@@ -1,19 +1,28 @@
 var express = require('express');
 var app = express();
-var DbController = require('./controller/dbcontroller');
+var prompt = require('prompt');
 
+//controller
+var DbController = require('./controller/dbController');
+var ErrorController = require('./controller/errorController');
+
+//uses
 app.use(express.static('../client'));
 
 
-var _dbController = new DbController();
-_dbController.connect();
-
-
+prompt.start();
+prompt.get(['user', 'password', 'dbo'], function (err, result) {
+  if (err) { return onErr(err); }
+  var _dbController = new DbController();
+  _dbController.connect(result.user, result.password, result.dbo, startServer);
+});
 
 // app.get('/', function (req, res) {
   // res.send('Hello World!');
 // });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
+function startServer() {
+  app.listen(3000, function () {
+    console.log('Example app listening on port 3000!');
+  });
+}
