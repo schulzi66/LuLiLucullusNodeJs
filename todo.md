@@ -1,1 +1,4 @@
-# Alle Todos
+# Todos und Notizen  
+
+## Technologie  
+* NodeJS
