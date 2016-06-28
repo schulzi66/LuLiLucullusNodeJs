@@ -8,13 +8,8 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var entries = [
-    { name: 'Home'},
-    { name: 'Contact'}
-  ];
-  res.render('index', {
-    entries : entries
-  });
+
+  res.render('index');
 });
 
 module.exports = router;
