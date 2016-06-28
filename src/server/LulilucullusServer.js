@@ -1,10 +1,15 @@
+/**
+ * @author
+ * Beschreibung
+ */
+
 var express = require('express');
 var app = express();
 var prompt = require('prompt');
 
 //controller
-var DbController = require('./controller/dbController');
-var ErrorController = require('./controller/errorController');
+var DbController = require('./controller/DbController');
+var ErrorController = require('./controller/ErrorController');
 
 //uses
 app.use(express.static('../client'));

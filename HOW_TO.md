@@ -9,4 +9,4 @@
 
 # Vorgehensweise fü´s Starten des Servers
 1. In src/server cmd öffnen
-2. node lulilucullus_server.js
+2. node LulilucullusServer.js

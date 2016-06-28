@@ -1,3 +1,8 @@
+/**
+ * @author
+ * Beschreibung
+ */
+
 var mysql =require('mysql');
 var DbController = function() {
 }

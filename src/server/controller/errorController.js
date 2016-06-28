@@ -1,3 +1,8 @@
+/**
+ * @author
+ * Beschreibung
+ */
+
 var ErrorController = function() {
 }
 
