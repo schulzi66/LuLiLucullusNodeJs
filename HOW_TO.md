@@ -1,6 +1,6 @@
 # Vorgehensweise beim updaten der node_modules
 1. cmd im Hauptordner(wo packages.json liegt) starten
-2. npm --save
+2. npm install --save
 
 # Vorgehensweise für´s einchecken:
 1. Sync Request machen, um die neuesten Stand zu haben! => verhindert merge conflicts
