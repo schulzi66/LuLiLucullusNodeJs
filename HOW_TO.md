@@ -9,4 +9,5 @@
 
 # Vorgehensweise fü´s Starten des Servers
 1. In src/server cmd öffnen
-2. node LulilucullusServer.js
+2. npm start
+3. Datenbank Anmeldedaten eingeben
