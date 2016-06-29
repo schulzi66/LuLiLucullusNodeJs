@@ -6,6 +6,6 @@ Markup (.md) Notation könnt ihr euch hier anschauen falls ihr diese Dateien bea
 
 
 # Empfohlende Addons
-autocomplete-html-entities
-autocomplete-modules
-javascript-snippets
+* autocomplete-html-entities
+* autocomplete-modules
+* javascript-snippets
