@@ -9,3 +9,4 @@ Markup (.md) Notation könnt ihr euch hier anschauen falls ihr diese Dateien bea
 * autocomplete-html-entities
 * autocomplete-modules
 * javascript-snippets
+* markdown-preview
