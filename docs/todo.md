@@ -28,4 +28,5 @@ Weitere Vorschläge willkommen!
   * Filtern, sortieren, speichern, bewerten, drucken, auswählen
 * Buchungsüberblick
 * Warenkorb
+* Mail Benachrichtigung bei Bestellung
 * Optional bei Rezeptauswahl eine Einkaufsliste erstellen
