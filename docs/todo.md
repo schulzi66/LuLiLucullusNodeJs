@@ -30,3 +30,7 @@ Weitere Vorschläge willkommen!
 * Warenkorb
 * Mail Benachrichtigung bei Bestellung
 * Optional bei Rezeptauswahl eine Einkaufsliste erstellen
+
+### Features (evtl.)
+* Admin Bereich
+* Rezepte hochladen
