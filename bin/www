@@ -13,6 +13,7 @@ var app = require('../app');
 var debug = require('debug')('lulilucullu:server');
 var http = require('http');
 var DbController = require('./../controllers/DatabaseController');
+var SocketController = require('./../controllers/SocketController');
 var conf = require('../conf.json');
 
 /**
@@ -35,6 +36,11 @@ app.set('port', port);
 var server = http.createServer(app);
 var io = require('socket.io')(server);
 
+/**
+* Create Socket Controller
+*/
+var _socketController = new SocketController();
+
 function startServer() {
   /**
   * Listen on provided port, on all network interfaces.
@@ -42,7 +48,7 @@ function startServer() {
   server.listen(port);
   server.on('error', onError);
   server.on('listening', onListening);
-  io.on('connection', onConnection);
+  _socketController.startServerSocket(io);
 }
 
 /**
@@ -103,13 +109,4 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-}
-
-function onConnection(socket) {
-  console.log('connected');
-  socket.on('disconnect', onDisconnect);
-}
-
-function onDisconnect() {
-  console.log('disconnected');
 }
