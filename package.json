@@ -15,6 +15,8 @@
     "express": "~4.13.4",
     "morgan": "~1.7.0",
     "mysql": "^2.11.1",
+    "passport-facebook": "^2.1.1",
+    "passport-local": "^1.0.0",
     "prompt": "^1.0.0",
     "pwd": "^1.0.0",
     "serve-favicon": "~2.3.0"
