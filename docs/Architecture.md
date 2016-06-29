@@ -1,6 +1,7 @@
 #LulilucullusNodeJs
 - bin
 - controllers
+- docs
 - public
   - images
   - javacripts
@@ -18,6 +19,9 @@ server startup
 
 # controllers
 voraussichtlich alle controller für server/db schnittstellen
+
+# docs
+beinhaltet alle zusätzliche Dokumente
 
 # public
 client verzeichnis unterteilt nach bildern, alle .js datein für jegliche views und stylesheets
