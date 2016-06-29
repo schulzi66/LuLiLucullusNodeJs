@@ -1,0 +1,7 @@
+{
+  "database": {
+    "user": "root",
+    "password": "root",
+    "dbo": "mongodb"
+  }
+}

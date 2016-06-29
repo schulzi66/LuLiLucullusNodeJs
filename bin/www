@@ -12,8 +12,8 @@
 var app = require('../app');
 var debug = require('debug')('lulilucullu:server');
 var http = require('http');
-var prompt = require('prompt');
-var DbController = require('./../controllers/dbController');
+var DbController = require('./../controllers/DatabaseController');
+var conf = require('../conf.json');
 
 /**
  * Get port from environment and store in Express.
@@ -25,12 +25,8 @@ app.set('port', port);
 /**
 * Promt environment db logins
 */
-prompt.start();
-prompt.get(['user', 'password', 'dbo'], function (err, result) {
-  if (err) { return onErr(err); }
   var _dbController = new DbController();
-  _dbController.connect(result.user, result.password, result.dbo, startServer);
-});
+  _dbController.connect(conf.database.user, conf.database.password, conf.database.dbo, startServer);
 
 /**
 * Create HTTP server.
