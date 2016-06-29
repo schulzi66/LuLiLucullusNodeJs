@@ -9,9 +9,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-passport = require("passport");
-LocalStrategy = require('passport-local').Strategy;
-FacebookStrategy = require('passport-facebook').Strategy;
+// passport = require("passport");
+// LocalStrategy = require('passport-local').Strategy;
+// FacebookStrategy = require('passport-facebook').Strategy;
 
 // setup routes
 var index = require('./routes/index');
@@ -35,11 +35,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //auth middleware
 
-app.use(express.cookieParser());
-app.use(express.bodyParser());
-app.use(express.session({ secret: 'SECRET' }));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(express.cookieParser());
+// app.use(express.bodyParser());
+// app.use(express.session({ secret: 'SECRET' }));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // use routes
 app.use('/', index);
@@ -79,7 +79,7 @@ app.use(function(err, req, res, next) {
 
 /**
  *
- */
+
 
 passport.use(new LocalStrategy(function(username, password,done){
     Users.findOne({ username : username},function(err,user){
@@ -137,5 +137,5 @@ passport.deserializeUser(function(id, done) {
         }
     });
 });
-
+ */
 module.exports = app;
