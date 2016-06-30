@@ -1,14 +1,36 @@
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <ul class="nav nav-justified">
-     <li><a href="./">Home</a></li>
-     <li><a href="./contact">Contact</a></li>
-     <li><a href="./services">Services</a></li>
-     <% if (!user) { %>
-      	<li><a href="/login">Log in</a>.</li>
-      <% } else { %>
-      	<li>Hello, <%= user.username %>. View your <a href="/profile">profile</a>.</li>
-      <% } %>
-   </ul>
-  </div>
+    <div class="container-fluid">
+        <ul class="nav nav-justified">
+            <li>
+                <button class="sidebar-menu-button">&#9776;</button>
+            </li>
+            <li><a href="./">Home</a></li>
+            <li><a href="./contact">Contact</a></li>
+            <li><a href="./services">Services</a></li>
+            <% if (!user) { %>
+            <li><a href="/login">Log in</a>.</li>
+            <% } else { %>
+            <li>Hello, <%= user.username %>. View your <a href="/profile">profile</a>.</li>
+            <% } %>
+        </ul>
+    </div>
 </nav>
+<div class="sidebar-menu">
+    <ul>
+        <a href="#">
+            <li>LINK ONE</li>
+        </a>
+        <a href="#">
+            <li>LINK TWO</li>
+        </a>
+        <a href="#">
+            <li>LINK THREE</li>
+        </a>
+        <a href="#">
+            <li>LINK FOUR</li>
+        </a>
+        <a href="#">
+            <li>LINK FIVE</li>
+        </a>
+    </ul>
+</div>
