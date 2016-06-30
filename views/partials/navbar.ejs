@@ -52,6 +52,11 @@
      <li><a href="./">Home</a></li>
      <li><a href="./contact">Contact</a></li>
      <li><a href="./services">Services</a></li>
+     <% if (!user) { %>
+      	<li><a href="/login">Log in</a>.</li>
+      <% } else { %>
+      	<li>Hello, <%= user.username %>. View your <a href="/profile">profile</a>.</li>
+      <% } %>
    </ul>
   </div>
 </nav>

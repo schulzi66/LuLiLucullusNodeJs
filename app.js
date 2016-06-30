@@ -9,14 +9,33 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-// passport = require("passport");
-// LocalStrategy = require('passport-local').Strategy;
-// FacebookStrategy = require('passport-facebook').Strategy;
+// Facebook Login
+//https://github.com/passport/express-4.x-facebook-example/blob/master/server.js
+// var passport = require('passport');
+// var Strategy = require('passport-facebook').Strategy;
+//
+// passport.use(new Strategy({
+//     clientID: process.env.CLIENT_ID,
+//     clientSecret: process.env.CLIENT_SECRET,
+//     callbackURL: 'http://localhost:3000/login/facebook/return'
+//   },
+//   function(accessToken, refreshToken, profile, cb) {
+//     return cb(null, profile);
+// }));
+//
+// passport.serializeUser(function(user, cb) {
+//   cb(null, user);
+// });
+//
+// passport.deserializeUser(function(obj, cb) {
+//   cb(null, obj);
+// });
 
 // setup routes
 var index = require('./routes/index');
 var contact = require('./routes/contact');
 var services = require('./routes/services');
+var login = require('./routes/login');
 
 var app = express();
 
@@ -33,18 +52,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//auth middleware
-
-// app.use(express.cookieParser());
-// app.use(express.bodyParser());
-// app.use(express.session({ secret: 'SECRET' }));
+// // Use application-level middleware for common functionality, including
+// // logging, parsing, and session handling.
+// app.use(require('morgan')('combined'));
+// app.use(require('cookie-parser')());
+// app.use(require('body-parser').urlencoded({ extended: true }));
+// app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+//
+// // Initialize Passport and restore authentication state, if any, from the
+// // session.
 // app.use(passport.initialize());
 // app.use(passport.session());
+
 
 // use routes
 app.use('/', index);
 app.use('/contact', contact);
 app.use('/services', services);
+app.use('/login', login);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

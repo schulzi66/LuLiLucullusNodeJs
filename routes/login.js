@@ -1,0 +1,64 @@
+/**
+ * @author
+ * Marius Schulze
+ */
+
+var express = require('express');
+var router = express.Router();
+
+// Facebook Login
+//https://github.com/passport/express-4.x-facebook-example/blob/master/server.js
+var passport = require('passport');
+var Strategy = require('passport-facebook').Strategy;
+
+passport.use(new Strategy({
+    clientID: '242003976182956',
+    clientSecret: '07fece9f13e977f0c98c552677ad3331',
+    callbackURL: 'http://localhost:3000/login/facebook/return'
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    return cb(null, profile);
+}));
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+// Use application-level middleware for common functionality, including
+// logging, parsing, and session handling.
+router.use(require('morgan')('combined'));
+router.use(require('cookie-parser')());
+router.use(require('body-parser').urlencoded({ extended: true }));
+router.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+router.use(passport.initialize());
+router.use(passport.session());
+
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('login');
+});
+
+router.get('/facebook', passport.authenticate('facebook'));
+
+router.get('/facebook/return',
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/');
+});
+
+router.get('/profile',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res){
+    res.render('profile', { user: req.user });
+});
+
+
+module.exports = router;
