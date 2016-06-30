@@ -8,6 +8,9 @@
 3. Sync Request machen
 
 # Vorgehensweise fü´s Starten des Servers
-1. In src/server cmd öffnen
+1. Im Hauptordner cmd öffnen
 2. npm start
-3. Datenbank Anmeldedaten eingeben
+
+# Vorgehensweise fü´s Starten des Servers im Debug Mode
+1. Im Hauptordner cmd öffnen
+2. set DEBUG=LulilucullusNodeJs:* & npm start

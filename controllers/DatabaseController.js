@@ -3,11 +3,11 @@
  * Marius Schulze
  */
 
-var mysql =require('mysql');
-var dbController = function() {
+var mysql = require('mysql');
+var DatabaseController = function() {
 }
 
-dbController.prototype.connect = function (user, password, dbo, startServerCallback) {
+DatabaseController.prototype.connect = function (user, password, dbo, startServerCallback) {
   var connection = mysql.createConnection({
     host     : 'localhost',
     user     : user,
@@ -25,4 +25,4 @@ dbController.prototype.connect = function (user, password, dbo, startServerCallb
   });
 }
 
-module.exports = dbController;
+module.exports = DatabaseController;
