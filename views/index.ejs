@@ -2,21 +2,16 @@
 Marius Schulze -->
 <!DOCTYPE html>
 <html>
-  <head><!--
-    <script type="text/javascript" src="C:\Users\finge\Documents\GitHub\LuLiLucullusNodeJs\public\js\ejs_production.js"></script>
-    <script type="text/javascript">var html = new EJS({url: 'index.ejs'}).render(data);</script>
-  -->
+  <head>
     <% include ./partials/head %>
-    <script src="./thirdparty/js/socket.io.js"></script>
   </head>
   <body>
-    <script src="./js/ClientSocket.js"></script>
     <% include ./partials/navbar %>
     <div>
       <h1>LuLiLucullus</h1>
       <div>Herzlich willkommen bei LuLiLucullus</div>
     </div>
-
     <% include ./partials/footer %>
+    <script src="./js/ClientSocket.js"></script>
   </body>
 </html>
