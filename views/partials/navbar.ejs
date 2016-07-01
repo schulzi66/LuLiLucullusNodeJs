@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <ul class="nav nav-justified">
             <li>
-                <button class="sidebar-menu-button">&#9776;</button>
+                <button class="sidebar-menu-button" data-dropdown="#dropdown-standard">&#9776;</button>
+                <!--<button data-dropdown="#dropdown-standard" class="sidebar-menu-button">&#9776;</button>-->
             </li>
             <li><a href="./">Home</a></li>
             <li><a href="./contact">Contact</a></li>
@@ -15,22 +16,17 @@
         </ul>
     </div>
 </nav>
-<div class="sidebar-menu">
+<div class=" sidebar-menu dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
     <ul>
-        <a href="#">
-            <li>LINK ONE</li>
-        </a>
-        <a href="#">
-            <li>LINK TWO</li>
-        </a>
-        <a href="#">
-            <li>LINK THREE</li>
-        </a>
-        <a href="#">
-            <li>LINK FOUR</li>
-        </a>
-        <a href="#">
-            <li>LINK FIVE</li>
-        </a>
+        <li><a href="#">Catering</a></li>
+        <li><a href="#">Rent a Cook</a></li>
+        <li><a href="#">XXX</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">XXX</a></li>
+        <li><a href="#">XXX</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Rezepte</a></li>
+        <li><a href="#">Meine Rezepte</a></li>
+        <li><a href="#">Profilverwaltung</a></li>
     </ul>
 </div>
