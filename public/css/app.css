@@ -16,6 +16,16 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
 }
+
+.btn {
+    background-color: #40434E;
+    border-color: #575a66;
+}
+
+.btn:hover {
+    background-color: #575a66;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -35,11 +45,35 @@ body {
 .nav.nav-inline .nav {
     text-align: center;
 }
-.nav {
-
-}
 
 .nav-logo {
     height: 40px;
     width: 84px;
+}
+
+/*Recipe Box styles*/
+.recipe-box {
+    background-color: #912F40;
+    width: 250px;
+    height: 300px;
+    margin-left: 50px;
+    position: absolute;
+}
+
+#recipes-recipe-img {
+    width: inherit;
+}
+
+#recipes-recipe-short-description {
+    color: #FFFFFA;
+    margin: 10px 10px 10px 10px;
+}
+
+#recipes-recipe-button {
+    position: relative;
+    float: right;
+    -webkit-appearance: button;
+    cursor: pointer;
+    margin: 0 10px 15px 10px;
+    color: #FFFFFA;
 }
