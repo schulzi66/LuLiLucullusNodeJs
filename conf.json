@@ -1,7 +1,12 @@
 {
   "database": {
-    "user": "",
-    "password": "",
-    "dbo": ""
+    "user": "root",
+    "password": "root",
+    "dbo": "webdev"
+  },
+  "login" : {
+    "clientID": "242003976182956",
+    "clientSecret": "07fece9f13e977f0c98c552677ad3331",
+    "callbackURL": "http://localhost:3000/login/facebook/return"
   }
 }

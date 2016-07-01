@@ -2,7 +2,7 @@
  * @author
  * Marius Schulze
  */
-
+var conf = require('../conf.json');
 var express = require('express');
 var router = express.Router();
 
@@ -12,9 +12,9 @@ var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 
 passport.use(new Strategy({
-    clientID: '242003976182956',
-    clientSecret: '07fece9f13e977f0c98c552677ad3331',
-    callbackURL: 'http://localhost:3000/login/facebook/return'
+    clientID: conf.login.clientID,
+    clientSecret: conf.login.clientSecret,
+    callbackURL: conf.login.callbackURL
   },
   function(accessToken, refreshToken, profile, cb) {
     return cb(null, profile);
