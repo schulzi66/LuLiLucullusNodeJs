@@ -26,15 +26,19 @@ body {
     border-top: 1px solid #e7e7e7;
 }
 
-.g-recaptcha {
-    float: right;
-}
-
+/* Navbar styles */
 #navbar {
     border-top: 1px solid #080705;
     border-bottom: 2px solid #080705;
     margin-bottom: 20px;
 }
+.nav.nav-inline .nav {
+    text-align: center;
+}
+.nav {
+
+}
+
 .nav-logo {
     height: 40px;
     width: 84px;

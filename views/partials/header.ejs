@@ -5,9 +5,9 @@
                 <button data-dropdown="#dropdown-standard">&#9776;</button>
             </li>
             <% if (!user) { %>
-            <li><a href="/login">Log in</a>.</li>
+            <li style="width: 0.05%"><a href="/login">Log in</a></li>
             <% } else { %>
-            <li><a href="/login/profile"><%= user.displayName %></a></li>
+            <li style="width: 0.05%"><a href="/login/profile"><%= user.displayName %></a></li>
             <% } %>
         </ul>
     </div>
