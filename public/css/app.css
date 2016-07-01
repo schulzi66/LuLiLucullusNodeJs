@@ -23,4 +23,5 @@ body {
     /* Set the fixed height of the footer here */
     height: 60px;
     background-color: #F8F8F8;
+    border-top: 1px solid #e7e7e7;
 }
