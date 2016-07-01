@@ -3,11 +3,13 @@
  * Marius Schulze
  */
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var conf = require('./conf.json');
 
 // setup routes
 var index = require('./routes/index');

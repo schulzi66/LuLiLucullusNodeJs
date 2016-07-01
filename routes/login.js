@@ -51,14 +51,15 @@ router.get('/facebook', passport.authenticate('facebook'));
 router.get('/facebook/return',
   passport.authenticate('facebook', { failureRedirect: '/' }),
   function(req, res) {
+    //save user accoun across the routes
+    req.session.user = req.user;
     res.redirect('/');
 });
 
 router.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
-    res.render('profile', { user: req.user });
+    res.render('profile', { user: req.session.user });
 });
-
 
 module.exports = router;

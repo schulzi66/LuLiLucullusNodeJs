@@ -4,19 +4,18 @@
             <li>
                 <button data-dropdown="#dropdown-standard">&#9776;</button>
             </li>
-            <li><a href="./">Home</a></li>
-            <li><a href="./contact">Contact</a></li>
-            <li><a href="./services">Services</a></li>
             <% if (!user) { %>
             <li><a href="/login">Log in</a>.</li>
             <% } else { %>
-            <li>Hello, <%= user.username %>. View your <a href="/profile">profile</a>.</li>
+            <li><a href="/login/profile"><%= user.displayName %></a></li>
             <% } %>
         </ul>
     </div>
 </nav>
 <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
     <ul>
+        <li><a href="./">Home</a></li>
+        <li><a href="./contact">Contact</a></li>
         <li><a href="#">Catering</a></li>
         <li><a href="#">Rent a Cook</a></li>
         <li><a href="#">XXX</a></li>
@@ -26,6 +25,5 @@
         <li class="divider"></li>
         <li><a href="#">Rezepte</a></li>
         <li><a href="#">Meine Rezepte</a></li>
-        <li><a href="#">Profilverwaltung</a></li>
     </ul>
 </div>
