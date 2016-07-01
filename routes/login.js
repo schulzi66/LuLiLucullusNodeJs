@@ -53,6 +53,7 @@ router.get('/facebook/return',
   function(req, res) {
     //save user accoun across the routes
     req.session.user = req.user;
+      console.log(req.user);
     res.redirect('/');
 });
 
