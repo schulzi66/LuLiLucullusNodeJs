@@ -3,12 +3,10 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <% include ./partials/head %>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-</head>
+<% include partials/head %>
+
 <body>
-<% include ./partials/header %>
+<% include partials/header %>
 <h1>LuLiLucullus GmbH - Kontakt</h1>
 <p>Bei Kontaktfragen, fragen Sie</p>
 
@@ -31,6 +29,12 @@
             <textarea class="form-control" rows="4" name="message"></textarea>
         </div>
     </div>
+
+    <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+            <div class="g-recaptcha" data-sitekey="6LdJByQTAAAAANS8XkjlNFggN77IHrJnMiKX6bdB"></div>
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-sm-10 col-sm-offset-2">
             <input id="submit" name="submit" type="submit" value="Absenden" class="btn btn-primary">
@@ -40,15 +44,7 @@
         <div class="col-sm-10 col-sm-offset-2">
         </div>
     </div>
-
-    <div class="form-group">
-        <div class="col-sm-10 col-sm-offset-2">
-            <div class="g-recaptcha" data-sitekey="6LdJByQTAAAAANS8XkjlNFggN77IHrJnMiKX6bdB"></div>
-        </div>
-    </div>
 </form>
-<footer>
-    <% include ./partials/footer %>
-</footer>
+<% include partials/footer %>
 </body>
 </html>
