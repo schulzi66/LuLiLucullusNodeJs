@@ -7,6 +7,14 @@ a {
     color: #00B7FF;
 }
 
+#dropdown-standard {
+    background-color: #FFFFFA;
+}
+
+#dropdown-standard ul li:hover {
+
+}
+
 .sidebar-menu-button {
     position: absolute;
     line-height: 45px;
