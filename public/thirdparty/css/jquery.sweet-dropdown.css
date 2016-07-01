@@ -51,7 +51,7 @@
 }
 
 .dropdown-menu.grey-anchor .dropdown-anchor, .dropdown-menu.grey-anchor .dropdown-anchor::after {
-    border-color: #f6f6f6;
+    border-color: #FFFFFA;
 }
 
 .dropdown-menu.accent-anchor .dropdown-anchor, .dropdown-menu.accent-anchor .dropdown-anchor::after {
