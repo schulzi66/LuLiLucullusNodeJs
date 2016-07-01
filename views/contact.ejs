@@ -5,11 +5,15 @@
 <html>
   <head>
     <% include ./partials/head %>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
   </head>
   <body>
     <% include ./partials/navbar %>
     <h1>LuLiLucullus GmbH - Kontakt</h1>
     <p>Bei Kontaktfragen, fragen Sie</p>
+    <form>
+        <div class="g-recaptcha" data-sitekey="6LdJByQTAAAAANS8XkjlNFggN77IHrJnMiKX6bdB"></div>
+    </form>
     <footer>
       <% include ./partials/footer %>
     </footer>
