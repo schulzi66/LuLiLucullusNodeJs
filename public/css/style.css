@@ -11,70 +11,10 @@ a {
     background-color: #FFFFFA;
 }
 
-#dropdown-standard ul li:hover {
-
-}
-
 .sidebar-menu-button {
     position: absolute;
     line-height: 45px;
     padding: 0px 15px 0px 15px;
     cursor: pointer;
     outline: none;
-}
-
-.sidebar-menu {
-    z-index: 1000000;
-    font-weight: bold;
-    font-size: 0.8em;
-    width: 100%;
-    background: #131313;
-    text-align: center;
-    position: relative;
-}
-
-.sidebar-menu ul {
-    margin: 0;
-    padding: 0;
-}
-
-.sidebar-menu li {
-    display: block;
-    padding: 15px 0 15px 0;
-    border-bottom: #1d1f20 1px solid;
-}
-
-.sidebar-menu li:hover {
-    display: block;
-    background: #181818;
-    padding: 15px 0 15px 0;
-    border-bottom: #1d1f20 1px solid;
-}
-
-.sidebar-menu ul li a {
-    text-decoration: none;
-    margin: 0px;
-    color: #fff;
-}
-
-.sidebar-menu ul li a:hover {
-    color: #fff;
-    text-decoration: none;
-}
-
-.sidebar-menu a {
-    text-decoration: none;
-    color: white;
-}
-
-.sidebar-menu a:hover {
-    text-decoration: none;
-    color: white;
-}
-
-.glyphicon-home {
-    color: white;
-    font-size: 1.5em;
-    margin-top: 5px;
-    margin: 0 auto;
 }

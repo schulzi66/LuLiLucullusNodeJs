@@ -4,7 +4,7 @@
     display: none;
     opacity: 0;
     top: 0;
-    left: 0;
+    left: 1px;
     -webkit-transition: opacity 0.2s, -webkit-transform 0.2s;
     transition: opacity 0.2s, transform 0.2s;
     -webkit-transform: translateY(-20px) scale(0.93);
