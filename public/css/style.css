@@ -10,11 +10,3 @@ a {
 #dropdown-standard {
     background-color: #FFFFFA;
 }
-
-.sidebar-menu-button {
-    position: absolute;
-    line-height: 45px;
-    padding: 0px 15px 0px 15px;
-    cursor: pointer;
-    outline: none;
-}
