@@ -1,14 +1,29 @@
-<div id="burger-menu">
-  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-    <span class="sr-only">Toggle navigation</span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
-</div>
-<div id="logo">
-  <h1>LuLiLucullus</h1>
-</div>
-<div id="login-area">
-  TEST
+<nav class="navbar navbar-default nav-justified">
+    <div class="container-fluid">
+        <ul class="nav nav-justified">
+            <li>
+                <button data-dropdown="#dropdown-standard">&#9776;</button>
+            </li>
+            <% if (!user) { %>
+            <li><a href="/login">Log in</a>.</li>
+            <% } else { %>
+            <li><a href="/login/profile"><%= user.displayName %></a></li>
+            <% } %>
+        </ul>
+    </div>
+</nav>
+<div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
+    <ul>
+        <li><a href="./">Home</a></li>
+        <li><a href="./contact">Contact</a></li>
+        <li><a href="#">Catering</a></li>
+        <li><a href="#">Rent a Cook</a></li>
+        <li><a href="#">XXX</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">XXX</a></li>
+        <li><a href="#">XXX</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Rezepte</a></li>
+        <li><a href="#">Meine Rezepte</a></li>
+    </ul>
 </div>

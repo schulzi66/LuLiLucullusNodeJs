@@ -29,3 +29,13 @@ body {
 .g-recaptcha {
     float: right;
 }
+
+#navbar {
+    border-top: 1px solid #080705;
+    border-bottom: 2px solid #080705;
+    margin-bottom: 20px;
+}
+.nav-logo {
+    height: 40px;
+    width: 84px;
+}

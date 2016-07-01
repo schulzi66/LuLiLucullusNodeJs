@@ -1,29 +1,13 @@
-<nav class="navbar navbar-default nav-justified">
-    <div class="container-fluid">
+<div id="navbar" class="container">
+    <nav class="nav nav-inline hidden-sm-down">
         <ul class="nav nav-justified">
-            <li>
-                <button data-dropdown="#dropdown-standard">&#9776;</button>
-            </li>
-            <% if (!user) { %>
-            <li><a href="/login">Log in</a>.</li>
-            <% } else { %>
-            <li><a href="/login/profile"><%= user.displayName %></a></li>
-            <% } %>
+            <li class="nav-item"><a href="#" class="nav-link">Catering</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Rent a Cook</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">XXX</a></li>
+            <li class="nav-item"><a href="#" class="nav-link"><img class="nav-logo" src="./img/test_logo.jpg"></a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Events</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">XXX</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">XXX</a></li>
         </ul>
-    </div>
-</nav>
-<div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
-    <ul>
-        <li><a href="./">Home</a></li>
-        <li><a href="./contact">Contact</a></li>
-        <li><a href="#">Catering</a></li>
-        <li><a href="#">Rent a Cook</a></li>
-        <li><a href="#">XXX</a></li>
-        <li><a href="#">Events</a></li>
-        <li><a href="#">XXX</a></li>
-        <li><a href="#">XXX</a></li>
-        <li class="divider"></li>
-        <li><a href="#">Rezepte</a></li>
-        <li><a href="#">Meine Rezepte</a></li>
-    </ul>
+    </nav>
 </div>

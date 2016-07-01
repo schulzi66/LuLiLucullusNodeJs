@@ -1,8 +1,8 @@
 {
   "database": {
     "user": "root",
-    "password": "pmcs123$",
-    "dbo": "lll"
+    "password": "root",
+    "dbo": "webdev"
   },
   "login" : {
     "clientID": "242003976182956",
