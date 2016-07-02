@@ -16,7 +16,7 @@ var helmet = require('helmet');
 var index = require('./routes/index');
 var contact = require('./routes/contact');
 var services = require('./routes/services');
-var login = require('./routes/login');
+var login = require('./routes/logins/login');
 var recipes = require('./routes/recipes')
 
 var app = express();
@@ -47,6 +47,7 @@ app.use('/contact', contact);
 app.use('/services', services);
 app.use('/login', login);
 app.use('/recipes', recipes);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');

@@ -1,5 +1,19 @@
 <% include partials/head %>
-
-<a href="/login/facebook">Log In with Facebook</a>
+<form class="form-horizontal" role="form" method="post" action="">
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+          <input class="form-control" rows="4" placeholder="Name"name="name">
+        </div>
+        <label for="password" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+          <input class="form-control" rows="4" placeholder="Passwort"name="password">
+        </div>
+    </div>
+    <div id="login-img-buttons">
+      <a href="/login/facebook"><img id="login-img" src="/img/facebook.png"></a>
+      <a href=""><img id="login-img" src="/img/login-with-google-plus.png"></a>
+    </div>
+</form>
 
 <% include partials/footer %>

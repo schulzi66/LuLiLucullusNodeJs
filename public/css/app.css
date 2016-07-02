@@ -77,3 +77,12 @@ body {
     margin: 0 10px 15px 10px;
     color: #FFFFFA;
 }
+
+/*Login Button styles */
+#login-img-buttons{
+  margin-left: 230px;
+}
+
+#login-img{  
+  width: 50px;
+}
