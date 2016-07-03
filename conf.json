@@ -4,10 +4,18 @@
     "password": "root",
     "dbo": "webdev"
   },
-  "login" : {
+  "facebook" : {
     "clientID": "242003976182956",
     "clientSecret": "07fece9f13e977f0c98c552677ad3331",
     "callbackURL": "http://localhost:3000/login/facebook/return"
+  },
+  "google": {
+    "client_id":"111427977021-0trtfauh9lks262gei2vh1o6jbfi3kcs.apps.googleusercontent.com",
+    "project_id":"lulilucullus-1360",
+    "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+    "token_uri":"https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret":"uH3F1GEX7k3y2E3edUdEWTn5"
   },
   "session" : {
     "secret" : "cxnasdfiö203dsfs0§%/(%;S)"
