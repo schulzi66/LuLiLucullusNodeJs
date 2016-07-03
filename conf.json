@@ -15,7 +15,8 @@
     "auth_uri":"https://accounts.google.com/o/oauth2/auth",
     "token_uri":"https://accounts.google.com/o/oauth2/token",
     "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
-    "client_secret":"uH3F1GEX7k3y2E3edUdEWTn5"
+    "client_secret":"uH3F1GEX7k3y2E3edUdEWTn5",
+    "redirect_uris":["http://localhost:3000/login/google/return"]
   },
   "session" : {
     "secret" : "cxnasdfiö203dsfs0§%/(%;S)"
