@@ -126,8 +126,9 @@ body {
     opacity: 0.8;
 }
 
-#dropdown-recipe-categorie {
-
+#dropdown-recipe-categories {
+    top: 105px !important;
+    left: 42.95% !important;
 }
 
 /* Slider styles */
