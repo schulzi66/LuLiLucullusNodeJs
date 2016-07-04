@@ -83,6 +83,12 @@ body {
   margin-left: 230px;
 }
 
-#login-img{  
+#login-img{
   width: 50px;
+}
+
+
+/* Dropdown styling */
+#dropdown-logout {
+    left: 50%;
 }

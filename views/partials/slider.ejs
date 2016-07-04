@@ -1,44 +1,54 @@
-<div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden; visibility: hidden;">
-    <!-- Loading Screen -->
-    <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
-        <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-        <div style="position:absolute;display:block;background:url('./img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
-    </div>
-    <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden;">
-        <div data-p="112.50" style="display: none;">
-            <img data-u="image" src="./img/005.jpg" />
-            <div data-u="thumb">Rent a Cook</div>
-        </div>
-        <div data-p="112.50" style="display: none;">
-            <img data-u="image" src="./img/002.jpg" />
-            <div data-u="thumb">Rezepte</div>
-        </div>
-        <div data-p="112.50" style="display: none;">
-            <img data-u="image" src="./img/003.jpg" />
-            <div data-u="thumb">Events</div>
-        </div>
-        <div data-p="112.50" style="display: none;">
-            <img data-u="image" src="./img/004.jpg" />
-            <div data-u="thumb">Kochboxen</div>
-        </div>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
 
-    </div>
-    <!-- Thumbnail Navigator -->
-    <div data-u="thumbnavigator" class="jssort09-600-45" style="position:absolute;bottom:0px;left:0px;width:600px;height:45px;">
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height:100%; background-color: #000; filter:alpha(opacity=40.0); opacity:0.4;"></div>
-        <!-- Thumbnail Item Skin Begin -->
-        <div data-u="slides" style="cursor: default;">
-            <div data-u="prototype" class="p">
-                <div data-u="thumbnailtemplate" class="t"></div>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="./img/002.jpg" alt="Chania">
+            <div class="carousel-caption">
+                <h3>Chania</h3>
+                <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
             </div>
         </div>
-        <!-- Thumbnail Item Skin End -->
+
+        <div class="item">
+            <img src="./img/003.jpg" alt="Chania">
+            <div class="carousel-caption">
+                <h3>Chania</h3>
+                <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="./img/004.jpg" alt="Flower">
+            <div class="carousel-caption">
+                <h3>Flowers</h3>
+                <p>Beatiful flowers in Kolymbari, Crete.</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="./img/005.jpg" alt="Flower">
+            <div class="carousel-caption">
+                <h3>Flowers</h3>
+                <p>Beatiful flowers in Kolymbari, Crete.</p>
+            </div>
+        </div>
     </div>
-    <!-- Bullet Navigator -->
-    <div data-u="navigator" class="jssorb01" style="bottom:16px;right:16px;">
-        <div data-u="prototype" style="width:12px;height:12px;"></div>
-    </div>
-    <!-- Arrow Navigator -->
-    <span data-u="arrowleft" class="jssora05l" style="top:0px;left:8px;width:40px;height:40px;" data-autocenter="2"></span>
-    <span data-u="arrowright" class="jssora05r" style="top:0px;right:8px;width:40px;height:40px;" data-autocenter="2"></span>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
