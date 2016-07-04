@@ -22,21 +22,7 @@ app.set('port', port);
 * Promt environment db logins
 */
 var _dbController = new DbController();
-var con = _dbController.connect(startServer);
-// app.set('connection', connection);
-// var con = _dbController.getConnection();
-console.log(con);
-// var query = 'SELECT * from user';
-// con.query(query, function(err, rows, fields) {
-//     if (err) throw err;
-//
-//     for (var i in rows) {
-//         console.log('users: ', rows[i].post_title);
-//     }
-// });
-
-  // var _dbController = new DbController();
-  // var connection = _dbController.connect(conf.database.user, conf.database.password, conf.database.dbo, startServer);
+var connection = _dbController.connect(startServer);
 
 /**
 * Create HTTP server.
