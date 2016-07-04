@@ -7,12 +7,12 @@
             <% if (!user) { %>
             <li style="width: 0.05%"><a href="/login">Log in</a></li>
             <% } else { %>
-            <li style="width: 0.05%"><input type="button" class="button-logout" data-dropdown="#dropdown-logout" value="<%= user.displayName %>"></li>
+            <li id="user-name-header" style="width: 0.05%" data-dropdown="#dropdown-logout" value=""><%= user.displayName %></li>
             <% } %>
         </ul>
     </div>
 </nav>
-<div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-logout">
+<div class="dropdown-menu dropdown-anchor-top-right dropdown-has-anchor" id="dropdown-logout">
     <ul>
         <li><a href="/logout">Logout</a></li>
     </ul>
