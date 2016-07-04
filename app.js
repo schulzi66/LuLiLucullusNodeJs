@@ -1,7 +1,3 @@
-/**
- * @author
- * Marius Schulze
- */
 var express = require('express');
 var session = require('express-session');
 var path = require('path');
@@ -20,6 +16,7 @@ var login = require('./routes/logins/login');
 var recipes = require('./routes/recipes')
 var facebook = require('./routes/logins/facebook');
 var google = require('./routes/logins/google');
+var twitter = require('./routes/logins/twitter');
 
 var app = express();
 
@@ -51,6 +48,7 @@ app.use('/login', login);
 app.use('/recipes', recipes);
 app.use('/login/facebook', facebook);
 app.use('/login/google', google);
+app.use('/login/twitter', twitter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
