@@ -1,8 +1,3 @@
-/**
- * @author
- * Marius Schulze
- */
-
 var SocketController = function() {
 }
 

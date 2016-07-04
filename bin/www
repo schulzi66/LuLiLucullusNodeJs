@@ -29,6 +29,7 @@ app.set('port', port);
   var _dbController = new DbController();
   _dbController.connect(conf.database.user, conf.database.password, conf.database.dbo, startServer);
 
+
 /**
 * Create HTTP server.
 */
