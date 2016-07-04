@@ -101,15 +101,11 @@ body {
 
 /* Dropdown styles */
 #dropdown-logout {
-    left: 50%;
+    left: 87% !important;
 }
 
 #dropdown-standard{
     opacity: 0.8;
-}
-
-#dropdown-standard > li{
-    opacity: 1;
 }
 
 /* Slider styles */
