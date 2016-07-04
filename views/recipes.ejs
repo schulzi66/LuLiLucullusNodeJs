@@ -1,13 +1,34 @@
 <% include partials/head %>
 <% include partials/header %>
+<div class="container">
+    <div class="row" style="text-align: center">
+        <section class="col-sm-12">
+            <div class="btn-group">
+                <button id="dropdown-recipe-categorie" class="btn text-uppercase text-spat"
+                        data-dropdown="#dropdown-recipe-categories"
+                        aria-haspopup="true" aria-expanded="false">
+                    Direkt zur Kategorie
+                </button>
 
-<div class="wrapper">
+            </div>
+            <div id="dropdown-recipe-categories"
+                 class="dropdown-menu dropdown-anchor-top-right dropdown-has-anchor">
+                <a class="dropdown-item" href="#">Vorspeisen, Suppen &amp; Salate</a>
+                <a class="dropdown-item" href="#">Pasta &amp; Risotto</a>
+                <a class="dropdown-item" href="#">Fleisch</a>
+                <a class="dropdown-item" href="#">Fisch &amp; Vegetarisch</a>
+                <a class="dropdown-item" href="#">Nachspeisen</a>
+            </div>
+        </section>
+    </div>
+
     <div class="recipe-box">
         <img id="recipes-recipe-img" src="img/test_logo.jpg">
         <div id="recipes-recipe-short-description">
             <p>Test descriptionTest descriptionTest descriptionTest descriptionTest descriptionTest descriptionTest
                 descriptionTest descriptionTest descriptionTest descriptionTest descriptionTest description</p>
         </div>
-        <input id="recipes-recipe-button" class="btn btn-primary" type="button" href="/recipe/{recipeID}" value="weitere Informationen">
+        <input id="recipes-recipe-button" class="btn btn-primary" type="button" href="/recipe/{recipeID}"
+               value="weitere Informationen">
     </div>
 </div>

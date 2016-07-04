@@ -100,6 +100,10 @@ body {
     color: #FFFFFA;
 }
 
+#dropdown-recipe-categorie {
+    color: #fff;
+}
+
 /*Login Button styles */
 #login-img-buttons {
     margin-left: 230px;
@@ -120,6 +124,10 @@ body {
 
 #dropdown-standard{
     opacity: 0.8;
+}
+
+#dropdown-recipe-categorie {
+    l
 }
 
 /* Slider styles */
