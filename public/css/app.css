@@ -17,13 +17,13 @@ body {
     margin-bottom: 60px;
 }
 
-.footer {
+#footer-wrapper {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 60px;
-    background-color: #F8F8F8;
+    background-color: #f8f8f8;
     border-top: 1px solid #e7e7e7;
 }
 
@@ -31,11 +31,15 @@ body {
 .form-control {
     width: 75%;
 }
+.button-wrapper {
+
+}
 
 /* Button styles */
 .btn {
     background-color: #40434E;
     border-color: #575a66;
+    margin-bottom: 20px;
 }
 
 .btn:hover {
@@ -113,4 +117,8 @@ body {
 .carousel-inner > .item > a > img {
     width: 70%;
     margin: auto;
+}
+
+#home-slider {
+    margin-bottom: 20px;
 }
