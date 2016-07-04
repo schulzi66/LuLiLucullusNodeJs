@@ -1,11 +1,6 @@
 #!/usr/bin/env node
 
 /**
- * @author
- * Marius Schulze
- */
-
-/**
  * Module dependencies.
  */
 
@@ -28,7 +23,8 @@ app.set('port', port);
 */
   var _dbController = new DbController();
   _dbController.connect(conf.database.user, conf.database.password, conf.database.dbo, startServer);
-
+  var connection = _dbController.getConnection();
+  app.set('connection', connection);
 
 /**
 * Create HTTP server.

@@ -4,16 +4,17 @@
  */
 
 var mysql = require('mysql');
-var DatabaseController = function () {
+var connection;
+var DatabaseController = function() {
 }
 
 DatabaseController.prototype.connect = function (user, password, dbo, startServerCallback) {
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: user,
-        password: password,
-        database: dbo
-    });
+  connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : user,
+    password : password,
+    database : dbo
+  });
 
     connection.connect(function (err) {
         if (err) {
@@ -32,5 +33,10 @@ DatabaseController.prototype.connect = function (user, password, dbo, startServe
         }
     });
 }
+
+DatabaseController.prototype.getConnection = function () {
+console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+console.log(connection);
+};
 
 module.exports = DatabaseController;

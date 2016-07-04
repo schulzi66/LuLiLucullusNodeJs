@@ -1,4 +1,4 @@
-//https://scotch.io/tutorials/easy-node-authentication-google
+//https://scotch.io/tutorials/easy-node-authentication-twitter
 var conf = require('../../conf.json');
 var express = require('express');
 var router = express.Router();
