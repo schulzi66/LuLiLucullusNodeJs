@@ -7,9 +7,9 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 passport.use(new GoogleStrategy({
-    clientID: conf.google.client_id,
-    clientSecret: conf.google.client_secret,
-    callbackURL: conf.google.redirect_uris[0]
+    clientID: conf.google.clientID,
+    clientSecret: conf.google.clientSecret,
+    callbackURL: conf.google.callbackURL 
   },
   function(accessToken, refreshToken, profile, cb) {
     return cb(null, profile);

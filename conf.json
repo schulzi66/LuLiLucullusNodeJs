@@ -10,13 +10,14 @@
     "callbackURL": "http://localhost:3000/login/facebook/return"
   },
   "google": {
-    "client_id":"111427977021-0trtfauh9lks262gei2vh1o6jbfi3kcs.apps.googleusercontent.com",
-    "project_id":"lulilucullus-1360",
-    "auth_uri":"https://accounts.google.com/o/oauth2/auth",
-    "token_uri":"https://accounts.google.com/o/oauth2/token",
-    "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
-    "client_secret":"uH3F1GEX7k3y2E3edUdEWTn5",
-    "redirect_uris":["http://localhost:3000/login/google/return"]
+    "clientID":"111427977021-0trtfauh9lks262gei2vh1o6jbfi3kcs.apps.googleusercontent.com",
+    "clientSecret":"uH3F1GEX7k3y2E3edUdEWTn5",
+    "callbackURL": "http://localhost:3000/login/google/return"
+  },
+  "twitter": {
+    "clientID":"NRlwyjtNKbo3A1JuF9Il5ydjL",
+    "clientSecret":"1873br1jcvEr5laQcGBvfQ3f9kFpZKBwL06HBr0ekpNDjgYz1U",
+    "callbackURL":"http://127.0.0.1:3000/login/twitter/return"
   },
   "session" : {
     "secret" : "cxnasdfiö203dsfs0§%/(%;S)"
