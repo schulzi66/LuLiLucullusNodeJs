@@ -17,7 +17,8 @@ var index = require('./routes/index');
 var contact = require('./routes/contact');
 var services = require('./routes/services');
 var login = require('./routes/logins/login');
-var recipes = require('./routes/recipes')
+var recipes = require('./routes/recipes');
+var impressum = require('./routes/impressum');
 var facebook = require('./routes/logins/facebook');
 var google = require('./routes/logins/google');
 
@@ -49,6 +50,7 @@ app.use('/contact', contact);
 app.use('/services', services);
 app.use('/login', login);
 app.use('/recipes', recipes);
+app.use('/impressum', impressum);
 app.use('/login/facebook', facebook);
 app.use('/login/google', google);
 
