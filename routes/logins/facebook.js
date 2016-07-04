@@ -4,9 +4,9 @@ var express = require('express');
 var router = express.Router();
 
 var passport = require('passport');
-var Strategy = require('passport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
-passport.use(new Strategy({
+passport.use(new FacebookStrategy({
     clientID: conf.facebook.clientID,
     clientSecret: conf.facebook.clientSecret,
     callbackURL: conf.facebook.callbackURL
