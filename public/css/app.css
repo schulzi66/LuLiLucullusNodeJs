@@ -6,24 +6,15 @@ a {
     color: #40434E;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
+/* Sticky footer styles */
 html {
     position: relative;
     min-height: 100%;
 }
+
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-}
-
-.btn {
-    background-color: #40434E;
-    border-color: #575a66;
-}
-
-.btn:hover {
-    background-color: #575a66;
 }
 
 .footer {
@@ -36,16 +27,33 @@ body {
     border-top: 1px solid #e7e7e7;
 }
 
+/* Form styles */
+.form-control {
+    width: 75%;
+}
+
+/* Button styles */
+.btn {
+    background-color: #40434E;
+    border-color: #575a66;
+}
+
+.btn:hover {
+    background-color: #575a66;
+}
+
 /* Header styles */
 #header {
     margin-top: 10px;
 }
+
 /* Navbar styles */
 #navbar {
     border-top: 1px solid #080705;
     border-bottom: 2px solid #080705;
     margin-bottom: 20px;
 }
+
 .nav.nav-inline .nav {
     text-align: center;
 }
@@ -83,18 +91,25 @@ body {
 }
 
 /*Login Button styles */
-#login-img-buttons{
-  margin-left: 230px;
+#login-img-buttons {
+    margin-left: 230px;
 }
 
-#login-img{
-  width: 50px;
+#login-img {
+    width: 50px;
 }
-
 
 /* Dropdown styles */
 #dropdown-logout {
     left: 50%;
+}
+
+#dropdown-standard{
+    opacity: 0.8;
+}
+
+#dropdown-standard > li{
+    opacity: 1;
 }
 
 /* Slider styles */
