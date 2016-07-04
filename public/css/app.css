@@ -88,7 +88,14 @@ body {
 }
 
 
-/* Dropdown styling */
+/* Dropdown styles */
 #dropdown-logout {
     left: 50%;
+}
+
+/* Slider styles */
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    width: 70%;
+    margin: auto;
 }
