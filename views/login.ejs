@@ -1,5 +1,35 @@
 <% include partials/head %>
-<div class="container">
+
+<div id="header-wrapper">
+    <nav class="navbar navbar-default nav-justified navbar-fixed-top">
+        <div id="header" class="container-fluid">
+            <ul class="nav nav-justified">
+                <li>
+                    <button class="button-sidemenu" data-dropdown="#dropdown-standard">&#9776;</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="#">Catering</a></li>
+            <li><a href="#">Rent a Cook</a></li>
+            <li><a href="#">XXX</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">XXX</a></li>
+            <li><a href="#">XXX</a></li>
+            <li class="divider"></li>
+            <li><a href="/recipes">Rezepte</a></li>
+            <li><a href="#">Meine Rezepte</a></li>
+        </ul>
+    </div>
+</div>
+<% include partials/navbar %>
+<!-- MAIN CONTAINER -->
+
+<div class="container" style="margin-top: 60px">
     <form class="form-horizontal" role="form" method="post" action="">
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Name</label>
@@ -10,6 +40,9 @@
             <div class="col-sm-10">
                 <input class="form-control" rows="4" placeholder="Passwort" name="password">
             </div>
+        </div>
+        <div class="col-sm-10 col-sm-offset-2">
+            <a href="signup">Noch kein Konto? Hier anmelden!</a>
         </div>
         <div class="form-group">
             <div class="col-sm-10 col-sm-offset-2">
