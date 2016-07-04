@@ -18,6 +18,11 @@
     "client_secret":"uH3F1GEX7k3y2E3edUdEWTn5",
     "redirect_uris":["http://localhost:3000/login/google/return"]
   },
+  "twitter": {
+    "client_id":"NRlwyjtNKbo3A1JuF9Il5ydjL",
+    "clientSecret":"1873br1jcvEr5laQcGBvfQ3f9kFpZKBwL06HBr0ekpNDjgYz1U",
+    "callbackURL":"http://127.0.0.1:3000/login/twitter/return"
+  },
   "session" : {
     "secret" : "cxnasdfiö203dsfs0§%/(%;S)"
   }
