@@ -6,7 +6,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 /* GET login page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.render('login');
 });
 

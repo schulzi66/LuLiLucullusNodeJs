@@ -24,6 +24,7 @@
     "passport-google-oauth20": "^1.0.0",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
+    "passport-xing": "^0.1.5",
     "prompt": "^1.0.0",
     "pwd": "^1.0.0",
     "serve-favicon": "~2.3.0",

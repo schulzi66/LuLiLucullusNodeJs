@@ -1,19 +1,19 @@
-//https://scotch.io/tutorials/easy-node-authentication-facebook
 var conf = require('../../conf.json');
 var express = require('express');
 var router = express.Router();
-
 var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
+var XingStrategy = require('passport-xing').Strategy;
 
-passport.use(new FacebookStrategy({
-        clientID: conf.facebook.clientID,
-        clientSecret: conf.facebook.clientSecret,
-        callbackURL: conf.facebook.callbackURL
+passport.use(new XingStrategy({
+        consumerKey: conf.xing.clientID,
+        consumerSecret: conf.xing.clientSecret,
+        callbackURL: conf.xing.callbackURL,
+        profileFields: ['id', 'first_name', 'last_name', 'active_email']
     },
-    function (accessToken, refreshToken, profile, cb) {
+    function (token, tokenSecret, profile, cb) {
         return cb(null, profile);
-    }));
+    }
+));
 
 passport.serializeUser(function (user, cb) {
     cb(null, user);
@@ -35,10 +35,10 @@ router.use(require('express-session')({secret: 'keyboard cat', resave: true, sav
 router.use(passport.initialize());
 router.use(passport.session());
 
-router.get('/', passport.authenticate('facebook'));
+router.get('/', passport.authenticate('xing'));
 
 router.get('/return',
-    passport.authenticate('facebook', {failureRedirect: '/login'}),
+    passport.authenticate('xing', {failureRedirect: '/login'}),
     function (req, res) {
         //save user across the routes
         req.session.user = req.user;

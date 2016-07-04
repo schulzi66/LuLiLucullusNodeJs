@@ -19,6 +19,7 @@ var impressum = require('./routes/impressum');
 var facebook = require('./routes/logins/facebook');
 var google = require('./routes/logins/google');
 var twitter = require('./routes/logins/twitter');
+var xing = require('./routes/logins/xing');
 
 var app = express();
 
@@ -53,6 +54,7 @@ app.use('/impressum', impressum);
 app.use('/login/facebook', facebook);
 app.use('/login/google', google);
 app.use('/login/twitter', twitter);
+app.use('/login/xing', xing);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -6,22 +6,27 @@
     "dbo": "webdev",
     "port": 3306
   },
-  "facebook" : {
+  "facebook": {
     "clientID": "242003976182956",
     "clientSecret": "07fece9f13e977f0c98c552677ad3331",
     "callbackURL": "http://localhost:3000/login/facebook/return"
   },
   "google": {
-    "clientID":"111427977021-0trtfauh9lks262gei2vh1o6jbfi3kcs.apps.googleusercontent.com",
-    "clientSecret":"uH3F1GEX7k3y2E3edUdEWTn5",
+    "clientID": "111427977021-0trtfauh9lks262gei2vh1o6jbfi3kcs.apps.googleusercontent.com",
+    "clientSecret": "uH3F1GEX7k3y2E3edUdEWTn5",
     "callbackURL": "http://localhost:3000/login/google/return"
   },
   "twitter": {
-    "clientID":"NRlwyjtNKbo3A1JuF9Il5ydjL",
-    "clientSecret":"1873br1jcvEr5laQcGBvfQ3f9kFpZKBwL06HBr0ekpNDjgYz1U",
-    "callbackURL":"http://127.0.0.1:3000/login/twitter/return"
+    "clientID": "NRlwyjtNKbo3A1JuF9Il5ydjL",
+    "clientSecret": "1873br1jcvEr5laQcGBvfQ3f9kFpZKBwL06HBr0ekpNDjgYz1U",
+    "callbackURL": "http://127.0.0.1:3000/login/twitter/return"
   },
-  "session" : {
-    "secret" : "cxnasdfiö203dsfs0§%/(%;S)"
+  "xing": {
+    "clientID": "7469545a5f23df7b9bc3",
+    "clientSecret": "ca287a66e9bfca11f1171eec59144fcbdfa91dad",
+    "callbackURL": "http://localhost:3000/login/xing/return"
+  },
+  "session": {
+    "secret": "cxnasdfiö203dsfs0§%/(%;S)"
   }
 }
