@@ -17,6 +17,10 @@ body {
     margin-bottom: 60px;
 }
 
+.container{
+    margin-top: 80px;
+}
+
 #footer-wrapper {
     position: absolute;
     bottom: 0;
