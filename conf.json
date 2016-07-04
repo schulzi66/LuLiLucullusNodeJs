@@ -1,8 +1,10 @@
 {
   "database": {
+    "host": "localhost",
     "user": "root",
     "password": "root",
-    "dbo": "webdev"
+    "dbo": "webdev",
+    "port": 3306
   },
   "facebook" : {
     "clientID": "242003976182956",

@@ -9,7 +9,7 @@ var debug = require('debug')('lulilucullu:server');
 var http = require('http');
 var DbController = require('./../controllers/DatabaseController');
 var SocketController = require('./../controllers/SocketController');
-var conf = require('../conf.json');
+// var conf = require('../conf.json');
 
 /**
  * Get port from environment and store in Express.
@@ -21,10 +21,22 @@ app.set('port', port);
 /**
 * Promt environment db logins
 */
-  var _dbController = new DbController();
-  _dbController.connect(conf.database.user, conf.database.password, conf.database.dbo, startServer);
-  var connection = _dbController.getConnection();
-  app.set('connection', connection);
+var _dbController = new DbController();
+var con = _dbController.connect(startServer);
+// app.set('connection', connection);
+// var con = _dbController.getConnection();
+console.log(con);
+// var query = 'SELECT * from user';
+// con.query(query, function(err, rows, fields) {
+//     if (err) throw err;
+//
+//     for (var i in rows) {
+//         console.log('users: ', rows[i].post_title);
+//     }
+// });
+
+  // var _dbController = new DbController();
+  // var connection = _dbController.connect(conf.database.user, conf.database.password, conf.database.dbo, startServer);
 
 /**
 * Create HTTP server.

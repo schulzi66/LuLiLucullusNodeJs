@@ -30,7 +30,6 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 /*Local login */
-
 passport.use('local-login', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
         usernameField : 'email',
@@ -43,14 +42,14 @@ passport.use('local-login', new LocalStrategy({
 ));
 
 passport.serializeUser(function(user, cb) {
-        cb(null, user.id);
-    });
+    cb(null, user.id);
+});
 
 // used to deserialize the user
 passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
     // User.findById(id, function(err, user) {
-    // });
+    // });  
 });
 
 /* GET Profil page */
