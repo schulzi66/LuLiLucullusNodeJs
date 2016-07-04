@@ -1,3 +1,8 @@
+/**
+ * @author
+ * Marius Schulze
+ */
+
 var mysql = require('mysql');
 var conf = require('../conf.json');
 var connection = mysql.createConnection({
@@ -25,6 +30,7 @@ var connection = mysql.createConnection({
 var DatabaseController = function() {
 }
 
+<<<<<<< HEAD
 DatabaseController.prototype.connect = function (startServerCallback) {
   connection.connect(function(err) {
     if (err) {
@@ -48,6 +54,32 @@ DatabaseController.prototype.connect = function (startServerCallback) {
     return connection;
     startServerCallback();
   });
+=======
+DatabaseController.prototype.connect = function (user, password, dbo, startServerCallback) {
+  connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : user,
+    password : password,
+    database : dbo
+  });
+
+    connection.connect(function (err) {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        }
+        console.log('connected as id ' + connection.threadId);
+        startServerCallback();
+    });
+
+    connection.query('CREATE TABLE IF NOT EXISTS test_table (id int not NULL)', function (err, rows, fields) {
+        if (!err) {
+            console.log("Success " + rows)
+        } else {
+            console.log("Error while proceeding");
+        }
+    });
+>>>>>>> 7226aaa50785679058694ff4394f97b520e58e24
 }
 
 DatabaseController.prototype.getConnection = function () {
