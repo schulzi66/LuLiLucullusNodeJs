@@ -9,7 +9,7 @@
 
 # Vorgehensweise fü´s Starten des Servers
 1. Im Hauptordner cmd öffnen
-2. npm start
+2. nodemon app.js
 
 # Vorgehensweise fü´s Starten des Servers im Debug Mode
 1. Im Hauptordner cmd öffnen
