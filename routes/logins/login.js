@@ -2,12 +2,59 @@ var conf = require('../../conf.json');
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
+/* GET login page. */
 router.get('/', function(req, res, next) {
   res.render('login');
 });
 
-router.get('/profile',
+/* Post local login Command */
+router.post('/', passport.authenticate('local-login', {
+        successRedirect : '/', // redirect to the secure profile section
+        failureRedirect : '/login' // redirect back to the signup page if there is an error
+}));
+
+
+// Use application-level middleware for common functionality, including
+// logging, parsing, and session handling.
+router.use(require('morgan')('combined'));
+router.use(require('cookie-parser')());
+router.use(require('body-parser').urlencoded({ extended: true }));
+router.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+router.use(passport.initialize());
+router.use(passport.session());
+
+/*Local login */
+
+passport.use('local-login', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
+    function(req, email, password, cb) {
+      return cb(null, email);
+    }
+));
+
+passport.serializeUser(function(user, cb) {
+        cb(null, user.id);
+    });
+
+// used to deserialize the user
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+    // User.findById(id, function(err, user) {
+    // });
+});
+
+/* GET Profil page */
+router.get('/profile', isLoggedIn,
   function(req, res){
     res.render('profile', { user: req.session.user });
 });
@@ -17,5 +64,16 @@ router.get('/profile',
 //   function(req, res){
 //     res.render('profile', { user: req.session.user });
 // });
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
 
 module.exports = router;

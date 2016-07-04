@@ -1,14 +1,10 @@
-/**
- * @author
- * Marius Schulze
- */
-
 var mysql = require('mysql');
+var connection;
 var DatabaseController = function() {
 }
 
 DatabaseController.prototype.connect = function (user, password, dbo, startServerCallback) {
-  var connection = mysql.createConnection({
+  connection = mysql.createConnection({
     host     : 'localhost',
     user     : user,
     password : password,
@@ -24,5 +20,10 @@ DatabaseController.prototype.connect = function (user, password, dbo, startServe
     startServerCallback();
   });
 }
+
+DatabaseController.prototype.getConnection = function () {
+console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+console.log(connection);
+};
 
 module.exports = DatabaseController;
