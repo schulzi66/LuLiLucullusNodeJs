@@ -36,6 +36,10 @@ body {
     border-top: 1px solid #e7e7e7;
 }
 
+/* Header styles */
+#header {
+    margin-top: 10px;
+}
 /* Navbar styles */
 #navbar {
     border-top: 1px solid #080705;
