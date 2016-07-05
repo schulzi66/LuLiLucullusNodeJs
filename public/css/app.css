@@ -47,12 +47,12 @@ html {
 /* Button styles */
 .btn {
     background-color: #702632;
-    border-color: #575a66;
+    border-color: #4a1921;
     margin-bottom: 20px;
 }
 
 .btn:hover {
-    background-color: #575a66;
+    background-color: #963343;
 }
 
 /* Header styles */
