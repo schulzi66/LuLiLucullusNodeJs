@@ -1,3 +1,7 @@
+/*
+CSS Farbabstufungen: http://www.0to255.com/40434E
+*/
+
 body {
     background-color: #FFFFFA;
 }
@@ -60,6 +64,10 @@ body {
 }
 
 /* Navbar styles */
+/*.navbar-default {
+    background-color: #40434E;
+}*/
+
 #navbar {
     border-top: 1px solid #080705;
     border-bottom: 2px solid #080705;
