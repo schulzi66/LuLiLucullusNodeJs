@@ -6,6 +6,10 @@ a {
     color: #40434E;
 }
 
+p {
+  text-align: justify;
+}
+
 /* Sticky footer styles */
 html {
     position: relative;
