@@ -1,3 +1,4 @@
+/*
 var DbController = require('./../controllers/DatabaseController');
 var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
@@ -9,7 +10,7 @@ var connection = _dbController.connect(startServer);
 
 
 // define the schema for our user model
-var userSchema = mongoose.Schema({
+var userSchema = mysql.Schema({
 
     local: {
         email: String,
@@ -44,4 +45,4 @@ userSchema.methods.validPassword = function (password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mysql.model('User', userSchema);*/
