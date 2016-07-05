@@ -14,6 +14,7 @@ var contact = require('./routes/contact');
 var services = require('./routes/services');
 var recipes = require('./routes/recipes');
 var impressum = require('./routes/impressum');
+var rentaCook = require('./routes/rentaCook');
 var signup = require('./routes/logins/signup');
 var login = require('./routes/logins/login');
 var logout = require('./routes/logins/logout');
@@ -49,15 +50,16 @@ app.use(helmet());
 app.use('/', index);
 app.use('/contact', contact);
 app.use('/services', services);
+app.use('/recipes', recipes);
+app.use('/impressum', impressum);
+app.use('/rent-a-cook', rentaCook);
 app.use('/signup', signup);
 app.use('/login', login);
+app.use('/logout', logout);
 app.use('/login/facebook', facebook);
 app.use('/login/google', google);
 app.use('/login/twitter', twitter);
 app.use('/login/xing', xing);
-app.use('/logout', logout);
-app.use('/recipes', recipes);
-app.use('/impressum', impressum);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
