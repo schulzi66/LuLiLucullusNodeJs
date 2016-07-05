@@ -21,12 +21,11 @@ body {
     margin-top: 80px;
 }
 
+/* Footer styles */
 #footer-wrapper {
     position: absolute;
     bottom: 0;
     width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 60px;
     background-color: #f8f8f8;
     border-top: 1px solid #e7e7e7;
 }
@@ -48,8 +47,8 @@ body {
 }
 
 /* Header styles */
-#header {
-    margin-top: 10px;
+#header-wrapper {
+    width: 40px;
 }
 
 #user-name-header {

@@ -1,15 +1,16 @@
 var express = require('express');
 var router = express.Router();
-
+/*
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
-var User = require('../app/models/user');
+*/
 /* GET signup page. */
 router.get('/', function (req, res, next) {
-    res.render('signup');
+    res.render('signup', { user: req.session.user});
 });
 
+module.exports = router;
+/*
 
 module.exports = function (passport) {
 
@@ -76,4 +77,4 @@ module.exports = function (passport) {
 
         }));
 
-};
+};*/
