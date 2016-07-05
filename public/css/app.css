@@ -25,10 +25,6 @@ body {
     margin-bottom: 60px;
 }
 
-.container{
-
-}
-
 .container-margin{
     margin-top: 80px;
 }
@@ -49,7 +45,7 @@ body {
 
 /* Button styles */
 .btn {
-    background-color: #40434E;
+    background-color: #702632;
     border-color: #575a66;
     margin-bottom: 20px;
 }
