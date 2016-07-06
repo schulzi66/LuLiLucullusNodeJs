@@ -13,7 +13,7 @@ a {
     color: #40434E;
 }
 
-p {
+p:not(.slider-paragraph) {
     text-align: justify;
 }
 
@@ -155,6 +155,7 @@ html {
 .carousel-inner > .item > a > img {
     width: 70%;
     max-width: 900px !important;
+    max-height: 585px !important;
     margin: auto;
 }
 
