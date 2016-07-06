@@ -36,7 +36,11 @@ DatabaseController.prototype.signup = function (req, res, vorname, name, email, 
             "password=" + '\'' + req.body.password + '\'' + ", " +
             "lieferadresse_str=" + '\'' + req.body.street + '\'' + ", " +
             "lieferadresse_ort=" + '\'' + req.body.ort + '\'' + ", " +
-            "lieferadresse_plz=" + req.body.plz;
+            "lieferadresse_plz=" + req.body.plz + ", " +
+            "rechnungsadresse_str=" + '\'' + req.body.street + '\'' + ", " +
+            "rechnungsadresse_ort=" + '\'' + req.body.ort + '\'' + ", " +
+            "rechnungsadresse_plz=" + req.body.plz;
+
         connection.query(queryString,
             function (err, rows) {
                 console.log(queryString);
