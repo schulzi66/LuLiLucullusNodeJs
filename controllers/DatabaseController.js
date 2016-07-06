@@ -21,7 +21,7 @@ DatabaseController.prototype.connect = function (startServerCallback) {
     });
 }
 
-DatabaseController.prototype.signup = function (req, res, email, password) {
+DatabaseController.prototype.signup = function (req, res, vorname, name, email, password, strasse, plz, ort) {
     console.log("START SIGNUP");
     pool.getConnection(function (err, connection) {
         if (err) {
@@ -29,11 +29,17 @@ DatabaseController.prototype.signup = function (req, res, email, password) {
             return;
         }
 
-        var queryString = "INSERT INTO USER SET name='TestName', vorname='TestVorName', email=" + '\'' + req.body.email + '\'' + ", password="+ '\'' + req.body.password + '\'';
+        var queryString = "INSERT INTO USER SET " +
+            "name=" + '\'' + req.body.name + '\'' + ", " +
+            "vorname=" + '\'' + req.body.vorname + '\'' + ", " +
+            "email=" + '\'' + req.body.email + '\'' + ", " +
+            "password=" + '\'' + req.body.password + '\'' + ", " +
+            "lieferadresse_str=" + '\'' + req.body.street + '\'' + ", " +
+            "lieferadresse_ort=" + '\'' + req.body.ort + '\'' + ", " +
+            "lieferadresse_plz=" + req.body.plz;
         connection.query(queryString,
             function (err, rows) {
                 console.log(queryString);
-                connection.query("SELECT * FROM USER");
                 connection.release();
 
                 if (!err) {
