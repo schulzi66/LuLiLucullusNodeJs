@@ -2,8 +2,11 @@
 CSS Farbabstufungen: http://www.0to255.com/40434E
 */
 
+/* Global styles */
 body {
     background-color: #FFFFFA;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
 
 a {
@@ -14,19 +17,14 @@ p {
     text-align: justify;
 }
 
-/* Sticky footer styles */
 html {
     position: relative;
     min-height: 100%;
 }
 
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-}
-
+/* Main Container Wrapper */
 .container-margin {
-    margin-top: 80px;
+    margin-top: 50px;
 }
 
 /* Footer styles */
@@ -41,8 +39,11 @@ body {
 /* Form styles */
 .form-control {
     width: 80%;
+    margin-bottom: 15px;
 }
-
+.form-group > label {
+    padding: 0;
+}
 /* Button styles */
 .btn {
     background-color: #702632;
@@ -158,4 +159,9 @@ body {
 
 #home-slider {
     margin-bottom: 20px;
+}
+
+/*Profile styles */
+.profile-form > div {
+    margin-bottom: 15px;
 }

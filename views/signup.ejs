@@ -1,1 +1,61 @@
-Lorem ipsum
+<!DOCTYPE html>
+<html>
+<% include partials/head %>
+
+<div id="header-wrapper">
+    <nav class="navbar navbar-default nav-justified navbar-fixed-top">
+        <div id="header" class="container-fluid">
+            <ul class="nav nav-justified">
+                <li>
+                    <button class="button-sidemenu" data-dropdown="#dropdown-standard">&#9776;</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="#">Catering</a></li>
+            <li><a href="#">Rent a Cook</a></li>
+            <li><a href="#">XXX</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">XXX</a></li>
+            <li><a href="#">XXX</a></li>
+            <li class="divider"></li>
+            <li><a href="/recipes">Rezepte</a></li>
+            <li><a href="#">Meine Rezepte</a></li>
+        </ul>
+    </div>
+</div>
+<% include partials/navbar %>
+<body>
+<div class="container">
+
+    <div class="col-sm-6 col-sm-offset-3">
+
+        <h1><span class="fa fa-sign-in"></span> Signup</h1>
+
+        <form action="/signup" method="post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+        </form>
+
+        <hr>
+
+        <p>Already have an account? <a href="/login">Login</a></p>
+        <p>Or go <a href="/">home</a>.</p>
+
+    </div>
+
+</div>
+</body>
+</html>
