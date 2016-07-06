@@ -1,38 +1,40 @@
 var mysql = require('mysql');
 var conf = require('../conf.json');
-var connection = mysql.createConnection({
-    host     : conf.database.host,
-    user     : conf.database.user,
-    password : conf.database.password,
-    database : conf.database.dbo,
-    port     : conf.database.port,
-    charset  : 'utf8'
+
+var pool = mysql.createPool({
+    host: conf.database.host,
+    user: conf.database.user,
+    password: conf.database.password,
+    database: conf.database.dbo,
+    port: conf.database.port,
+    charset: conf.database.charset,
+    connectionLimit: conf.database.connectionLimit,
+    debug: false
 });
 
-var DatabaseController = function() {
+var DatabaseController = function () {
 }
 
-DatabaseController.prototype.connect = function (startServerCallback) {
-    connection.connect(function (err) {
+DatabaseController.prototype.connect = function(req, res, email) {
+    pool.getConnection(function (err, connection) {
         if (err) {
-            console.error('error connecting: ' + err.stack);
+            res.json({"code": 100, "status": "Error in connection database"});
             return;
         }
         console.log('connected as id ' + connection.threadId);
-        startServerCallback();
-    });
-}
 
-DatabaseController.prototype.getUserById = function(connection, id) {
-    connection.query('SELECT * from user where id = ' + id , function(err, rows, fields) {
-        if (!err) {
-            for (var i in rows) {
-                console.log('users: ', rows[i]);
+        connection.query('SELECT * FROM USER WHERE email = ' + email, function (err, rows) {
+            connection.release();
+            if (!err) {
+                res.json(rows);
             }
-        } else {
-            console.log(err);
-        }
-    })
+        });
+
+        connection.on('error', function (err) {
+            res.json({"code": 100, "status": "Error in connection database"});
+            return;
+        });
+    });
 }
 
 module.exports = DatabaseController;

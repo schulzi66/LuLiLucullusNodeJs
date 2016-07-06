@@ -4,7 +4,9 @@
     "user": "root",
     "password": "root",
     "dbo": "webdev",
-    "port": 3306
+    "port": 3306,
+    "connectionLimit": 100,
+    "charset": "UTF8"
   },
   "facebook": {
     "clientID": "242003976182956",

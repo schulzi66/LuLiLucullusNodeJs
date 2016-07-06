@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 
 <% include partials/head %>
-
 <% include partials/header %>
-
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<div class="container container-margin">
+    <h1><%= message %></h1>
+    <h2><%= error.status %></h2>
+    <pre><%= error.stack %></pre>
+</div>
 <% include partials/footer %>
