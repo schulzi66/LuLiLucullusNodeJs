@@ -11,7 +11,7 @@ a {
 }
 
 p {
-  text-align: justify;
+    text-align: justify;
 }
 
 /* Sticky footer styles */
@@ -25,7 +25,7 @@ body {
     margin-bottom: 60px;
 }
 
-.container-margin{
+.container-margin {
     margin-top: 80px;
 }
 
@@ -135,8 +135,13 @@ body {
     left: 88% !important;
 }
 
-#dropdown-standard, #dropdown-logout, #dropdown-recipe-categories{
-    opacity: 0.8;
+#dropdown-standard, #dropdown-logout, #dropdown-recipe-categories {
+    background-color: rgba(255, 255, 250, 0.4)
+
+}
+
+.dropdown-menu ul {
+    background-color: transparent;
 }
 
 #dropdown-recipe-categories {
