@@ -15,14 +15,22 @@ var pool = mysql.createPool({
 var DatabaseController = function () {
 }
 
-DatabaseController.prototype.connect = function(req, res, email) {
+// DatabaseController.prototype.connect = function (startServerCallback) {
+//     pool.getConnection(function (err, connection) {
+//         console.log('connected as id ' + connection.threadId);
+//         startServerCallback();
+//     });
+// }
+
+
+DatabaseController.prototype.connect = function(startServerCallback, req, res, email) {
     pool.getConnection(function (err, connection) {
         if (err) {
             res.json({"code": 100, "status": "Error in connection database"});
             return;
         }
         console.log('connected as id ' + connection.threadId);
-
+        startServerCallback();
         connection.query('SELECT * FROM USER WHERE email = ' + email, function (err, rows) {
             connection.release();
             if (!err) {
