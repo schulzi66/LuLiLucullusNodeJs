@@ -154,6 +154,7 @@ html {
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
     width: 70%;
+    max-width: 900px !important;
     margin: auto;
 }
 
