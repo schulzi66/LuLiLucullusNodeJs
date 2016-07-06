@@ -84,21 +84,23 @@ body {
     width: 84px;
 }
 
-/*Recipe Box styles*/
+/* Recipe Box styles */
 .recipe-box {
-    background-color: #912F40;
+    background-color: #FFFFFA;
     width: 250px;
     height: 300px;
     margin-left: 50px;
     position: absolute;
+    border: 1px solid #702632;
 }
 
 #recipes-recipe-img {
     width: inherit;
+    max-width: 248px;
 }
 
 #recipes-recipe-short-description {
-    color: #FFFFFA;
+    color: #575a66;
     margin: 10px 10px 10px 10px;
 }
 
@@ -107,7 +109,6 @@ body {
     float: right;
     -webkit-appearance: button;
     cursor: pointer;
-    margin: 0 10px 15px 10px;
     color: #FFFFFA;
 }
 
