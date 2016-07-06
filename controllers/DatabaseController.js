@@ -1,5 +1,6 @@
 var mysql = require('mysql');
 var conf = require('../conf.json');
+var UserController = require('./UserController');
 
 var pool = mysql.createPool({
     host: conf.database.host,
@@ -21,14 +22,13 @@ DatabaseController.prototype.connect = function (startServerCallback) {
     });
 }
 
-DatabaseController.prototype.signup = function (req, res, vorname, name, email, password, strasse, plz, ort) {
+DatabaseController.prototype.signup = function (req, res) {
     console.log("START SIGNUP");
     pool.getConnection(function (err, connection) {
         if (err) {
             console.log("ERR: " + err);
             return;
         }
-
         var queryString = "INSERT INTO USER SET " +
             "name=" + '\'' + req.body.name + '\'' + ", " +
             "vorname=" + '\'' + req.body.vorname + '\'' + ", " +
@@ -47,9 +47,13 @@ DatabaseController.prototype.signup = function (req, res, vorname, name, email, 
                 connection.release();
 
                 if (!err) {
-                    res.json(rows);
+                    var _userController = new UserController();
+                    var user = _userController.createUserModel(req.body.name, req.body.vorname, req.body.email, req.body.password, req.body.street, req.body.plz, req.body.ort);
+                    req.session.user = user;
+                    res.redirect('/');
                 }
             });
+
         connection.on('error', function (err) {
             console.log("ERR: " + err);
             return;

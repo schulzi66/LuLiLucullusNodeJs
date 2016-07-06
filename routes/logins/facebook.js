@@ -42,6 +42,8 @@ router.get('/return',
     function (req, res) {
         //save user across the routes
         req.session.user = req.user;
+        console.log("Facebook Json return");
+        console.log(req.session.user);
         res.redirect('/');
     });
 

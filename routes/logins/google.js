@@ -9,7 +9,7 @@ var GoogleStrategy = require('passport-google-oauth20').Strategy;
 passport.use(new GoogleStrategy({
     clientID: conf.google.clientID,
     clientSecret: conf.google.clientSecret,
-    callbackURL: conf.google.callbackURL 
+    callbackURL: conf.google.callbackURL
   },
   function(accessToken, refreshToken, profile, cb) {
     return cb(null, profile);
@@ -43,7 +43,10 @@ router.get('/return',
   function(req, res) {
     //save user across the routes
     req.session.user = req.user;
+    console.log("Google Json Return");
+    console.log(req.session.user);
     res.redirect('/');
+
   });
 
 module.exports = router;
