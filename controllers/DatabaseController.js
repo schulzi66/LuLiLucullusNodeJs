@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 var conf = require('../conf.json');
-var UserController = require('./UserController');
+var UserModelController = require('./UserModelController');
 
 var pool = mysql.createPool({
     host: conf.database.host,
@@ -22,7 +22,83 @@ DatabaseController.prototype.connect = function (startServerCallback) {
     });
 }
 
-DatabaseController.prototype.signup = function (req, res) {
+DatabaseController.prototype.getUserByMail = function (email) {
+    pool.getConnection(function (err, connection) {
+      if (err) {
+          console.log("ERR: " + err);
+          return;
+      }
+      var queryString = "Select * from user where email = " + email;
+
+      connection.query(queryString, function (err, rows) {
+        connection.release();
+        if (!err) {
+          return rows;
+        }
+      });
+
+      connection.on('error', function (err) {
+          console.log("ERR: " + err);
+          return;
+      });
+
+    })
+}
+
+DatabaseController.prototype.signupExternalUser = function (name, givenName, passwordPlaceholder, email) {
+    console.log("START SIGNUP");
+    pool.getConnection(function (err, connection) {
+        if (err) {
+            console.log("ERR: " + err);
+            return;
+        }
+        var queryString = "INSERT INTO USER SET " +
+            "name=" + '\'' + name + '\'' + ", " +
+            "vorname=" + '\'' + givenName + '\'' + ", " +
+            "email=" + '\'' + email + '\'' + ", " +
+            "password=" + '\'' + passwordPlaceholder + '\'' + ", " +
+            "lieferadresse_str=" + '\'' + null + '\'' + ", " +
+            "lieferadresse_ort=" + '\'' + null + '\'' + ", " +
+            "lieferadresse_plz=" + null + ", " +
+            "rechnungsadresse_str=" + '\'' + null + '\'' + ", " +
+            "rechnungsadresse_ort=" + '\'' + null + '\'' + ", " +
+            "rechnungsadresse_plz=" + '\'' + null + '\'' + ", " +
+            "internal=" + false;
+
+        connection.query(queryString,
+            function (err) {
+                console.log(queryString);
+                connection.release();
+
+                //signup was successful
+                if (!err) {
+                  console.log("facebook login successful");
+                    // var _userController = new UserModelController();
+                    // var user = _userModelController.createUserModel(req.body.name,
+                    //     req.body.vorname,
+                    //     req.body.email,
+                    //     req.body.password,
+                    //     req.body.street,
+                    //     req.body.ort,
+                    //     req.body.plz,
+                    //     req.body.rech_street,
+                    //     req.body.rech_ort,
+                    //     req.body.rech_plz,
+                    //     internal);
+                    // req.session.user = user;
+                    // res.redirect('/');
+                }
+            });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+    console.log("SUCCESS");
+}
+
+DatabaseController.prototype.signup = function (req, res, internal) {
     console.log("START SIGNUP");
     pool.getConnection(function (err, connection) {
         if (err) {
@@ -39,17 +115,18 @@ DatabaseController.prototype.signup = function (req, res) {
             "lieferadresse_plz=" + req.body.plz + ", " +
             "rechnungsadresse_str=" + '\'' + req.body.rech_street + '\'' + ", " +
             "rechnungsadresse_ort=" + '\'' + req.body.rech_ort + '\'' + ", " +
-            "rechnungsadresse_plz=" + req.body.rech_plz;
+            "rechnungsadresse_plz=" + '\'' + req.body.rech_plz + '\'' + ", " +
+            "internal=" + true;
 
         connection.query(queryString,
             function (err) {
                 console.log(queryString);
                 connection.release();
 
-                //signup was successful 
+                //signup was successful
                 if (!err) {
-                    var _userController = new UserController();
-                    var user = _userController.createUserModel(req.body.name,
+                    var _userController = new UserModelController();
+                    var user = _userModelController.createUserModel(req.body.name,
                         req.body.vorname,
                         req.body.email,
                         req.body.password,
@@ -58,7 +135,8 @@ DatabaseController.prototype.signup = function (req, res) {
                         req.body.plz,
                         req.body.rech_street,
                         req.body.rech_ort,
-                        req.body.rech_plz);
+                        req.body.rech_plz,
+                        internal);
                     req.session.user = user;
                     res.redirect('/');
                 }
