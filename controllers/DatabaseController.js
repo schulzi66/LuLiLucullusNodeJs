@@ -46,6 +46,7 @@ DatabaseController.prototype.signup = function (req, res) {
                 console.log(queryString);
                 connection.release();
 
+                //signup was successful 
                 if (!err) {
                     var _userController = new UserController();
                     var user = _userController.createUserModel(req.body.name, req.body.vorname, req.body.email, req.body.password, req.body.street, req.body.plz, req.body.ort);
