@@ -16,7 +16,7 @@ UserController.prototype.createUserModel = function (name, firstName, email, pas
         "rechnungsadresse_plz": rech_plz,
 
     }
-    return userModel;
+    return userModel; //Handytest
 }
 
 module.exports = UserController;
