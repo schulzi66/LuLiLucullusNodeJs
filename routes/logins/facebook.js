@@ -2,6 +2,8 @@
 var conf = require('../../conf.json');
 var express = require('express');
 var router = express.Router();
+var DatabaseController = require('../../controllers/DatabaseController');
+// var UserModelController = require('../../controllers/UserModelController');
 
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -9,7 +11,8 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(new FacebookStrategy({
         clientID: conf.facebook.clientID,
         clientSecret: conf.facebook.clientSecret,
-        callbackURL: conf.facebook.callbackURL
+        callbackURL: conf.facebook.callbackURL,
+        profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified']
     },
     function (accessToken, refreshToken, profile, cb) {
         return cb(null, profile);
@@ -35,7 +38,9 @@ router.use(require('express-session')({secret: 'keyboard cat', resave: true, sav
 router.use(passport.initialize());
 router.use(passport.session());
 
-router.get('/', passport.authenticate('facebook'));
+router.get('/', passport.authenticate('facebook', {
+  scope: ['email']
+}));
 
 router.get('/return',
     passport.authenticate('facebook', {failureRedirect: '/login'}),
@@ -44,6 +49,10 @@ router.get('/return',
         req.session.user = req.user;
         console.log("Facebook Json return");
         console.log(req.session.user);
+        var _dbController = new DbController();
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+          _dbController.signupExternalUser(req.user.name.familyName, req.user.name.givenName, "", req.user.emails[0]);
+        // _userModelController.createUserModel(req.user.name.familyName, req.user.name.givenName, req.user.emails[0], "", null, null, null, null, null, null, false);
         res.redirect('/');
     });
 

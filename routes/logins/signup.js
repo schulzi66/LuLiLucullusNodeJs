@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function(req, res){
     var _dbController = new DbController();
-      _dbController.signup(req, res);
+      _dbController.signup(req, res, true);
 });
 
 module.exports = router;
