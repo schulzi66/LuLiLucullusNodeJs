@@ -1,5 +1,6 @@
 var mysql = require('mysql');
 var conf = require('../conf.json');
+var bcrypt = require('bcrypt-nodejs');
 var UserController = require('./UserController');
 
 var pool = mysql.createPool({
@@ -29,11 +30,14 @@ DatabaseController.prototype.signup = function (req, res) {
             console.log("ERR: " + err);
             return;
         }
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(req.body.password, salt);
+
         var queryString = "INSERT INTO USER SET " +
             "name=" + '\'' + req.body.name + '\'' + ", " +
             "vorname=" + '\'' + req.body.vorname + '\'' + ", " +
             "email=" + '\'' + req.body.email + '\'' + ", " +
-            "password=" + '\'' + req.body.password + '\'' + ", " +
+            "password=" + '\'' + hash + '\'' + ", " +
             "lieferadresse_str=" + '\'' + req.body.street + '\'' + ", " +
             "lieferadresse_ort=" + '\'' + req.body.ort + '\'' + ", " +
             "lieferadresse_plz=" + req.body.plz + ", " +
