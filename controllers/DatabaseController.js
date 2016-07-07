@@ -37,18 +37,27 @@ DatabaseController.prototype.signup = function (req, res) {
             "lieferadresse_str=" + '\'' + req.body.street + '\'' + ", " +
             "lieferadresse_ort=" + '\'' + req.body.ort + '\'' + ", " +
             "lieferadresse_plz=" + req.body.plz + ", " +
-            "rechnungsadresse_str=" + '\'' + req.body.street + '\'' + ", " +
-            "rechnungsadresse_ort=" + '\'' + req.body.ort + '\'' + ", " +
-            "rechnungsadresse_plz=" + req.body.plz;
+            "rechnungsadresse_str=" + '\'' + req.body.rech_street + '\'' + ", " +
+            "rechnungsadresse_ort=" + '\'' + req.body.rech_ort + '\'' + ", " +
+            "rechnungsadresse_plz=" + req.body.rech_plz;
 
         connection.query(queryString,
-            function (err, rows) {
+            function (err) {
                 console.log(queryString);
                 connection.release();
 
                 if (!err) {
                     var _userController = new UserController();
-                    var user = _userController.createUserModel(req.body.name, req.body.vorname, req.body.email, req.body.password, req.body.street, req.body.plz, req.body.ort);
+                    var user = _userController.createUserModel(req.body.name,
+                        req.body.vorname,
+                        req.body.email,
+                        req.body.password,
+                        req.body.street,
+                        req.body.ort,
+                        req.body.plz,
+                        req.body.rech_street,
+                        req.body.rech_ort,
+                        req.body.rech_plz);
                     req.session.user = user;
                     res.redirect('/');
                 }
