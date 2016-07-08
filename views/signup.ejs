@@ -36,7 +36,9 @@
 
         <h1><span class="fa fa-sign-in"></span> Signup</h1>
         <% if (typeof message !== 'undefined') { %>
-          <label><%= message %></label>
+        <div class="alert alert-warning">
+            <%= message %>
+        </div>
         <% } %>
         <form action="/signup" method="post">
             <div class="form-group">
@@ -45,7 +47,7 @@
             </div>
             <div class="form-group">
                 <label for="vorname" class="control-label">Vorname</label>
-                    <input type="text" class="form-control" name="vorname" placeholder="Vorname">
+                <input type="text" class="form-control" name="vorname" placeholder="Vorname">
             </div>
             <div class="form-group">
                 <label>Email</label>
@@ -64,7 +66,8 @@
             </div>
             <div class="form-group">
                 <label for="rechnungsadresse" class="control-label">Rechnungsadresse</label>
-                <input type="text" class="form-control" id="rech_street" name="rech_street" placeholder="Stra&szlig;e + HNr"
+                <input type="text" class="form-control" id="rech_street" name="rech_street"
+                       placeholder="Stra&szlig;e + HNr"
                        value="">
                 <input type="text" class="form-control" id="rech_plz" name="rech_plz" placeholder="PLZ" value="">
                 <input type="text" class="form-control" id="rech_ort" name="rech_ort" placeholder="Wohnort" value="">
