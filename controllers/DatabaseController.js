@@ -52,7 +52,6 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             console.log("ERR: " + err);
             return;
         }
-
         var queryString = "INSERT INTO USER SET " +
             "name=" + connection.escape(req.user.name.familyName) + ", " +
             "vorname=" + connection.escape(req.user.name.givenName) + ", " +
@@ -70,23 +69,21 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             function (err) {
                 connection.release();
 
-                //signup was successful
                 if (!err) {
-                    console.log("facebook login successful");
                     var _userModelController = new UserModelController();
-                    // var user = _userModelController.createUserModel(req.body.name,
-                    //     req.body.vorname,
-                    //     req.body.email,
-                    //     req.body.password,
-                    //     req.body.street,
-                    //     req.body.ort,
-                    //     req.body.plz,
-                    //     req.body.rech_street,
-                    //     req.body.rech_ort,
-                    //     req.body.rech_plz,
-                    //     internal);
-                    //req.session.user = user;
-                    //res.redirect('/');
+                    var user = _userModelController.createUserModel(req.body.name,
+                        req.body.vorname,
+                        req.body.email,
+                        req.body.password,
+                        req.body.street,
+                        req.body.ort,
+                        req.body.plz,
+                        req.body.rech_street,
+                        req.body.rech_ort,
+                        req.body.rech_plz,
+                        internal);
+                    req.session.user = user;
+                    res.redirect('/');
                 }
             });
 
@@ -109,15 +106,15 @@ DatabaseController.prototype.signup = function (req, res, internal) {
 
         var rech_str, rech_ort, rech_plz;
 
-        if(req.body.rech_str === '') {
+        if (req.body.rech_str === '') {
             rech_str = req.body.str;
         } else rech_str = req.body.rech_str;
 
-        if(req.body.rech_ort === '') {
+        if (req.body.rech_ort === '') {
             rech_ort = req.body.ort;
         } else rech_ort = req.body.rech_ort;
 
-        if(req.body.rech_plz == '') {
+        if (req.body.rech_plz == '') {
             rech_plz = req.body.plz;
         } else rech_plz = req.body.rech_plz;
 
@@ -173,15 +170,15 @@ DatabaseController.prototype.updateUser = function (req, res) {
 
         var rech_str, rech_ort, rech_plz;
 
-        if(req.body.rech_street === '') {
+        if (req.body.rech_street === '') {
             rech_str = req.body.street;
         } else rech_str = req.body.rech_street;
 
-        if(req.body.rech_ort === '') {
+        if (req.body.rech_ort === '') {
             rech_ort = req.body.ort;
         } else rech_ort = req.body.rech_ort;
 
-        if(req.body.rech_plz == '') {
+        if (req.body.rech_plz == '') {
             rech_plz = req.body.plz;
         } else rech_plz = req.body.rech_plz;
 
@@ -200,7 +197,6 @@ DatabaseController.prototype.updateUser = function (req, res) {
 
         connection.query(queryString,
             function (err) {
-                console.log(queryString);
                 connection.release();
 
                 if (!err) {

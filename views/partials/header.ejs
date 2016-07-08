@@ -6,9 +6,9 @@
                     <button class="button-sidemenu" data-dropdown="#dropdown-standard">&#9776;</button>
                 </li>
                 <% if (typeof user == 'undefined') { %>
-                  <li style="width: 0.05%"><a href="/login">Log in</a></li>
+                <li style="width: 0.05%"><a href="/login">Log in</a></li>
                 <% } else { %>
-                  <li id="user-name-header" style="width: 0.05%" data-dropdown="#dropdown-logout"><%= user.displayName %></li>
+                <li id="user-name-header" style="width: 0.05%" data-dropdown="#dropdown-logout"><%= user.displayName %></li>
                 <% } %>
             </ul>
         </div>
