@@ -9,7 +9,7 @@ UserController.prototype.createUserModel = function (name, firstName, email, pas
         },
         "displayName": firstName + " " + name,
         "emails":{
-            "email": email
+            email
         },
         "password": password,
         "lieferadresse_str": lief_street,
