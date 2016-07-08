@@ -52,13 +52,15 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             console.log("ERR: " + err);
             return;
         }
-        var familyName = req.user.name.familyName;
+
+        var familyName;
+
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(placeholder, salt);
 
         if(method_token === "twitter") {
             familyName = req.user.displayName.split(" ")[1];
-        }
+        } else familyName = req.user.name.familyName;
 
         var queryString = "INSERT INTO USER SET " +
             "name=" + connection.escape(familyName) + ", " +
@@ -91,7 +93,6 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
                         req.body.rech_plz,
                         internal);
                     req.session.user = user;
-                    res.redirect('/');
                 }
             });
 
