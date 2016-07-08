@@ -60,10 +60,10 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             "password=" + connection.escape(placeholder) + ", " +
             "lieferadresse_str=" + connection.escape(null) + ", " +
             "lieferadresse_ort=" + connection.escape(null) + ", " +
-            "lieferadresse_plz=" + connection.escape(12345) + ", " +
+            "lieferadresse_plz=" + connection.escape(0) + ", " +
             "rechnungsadresse_str=" + connection.escape(null) + ", " +
             "rechnungsadresse_ort=" + connection.escape(null) + ", " +
-            "rechnungsadresse_plz=" + connection.escape(12345) + ", " +
+            "rechnungsadresse_plz=" + connection.escape(0) + ", " +
             "internal=" + connection.escape(internal);
 
         connection.query(queryString,

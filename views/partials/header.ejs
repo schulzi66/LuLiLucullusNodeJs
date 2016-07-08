@@ -5,11 +5,10 @@
                 <li>
                     <button class="button-sidemenu" data-dropdown="#dropdown-standard">&#9776;</button>
                 </li>
-                <% if (!user) { %>
-                <li style="width: 0.05%"><a href="/login">Log in</a></li>
+                <% if (typeof user == 'undefined') { %>
+                  <li style="width: 0.05%"><a href="/login">Log in</a></li>
                 <% } else { %>
-                <li id="user-name-header" style="width: 0.05%" data-dropdown="#dropdown-logout"
-                    value=""><%= user.displayName %></li>
+                  <li id="user-name-header" style="width: 0.05%" data-dropdown="#dropdown-logout"><%= user.displayName %></li>
                 <% } %>
             </ul>
         </div>
@@ -32,7 +31,7 @@
             <li class="divider"></li>
             <li><a href="/recipes">Rezepte</a></li>
             <li><a href="#">Meine Rezepte</a></li>
-            <% if (user) { %>
+            <% if (locals.user) { %>
             <li><a href="/login/profile">Profilverwaltung</a></li>
             <% } %>
         </ul>

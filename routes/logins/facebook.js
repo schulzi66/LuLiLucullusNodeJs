@@ -45,6 +45,7 @@ router.get('/', passport.authenticate('facebook', {
 router.get('/return',
     passport.authenticate('facebook', {failureRedirect: '/login'}),
     function (req, res) {
+        req.user.displayName = req.user.name.givenName + " " + req.user.name.familyName;
         //save user across the routes
         req.session.user = req.user;
         console.log("Facebook Json return");
