@@ -30,7 +30,7 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             return;
         }
         // Primary key violation must be checked
-        var queryString = "Select * from user where email = " + req.user.emails[0].value;
+        /*var queryString = "Select * from user where email = " + req.user.emails[0].value;
 
         var user = connection.query(queryString, function (err, rows) {
             connection.release();
@@ -39,7 +39,7 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             }
         });
         //  otherwise user is already signed up
-        if (user.length < 0) {
+        if (user.length < 0) {*/
             var familyName;
 
             var salt = bcrypt.genSaltSync(10);
@@ -53,6 +53,7 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
                 "name=" + connection.escape(familyName) + ", " +
                 "vorname=" + connection.escape(req.user.name.givenName) + ", " +
                 "email=" + connection.escape(req.user.emails[0].value) + ", " +
+                "telefon=" + connection.escape(null) + ", " +
                 "password=" + connection.escape(hash) + ", " +
                 "lieferadresse_str=" + connection.escape(null) + ", " +
                 "lieferadresse_ort=" + connection.escape(null) + ", " +
@@ -64,6 +65,7 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
 
             connection.query(queryString,
                 function (err) {
+                    console.log(queryString);
                     connection.release();
 
                     if (!err) {
@@ -82,13 +84,12 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
                         req.session.user = user;
                     }
                 });
-        }
+        //}
         connection.on('error', function (err) {
             console.log("ERR: " + err);
             return;
         });
     });
-
 }
 
 DatabaseController.prototype.signup = function (req, res, internal) {
@@ -103,9 +104,9 @@ DatabaseController.prototype.signup = function (req, res, internal) {
 
         var rech_str, rech_ort, rech_plz;
 
-        if (req.body.rech_str === '') {
-            rech_str = req.body.str;
-        } else rech_str = req.body.rech_str;
+        if (req.body.rech_street === '') {
+            rech_str = req.body.street;
+        } else rech_str = req.body.rech_street;
 
         if (req.body.rech_ort === '') {
             rech_ort = req.body.ort;
@@ -119,6 +120,7 @@ DatabaseController.prototype.signup = function (req, res, internal) {
             "name=" + connection.escape(req.body.name) + ", " +
             "vorname=" + connection.escape(req.body.vorname) + ", " +
             "email=" + connection.escape(req.body.email) + ", " +
+            "telefon=" + connection.escape(req.body.tel) + ", " +
             "password=" + connection.escape(hash) + ", " +
             "lieferadresse_str=" + connection.escape(req.body.street) + ", " +
             "lieferadresse_ort=" + connection.escape(req.body.ort) + ", " +
