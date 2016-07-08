@@ -15,10 +15,9 @@ var pool = mysql.createPool({
 var DatabaseController = function () {
 }
 
-DatabaseController.prototype.hash = function (password) {
-    var salt = bcrypt.genSaltSync(10);
-    password = bcrypt.hashSync(password, salt);
-    return password;
+DatabaseController.prototype.hash = function (hash) {
+    hash = bcrypt.hashSync(hash, null, null);
+    return hash;
 }
 
 DatabaseController.prototype.connect = function (startServerCallback) {
@@ -30,10 +29,6 @@ DatabaseController.prototype.connect = function (startServerCallback) {
 
 DatabaseController.prototype.getUserByEmail = function (req, res, callback) {
     pool.getConnection(function (err, connection) {
-        if (err) {
-            console.log("ERR: " + err);
-            return;
-        }
         var queryString = "SELECT * FROM USER WHERE email=" + connection.escape(req.user);
         connection.query(queryString, function (err, rows) {
             connection.release();
@@ -49,13 +44,9 @@ DatabaseController.prototype.getUserByEmail = function (req, res, callback) {
     });
 };
 
-DatabaseController.prototype.getHashFromUser = function (req, res, callback) {
+DatabaseController.prototype.getHashFromUser = function (req, callback) {
     pool.getConnection(function (err, connection) {
-        if (err) {
-            console.log("ERR: " + err);
-            return;
-        }
-        var queryString = "SELECT password FROM USER WHERE email=" + connection.escape(req.user);
+        var queryString = "SELECT password FROM USER WHERE email=" + connection.escape(req.body.email);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -70,10 +61,6 @@ DatabaseController.prototype.getHashFromUser = function (req, res, callback) {
 }
 DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal, method_token) {
     pool.getConnection(function (err, connection) {
-        if (err) {
-            console.log("ERR: " + err);
-            return;
-        }
         var familyName;
 
         if (method_token === "twitter") {
@@ -126,11 +113,6 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
 DatabaseController.prototype.signup = function (req, res, internal) {
     console.log("START SIGNUP");
     pool.getConnection(function (err, connection) {
-        if (err) {
-            console.log("ERR: " + err);
-            return;
-        }
-
         var rech_str, rech_ort, rech_plz;
 
         if (req.body.rech_street === '') {
@@ -191,11 +173,6 @@ DatabaseController.prototype.signup = function (req, res, internal) {
 
 DatabaseController.prototype.updateUser = function (req, res) {
     pool.getConnection(function (err, connection) {
-        if (err) {
-            console.log("ERR: " + err);
-            return;
-        }
-
         var rech_str, rech_ort, rech_plz;
 
         if (req.body.rech_street === '') {

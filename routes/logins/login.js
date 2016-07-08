@@ -4,10 +4,11 @@ var router = express.Router();
 var bcrypt = require('bcrypt-nodejs');
 var DatabaseController = require('../../controllers/DatabaseController');
 
+var _dbController = new DatabaseController();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var saved_hash;
+var stored_hash;
 
 /* GET login page. */
 router.get('/', function (req, res) {
@@ -33,7 +34,17 @@ passport.use('local-login', new LocalStrategy({
         passReqToCallback: true
     },
     function (req, email, password, cb) {
-        return cb(null, email);
+        _dbController.getHashFromUser(req, function (err, data) {
+            stored_hash = data;
+        });
+
+        bcrypt.compare(password, stored_hash, function (err, res) {
+            if (err) {
+                console.log("ERR: " + err);
+            } else {
+                return cb(null, email);
+            }
+        });
     }
 ));
 
@@ -51,11 +62,8 @@ passport.deserializeUser(function (user, cb) {
 /* Post local login Command */
 router.post('/', passport.authenticate('local-login', {failureRedirect: '/login'}),
     function (req, res) {
-        var _dbController = new DatabaseController();
         _dbController.getUserByEmail(req, res, loginUser);
-        _dbController.getHashFromUser(req, res, function (err, data) {
-            saved_hash = data;
-        });
+
     });
 
 
