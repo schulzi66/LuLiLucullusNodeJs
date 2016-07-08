@@ -49,6 +49,25 @@ DatabaseController.prototype.getUserByEmail = function (req, res, callback) {
     });
 };
 
+DatabaseController.prototype.getHashFromUser = function (req, res, callback) {
+    pool.getConnection(function (err, connection) {
+        if (err) {
+            console.log("ERR: " + err);
+            return;
+        }
+        var queryString = "SELECT password FROM USER WHERE email=" + connection.escape(req.user);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(null, rows[0].password);
+            }
+        });
+
+        connection.on('error', function (err) {
+            callback(err, null);
+        });
+    });
+}
 DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal, method_token) {
     pool.getConnection(function (err, connection) {
         if (err) {
