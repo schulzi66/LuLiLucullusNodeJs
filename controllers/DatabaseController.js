@@ -15,9 +15,10 @@ var pool = mysql.createPool({
 var DatabaseController = function () {
 }
 
-DatabaseController.prototype.hash = function(password) {
+DatabaseController.prototype.hash = function (password) {
     var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(password, salt);
+    password = bcrypt.hashSync(password, salt);
+    return password;
 }
 
 DatabaseController.prototype.connect = function (startServerCallback) {
