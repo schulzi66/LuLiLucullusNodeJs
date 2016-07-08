@@ -23,6 +23,8 @@ var facebook = require('./routes/logins/facebook');
 var google = require('./routes/logins/google');
 var twitter = require('./routes/logins/twitter');
 var xing = require('./routes/logins/xing');
+var profile = require('./routes/profile');
+
 var app = express();
 
 
@@ -55,6 +57,7 @@ app.use('/recipes', recipes);
 app.use('/impressum', impressum);
 app.use('/rent-a-cook', rentaCook);
 app.use('/catering', catering);
+app.use('/login/profile', profile);
 app.use('/signup', signup);
 app.use('/login', login);
 app.use('/logout', logout);

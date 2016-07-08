@@ -51,8 +51,7 @@ router.get('/return',
         console.log(req.session.user);
         var _dbController = new DatabaseController();
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-          _dbController.signupExternalUser(req.user.name.familyName, req.user.name.givenName, "placeholder", req.user.emails[0].value);
-        // _userModelController.createUserModel(req.user.name.familyName, req.user.name.givenName, req.user.emails[0], "", null, null, null, null, null, null, false);
+          _dbController.signupExternalUser(req, res, "placeholderPW", false);
         res.redirect('/');
     });
 

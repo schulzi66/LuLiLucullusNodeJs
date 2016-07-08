@@ -45,26 +45,28 @@ DatabaseController.prototype.getUserByMail = function (email) {
 
     })
 }
-
-DatabaseController.prototype.signupExternalUser = function (name, givenName, passwordPlaceholder, email) {
+/*name, givenName, passwordPlaceholder, email,*/
+DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal) {
     console.log("START SIGNUP");
     pool.getConnection(function (err, connection) {
         if (err) {
             console.log("ERR: " + err);
             return;
         }
+        /*req.user.name.familyName, req.user.name.givenName, "placeholder", req.user.emails[0].value*/
+
         var queryString = "INSERT INTO USER SET " +
-            "name=" + '\'' + name + '\'' + ", " +
-            "vorname=" + '\'' + givenName + '\'' + ", " +
-            "email=" + '\'' + email + '\'' + ", " +
-            "password=" + '\'' + passwordPlaceholder + '\'' + ", " +
-            "lieferadresse_str=" + '\'' + null + '\'' + ", " +
-            "lieferadresse_ort=" + '\'' + null + '\'' + ", " +
-            "lieferadresse_plz=" + 12345 + ", " +
-            "rechnungsadresse_str=" + '\'' + null + '\'' + ", " +
-            "rechnungsadresse_ort=" + '\'' + null + '\'' + ", " +
-            "rechnungsadresse_plz=" + '\'' + 12345 + '\'' + ", " +
-            "internal=" + 'false';
+            "name=" + connection.escape(req.user.name.familyName) + ", " +
+            "vorname=" + connection.escape(req.user.name.givenName) + ", " +
+            "email=" + connection.escape(req.user.emails[0].value) + ", " +
+            "password=" + connection.escape(placeholder) + ", " +
+            "lieferadresse_str=" + connection.escape(null) + ", " +
+            "lieferadresse_ort=" + connection.escape(null) + ", " +
+            "lieferadresse_plz=" + connection.escape(12345) + ", " +
+            "rechnungsadresse_str=" + connection.escape(null) + ", " +
+            "rechnungsadresse_ort=" + connection.escape(null) + ", " +
+            "rechnungsadresse_plz=" + connection.escape(12345) + ", " +
+            "internal=" + connection.escape(internal);
 
         connection.query(queryString,
             function (err) {
@@ -110,17 +112,17 @@ DatabaseController.prototype.signup = function (req, res, internal) {
         var hash = bcrypt.hashSync(req.body.password, salt);
 
         var queryString = "INSERT INTO USER SET " +
-            "name=" + '\'' + req.body.name + '\'' + ", " +
-            "vorname=" + '\'' + req.body.vorname + '\'' + ", " +
-            "email=" + '\'' + req.body.email + '\'' + ", " +
-            "password=" + '\'' + hash + '\'' + ", " +
-            "lieferadresse_str=" + '\'' + req.body.street + '\'' + ", " +
-            "lieferadresse_ort=" + '\'' + req.body.ort + '\'' + ", " +
-            "lieferadresse_plz=" + req.body.plz + ", " +
-            "rechnungsadresse_str=" + '\'' + req.body.rech_street + '\'' + ", " +
-            "rechnungsadresse_ort=" + '\'' + req.body.rech_ort + '\'' + ", " +
-            "rechnungsadresse_plz=" + '\'' + req.body.rech_plz + '\'' + ", " +
-            "internal=" + 'true';
+            "name=" + connection.escape(req.body.name) + ", " +
+            "vorname=" + connection.escape(req.body.vorname) + ", " +
+            "email=" + connection.escape(req.body.email) + ", " +
+            "password=" + connection.escape(hash) + ", " +
+            "lieferadresse_str=" + connection.escape(req.body.street) + ", " +
+            "lieferadresse_ort=" + connection.escape(req.body.ort) + ", " +
+            "lieferadresse_plz=" + connection.escape(req.body.plz) + ", " +
+            "rechnungsadresse_str=" + connection.escape(req.body.rech_street) + ", " +
+            "rechnungsadresse_ort=" + connection.escape(req.body.rech_ort)+ ", " +
+            "rechnungsadresse_plz=" + connection.escape(req.body.rech_plz) + ", " +
+            "internal=" + connection.escape(internal);
 
         connection.query(queryString,
             function (err) {
@@ -154,4 +156,34 @@ DatabaseController.prototype.signup = function (req, res, internal) {
     console.log("SUCCESS");
 }
 
+DatabaseController.prototype.updateUser = function (req, res) {
+    pool.getConnection(function (err, connection) {
+        if (err) {
+            console.log("ERR: " + err);
+            return;
+        }
+        /*req.user.name.familyName, req.user.name.givenName, "placeholder", req.user.emails[0].value*/
+
+        var queryString = "UPDATE USER " +
+            "SET name=" + connection.escape(req.body.name) +
+            " WHERE email= " + connection.escape(req.body.email);
+
+        connection.query(queryString,
+            function (err) {
+                console.log(queryString);
+                connection.release();
+
+                //signup was successful
+                if (!err) {
+                    res.redirect('/');
+                }
+            });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+    console.log("SUCCESS");
+}
 module.exports = DatabaseController;
