@@ -74,19 +74,19 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
                 if (!err) {
                     console.log("facebook login successful");
                     var _userModelController = new UserModelController();
-                    // var user = _userModelController.createUserModel(req.body.name,
-                    //     req.body.vorname,
-                    //     req.body.email,
-                    //     req.body.password,
-                    //     req.body.street,
-                    //     req.body.ort,
-                    //     req.body.plz,
-                    //     req.body.rech_street,
-                    //     req.body.rech_ort,
-                    //     req.body.rech_plz,
-                    //     internal);
-                    //req.session.user = user;
-                    //res.redirect('/');
+                    var user = _userModelController.createUserModel(req.body.name,
+                        req.body.vorname,
+                        req.body.email,
+                        req.body.password,
+                        req.body.street,
+                        req.body.ort,
+                        req.body.plz,
+                        req.body.rech_street,
+                        req.body.rech_ort,
+                        req.body.rech_plz,
+                        internal);
+                    req.session.user = user;
+                    res.redirect('/');
                 }
             });
 

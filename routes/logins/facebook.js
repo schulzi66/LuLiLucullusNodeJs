@@ -48,10 +48,7 @@ router.get('/return',
         req.user.displayName = req.user.name.givenName + " " + req.user.name.familyName;
         //save user across the routes
         req.session.user = req.user;
-        console.log("Facebook Json return");
-        console.log(req.session.user);
         var _dbController = new DatabaseController();
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
           _dbController.signupExternalUser(req, res, "placeholderPW", false);
         res.redirect('/');
     });
