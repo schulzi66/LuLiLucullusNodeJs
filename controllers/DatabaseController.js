@@ -23,32 +23,6 @@ DatabaseController.prototype.connect = function (startServerCallback) {
     });
 }
 
-DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal) {
-    pool.getConnection(function (err, connection) {
-        if (err) {
-            console.log("ERR: " + err);
-            return;
-        }
-
-        // Primary key violation must be checked
-        var queryString = "Select * from user where email = " + req.user.emails[0].value;
-
-        var user = connection.query(queryString, function (err, rows) {
-            connection.release();
-            if (!err) {
-                return rows;
-            }
-        });
-
-        if (user.lenght < 0) {
-            connection.on('error', function (err) {
-                console.log("ERR: " + err);
-                return;
-            });
-        }
-    });
-}
-
 DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal, method_token) {
     pool.getConnection(function (err, connection) {
         if (err) {
@@ -108,12 +82,11 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
                         req.session.user = user;
                     }
                 });
-          };
-    });
-
-    connection.on('error', function (err) {
-        console.log("ERR: " + err);
-        return;
+        }
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
     });
 
 }
