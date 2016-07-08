@@ -45,15 +45,13 @@ DatabaseController.prototype.getUserByMail = function (email) {
 
     })
 }
-/*name, givenName, passwordPlaceholder, email,*/
+
 DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal) {
-    console.log("START SIGNUP");
     pool.getConnection(function (err, connection) {
         if (err) {
             console.log("ERR: " + err);
             return;
         }
-        /*req.user.name.familyName, req.user.name.givenName, "placeholder", req.user.emails[0].value*/
 
         var queryString = "INSERT INTO USER SET " +
             "name=" + connection.escape(req.user.name.familyName) + ", " +
@@ -70,7 +68,6 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
 
         connection.query(queryString,
             function (err) {
-                console.log(queryString);
                 connection.release();
 
                 //signup was successful
@@ -98,7 +95,6 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             return;
         });
     });
-    console.log("SUCCESS");
 }
 
 DatabaseController.prototype.signup = function (req, res, internal) {
@@ -129,7 +125,6 @@ DatabaseController.prototype.signup = function (req, res, internal) {
                 console.log(queryString);
                 connection.release();
 
-                //signup was successful
                 if (!err) {
                     var _userModelController = new UserModelController();
                     var user = _userModelController.createUserModel(req.body.name,
@@ -153,7 +148,6 @@ DatabaseController.prototype.signup = function (req, res, internal) {
             return;
         });
     });
-    console.log("SUCCESS");
 }
 
 DatabaseController.prototype.updateUser = function (req, res) {
@@ -162,7 +156,6 @@ DatabaseController.prototype.updateUser = function (req, res) {
             console.log("ERR: " + err);
             return;
         }
-        /*req.user.name.familyName, req.user.name.givenName, "placeholder", req.user.emails[0].value*/
 
         var queryString = "UPDATE USER " +
             "SET name=" + connection.escape(req.body.name) +
@@ -170,10 +163,8 @@ DatabaseController.prototype.updateUser = function (req, res) {
 
         connection.query(queryString,
             function (err) {
-                console.log(queryString);
                 connection.release();
 
-                //signup was successful
                 if (!err) {
                     res.redirect('/');
                 }
@@ -184,6 +175,5 @@ DatabaseController.prototype.updateUser = function (req, res) {
             return;
         });
     });
-    console.log("SUCCESS");
 }
 module.exports = DatabaseController;
