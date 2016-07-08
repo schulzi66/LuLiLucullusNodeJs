@@ -12,7 +12,7 @@ passport.use(new FacebookStrategy({
         clientID: conf.facebook.clientID,
         clientSecret: conf.facebook.clientSecret,
         callbackURL: conf.facebook.callbackURL,
-        profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified']
+        profileFields: ['id', 'email', 'gender', 'name']
     },
     function (accessToken, refreshToken, profile, cb) {
         return cb(null, profile);

@@ -42,6 +42,8 @@ router.get('/return',
     function (req, res) {
         //save user across the routes
         req.session.user = req.user;
+        var _dbController = new DatabaseController();
+        _dbController.signupExternalUser(req, res, "placeholderPW", false);
         res.redirect('/');
     });
 
