@@ -44,7 +44,6 @@ router.get('/return',
     function (req, res) {
         //save user across the routes
         req.session.user = req.user;
-        console.log(req.session.user);
         var _dbController = new DatabaseController();
         _dbController.signupExternalUser(req, res, "placeholderPW", false, "twitter");
         res.redirect('/');
