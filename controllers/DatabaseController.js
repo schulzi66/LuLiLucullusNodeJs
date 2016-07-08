@@ -46,14 +46,20 @@ DatabaseController.prototype.getUserByMail = function (email) {
     })
 }
 
-DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal) {
+DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal, method_token) {
     pool.getConnection(function (err, connection) {
         if (err) {
             console.log("ERR: " + err);
             return;
         }
+        var familyName = req.user.name.familyName;
+
+        if(method_token === "twitter") {
+            familyName = req.user.displayName.split(" ")[1];
+        }
+
         var queryString = "INSERT INTO USER SET " +
-            "name=" + connection.escape(req.user.name.familyName) + ", " +
+            "name=" + connection.escape(familyName) + ", " +
             "vorname=" + connection.escape(req.user.name.givenName) + ", " +
             "email=" + connection.escape(req.user.emails[0].value) + ", " +
             "password=" + connection.escape(placeholder) + ", " +
