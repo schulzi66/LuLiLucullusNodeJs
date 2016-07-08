@@ -120,7 +120,7 @@ DatabaseController.prototype.signup = function (req, res, internal) {
             "rechnungsadresse_str=" + '\'' + req.body.rech_street + '\'' + ", " +
             "rechnungsadresse_ort=" + '\'' + req.body.rech_ort + '\'' + ", " +
             "rechnungsadresse_plz=" + '\'' + req.body.rech_plz + '\'' + ", " +
-            "internal=" + true;
+            "internal=" + 'true';
 
         connection.query(queryString,
             function (err) {
@@ -129,7 +129,7 @@ DatabaseController.prototype.signup = function (req, res, internal) {
 
                 //signup was successful
                 if (!err) {
-                    var _userController = new UserModelController();
+                    var _userModelController = new UserModelController();
                     var user = _userModelController.createUserModel(req.body.name,
                         req.body.vorname,
                         req.body.email,

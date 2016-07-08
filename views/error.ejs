@@ -4,7 +4,11 @@
 <% include partials/header %>
 <div class="container container-margin">
     <h1><%= message %></h1>
-    <h2><%= error.status %></h2>
+    <% if(error.status == 500) { %>
+        <img src="https://http.cat/500">
+    <% } else if(error.status == 404){ %>
+        <img src="https://http.cat/404">
+    <% } %>
     <pre><%= error.stack %></pre>
 </div>
 <% include partials/footer %>
