@@ -3,7 +3,6 @@ var conf = require('../../conf.json');
 var express = require('express');
 var router = express.Router();
 var DatabaseController = require('../../controllers/DatabaseController');
-// var UserModelController = require('../../controllers/UserModelController');
 
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;

@@ -2,7 +2,7 @@
 var conf = require('../../conf.json');
 var express = require('express');
 var router = express.Router();
-
+var DatabaseController = require('../../controllers/DatabaseController');
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
 

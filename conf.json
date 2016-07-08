@@ -21,7 +21,7 @@
   "twitter": {
     "clientID": "NRlwyjtNKbo3A1JuF9Il5ydjL",
     "clientSecret": "1873br1jcvEr5laQcGBvfQ3f9kFpZKBwL06HBr0ekpNDjgYz1U",
-    "callbackURL": "http://127.0.0.1:3000/login/twitter/return"
+    "callbackURL": "http://localhost:3000/login/twitter/return"
   },
   "xing": {
     "clientID": "7469545a5f23df7b9bc3",

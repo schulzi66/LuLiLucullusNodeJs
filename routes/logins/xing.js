@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var XingStrategy = require('passport-xing').Strategy;
+var DatabaseController = require('../../controllers/DatabaseController');
 
 passport.use(new XingStrategy({
         consumerKey: conf.xing.clientID,
