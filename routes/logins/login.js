@@ -1,6 +1,7 @@
 var conf = require('../../conf.json');
 var express = require('express');
 var router = express.Router();
+var DatabaseController = require('../../controllers/DatabaseController');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -10,11 +11,6 @@ router.get('/', function(req, res) {
   res.render('login');
 });
 
-/* Post local login Command */
-router.post('/', passport.authenticate('local-login', {
-        successRedirect : '/', // redirect to the secure profile section
-        failureRedirect : '/login' // redirect back to the signup page if there is an error
-}));
 
 
 // Use application-level middleware for common functionality, including
@@ -42,15 +38,24 @@ passport.use('local-login', new LocalStrategy({
 ));
 
 passport.serializeUser(function(user, cb) {
-    cb(null, user.id);
+    cb(null, user);
 });
 
 // used to deserialize the user
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
+passport.deserializeUser(function(user, cb) {
+  cb(null, user);
     // User.findById(id, function(err, user) {
-    // });  
+    // });
 });
+
+/* Post local login Command */
+router.post('/', passport.authenticate('local-login', { failureRedirect : '/login'}),
+function (req, res) {
+  var _dbController = new DatabaseController();
+  _dbController.getUserByEmail(req, res, loginUser);
+});
+
+
 
 /* GET Profil page */
 router.get('/profile', isLoggedIn,
@@ -73,6 +78,14 @@ function isLoggedIn(req, res, next) {
 
     // if they aren't redirect them to the home page
     res.redirect('/');
+}
+
+//Callback function after the login result returns from the database
+function loginUser(req, res, user) {
+      //save user across the routes
+      req.session.user = user;
+      req.session.user.displayName = user.vorname + " " + user.name;
+      res.redirect('/');
 }
 
 module.exports = router;
