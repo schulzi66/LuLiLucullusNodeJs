@@ -24,24 +24,24 @@ DatabaseController.prototype.connect = function (startServerCallback) {
 }
 
 DatabaseController.prototype.getUserByEmail = function (req, res, callback) {
-  pool.getConnection(function (err, connection) {
-      if (err) {
-          console.log("ERR: " + err);
-          return;
-      }
-      var queryString = "SELECT * FROM USER WHERE email=" + connection.escape(req.user);
-      connection.query(queryString, function (err, rows) {
+    pool.getConnection(function (err, connection) {
+        if (err) {
+            console.log("ERR: " + err);
+            return;
+        }
+        var queryString = "SELECT * FROM USER WHERE email=" + connection.escape(req.user);
+        connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-              callback(req, res, rows[0]);
+                callback(req, res, rows[0]);
             }
         });
 
-      connection.on('error', function (err) {
-          console.log("ERR: " + err);
-          return;
-      });
-  });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
 };
 
 DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal, method_token) {
