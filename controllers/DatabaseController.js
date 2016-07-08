@@ -23,35 +23,24 @@ DatabaseController.prototype.connect = function (startServerCallback) {
     });
 }
 
-DatabaseController.prototype.getUserByMail = function (email) {
-    pool.getConnection(function (err, connection) {
-        if (err) {
-            console.log("ERR: " + err);
-            return;
-        }
-        var queryString = "Select * from user where email = " + email;
-
-        connection.query(queryString, function (err, rows) {
-            connection.release();
-            if (!err) {
-                return rows;
-            }
-        });
-
-        connection.on('error', function (err) {
-            console.log("ERR: " + err);
-            return;
-        });
-
-    })
-}
-
 DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal) {
     pool.getConnection(function (err, connection) {
         if (err) {
             console.log("ERR: " + err);
             return;
         }
+
+        // Primary key violation must be checked
+        var queryString = "Select * from user where email = " + req.user.emails[0].value;
+
+        var user = connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                return rows;
+            }
+        });
+
+        if (user.lenght < 0) {
         var queryString = "INSERT INTO USER SET " +
             "name=" + connection.escape(req.user.name.familyName) + ", " +
             "vorname=" + connection.escape(req.user.name.givenName) + ", " +
@@ -86,6 +75,7 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
                     res.redirect('/');
                 }
             });
+          };
 
         connection.on('error', function (err) {
             console.log("ERR: " + err);
