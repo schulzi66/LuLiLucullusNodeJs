@@ -60,11 +60,11 @@ DatabaseController.prototype.signupExternalUser = function (name, givenName, pas
             "password=" + '\'' + passwordPlaceholder + '\'' + ", " +
             "lieferadresse_str=" + '\'' + null + '\'' + ", " +
             "lieferadresse_ort=" + '\'' + null + '\'' + ", " +
-            "lieferadresse_plz=" + null + ", " +
+            "lieferadresse_plz=" + 12345 + ", " +
             "rechnungsadresse_str=" + '\'' + null + '\'' + ", " +
             "rechnungsadresse_ort=" + '\'' + null + '\'' + ", " +
-            "rechnungsadresse_plz=" + '\'' + null + '\'' + ", " +
-            "internal=" + false;
+            "rechnungsadresse_plz=" + '\'' + 12345 + '\'' + ", " +
+            "internal=" + 'false';
 
         connection.query(queryString,
             function (err) {
@@ -74,7 +74,7 @@ DatabaseController.prototype.signupExternalUser = function (name, givenName, pas
                 //signup was successful
                 if (!err) {
                   console.log("facebook login successful");
-                    // var _userController = new UserModelController();
+                    var _userModelController = new UserModelController();
                     // var user = _userModelController.createUserModel(req.body.name,
                     //     req.body.vorname,
                     //     req.body.email,
@@ -86,8 +86,8 @@ DatabaseController.prototype.signupExternalUser = function (name, givenName, pas
                     //     req.body.rech_ort,
                     //     req.body.rech_plz,
                     //     internal);
-                    // req.session.user = user;
-                    // res.redirect('/');
+                    //req.session.user = user;
+                    res.redirect('/');
                 }
             });
 

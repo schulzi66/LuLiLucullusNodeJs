@@ -49,9 +49,9 @@ router.get('/return',
         req.session.user = req.user;
         console.log("Facebook Json return");
         console.log(req.session.user);
-        var _dbController = new DbController();
+        var _dbController = new DatabaseController();
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-          _dbController.signupExternalUser(req.user.name.familyName, req.user.name.givenName, "", req.user.emails[0]);
+          _dbController.signupExternalUser(req.user.name.familyName, req.user.name.givenName, "placeholder", req.user.emails[0].value);
         // _userModelController.createUserModel(req.user.name.familyName, req.user.name.givenName, req.user.emails[0], "", null, null, null, null, null, null, false);
         res.redirect('/');
     });
