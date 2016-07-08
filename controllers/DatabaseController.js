@@ -29,9 +29,7 @@ DatabaseController.prototype.getUserByEmail = function (req, res, callback) {
           console.log("ERR: " + err);
           return;
       }
-
       var queryString = "SELECT * FROM USER WHERE email=" + connection.escape(req.user);
-      console.log(queryString);
       connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {

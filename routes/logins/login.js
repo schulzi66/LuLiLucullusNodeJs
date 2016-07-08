@@ -1,6 +1,7 @@
 var conf = require('../../conf.json');
 var express = require('express');
 var router = express.Router();
+var bcrypt = require('bcrypt-nodejs');
 var DatabaseController = require('../../controllers/DatabaseController');
 
 var passport = require('passport');
@@ -10,8 +11,6 @@ var LocalStrategy = require('passport-local').Strategy;
 router.get('/', function(req, res) {
   res.render('login');
 });
-
-
 
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
@@ -27,10 +26,9 @@ router.use(passport.session());
 
 /*Local login */
 passport.use('local-login', new LocalStrategy({
-        // by default, local strategy uses username and password, we will override with email
         usernameField : 'email',
         passwordField : 'password',
-        passReqToCallback : true // allows us to pass back the entire request to the callback
+        passReqToCallback : true
     },
     function(req, email, password, cb) {
       return cb(null, email);
@@ -63,12 +61,6 @@ router.get('/profile', isLoggedIn,
     res.render('profile', { user: req.session.user });
 });
 
-// router.get('/profile',
-//   require('connect-ensure-login').ensureLoggedIn(),
-//   function(req, res){
-//     res.render('profile', { user: req.session.user });
-// });
-
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
 
@@ -82,10 +74,17 @@ function isLoggedIn(req, res, next) {
 
 //Callback function after the login result returns from the database
 function loginUser(req, res, user) {
-      //save user across the routes
-      req.session.user = user;
-      req.session.user.displayName = user.vorname + " " + user.name;
-      res.redirect('/');
+      //user has no account or wrong email is provided
+      if (user === undefined) {
+        req.session.message = 'Scheinbar haben Sie keine Account bei uns.'
+        res.redirect('/signup')
+      }
+      else {
+        //save user across the routes
+        req.session.user = user;
+        req.session.user.displayName = user.vorname + " " + user.name;
+        res.redirect('/');
+    }
 }
 
 module.exports = router;

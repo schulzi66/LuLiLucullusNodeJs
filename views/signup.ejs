@@ -35,7 +35,9 @@
     <div class="col-sm-6 col-sm-offset-3">
 
         <h1><span class="fa fa-sign-in"></span> Signup</h1>
-
+        <% if (typeof message !== 'undefined') { %>
+          <label><%= message %></label>
+        <% } %>
         <form action="/signup" method="post">
             <div class="form-group">
                 <label for="name" class="control-label">Name</label>
