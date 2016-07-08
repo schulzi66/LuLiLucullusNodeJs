@@ -53,6 +53,8 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             return;
         }
         var familyName = req.user.name.familyName;
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(placeholder, salt);
 
         if(method_token === "twitter") {
             familyName = req.user.displayName.split(" ")[1];
@@ -62,7 +64,7 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             "name=" + connection.escape(familyName) + ", " +
             "vorname=" + connection.escape(req.user.name.givenName) + ", " +
             "email=" + connection.escape(req.user.emails[0].value) + ", " +
-            "password=" + connection.escape(placeholder) + ", " +
+            "password=" + connection.escape(hash) + ", " +
             "lieferadresse_str=" + connection.escape(null) + ", " +
             "lieferadresse_ort=" + connection.escape(null) + ", " +
             "lieferadresse_plz=" + connection.escape(0) + ", " +
