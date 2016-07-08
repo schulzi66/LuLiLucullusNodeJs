@@ -25,23 +25,23 @@ DatabaseController.prototype.connect = function (startServerCallback) {
 
 DatabaseController.prototype.getUserByMail = function (email) {
     pool.getConnection(function (err, connection) {
-      if (err) {
-          console.log("ERR: " + err);
-          return;
-      }
-      var queryString = "Select * from user where email = " + email;
-
-      connection.query(queryString, function (err, rows) {
-        connection.release();
-        if (!err) {
-          return rows;
+        if (err) {
+            console.log("ERR: " + err);
+            return;
         }
-      });
+        var queryString = "Select * from user where email = " + email;
 
-      connection.on('error', function (err) {
-          console.log("ERR: " + err);
-          return;
-      });
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                return rows;
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
 
     })
 }
@@ -72,7 +72,7 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
 
                 //signup was successful
                 if (!err) {
-                  console.log("facebook login successful");
+                    console.log("facebook login successful");
                     var _userModelController = new UserModelController();
                     // var user = _userModelController.createUserModel(req.body.name,
                     //     req.body.vorname,
@@ -86,7 +86,7 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
                     //     req.body.rech_plz,
                     //     internal);
                     //req.session.user = user;
-                    res.redirect('/');
+                    //res.redirect('/');
                 }
             });
 
@@ -107,6 +107,20 @@ DatabaseController.prototype.signup = function (req, res, internal) {
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(req.body.password, salt);
 
+        var rech_str, rech_ort, rech_plz;
+
+        if(req.body.rech_str === '') {
+            rech_str = req.body.str;
+        } else rech_str = req.body.rech_str;
+
+        if(req.body.rech_ort === '') {
+            rech_ort = req.body.ort;
+        } else rech_ort = req.body.rech_ort;
+
+        if(req.body.rech_plz == '') {
+            rech_plz = req.body.plz;
+        } else rech_plz = req.body.rech_plz;
+
         var queryString = "INSERT INTO USER SET " +
             "name=" + connection.escape(req.body.name) + ", " +
             "vorname=" + connection.escape(req.body.vorname) + ", " +
@@ -115,9 +129,9 @@ DatabaseController.prototype.signup = function (req, res, internal) {
             "lieferadresse_str=" + connection.escape(req.body.street) + ", " +
             "lieferadresse_ort=" + connection.escape(req.body.ort) + ", " +
             "lieferadresse_plz=" + connection.escape(req.body.plz) + ", " +
-            "rechnungsadresse_str=" + connection.escape(req.body.rech_street) + ", " +
-            "rechnungsadresse_ort=" + connection.escape(req.body.rech_ort)+ ", " +
-            "rechnungsadresse_plz=" + connection.escape(req.body.rech_plz) + ", " +
+            "rechnungsadresse_str=" + connection.escape(rech_str) + ", " +
+            "rechnungsadresse_ort=" + connection.escape(rech_ort) + ", " +
+            "rechnungsadresse_plz=" + connection.escape(rech_plz) + ", " +
             "internal=" + connection.escape(internal);
 
         connection.query(queryString,
@@ -157,12 +171,36 @@ DatabaseController.prototype.updateUser = function (req, res) {
             return;
         }
 
+        var rech_str, rech_ort, rech_plz;
+
+        if(req.body.rech_street === '') {
+            rech_str = req.body.street;
+        } else rech_str = req.body.rech_street;
+
+        if(req.body.rech_ort === '') {
+            rech_ort = req.body.ort;
+        } else rech_ort = req.body.rech_ort;
+
+        if(req.body.rech_plz == '') {
+            rech_plz = req.body.plz;
+        } else rech_plz = req.body.rech_plz;
+
         var queryString = "UPDATE USER " +
-            "SET name=" + connection.escape(req.body.name) +
-            " WHERE email= " + connection.escape(req.body.email);
+            "SET name=" + connection.escape(req.body.name) + ", " +
+            "vorname=" + connection.escape(req.body.vorname) + ", " +
+            //"email=" + connection.escape() + ", " +
+            "telefon=" + connection.escape(req.body.tel) + ", " +
+            "lieferadresse_str=" + connection.escape(req.body.street) + ", " +
+            "lieferadresse_ort=" + connection.escape(req.body.ort) + ", " +
+            "lieferadresse_plz=" + connection.escape(req.body.plz) + ", " +
+            "rechnungsadresse_str=" + connection.escape(rech_str) + ", " +
+            "rechnungsadresse_ort=" + connection.escape(rech_ort) + ", " +
+            "rechnungsadresse_plz=" + connection.escape(rech_plz) + " " +
+            "WHERE email= " + connection.escape(req.body.email);
 
         connection.query(queryString,
             function (err) {
+                console.log(queryString);
                 connection.release();
 
                 if (!err) {
