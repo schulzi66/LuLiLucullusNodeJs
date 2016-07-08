@@ -2,9 +2,10 @@
 var conf = require('../../conf.json');
 var express = require('express');
 var router = express.Router();
-var DatabaseController = require('../../controllers/DatabaseController');
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
+
+var DatabaseController = require('../../controllers/DatabaseController');
 
 passport.use(new TwitterStrategy({
         consumerKey: conf.twitter.clientID,
@@ -44,7 +45,7 @@ router.get('/return',
         //save user across the routes
         req.session.user = req.user;
         var _dbController = new DatabaseController();
-        _dbController.signupExternalUser(req, res, "placeholderPW", false);
+        _dbController.signupExternalUser(req, res, "placeholderPW", false, "twitter");
         res.redirect('/');
     });
 

@@ -40,12 +40,37 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             }
         });
 
+<<<<<<< HEAD
         if (user.lenght < 0) {
+=======
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+
+    })
+}
+
+DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal, method_token) {
+    pool.getConnection(function (err, connection) {
+        if (err) {
+            console.log("ERR: " + err);
+            return;
+        }
+        var familyName = req.user.name.familyName;
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(placeholder, salt);
+
+        if(method_token === "twitter") {
+            familyName = req.user.displayName.split(" ")[1];
+        }
+
+>>>>>>> cc32046c0edeed74508e7f8535aa140469534c73
         var queryString = "INSERT INTO USER SET " +
-            "name=" + connection.escape(req.user.name.familyName) + ", " +
+            "name=" + connection.escape(familyName) + ", " +
             "vorname=" + connection.escape(req.user.name.givenName) + ", " +
             "email=" + connection.escape(req.user.emails[0].value) + ", " +
-            "password=" + connection.escape(placeholder) + ", " +
+            "password=" + connection.escape(hash) + ", " +
             "lieferadresse_str=" + connection.escape(null) + ", " +
             "lieferadresse_ort=" + connection.escape(null) + ", " +
             "lieferadresse_plz=" + connection.escape(0) + ", " +
