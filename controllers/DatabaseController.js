@@ -15,6 +15,10 @@ var pool = mysql.createPool({
 var DatabaseController = function () {
 }
 
+DatabaseController.prototype.hash = function(password) {
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(password, salt);
+}
 
 DatabaseController.prototype.connect = function (startServerCallback) {
     pool.getConnection(function (err, connection) {
@@ -52,9 +56,6 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
         }
         var familyName;
 
-        var salt = bcrypt.genSaltSync(10);
-        var hash = bcrypt.hashSync(placeholder, salt);
-
         if (method_token === "twitter") {
             familyName = req.user.displayName.split(" ")[1];
         } else familyName = req.user.name.familyName;
@@ -64,7 +65,7 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             "vorname=" + connection.escape(req.user.name.givenName) + ", " +
             "email=" + connection.escape(req.user.emails[0].value) + ", " +
             "telefon=" + connection.escape(null) + ", " +
-            "password=" + connection.escape(hash) + ", " +
+            "password=" + connection.escape(DatabaseController.prototype.hash(placeholder)) + ", " +
             "lieferadresse_str=" + connection.escape(null) + ", " +
             "lieferadresse_ort=" + connection.escape(null) + ", " +
             "lieferadresse_plz=" + connection.escape(0) + ", " +
@@ -109,8 +110,6 @@ DatabaseController.prototype.signup = function (req, res, internal) {
             console.log("ERR: " + err);
             return;
         }
-        var salt = bcrypt.genSaltSync(10);
-        var hash = bcrypt.hashSync(req.body.password, salt);
 
         var rech_str, rech_ort, rech_plz;
 
@@ -131,7 +130,7 @@ DatabaseController.prototype.signup = function (req, res, internal) {
             "vorname=" + connection.escape(req.body.vorname) + ", " +
             "email=" + connection.escape(req.body.email) + ", " +
             "telefon=" + connection.escape(req.body.tel) + ", " +
-            "password=" + connection.escape(hash) + ", " +
+            "password=" + connection.escape(DatabaseController.prototype.hash(req.body.password)) + ", " +
             "lieferadresse_str=" + connection.escape(req.body.street) + ", " +
             "lieferadresse_ort=" + connection.escape(req.body.ort) + ", " +
             "lieferadresse_plz=" + connection.escape(req.body.plz) + ", " +
