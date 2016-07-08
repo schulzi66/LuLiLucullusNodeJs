@@ -51,8 +51,7 @@ router.get('/return',
         console.log("Facebook Json return");
         console.log(req.session.user);
         var _dbController = new DatabaseController();
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-          _dbController.signupExternalUser(req, res, "placeholderPW", false);
+        _dbController.signupExternalUser(req, res, "placeholderPW", false);
         res.redirect('/');
     });
 

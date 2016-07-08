@@ -2,6 +2,7 @@
 var conf = require('../../conf.json');
 var express = require('express');
 var router = express.Router();
+var DatabaseController = require('../../controllers/DatabaseController');
 
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -36,7 +37,7 @@ router.use(require('express-session')({ secret: 'keyboard cat', resave: true, sa
 router.use(passport.initialize());
 router.use(passport.session());
 
-router.get('/', passport.authenticate('google', { scope: ['profile'] }));
+router.get('/', passport.authenticate('google', { scope: ['email', 'profile'] }));
 
 router.get('/return',
   passport.authenticate('google', { failureRedirect: '/login' }),
@@ -45,6 +46,8 @@ router.get('/return',
     req.session.user = req.user;
     console.log("Google Json Return");
     console.log(req.session.user);
+    var _dbController = new DatabaseController();
+    _dbController.signupExternalUser(req, res, "placeholderPW", false);
     res.redirect('/');
 
   });
