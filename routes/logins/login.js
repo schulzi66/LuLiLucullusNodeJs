@@ -2,13 +2,12 @@ var conf = require('../../conf.json');
 var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcrypt-nodejs');
-var DatabaseController = require('../../controllers/DatabaseController');
 
+var DatabaseController = require('../../controllers/DatabaseController');
 var _dbController = new DatabaseController();
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
-var stored_hash;
 
 /* GET login page. */
 router.get('/', function (req, res) {
@@ -34,18 +33,17 @@ passport.use('local-login', new LocalStrategy({
         passReqToCallback: true
     },
     function (req, email, password, cb) {
+        var stored_hash;
         _dbController.getHashFromUser(req, function (err, data) {
             stored_hash = data;
-        });
-
-        bcrypt.compare(password, stored_hash, function (err) {
-            if (err) {
-                console.log("ERROR");
-                req.session.message = 'Falsche Emailadresse oder falsches Passwort.';
-                return cb(null, null);
-            } else {
-                return cb(null, email);
-            }
+            bcrypt.compare(password, stored_hash, function (err) {
+                if (err) {
+                    req.session.message = 'Falsche Emailadresse oder falsches Passwort.';
+                    return cb(null, null);
+                } else {
+                    return cb(null, email);
+                }
+            });
         });
     }
 ));

@@ -1,17 +1,18 @@
 var UserController = function () {
 }
 
-UserController.prototype.createUserModel = function (name, firstName, email, password, lief_street, lief_city, lief_plz, rech_street, rech_city, rech_plz, internal) {
+UserController.prototype.createUserModel = function (name, firstName, email, password, telefon, lief_street, lief_city, lief_plz, rech_street, rech_city, rech_plz, internal) {
     var userModel = {
         "name": {
             "familyName": name,
             "givenName": firstName
         },
         "displayName": firstName + " " + name,
-        "emails":{
-            email
-        },
+        "emails": [{
+            "value": email
+        }],
         "password": password,
+        "telefon": telefon,
         "lieferadresse_str": lief_street,
         "lieferadresse_ort": lief_city,
         "lieferadresse_plz": lief_plz,
