@@ -11,10 +11,10 @@
   "mail": {
     "service": "Gmail",
     "auth": {
-      "user": "",
-      "password": ""
+      "user": "lulilucullus@gmail.com",
+      "password": "lulilucullus"
     }
-  }
+  },
   "facebook": {
     "clientID": "242003976182956",
     "clientSecret": "07fece9f13e977f0c98c552677ad3331",
