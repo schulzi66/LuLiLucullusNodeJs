@@ -18,8 +18,8 @@ router.post('/', function (req, res) {
 
     var mailOptions = {
         from: req.body.email, // sender address
-        to: 'ulonska.julian@gmail.com', // list of receivers
-        subject: 'Kontakt Formular', // Subject line
+        to: conf.auth.mail.user, // list of receivers
+        subject: 'Kontakt Anfrage Lulilucullus', // Subject line
         text: req.body.contact_message//, // plaintext body
     };
 
