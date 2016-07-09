@@ -2,12 +2,19 @@
   "database": {
     "host": "localhost",
     "user": "root",
-    "password": "root",
+    "password": "",
     "dbo": "webdev",
     "port": 3306,
     "connectionLimit": 100,
     "charset": "UTF8"
   },
+  "mail": {
+    "service": "Gmail",
+    "auth": {
+      "user": "",
+      "password": ""
+    }
+  }
   "facebook": {
     "clientID": "242003976182956",
     "clientSecret": "07fece9f13e977f0c98c552677ad3331",
