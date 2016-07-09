@@ -83,7 +83,6 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
 
         connection.query(queryString,
             function (err) {
-                console.log(queryString);
                 connection.release();
 
                 if (!err) {
@@ -111,7 +110,6 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
 }
 
 DatabaseController.prototype.signup = function (req, res, internal) {
-    console.log("START SIGNUP");
     pool.getConnection(function (err, connection) {
         var rech_str, rech_ort, rech_plz;
 

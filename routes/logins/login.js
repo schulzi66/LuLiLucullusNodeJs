@@ -38,9 +38,11 @@ passport.use('local-login', new LocalStrategy({
             stored_hash = data;
         });
 
-        bcrypt.compare(password, stored_hash, function (err, res) {
+        bcrypt.compare(password, stored_hash, function (err) {
             if (err) {
-                console.log("ERR: " + err);
+                console.log("ERROR");
+                req.session.message = 'Falsche Emailadresse oder falsches Passwort.';
+                return cb(null, null);
             } else {
                 return cb(null, email);
             }
@@ -63,7 +65,6 @@ passport.deserializeUser(function (user, cb) {
 router.post('/', passport.authenticate('local-login', {failureRedirect: '/login'}),
     function (req, res) {
         _dbController.getUserByEmail(req, res, loginUser);
-
     });
 
 
@@ -88,8 +89,8 @@ function isLoggedIn(req, res, next) {
 function loginUser(req, res, user) {
     //user has no account or wrong email is provided
     if (user === undefined) {
-        req.session.message = 'Scheinbar haben Sie keine Account bei uns.'
-        res.redirect('/signup')
+        req.session.message = 'Scheinbar haben Sie keine Account bei uns.';
+        res.redirect('/signup');
     }
     else {
         //save user across the routes

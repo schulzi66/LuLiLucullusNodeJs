@@ -35,7 +35,11 @@
     <div class="col-sm-6 col-sm-offset-3">
 
         <h1><span class="fa fa-sign-in"></span> Login</h1>
-
+        <% if (typeof message !== 'undefined') { %>
+        <div class="alert alert-danger">
+            <%= message %>
+        </div>
+        <% } %>
         <!-- LOGIN FORM -->
         <form action="/login" method="post">
             <div class="form-group">
