@@ -33,18 +33,7 @@ passport.use('local-login', new LocalStrategy({
         passReqToCallback: true
     },
     function (req, email, password, cb) {
-        var stored_hash;
-        _dbController.getHashFromUser(req, function (err, data) {
-            stored_hash = data;
-            bcrypt.compare(password, stored_hash, function (err) {
-                if (err) {
-                    req.session.message = 'Falsche Emailadresse oder falsches Passwort.';
-                    return cb(null, null);
-                } else {
-                    return cb(null, email);
-                }
-            });
-        });
+        return cb(null, email);
     }
 ));
 
@@ -86,15 +75,26 @@ function isLoggedIn(req, res, next) {
 //Callback function after the login result returns from the database
 function loginUser(req, res, user) {
     //user has no account or wrong email is provided
+
     if (user === undefined) {
         req.session.message = 'Scheinbar haben Sie keine Account bei uns.';
         res.redirect('/signup');
     }
     else {
-        //save user across the routes
-        req.session.user = user;
-        req.session.user.displayName = user.vorname + " " + user.name;
-        res.redirect('/');
+        var stored_hash;
+        stored_hash = user.password;
+        bcrypt.compare(req.body.password, stored_hash, function (err) {
+            if (err) {
+                req.session.message = 'Falsche Emailadresse oder falsches Passwort.';
+
+            } else {
+                //save user across the routes
+                req.session.user = user;
+                req.session.user.displayName = user.vorname + " " + user.name;
+                res.redirect('/');
+            }
+        });
+
     }
 }
 
