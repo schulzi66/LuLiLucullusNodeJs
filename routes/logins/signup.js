@@ -11,8 +11,9 @@ router.get('/', function (req, res, next) {
 
 var existing_user;
 router.post('/', function (req, res) {
-    var _dbController = new DbController();
-    _dbController.getUserByEmail(req, res, function (data) {
+  var _dbController = new DbController();
+    console.log(Object.keys(req.body));
+    _dbController.getUserByEmail(req, res, req, function (data) {
         //existing_user = data;
         console.log("ExistingUser: " + data);
     });
