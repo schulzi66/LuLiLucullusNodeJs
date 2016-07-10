@@ -24,7 +24,7 @@ var google = require('./routes/logins/google');
 var twitter = require('./routes/logins/twitter');
 var xing = require('./routes/logins/xing');
 var profile = require('./routes/profile');
-
+var profile_external = require('./routes/profile-external');
 var app = express();
 
 
@@ -57,6 +57,7 @@ app.use('/impressum', impressum);
 app.use('/rent-a-cook', rentaCook);
 app.use('/catering', catering);
 app.use('/login/profile', profile);
+app.use('/login/profile-external', profile_external);
 app.use('/signup', signup);
 app.use('/login', login);
 app.use('/logout', logout);
