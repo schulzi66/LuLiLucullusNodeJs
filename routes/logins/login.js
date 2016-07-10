@@ -51,7 +51,7 @@ passport.deserializeUser(function (user, cb) {
 /* Post local login Command */
 router.post('/', passport.authenticate('local-login', {failureRedirect: '/login'}),
     function (req, res) {
-        _dbController.getUserByEmail(req, res, loginUser);
+        _dbController.getUserByEmail(req, res, req.user, loginUser);
     });
 
 

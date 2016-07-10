@@ -27,9 +27,10 @@ DatabaseController.prototype.connect = function (startServerCallback) {
     });
 }
 
-DatabaseController.prototype.getUserByEmail = function (req, res, callback) {
+DatabaseController.prototype.getUserByEmail = function (req, res, email, callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT * FROM USER WHERE email=" + connection.escape(req.user);
+        var queryString = "SELECT * FROM USER WHERE email=" + connection.escape(email);
+        console.log("queryString: " + queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
