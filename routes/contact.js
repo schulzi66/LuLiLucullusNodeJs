@@ -11,14 +11,14 @@ router.post('/', function (req, res) {
     var transporter = nodemailer.createTransport({
         service: conf.mail.service,
         auth: {
-            user: conf.auth.mail.user, // Your email id
-            pass: conf.auth.mail.password // Your password
+            user: conf.mail.auth.user, // Your email id
+            pass: conf.mail.auth.password // Your password
         }
     });
 
     var mailOptions = {
         from: req.body.email, // sender address
-        to: conf.auth.mail.user, // list of receivers
+        to: conf.mail.auth.user, // list of receivers
         subject: 'Kontakt Anfrage Lulilucullus', // Subject line
         text: req.body.contact_message//, // plaintext body
     };
