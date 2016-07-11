@@ -59,11 +59,11 @@
                 <label for="lieferadresse" class="col-sm-2 control-label">Lieferadresse</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="street" name="street" placeholder="Stra&szlig;e + HNr"
-                           value="<% user.lieferadresse_str %>">
+                           value="<%= user.lieferadresse_str %>">
                     <input type="text" class="form-control" id="plz" name="plz" placeholder="PLZ"
-                           value=" <% user.lieferadresse_plz %>">
+                           value=" <%= user.lieferadresse_plz %>">
                     <input type="text" class="form-control" id="ort" name="ort" placeholder="Wohnort"
-                           value="<% user.lieferadresse_ort %> ">
+                           value="<%= user.lieferadresse_ort %> ">
                 </div>
             </div>
             <div class="form-group">
@@ -71,11 +71,11 @@
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="rech_street" name="rech_street"
                            placeholder="Stra&szlig;e + HNr"
-                           value="<% user.rechnungsadresse_str %>">
+                           value="<%= user.rechnungsadresse_str %>">
                     <input type="text" class="form-control" id="rech_plz" name="rech_plz" placeholder="PLZ"
-                           value="<% user.rechnungsadresse_plz %>">
+                           value="<%= user.rechnungsadresse_plz %>">
                     <input type="text" class="form-control" id="rech_ort" name="rech_ort" placeholder="Wohnort"
-                           value="<% user.rechnungsadresse_ort %>">
+                           value="<%= user.rechnungsadresse_ort %>">
                 </div>
             </div>
             <div class="form-group">
