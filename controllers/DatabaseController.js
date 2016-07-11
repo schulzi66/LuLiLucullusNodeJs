@@ -57,7 +57,7 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             "name=" + connection.escape(familyName) + ", " +
             "vorname=" + connection.escape(req.user.name.givenName) + ", " +
             "email=" + connection.escape(req.user.emails[0].value) + ", " +
-            "telefon=" + connection.escape(null) + ", " +
+            "telefon=" + connection.escape(req.user.telefon) + ", " +
             "password=" + connection.escape(DatabaseController.prototype.hash(placeholder)) + ", " +
             "lieferadresse_str=" + connection.escape(null) + ", " +
             "lieferadresse_ort=" + connection.escape(null) + ", " +
@@ -86,6 +86,7 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
                         req.body.rech_plz,
                         internal);
                     req.session.user = user;
+                    console.log(req.session.user);
                 }
             });
 
@@ -191,6 +192,20 @@ DatabaseController.prototype.updateUser = function (req, res) {
                 connection.release();
 
                 if (!err) {
+                    var _userModelController = new UserModelController();
+                    var user = _userModelController.createUserModel(req.body.name,
+                        req.body.vorname,
+                        req.body.email,
+                        req.body.password,
+                        req.body.telefon,
+                        req.body.street,
+                        req.body.ort,
+                        req.body.plz,
+                        req.body.rech_street,
+                        req.body.rech_ort,
+                        req.body.rech_plz
+                    );
+                    req.session.user = user;
                     res.redirect('/');
                 }
             });
