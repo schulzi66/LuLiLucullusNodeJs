@@ -16,13 +16,16 @@ var DatabaseController = function () {
 }
 
 DatabaseController.prototype.hash = function (password) {
-    bcrypt.hash(password, null, null, function (err, hash) {
+    var hash = bcrypt.hashSync(password, null, null);
+    return hash;
+    /*bcrypt.hash(password, null, null, function (err, hash) {
         if (err) {
             console.log(err);
         } else {
+            console.log("DBController, PW:" + password, "HASH: " + hash);
             return hash;
         }
-    });
+    });*/
 }
 
 DatabaseController.prototype.connect = function (startServerCallback) {

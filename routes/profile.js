@@ -6,7 +6,7 @@ var DbController = require('../controllers/DatabaseController');
 /* GET signup page. */
 router.get('/', function (req, res, next) {
     var _dbController = new DbController();
-    _dbController.getUserByEmail(req, res, req.session.user.email ,renderProfile)
+    _dbController.getUserByEmail(req, res, req.session.user.email, renderProfile)
 });
 
 /* Post changes from userdata */

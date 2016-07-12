@@ -12,5 +12,5 @@ CREATE TABLE IF NOT EXISTS USER (
   rechnungsadresse_str VARCHAR(50),
   rechnungsadresse_ort VARCHAR(50),
   rechnungsadresse_plz INTEGER,
-  internal boolean
+  internal BOOL NOT NULL
 );

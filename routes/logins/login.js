@@ -79,14 +79,13 @@ function loginUser(req, res, user) {
     if (user === undefined) {
         req.session.message = 'Scheinbar haben Sie keine Account bei uns.';
         res.redirect('/signup');
-    } else if (user) {
-        var stored_hash = user.password;
-        bcrypt.compare(req.body.password, stored_hash, function (err, bcrypt_res) {
-            console.log(req.body.password, stored_hash);
-            if (bcrypt_res == false) {
-                console.log(bcrypt_res);
-                req.session.message = 'Bitte überprüfen Sie Ihr Passwort.';
-                res.redirect("/login");
+    } else {
+        var stored_hash;
+        stored_hash = user.password;
+        bcrypt.compare(req.body.password, stored_hash, function (err) {
+            if (err) {
+                req.session.message = 'Falsche Emailadresse oder falsches Passwort.';
+
             } else {
                 //save user across the routes
                 req.session.user = user;
@@ -94,9 +93,24 @@ function loginUser(req, res, user) {
                 res.redirect('/');
             }
         });
-    } else {
-        req.session.message = 'Falsche Emailadresse oder falsches Passwort.';
-        res.redirect("/login");
+        /*else if (user) {
+         var stored_hash = user.password;
+         bcrypt.compare(req.body.password, stored_hash, function (err, bcrypt_res) {
+         console.log(req.body.password, stored_hash);
+         if (bcrypt_res == false) {
+         console.log(bcrypt_res);
+         req.session.message = 'Bitte überprüfen Sie Ihr Passwort.';
+         res.redirect("/login");
+         } else {
+         //save user across the routes
+         req.session.user = user;
+         req.session.user.displayName = user.vorname + " " + user.name;
+         res.redirect('/');
+         }
+         });
+         } else {
+         req.session.message = 'Falsche Emailadresse oder falsches Passwort.';
+         res.redirect("/login");*/
     }
 }
 
