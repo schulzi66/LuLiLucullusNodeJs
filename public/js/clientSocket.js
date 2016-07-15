@@ -1,4 +1,4 @@
-// var socket = io.connect();
+var socket = io.connect();
 // socket.emit('test', 'param');
 //
 // socket.on('servercall', function (servermessage) {

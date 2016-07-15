@@ -53,6 +53,40 @@ DatabaseController.prototype.getUserByEmail = function (req, res, email, callbac
     });
 };
 
+DatabaseController.prototype.loadAllRecipes = function (callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT * FROM RECIPE";
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+};
+
+DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT * FROM RECIPE WHERE ID=" + connection.escape(id);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows[0]);
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+};
+
 DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal, method_token) {
     pool.getConnection(function (err, connection) {
         var familyName;
