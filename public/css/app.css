@@ -171,3 +171,11 @@ html {
 .profile-form > div {
     margin-bottom: 15px;
 }
+
+.faq-question {
+  font-weight: bold;
+}
+
+.faq-answer {
+  font-style: italic;
+}
