@@ -155,7 +155,7 @@ html {
 .carousel-inner > .item > a > img {
     width: 70%;
     max-width: 900px !important;
-    max-height: 585px !important;
+    max-height: 555px !important;
     margin: auto;
 }
 
