@@ -29,7 +29,11 @@
             <li><a href="#">XXX</a></li>
             <li><a href="#">XXX</a></li>
             <li class="divider"></li>
+            <% if (locals.user) { %>
             <li><a href="/recipes">Rezepte</a></li>
+            <% } else { %>
+            <li><a href="/login">Rezepte</a></li>
+            <% } %>
             <li><a href="#">Meine Rezepte</a></li>
             <% if (locals.user) { %>
                 <% if (user.provider) {%>
