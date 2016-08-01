@@ -1,0 +1,30 @@
+Use Cases
+
+Als nicht angemeldeter Nutzer möchte ich...
+	die Startseite aufrufen können, um mir einen Überblick zu verschaffen.
+	mir die öffentlichen Events von LuLiLucullus anzeigen lassen.
+	mir Bilder zu LuLiLucullus anzeigen lassen, damit ich einen Eindruck von der Firma bekomme.
+	Kontakt zu LuLiLucullus aufnehmen können, um Services zu bestellen oder Informationen einzuholen.
+	mir das Impressum anzeigen lassen (Gesetzlich definiert).
+	mir schnell wichtige Informationen zu LuLiLucullus anzeigen lassen (Über-Seite).
+	mich registrieren können, damit ich einen Account besitze.
+	mich einloggen können, damit ich auf die geschützten Bereiche zugreifen kann.
+Als registrierter Nutzer möchte ich...
+	mein Profil verwalten können.
+	mir Rezepte anschauen können, die von LuLiLucullus bereitgestellt werden.
+	Rezepte von LuLiLucullus speichern können um sie später schnell wieder aufrufen zu können.
+	Rezepte filtern lassen, damit ich je nach Geschmack & Ernährungsstil (Vegetarisch, allergien...) ein passendes Rezept finde.
+	mir anzeigen lassen, welche Termine ich bei LuLiLucullus bereits gebucht habe.
+	mir meinen aktuellen Warenkorn anzeigen lassen, um zu sehen, welche Services ich bestellen werde.
+	mir bei einem ausgewählten Rezept eine Einkaufsliste generieren lassen.
+	bei Bestellung eines Services eine Bestätigungs-E-Mail bekommen.
+	meinen Account vollständig löschen lassen.
+Als Administrator möchte ich...
+	Statistiken zur Website-Nutzung anzeigen lassen.
+	Rezepte hinzufügen können.
+	Benutzer verwalten können (Sperren?).
+Als Mitarbeiter möchte ich...
+	einsehen, für welche Events ich wie lange gebucht wurde.
+	an welchen Events ich teilgenommen habe.
+	ein eigenes Profil pflegen können, damit ich für mich werben kann.
+	
