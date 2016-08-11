@@ -82,35 +82,6 @@ html {
     width: 84px;
 }
 
-/* Recipe Box styles */
-.recipe-box {
-    background-color: #FFFFFA;
-    width: 250px;
-    height: 300px;
-    margin-left: 50px;
-    position: absolute;
-    border: 1px solid #702632;
-    border-radius: 0 0 5px 0;
-}
-
-#recipes-recipe-img {
-    width: inherit;
-    max-width: 248px;
-}
-
-#recipes-recipe-short-description {
-    color: #575a66;
-    margin: 10px 10px 10px 10px;
-}
-
-#recipes-recipe-button {
-    position: relative;
-    float: right;
-    -webkit-appearance: button;
-    cursor: pointer;
-    color: #FFFFFA;
-}
-
 #dropdown-recipe-categorie {
     color: #fff;
 }
@@ -191,6 +162,10 @@ html {
     margin-top: 1.5em;
     list-style: none;
     padding: 0;
+}
+
+.recipes-overview-btn {
+    float: right;
 }
 
 .recipes-overview .recipes-overview-item {
