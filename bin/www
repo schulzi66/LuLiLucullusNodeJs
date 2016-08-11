@@ -46,10 +46,10 @@ new compressor.minify({
 new compressor.minify({
     type: 'yui-css',
     fileIn: [
-        'public/thirdparty/css/bootstrap.css',
-        'public/thirdparty/css/font-awesome.min.css',
-        'public/thirdparty/css/jquery.sweet-dropdown.css',
-        'public/css/app.css'
+        'public/thirdparty/dev-css/bootstrap.css',
+        'public/thirdparty/dev-css/font-awesome.min.css',
+        'public/thirdparty/dev-css/jquery.sweet-dropdown.css',
+        'public/dev-css/app.css'
     ],
     fileOut: 'public/dist/main.css',
     callback: function(err) {
