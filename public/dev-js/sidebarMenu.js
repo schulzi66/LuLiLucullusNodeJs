@@ -1,0 +1,2 @@
+$.sweetDropdown.attachAll()
+
