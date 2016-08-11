@@ -180,8 +180,8 @@ html {
 
 .recipes-overview.recipes .recipes-overview-item {
     max-width: 210px;
-    margin-left: 12px;
-    margin-right: 12px;
+    margin-left: 46px;
+    margin-right: 46px;
     min-height: 0;
     vertical-align: baseline;
 }
@@ -203,16 +203,11 @@ html {
 }
 
 .recipes-overview .recipes-overview-item img {
-    margin: 0 6px 0;
-    width: 198px;
+    width: 210px;
     height: auto;
     background: transparent;
     display: block;
     border-radius: 0px;
-}
-
-.recipes-overview.recipes img {
-
 }
 
 .recipes-overview-short-description {
