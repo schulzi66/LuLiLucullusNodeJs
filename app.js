@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'production';
+
 var express = require('express');
 var session = require('express-session');
 var path = require('path');
