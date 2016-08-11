@@ -1,3 +1,4 @@
+"use strict";
 function init_recipes(/*TODO: Parameter*/) {
     var recipes = ['Rezept 1', 'Rezept 2', 'Rezept 3', 'Rezept 4', 'Rezept 5', 'Rezept 6'];
     var container = $('ul.recipes');

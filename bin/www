@@ -26,11 +26,8 @@ var _dbController = new DbController();
 var connection = _dbController.connect(startServer);
 
 /**
- * Create HTTP server.
+ * Minify js and css files
  */
-
-var server = http.createServer(app);
-
 new compressor.minify({
     type: 'gcc',
     fileIn: [
@@ -60,6 +57,10 @@ new compressor.minify({
     }
 });
 
+/**
+ * Create HTTP server.
+ */
+var server = http.createServer(app);
 var io = require('socket.io')(server);
 
 /**

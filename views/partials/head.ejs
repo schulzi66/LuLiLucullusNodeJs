@@ -2,15 +2,15 @@
 <head>
     <base href="http://localhost:3000/"/>
     <% var env = process.env.NODE_ENV || 'development'; %>
-    <% if(env == 'dev'){ %>
 
+    <% if(env === 'development'){ %>
     <script src="/thirdparty/dev-js/jquery-2.1.4.js"></script>
     <script src="/thirdparty/dev-js/bootstrap.js"></script>
     <script src="/thirdparty/dev-js/socket.io.js"></script>
 
     <script src="/thirdparty/dev-js/jquery.sweet-dropdown.js"></script>
     <script src="/thirdparty/dev-js/cookieconsent.js"></script>
-   <!--<script src='https://www.google.com/recaptcha/api.js'></script>-->
+    <!--<script src='https://www.google.com/recaptcha/api.js'></script>-->
 
     <script src="js/clientSocket.js"></script>
     <script src="js/sidebarMenu.js"></script>
@@ -21,12 +21,13 @@
     <link rel="stylesheet" href="/thirdparty/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="/css/app.css"/>
 
-    <% } else { %>
+    <% } else if(env === 'production') { %>
     <script src="/dist/main.js"></script>
     <script src="js/interface.js"></script>
     <script src="/thirdparty/dev-js/socket.io.js"></script>
     <link rel="stylesheet" href="/dist/main.css"/>
     <% } %>
+
     <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
     <script type="text/javascript">
         window.cookieconsent_options = {
