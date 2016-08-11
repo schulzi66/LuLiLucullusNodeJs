@@ -6,12 +6,12 @@ function init_recipes(/*TODO: Parameter*/) {
     $.each(recipes, function (i) {
         var recipe_list_element =
             '<li class="recipes-overview-item">' +
-            '<img src="img/test_logo.jpg" alt=""' + recipes[i] + '>' +
-            '<h3 class="recipes-overview-headline text-uppercase">' + recipes[i] + '</h3>' +
-            '<p class="recipes-overview-short-description">' + lorem_ipsum + '</p>' +
-            '<p>' +
-            '<a class="recipes-overview-btn btn btn-primary btn-sm"> Weitere Informationen ... </a>' +
-            '</p>' +
+                '<img src="img/test_logo.jpg" alt=""' + recipes[i] + '>' +
+                '<h3 class="recipes-overview-headline text-uppercase">' + recipes[i] + '</h3>' +
+                '<p class="recipes-overview-short-description">' + lorem_ipsum + '</p>' +
+                '<p>' +
+                    '<a class="recipes-overview-btn btn btn-primary btn-sm" href="recipes/recipe"> Weitere Informationen ... </a>' +
+                '</p>' +
             '</li>';
         container.append(recipe_list_element);
     });
