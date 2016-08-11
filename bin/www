@@ -43,7 +43,7 @@ function startServer() {
     server.listen(port);
     server.on('error', onError);
     server.on('listening', onListening);
-    _socketController.startServerSocket(io);
+    _socketController.startServerSocket(io, server);
 }
 
 /**

@@ -3,12 +3,17 @@ var DatabaseController = require('./DatabaseController');
 var SocketController = function () {
 }
 
-SocketController.prototype.startServerSocket = function (io) {
-  io.on('connection', onConnection);
+// SocketController.prototype.loadRecipesOverview = function () {
+// }
+
+
+SocketController.prototype.startServerSocket = function (io, server) {
+    io.listen(server);
+    // io.on('connection', onConnection);
 }
 
 function onConnection(socket) {
-  socket.on('loadAllRecipes', onLoadAllRecipes);
+  socket.on('loadRecipesOverview', onLoadRecipesOverview);
   socket.on('loadRecipeFromId', onLoadRecipeFromId);
   socket.on('disconnect', onDisconnect);
     // socket.on('test', onTest);
@@ -24,10 +29,11 @@ function onDisconnect() {
   console.log('disconnected');
 }
 
-function onLoadAllRecipes() {
+//Recepies
+function onLoadRecipesOverview() {
   var _dbController = new DatabaseController();
-  _dbController.loadAllRecipes(function (allRecipes) {
-    socket.emit('loadedAllRecipes', allRecipes);
+  _dbController.loadRecipesOverview(function (recepiesOverview) {
+    socket.emit('loadedRecipesOverview', recepiesOverview);
   })
 }
 
