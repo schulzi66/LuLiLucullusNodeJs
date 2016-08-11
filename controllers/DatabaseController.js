@@ -53,9 +53,9 @@ DatabaseController.prototype.getUserByEmail = function (req, res, email, callbac
     });
 };
 
-DatabaseController.prototype.loadAllRecipes = function (callback) {
+DatabaseController.prototype.loadRecipesOverview = function (callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT * FROM RECIPE";
+        var queryString = "SELECT RecipeID, RecipeName, Description, PictureRef FROM RECIPES";
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {

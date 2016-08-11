@@ -86,6 +86,7 @@ CREATE TABLE Recipes
 (
   RecipeID INT NOT NULL,
   RecipeName VARCHAR(100) NOT NULL,
+  Description VARCHAR(100) NOT NULL,
   Instructions LONGTEXT NOT NULL,
   PictureRef VARCHAR(256) NOT NULL,
   StyleID INT NOT NULL,

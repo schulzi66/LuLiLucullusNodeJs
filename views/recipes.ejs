@@ -4,6 +4,14 @@
 <% include partials/header %>
 <% include partials/navbar %>
 <body>
+  <script>
+  var socket = io.connect();
+  socket.emit('loadRecipesOverview');
+  socket.on('loadedRecipesOverview', function (overview) {
+  alert(overview);
+    //Overivew data from db should be json array
+  })
+  </script>
 <div class="container container-margin">
     <div class="row" style="text-align: center">
         <section class="col-sm-12">
