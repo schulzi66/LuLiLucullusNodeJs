@@ -55,7 +55,7 @@ DatabaseController.prototype.getUserByEmail = function (req, res, email, callbac
 
 DatabaseController.prototype.loadRecipesOverview = function (callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT RecipeID, RecipeName, Description, PictureRef FROM RECIPES";
+        var queryString = "SELECT recipeID, recipeName, shortDescription, baseDescription, pictureRef FROM RECIPES";
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {

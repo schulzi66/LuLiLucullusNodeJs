@@ -188,6 +188,7 @@ html {
 }
 
 .recipes-overview.recipes .recipes-overview-item {
+    min-height: 275px;
     max-width: 210px;
     margin-left: 46px;
     margin-right: 46px;

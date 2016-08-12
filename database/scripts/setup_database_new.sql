@@ -1,158 +1,159 @@
 CREATE TABLE Ingredients
 (
-  IngredientID INT NOT NULL,
-  IngredientName VARCHAR(50) NOT NULL,
-  PRIMARY KEY (IngredientID),
-  UNIQUE (IngredientName)
+  ingredientID INT NOT NULL,
+  ingredientName VARCHAR(50) NOT NULL,
+  PRIMARY KEY (ingredientID),
+  UNIQUE (ingredientName)
 );
 
 CREATE TABLE Styles
 (
-  StyleID INT NOT NULL,
-  StyleName VARCHAR(50) NOT NULL,
-  PRIMARY KEY (StyleID),
-  UNIQUE (StyleName)
+  styleID INT NOT NULL,
+  styleName VARCHAR(50) NOT NULL,
+  PRIMARY KEY (styleID),
+  UNIQUE (styleName)
 );
 
 CREATE TABLE Courses
 (
-  CourseID INT NOT NULL,
-  CourseName VARCHAR(50) NOT NULL,
-  PRIMARY KEY (CourseID),
-  UNIQUE (CourseName)
+  courseID INT NOT NULL,
+  courseName VARCHAR(50) NOT NULL,
+  PRIMARY KEY (courseID),
+  UNIQUE (courseName)
 );
 
 CREATE TABLE Users
 (
-  Name VARCHAR(50),
-  FamilyName VARCHAR(100),
-  UserID INT NOT NULL,
-  Street VARCHAR(50),
-  AccountName VARCHAR(50) NOT NULL,
-  Location VARCHAR(50),
-  HouseNumber VARCHAR(10),
-  ContactNumber VARCHAR(10),
-  EmailAdress VARCHAR(50),
-  Password INT NOT NULL,
-  PRIMARY KEY (UserID)
+  name VARCHAR(50),
+  familyName VARCHAR(100),
+  userID INT NOT NULL,
+  street VARCHAR(50),
+  accountName VARCHAR(50) NOT NULL,
+  location VARCHAR(50),
+  houseNumber VARCHAR(10),
+  contactNumber VARCHAR(10),
+  emailAdress VARCHAR(50),
+  password INT NOT NULL,
+  PRIMARY KEY (userID)
 );
 
 CREATE TABLE Allergenes
 (
-  AllergenID INT NOT NULL,
-  AllergenName VARCHAR(50) NOT NULL,
-  PRIMARY KEY (AllergenID),
-  UNIQUE (AllergenName)
+  allergenID INT NOT NULL,
+  allergenName VARCHAR(50) NOT NULL,
+  PRIMARY KEY (allergenID),
+  UNIQUE (allergenName)
 );
 
 CREATE TABLE IngredientsAllergenes
 (
-  IngredientID INT NOT NULL,
-  AllergenID INT NOT NULL,
-  PRIMARY KEY (IngredientID, AllergenID),
-  FOREIGN KEY (IngredientID) REFERENCES Ingredients(IngredientID),
-  FOREIGN KEY (AllergenID) REFERENCES Allergenes(AllergenID)
+  ingredientID INT NOT NULL,
+  allergenID INT NOT NULL,
+  PRIMARY KEY (ingredientID, allergenID),
+  FOREIGN KEY (ingredientID) REFERENCES Ingredients(ingredientID),
+  FOREIGN KEY (allergenID) REFERENCES Allergenes(allergenID)
 );
 
 CREATE TABLE Employees
 (
-  EmployeeID INT NOT NULL,
-  Name VARCHAR(50) NOT NULL,
-  FamilyName VARCHAR(50) NOT NULL,
-  Location VARCHAR(50) NOT NULL,
-  Street VARCHAR(50) NOT NULL,
-  HouseNumber VARCHAR(10) NOT NULL,
-  ContactNumber VARCHAR(10) NOT NULL,
-  EmailAdress VARCHAR(50) NOT NULL,
-  PRIMARY KEY (EmployeeID)
+  employeeID INT NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  familyName VARCHAR(50) NOT NULL,
+  location VARCHAR(50) NOT NULL,
+  street VARCHAR(50) NOT NULL,
+  houseNumber VARCHAR(10) NOT NULL,
+  contactNumber VARCHAR(10) NOT NULL,
+  emailAdress VARCHAR(50) NOT NULL,
+  PRIMARY KEY (employeeID)
 );
 
 CREATE TABLE BookingTypes
 (
-  TypeID INT NOT NULL,
-  Type VARCHAR(50) NOT NULL,
-  PRIMARY KEY (TypeID)
+  typeID INT NOT NULL,
+  type VARCHAR(50) NOT NULL,
+  PRIMARY KEY (typeID)
 );
 
 CREATE TABLE Units
 (
-  UnitID INT NOT NULL,
-  UnitName VARCHAR(10) NOT NULL,
-  PRIMARY KEY (UnitID),
-  UNIQUE (UnitName)
+  unitID INT NOT NULL,
+  unitName VARCHAR(10) NOT NULL,
+  PRIMARY KEY (unitID),
+  UNIQUE (unitName)
 );
 
 CREATE TABLE Recipes
 (
-  RecipeID INT NOT NULL,
-  RecipeName VARCHAR(100) NOT NULL,
-  Description VARCHAR(100) NOT NULL,
-  Instructions LONGTEXT NOT NULL,
-  PictureRef VARCHAR(256) NOT NULL,
-  StyleID INT NOT NULL,
-  CourseID INT NOT NULL,
-  PRIMARY KEY (RecipeID),
-  FOREIGN KEY (StyleID) REFERENCES Styles(StyleID),
-  FOREIGN KEY (CourseID) REFERENCES Courses(CourseID),
-  UNIQUE (RecipeName)
+  recipeID INT NOT NULL,
+  recipeName VARCHAR(100) NOT NULL,
+  shortDescription VARCHAR(100),
+  baseDescription VARCHAR(250) NOT NULL,
+  instructions LONGTEXT NOT NULL,
+  pictureRef VARCHAR(256) NOT NULL,
+  styleID INT NOT NULL,
+  courseID INT NOT NULL,
+  PRIMARY KEY (recipeID),
+  FOREIGN KEY (styleID) REFERENCES Styles(styleID),
+  FOREIGN KEY (courseID) REFERENCES Courses(courseID),
+  UNIQUE (recipeName)
 );
 
 CREATE TABLE RecipeIngredients
 (
-  Amount FLOAT NOT NULL,
-  RecipeID INT NOT NULL,
-  IngredientID INT NOT NULL,
-  UnitID INT NOT NULL,
-  PRIMARY KEY (RecipeID, IngredientID),
-  FOREIGN KEY (RecipeID) REFERENCES Recipes(RecipeID),
-  FOREIGN KEY (IngredientID) REFERENCES Ingredients(IngredientID),
-  FOREIGN KEY (UnitID) REFERENCES Units(UnitID)
+  amount FLOAT NOT NULL,
+  recipeID INT NOT NULL,
+  ingredientID INT NOT NULL,
+  unitID INT NOT NULL,
+  PRIMARY KEY (recipeID, ingredientID),
+  FOREIGN KEY (recipeID) REFERENCES Recipes(recipeID),
+  FOREIGN KEY (ingredientID) REFERENCES Ingredients(ingredientID),
+  FOREIGN KEY (unitID) REFERENCES Units(unitID)
 );
 
 CREATE TABLE Ratings
 (
-  Stars INT,
-  Comment TEXT,
-  UserID INT NOT NULL,
-  RecipeID INT NOT NULL,
-  PRIMARY KEY (UserID, RecipeID),
-  FOREIGN KEY (UserID) REFERENCES Users(UserID),
-  FOREIGN KEY (RecipeID) REFERENCES Recipes(RecipeID)
+  stars INT,
+  comment TEXT,
+  userID INT NOT NULL,
+  recipeID INT NOT NULL,
+  PRIMARY KEY (userID, recipeID),
+  FOREIGN KEY (userID) REFERENCES Users(userID),
+  FOREIGN KEY (recipeID) REFERENCES Recipes(recipeID)
 );
 
 CREATE TABLE Bookings
 (
-  BookingID INT NOT NULL,
-  EventName VARCHAR(100) NOT NULL,
-  DateBegin DATE NOT NULL,
-  Location VARCHAR(50) NOT NULL,
-  DateEnd DATE NOT NULL,
-  Street VARCHAR(50) NOT NULL,
-  HouseNumber VARCHAR(10) NOT NULL,
-  UserID INT NOT NULL,
-  TypeID INT NOT NULL,
-  PRIMARY KEY (BookingID),
-  FOREIGN KEY (UserID) REFERENCES Users(UserID),
-  FOREIGN KEY (TypeID) REFERENCES BookingTypes(TypeID)
+  bookingID INT NOT NULL,
+  eventName VARCHAR(100) NOT NULL,
+  dateBegin DATE NOT NULL,
+  location VARCHAR(50) NOT NULL,
+  dateEnd DATE NOT NULL,
+  street VARCHAR(50) NOT NULL,
+  houseNumber VARCHAR(10) NOT NULL,
+  userID INT NOT NULL,
+  typeID INT NOT NULL,
+  PRIMARY KEY (bookingID),
+  FOREIGN KEY (userID) REFERENCES Users(userID),
+  FOREIGN KEY (typeID) REFERENCES BookingTypes(typeID)
 );
 
 CREATE TABLE BookingEmployees
 (
-  DateBegin DATE NOT NULL,
-  DateEnd DATE NOT NULL,
-  BookingID INT NOT NULL,
-  EmployeeID INT NOT NULL,
-  PRIMARY KEY (BookingID, EmployeeID),
-  FOREIGN KEY (BookingID) REFERENCES Bookings(BookingID),
-  FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
+  dateBegin DATE NOT NULL,
+  dateEnd DATE NOT NULL,
+  bookingID INT NOT NULL,
+  employeeID INT NOT NULL,
+  PRIMARY KEY (bookingID, employeeID),
+  FOREIGN KEY (bookingID) REFERENCES Bookings(bookingID),
+  FOREIGN KEY (employeeID) REFERENCES Employees(employeeID)
 );
 
 CREATE TABLE BookingRecipes
 (
-  AmountOfServings INT NOT NULL,
-  BookingID INT NOT NULL,
-  RecipeID INT NOT NULL,
-  PRIMARY KEY (BookingID, RecipeID),
-  FOREIGN KEY (BookingID) REFERENCES Bookings(BookingID),
-  FOREIGN KEY (RecipeID) REFERENCES Recipes(RecipeID)
+  amountOfServings INT NOT NULL,
+  bookingID INT NOT NULL,
+  recipeID INT NOT NULL,
+  PRIMARY KEY (bookingID, recipeID),
+  FOREIGN KEY (bookingID) REFERENCES Bookings(bookingID),
+  FOREIGN KEY (recipeID) REFERENCES Recipes(recipeID)
 );
