@@ -98,10 +98,6 @@ html {
     color: #fff;
 }
 
-#recipe-filter {
-    color: #fff;
-}
-
 /* -----------------------------------------------------------------------------
     Login Button styles
 -----------------------------------------------------------------------------*/
@@ -134,11 +130,6 @@ html {
 }
 
 #dropdown-recipe-categories {
-    top: 105px !important;
-    left: 42.95% !important;
-}
-
-#dropdown-recipe-filters {
     top: 105px !important;
     left: 42.95% !important;
 }
@@ -248,6 +239,14 @@ html {
 
 .recipes-overview-short-description {
     font-size: 12px;
+}
+
+/* -----------------------------------------------------------------------------
+    Recipe Filter Styles
+----------------------------------------------------------------------------- */
+
+#recipe-filter {
+    color: #fff;
 }
 
 /* -----------------------------------------------------------------------------
