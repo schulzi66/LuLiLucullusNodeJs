@@ -9,6 +9,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var conf = require('./conf.json');
 var helmet = require('helmet');
+var fs = require('fs');
+var cleanup = require('./bin/cleanup').Cleanup(myCleanup);
+var path = require('path');
 
 // setup routes
 var index = require('./routes/index');
@@ -119,5 +122,15 @@ app.use(bodyParser.urlencoded({
  * Parses the text as JSON and exposes the resulting object on req.body.
  */
 app.use(bodyParser.json());
+
+/**
+ * Cleanup dist dir after shutdown
+ */
+function myCleanup() {
+    var appDir = path.dirname(require.main.filename);
+    console.log(appDir);
+    fs.unlinkSync(appDir + "/../public/dist/main.css");
+    fs.unlinkSync(appDir + "/../public/dist/main.js");
+};
 
 module.exports = app;
