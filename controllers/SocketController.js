@@ -8,8 +8,7 @@ SocketController.prototype.startServerSocket = function (io, server) {
 }
 
 function onConnection(socket) {
-
-  //Recepies
+  //Region Recepies
   socket.on('loadRecipesOverview', function () {
     var _dbController = new DatabaseController();
     _dbController.loadRecipesOverview(function (recepiesOverview) {
@@ -23,19 +22,7 @@ function onConnection(socket) {
       socket.emit('loadedRecipe', recipe);
     })
   });
-
-
-  // socket.on('disconnect', onDisconnect);
-    // socket.on('test', onTest);
-    // socket.emit('servercall', 'This is a test servercall');
+  //End Region
 }
-
-// function onTest(param) {
-//     console.log('test');
-//     console.log(param);
-// }
-
-
-
 
 module.exports = SocketController;
