@@ -35,6 +35,7 @@ new compressor.minify({
         'public/thirdparty/dev-js/bootstrap.js',
         'public/thirdparty/dev-js/cookieconsent.js',
         'public/thirdparty/dev-js/jquery.sweet-dropdown.js',
+        'public/thirdparty/dev-js/rating.js'
         //'public/thirdparty/dev-js/socket.io.min.js'
     ],
     fileOut: 'public/dist/main.js',

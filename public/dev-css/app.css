@@ -1,8 +1,10 @@
-/*
-CSS Farbabstufungen: http://www.0to255.com/40434E
-*/
+/* -----------------------------------------------------------------------------
+    CSS Farbabstufungen: http://www.0to255.com/40434E
+-----------------------------------------------------------------------------*/
 
-/* Global styles */
+/* -----------------------------------------------------------------------------
+    Global styles
+-----------------------------------------------------------------------------*/
 body {
     background-color: #FFFFFA;
     margin-bottom: 60px;
@@ -21,12 +23,16 @@ html {
     position: relative;
 }
 
-/* Main Container Wrapper */
+/* -----------------------------------------------------------------------------
+    Main Container Wrapper
+ -----------------------------------------------------------------------------*/
 .container-margin {
     margin-top: 50px;
 }
 
-/* Footer styles */
+/* -----------------------------------------------------------------------------
+    Footer styles
+-----------------------------------------------------------------------------*/
 #footer-wrapper {
     position: absolute;
     bottom: 0;
@@ -35,7 +41,9 @@ html {
     border-top: 1px solid #e7e7e7;
 }
 
-/* Form styles */
+/* -----------------------------------------------------------------------------
+    Form styles
+-----------------------------------------------------------------------------*/
 .form-control {
     width: 80%;
     margin-bottom: 15px;
@@ -45,7 +53,9 @@ html {
     padding: 0;
 }
 
-/* Button styles */
+/* -----------------------------------------------------------------------------
+    Button styles
+-----------------------------------------------------------------------------*/
 .btn {
     background-color: #702632;
     border-color: #4a1921;
@@ -57,7 +67,9 @@ html {
     border-color: #4a1921;
 }
 
-/* Header styles */
+/* -----------------------------------------------------------------------------
+    Header styles
+-----------------------------------------------------------------------------*/
 #header-wrapper {
     width: 40px;
 }
@@ -90,7 +102,9 @@ html {
     color: #fff;
 }
 
-/*Login Button styles */
+/* -----------------------------------------------------------------------------
+    Login Button styles
+-----------------------------------------------------------------------------*/
 #login-img-buttons {
     margin-left: 17%;
 }
@@ -99,7 +113,9 @@ html {
     width: 50px;
 }
 
-/* Dropdown styles */
+/* -----------------------------------------------------------------------------
+    Dropdown styles
+-----------------------------------------------------------------------------*/
 .dropdown-menu {
     position: fixed;
 }
@@ -127,7 +143,14 @@ html {
     left: 42.95% !important;
 }
 
-/* Slider styles */
+.h3 {
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+/* -----------------------------------------------------------------------------
+    Slider styles
+-----------------------------------------------------------------------------*/
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
     width: 70%;
@@ -144,7 +167,9 @@ html {
     color: #912F40;
 }
 
-/*Profile styles */
+/* -----------------------------------------------------------------------------
+    Profile styles
+-----------------------------------------------------------------------------  */
 .profile-form > div {
     margin-bottom: 15px;
 }
@@ -157,8 +182,9 @@ html {
     font-style: italic;
 }
 
-/*Recipe Overview */
-
+/* -----------------------------------------------------------------------------
+    Recipe Overview
+-----------------------------------------------------------------------------*/
 .recipes-container {
     margin-left: auto;
     margin-right: auto;
@@ -222,4 +248,36 @@ html {
 
 .recipes-overview-short-description {
     font-size: 12px;
+}
+
+/* -----------------------------------------------------------------------------
+    Rating styles
+----------------------------------------------------------------------------- */
+.c-rating {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.c-rating__item {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 24px;
+    -ms-flex: 0 0 24px;
+    flex: 0 0 24px;
+    height: 24px;
+    display: block;
+    background: url("../../img/star.svg");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    list-style: none;
+}
+
+.c-rating__item:hover,
+.c-rating__item.is-active {
+    background-position: -24px 0;
 }

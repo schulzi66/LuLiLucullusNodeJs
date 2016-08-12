@@ -4,6 +4,34 @@
 <% include partials/header %>
 <% include partials/navbar %>
 <body>
-    <div class="container"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <p class="h3">Rezeptname</p>
+            <img class="img-responsive img-rounded" src="http://placehold.it/500x250" alt="">
+        </div>
+        <div class="col-md-6">
+            <p class="h3">Bewertung</p>
+            <ul id="el" class="c-rating">
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="/thirdparty/dev-js/rating.js"></script>
+<script>
+    var el = document.querySelector('#el');
+    var currentRating = 0;
+    var maxRating = 5;
+
+    var callback = function (rating) {
+
+        recipeRating.getRating();
+        console.log(rating);
+    };
+
+    // rating instance
+    var recipeRating = rating(el, currentRating, maxRating, callback);
+</script>
+
 </body>
 </html>
