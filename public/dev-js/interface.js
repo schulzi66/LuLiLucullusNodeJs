@@ -9,7 +9,7 @@ function loadRecipesOverview() {
         $.each(recipes, function (i) {
             var recipe_list_element =
                 '<li class="recipes-overview-item">' +
-                '<img src="' + recipes[i].pictureRef + '" alt=""' + recipes[i] + '>' +
+                '<img src="' + convertPictureRefToPath(recipes[i].pictureRef) + '" alt=""' + recipes[i] + '>' +
                 '<h3 class="recipes-overview-headline text-uppercase">' + recipes[i].recipeName + '</h3>' +
                 '<p class="recipes-overview-short-description">' + recipes[i].shortDescription + '</p>' +
                 '<p>' +
