@@ -10,7 +10,9 @@ function loadRecipesOverview() {
             var default_img = "img/default.png";
             var recipe_list_element =
                 '<li class="recipes-overview-item">' +
-                '<img class="fallback" src="' + convertPictureRefToPath(recipes[i].pictureRef) + '"' + '>' +
+                '<object class="recipes-image-fallback" data="img/default.png" type="image/png">' +
+                    '<img src="' + convertPictureRefToPath(recipes[i].pictureRef) + '"' + '>' +
+                '</object>' +
                 '<h3 class="recipes-overview-headline text-uppercase">' + recipes[i].recipeName + '</h3>' +
                 '<p class="recipes-overview-short-description">' + recipes[i].shortDescription + '</p>' +
                 '<p>' +
@@ -30,9 +32,9 @@ function loadRecipeFromId(id) {
     })
 }
 
-jQuery(document).ready(function(){
-  jQuery('#recipe-filter').on('click', function(event) {
-    jQuery('#filter-bar').toggle('show');
-  });
+jQuery(document).ready(function () {
+    jQuery('#recipe-filter').on('click', function (event) {
+        jQuery('#filter-bar').toggle('show');
+    });
 });
 //End Region

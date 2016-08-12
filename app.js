@@ -11,7 +11,6 @@ var conf = require('./conf.json');
 var helmet = require('helmet');
 var fs = require('fs');
 var cleanup = require('./bin/cleanup').Cleanup(myCleanup);
-var path = require('path');
 
 // setup routes
 var index = require('./routes/index');
