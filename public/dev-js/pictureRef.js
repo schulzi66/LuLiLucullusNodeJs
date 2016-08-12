@@ -1,4 +1,8 @@
 function convertPictureRefToPath(pictureRef) {
-    //TODO: convert pictureRef to valid image path
-    pictureRef = "img/test_logo.png";
+    var imgDir = "public/img/";
+    var fileExtension = [".png", ".jpg"];
+    pictureRef = pictureRef.split('pictureRef')[1].toLowerCase();
+    var path = imgDir + pictureRef + fileExtension[0];
+
+    return path;
 }

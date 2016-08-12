@@ -7,9 +7,10 @@ function loadRecipesOverview() {
         console.log(recipes);
         var container = $('ul.recipes');
         $.each(recipes, function (i) {
+            var default_img = "img/default.png";
             var recipe_list_element =
                 '<li class="recipes-overview-item">' +
-                '<img src="' + convertPictureRefToPath(recipes[i].pictureRef) + '" alt=""' + recipes[i] + '>' +
+                '<img class="fallback" src="' + convertPictureRefToPath(recipes[i].pictureRef) + '"' + '>' +
                 '<h3 class="recipes-overview-headline text-uppercase">' + recipes[i].recipeName + '</h3>' +
                 '<p class="recipes-overview-short-description">' + recipes[i].shortDescription + '</p>' +
                 '<p>' +
