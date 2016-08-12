@@ -28,4 +28,10 @@ function loadRecipeFromId(id) {
         //TODO Julian: display recipe data. recipe has all the informations from db. dont forget the id
     })
 }
+
+jQuery(document).ready(function(){
+  jQuery('#recipe-filter').on('click', function(event) {
+    jQuery('#filter-bar').toggle('show');
+  });
+});
 //End Region
