@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 var conf = require('./conf.json');
 var helmet = require('helmet');
 var fs = require('fs');
-var cleanup = require('./bin/cleanup').Cleanup(myCleanup);
+var cleanup = require('./public/dev-js/cleanup').Cleanup(myCleanup);
 
 // setup routes
 var index = require('./routes/index');
