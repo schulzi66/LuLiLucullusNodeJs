@@ -24,16 +24,18 @@ CREATE TABLE Courses
 
 CREATE TABLE Users
 (
-  name VARCHAR(50),
   familyName VARCHAR(100),
-  userID INT NOT NULL,
-  street VARCHAR(50),
-  accountName VARCHAR(50) NOT NULL,
-  location VARCHAR(50),
-  houseNumber VARCHAR(10),
-  contactNumber VARCHAR(10),
-  emailAdress VARCHAR(50),
-  password INT NOT NULL,
+  name VARCHAR(50),
+  userID VARCHAR(100) NOT NULL,
+  street VARCHAR(100),
+  location VARCHAR(100),
+  plz VARCHAR(50),
+  telefonNumber VARCHAR(100),
+  password VARCHAR(250) NOT NULL,
+  billingAdressStreet VARCHAR(100),
+  billingAdressLocation VARCHAR(100),
+  billingAdressPlz VARCHAR(100),
+  internal BOOLEAN,
   PRIMARY KEY (userID)
 );
 
@@ -114,7 +116,7 @@ CREATE TABLE Ratings
 (
   stars INT,
   comment TEXT,
-  userID INT NOT NULL,
+  userID VARCHAR(100) NOT NULL,
   recipeID INT NOT NULL,
   PRIMARY KEY (userID, recipeID),
   FOREIGN KEY (userID) REFERENCES Users(userID),
@@ -130,7 +132,7 @@ CREATE TABLE Bookings
   dateEnd DATE NOT NULL,
   street VARCHAR(50) NOT NULL,
   houseNumber VARCHAR(10) NOT NULL,
-  userID INT NOT NULL,
+  userID VARCHAR(100) NOT NULL,
   typeID INT NOT NULL,
   PRIMARY KEY (bookingID),
   FOREIGN KEY (userID) REFERENCES Users(userID),

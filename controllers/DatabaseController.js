@@ -37,7 +37,7 @@ DatabaseController.prototype.connect = function (startServerCallback) {
 
 DatabaseController.prototype.getUserByEmail = function (req, res, email, callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT * FROM USER WHERE email=" + connection.escape(email);
+        var queryString = "SELECT * FROM USERS WHERE USERID=" + connection.escape(email);
         console.log("queryString: " + queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
@@ -95,18 +95,18 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             familyName = req.user.displayName.split(" ")[1];
         } else familyName = req.user.name.familyName;
 
-        var queryString = "INSERT INTO USER SET " +
-            "name=" + connection.escape(familyName) + ", " +
-            "vorname=" + connection.escape(req.user.name.givenName) + ", " +
-            "email=" + connection.escape(req.user.emails[0].value) + ", " +
-            "telefon=" + connection.escape(req.user.telefon) + ", " +
+        var queryString = "INSERT INTO USERS SET " +
+            "familyName=" + connection.escape(familyName) + ", " +
+            "name=" + connection.escape(req.user.name.givenName) + ", " +
+            "userID=" + connection.escape(req.user.emails[0].value) + ", " +
+            "street=" + connection.escape(null) + ", " +
+            "location=" + connection.escape(null) + ", " +
+            "plz=" + connection.escape(0) + ", " +
+            "telefonNumber=" + connection.escape(req.user.telefon) + ", " +
             "password=" + connection.escape(DatabaseController.prototype.hash(placeholder)) + ", " +
-            "lieferadresse_str=" + connection.escape(null) + ", " +
-            "lieferadresse_ort=" + connection.escape(null) + ", " +
-            "lieferadresse_plz=" + connection.escape(0) + ", " +
-            "rechnungsadresse_str=" + connection.escape(null) + ", " +
-            "rechnungsadresse_ort=" + connection.escape(null) + ", " +
-            "rechnungsadresse_plz=" + connection.escape(0) + ", " +
+            "billingAdressStreet=" + connection.escape(null) + ", " +
+            "billingAdressLocation=" + connection.escape(null) + ", " +
+            "billingAdressPlz=" + connection.escape(0) + ", " +
             "internal=" + connection.escape(internal);
 
         connection.query(queryString,
@@ -155,18 +155,18 @@ DatabaseController.prototype.signup = function (req, res, internal) {
             rech_plz = req.body.plz;
         } else rech_plz = req.body.rech_plz;
 
-        var queryString = "INSERT INTO USER SET " +
+        var queryString = "INSERT INTO USERS SET " +
+            "familyName=" + connection.escape(req.body.vorname) + ", " +
             "name=" + connection.escape(req.body.name) + ", " +
-            "vorname=" + connection.escape(req.body.vorname) + ", " +
-            "email=" + connection.escape(req.body.email) + ", " +
-            "telefon=" + connection.escape(req.body.tel) + ", " +
+            "userID=" + connection.escape(req.body.email) + ", " +
+            "street=" + connection.escape(req.body.street) + ", " +
+            "location=" + connection.escape(req.body.ort) + ", " +
+            "plz=" + connection.escape(req.body.plz) + ", " +
+            "telefonNumber=" + connection.escape(req.body.tel) + ", " +
             "password=" + connection.escape(DatabaseController.prototype.hash(req.body.password)) + ", " +
-            "lieferadresse_str=" + connection.escape(req.body.street) + ", " +
-            "lieferadresse_ort=" + connection.escape(req.body.ort) + ", " +
-            "lieferadresse_plz=" + connection.escape(req.body.plz) + ", " +
-            "rechnungsadresse_str=" + connection.escape(rech_str) + ", " +
-            "rechnungsadresse_ort=" + connection.escape(rech_ort) + ", " +
-            "rechnungsadresse_plz=" + connection.escape(rech_plz) + ", " +
+            "billingAdressStreet=" + connection.escape(rech_str) + ", " +
+            "billingAdressLocation=" + connection.escape(rech_ort) + ", " +
+            "billingAdressPlz=" + connection.escape(rech_plz) + ", " +
             "internal=" + connection.escape(internal);
 
         connection.query(queryString,
@@ -216,18 +216,18 @@ DatabaseController.prototype.updateUser = function (req, res) {
             rech_plz = req.body.plz;
         } else rech_plz = req.body.rech_plz;
 
-        var queryString = "UPDATE USER " +
-            "SET name=" + connection.escape(req.body.name) + ", " +
-            "vorname=" + connection.escape(req.body.vorname) + ", " +
-            //"email=" + connection.escape() + ", " +
-            "telefon=" + connection.escape(req.body.tel) + ", " +
-            "lieferadresse_str=" + connection.escape(req.body.street) + ", " +
-            "lieferadresse_ort=" + connection.escape(req.body.ort) + ", " +
-            "lieferadresse_plz=" + connection.escape(req.body.plz) + ", " +
-            "rechnungsadresse_str=" + connection.escape(rech_str) + ", " +
-            "rechnungsadresse_ort=" + connection.escape(rech_ort) + ", " +
-            "rechnungsadresse_plz=" + connection.escape(rech_plz) + " " +
-            "WHERE email= " + connection.escape(req.body.email);
+        var queryString = "UPDATE USERS " +
+            "SET familyName=" + connection.escape(req.body.name) + ", " +
+            "name=" + connection.escape(req.body.vorname) + ", " +
+            "telefonNumber=" + connection.escape(req.body.tel) + ", " +
+            "street=" + connection.escape(req.body.street) + ", " +
+            "location=" + connection.escape(req.body.ort) + ", " +
+            "plz=" + connection.escape(req.body.plz) + ", " +
+            "telefonNumber=" + connection.escape(req.body.tel) + ", " +
+            "billingAdressStreet=" + connection.escape(rech_str) + ", " +
+            "billingAdressLocation=" + connection.escape(rech_ort) + ", " +
+            "billingAdressPlz=" + connection.escape(rech_plz) + " " +
+            "WHERE userID= " + connection.escape(req.body.email);
 
         connection.query(queryString,
             function (err) {

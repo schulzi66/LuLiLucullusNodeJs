@@ -7,7 +7,7 @@ var DbController = require('../controllers/DatabaseController');
 router.get('/', function (req, res, next) {
     var _dbController = new DbController();
     console.log("Req.session.user (profile.js): " + req.session.user);
-    _dbController.getUserByEmail(req, res, req.session.user.email, renderProfile)
+    _dbController.getUserByEmail(req, res, req.session.user.userID, renderProfile)
 });
 
 /* Post changes from userdata */
@@ -24,6 +24,7 @@ function renderProfile(req, res, userModel) {
   }
   else {
       console.log("UserModel-Else (profile.js): " + userModel);
+      //TODO MARIUS generate right user model!
       res.render('profile', {user: userModel});
   }
 }
