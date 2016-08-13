@@ -260,6 +260,7 @@ html {
 
 .recipe-print-icon {
     cursor: pointer;
+    margin-left: 90px;
 }
 
 .recicpe-rating-wrapper {
@@ -283,6 +284,9 @@ html {
     display: inline;
 }
 
+.recipe-ingredients-headline {
+    margin-top: 0px;
+}
 
 .recipe-ingredients-list-item-second-column {
     padding-right: 40px;
