@@ -34,31 +34,11 @@
     <div class="recipe-container-row row col-md-6">
         <div>
             <p class="h3 recipe-ingredients-headline">Zutaten</p>
-            <div class="recipe-ingredients-list-wrapper recipe-ingredients">
-                <ul class="recipe-ingredients-list recipe-ingredients">
-                    <li class="recipe-ingredients-list-item-first-column">
-                        Zutat1
-                    </li>
-                    <li class="recipe-ingredients-list-item-second-column">
-                        1 kg
-                    </li>
-                </ul>
-                <ul class="recipe-ingredients-list recipe-ingredients">
-                    <li class="recipe-ingredients-list-item-first-column">
-                        Zutat 2
-                    </li>
-                    <li class="recipe-ingredients-list-item-second-column">
-                        300 g
-                    </li>
-                </ul>
-                <ul class="recipe-ingredients-list recipe-ingredients">
-                    <li class="recipe-ingredients-list-item-first-column">
-                        Zutat 3
-                    </li>
-                    <li class="recipe-ingredients-list-item-second-column">
-                        75 ml
-                    </li>
-                </ul>
+
+            <div id="ingredients-wrapper" class="recipe-ingredients-list-wrapper recipe-ingredients">
+                <script>
+                    loadRecipeFromId(0);
+                </script>
             </div>
         </div>
     </div>
@@ -83,13 +63,11 @@
 <script src="/thirdparty/dev-js/rating.js"></script>
 <script>
     var el = document.querySelector('#el');
-    var currentRating = 0;
+    var currentRating = 0; //TODO: get from database
     var maxRating = 5;
 
     var callback = function (rating) {
-
         recipeRating.getRating();
-        console.log(rating);
     };
 
     // rating instance

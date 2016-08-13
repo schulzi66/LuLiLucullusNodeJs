@@ -8,21 +8,21 @@ SocketController.prototype.startServerSocket = function (io, server) {
 }
 
 function onConnection(socket) {
-  //Region Recepies
-  socket.on('loadRecipesOverview', function () {
-    var _dbController = new DatabaseController();
-    _dbController.loadRecipesOverview(function (recepiesOverview) {
-      socket.emit('loadedRecipesOverview', recepiesOverview);
-    })
-  });
+    //Region Recepies
+    socket.on('loadRecipesOverview', function () {
+        var _dbController = new DatabaseController();
+        _dbController.loadRecipesOverview(function (recepiesOverview) {
+            socket.emit('loadedRecipesOverview', recepiesOverview);
+        })
+    });
 
-  socket.on('loadRecipeFromId', function (id) {
-    var _dbController = new DatabaseController();
-    _dbController.loadRecipeFromId(id, function (recipe) {
-      socket.emit('loadedRecipe', recipe);
-    })
-  });
-  //End Region
+    socket.on('loadRecipeFromId', function (id) {
+        var _dbController = new DatabaseController();
+        _dbController.loadRecipeFromId(id, function (recipe) {
+            socket.emit('loadedRecipe', recipe);
+        })
+    });
+    //End Region
 }
 
 module.exports = SocketController;

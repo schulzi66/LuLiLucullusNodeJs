@@ -16,16 +16,14 @@ var DatabaseController = function () {
 }
 
 DatabaseController.prototype.hash = function (password) {
-    var hash = bcrypt.hashSync(password, null, null);
-    return hash;
-    /*bcrypt.hash(password, null, null, function (err, hash) {
-        if (err) {
-            console.log(err);
-        } else {
+    bcrypt.hash(password, 10, function (err, hash) {
+        if (!err) {
             console.log("DBController, PW:" + password, "HASH: " + hash);
             return hash;
+        } else {
+            console.log('Fehler: ' + hash);
         }
-    });*/
+    });
 }
 
 DatabaseController.prototype.connect = function (startServerCallback) {
@@ -72,20 +70,35 @@ DatabaseController.prototype.loadRecipesOverview = function (callback) {
 
 DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT * FROM RECIPE WHERE ID=" + connection.escape(id);
+        //var queryString = "SELECT Recipes.*, RecipeIngredients.* FROM RECIPES JOIN RecipeIngredients ON Recipes.recipeid=RecipeIngredients.recipeid WHERE recipes.recipeID=" + connection.escape(id);
+        var queryString = "SELECT RecipeIngredients.amount, ingredients.ingredientName " +
+                            "FROM Ingredients " +
+                            "JOIN RecipeIngredients " +
+                            "ON RecipeIngredients.ingredientID=ingredients.ingredientID" +
+                            "WHERE RecipeIngredients.recipeID=" + connection.escape(id);
+        console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
+                console.log("ROWS" + rows[0]);
                 callback(rows[0]);
             }
         });
-
         connection.on('error', function (err) {
             console.log("ERR: " + err);
             return;
         });
     });
 };
+
+/*DatabaseController.prototype.saveRatingForRecipe = function (rating, id, callback) {
+ pool.getConnection(function (err, connection) {
+ var queryString = "INSERT INTO Ratings SET stars= " +
+ connection.escape(rating) + ", recipeId=" + connection.escape(id) +
+ ", userId=" + connection.escape(user.id) +
+ "WHERE "
+ });
+ };*/
 
 DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal, method_token) {
     pool.getConnection(function (err, connection) {
