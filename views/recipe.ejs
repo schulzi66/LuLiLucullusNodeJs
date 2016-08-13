@@ -5,30 +5,65 @@
 <% include partials/navbar %>
 <body>
 <div class="container">
-    <div class="recipe-container-row row">
-        <div class="col-md-5">
-            <p class="h3">Rezeptname</p>
-            <div class="recipe-image-wrapper col-md-6">
-                <img class="img-responsive img-rounded" src="http://placehold.it/500x250">
+    <div class="recipe-header-information">
+        <div class="recipe-container-row row">
+            <div class="col-md-4">
+                <p class="h3">Rezeptname</p>
+            </div>
+            <div class="col-md-2">
+                <a href="#">
+                    <p class="recipe-print-icon h3">
+                        <span class="glyphicon glyphicon-print"> </span>
+                    </p>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <p class="h3">Bewertung</p>
+            </div>
+            <div class="col-md-3 recicpe-rating-wrapper">
+                <ul id="el" class="c-rating">
+                </ul>
             </div>
         </div>
-        <div class="col-md-1">
-            <p class="h3"> Print</p>
+    </div>
+    <div class="col-md-6">
+        <div class="recipe-image-wrapper">
+            <img class="img-responsive img-rounded" src="http://placehold.it/500x250">
         </div>
-        <div class="col-md-2">
-            <p class="h3">Bewertung</p>
-        </div>
-        <div class="col-md-2">
-            <ul id="el" class="c-rating">
-            </ul>
+        <div class="recipe-container-row row col-md-6">
+            <p class="h3 recipe-instructions">Zubereitung</p>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <p class="h3 recipe-instructions">Zubereitung</p>
-            <p class="recipe-instructions">
-                Lorem ipsum dolor sit ...
-            </p>
+
+    <div class="recipe-container-row row col-md-6">
+        <div>
+            <p class="h3">Zutaten</p>
+            <div class="recipe-ingredients-list-wrapper recipe-ingredients">
+                <ul class="recipe-ingredients-list recipe-ingredients">
+                    <li class="recipe-ingredients-list-item-first-column">
+                        Zutat1
+                    </li>
+                    <li class="recipe-ingredients-list-item-second-column">
+                        1 kg
+                    </li>
+                </ul>
+                <ul class="recipe-ingredients-list recipe-ingredients">
+                    <li class="recipe-ingredients-list-item-first-column">
+                        Zutat 2
+                    </li>
+                    <li class="recipe-ingredients-list-item-second-column">
+                        300 g
+                    </li>
+                </ul>
+                <ul class="recipe-ingredients-list recipe-ingredients">
+                    <li class="recipe-ingredients-list-item-first-column">
+                        Zutat 3
+                    </li>
+                    <li class="recipe-ingredients-list-item-second-column">
+                        75 ml
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

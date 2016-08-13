@@ -258,6 +258,36 @@ html {
     margin-right: auto;
 }
 
+.recipe-print-icon {
+    cursor: pointer;
+}
+
+.recicpe-rating-wrapper {
+    margin-top: 7px;
+}
+
+.recipe-header-information {
+    margin-bottom: 20px;
+}
+
+.recipe-ingredients-list-wrapper {
+    border: 2px solid #4a1921;
+    border-radius: 0;
+}
+
+.recipe-ingredients-list, .recipe-ingredients-list-wrapper {
+    list-style: none;
+}
+
+.recipe-ingredients-list-item-first-column, .recipe-ingredients-list-item-second-column {
+    display: inline;
+}
+
+
+.recipe-ingredients-list-item-second-column {
+    padding-right: 40px;
+    float: right;
+}
 /* -----------------------------------------------------------------------------
     Recipe Filter Styles
 ----------------------------------------------------------------------------- */
