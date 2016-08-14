@@ -74,7 +74,7 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
         var queryString = "SELECT RecipeIngredients.amount, ingredients.ingredientName " +
                             "FROM Ingredients " +
                             "JOIN RecipeIngredients " +
-                            "ON RecipeIngredients.ingredientID=ingredients.ingredientID" +
+                            "ON RecipeIngredients.ingredientID=ingredients.ingredientID " +
                             "WHERE RecipeIngredients.recipeID=" + connection.escape(id);
         console.log(queryString);
         connection.query(queryString, function (err, rows) {
