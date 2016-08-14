@@ -12,14 +12,10 @@ router.get('/', function (req, res, next) {
 var existing_user;
 router.post('/', function (req, res) {
   var _dbController = new DbController();
-    console.log("req.body.email (signup.js): " +req.body.email);
     _dbController.getUserByEmail(req, res, req.body.email, function (data) {
-        //existing_user = data;
-        console.log("ExistingUser: " + data);
     });
     if (!existing_user) {
         _dbController.signup(req, res, true);
-        console.log("req.session.user (signup.js): " + req.session.user);
     } else {
         req.session.message = 'Scheinbar haben Sie bereits einen Account mit der Emailadresse' + existing_user + 'bei uns.';
         res.redirect('/login');

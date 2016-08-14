@@ -83,7 +83,6 @@ function loginUser(req, res, user) {
         var stored_hash;
         stored_hash = user.password;
         req.session.user = user;
-        console.log(user);
         req.session.user.displayName = user.familyName + " " + user.name;
         res.redirect('/');
 

@@ -2,6 +2,8 @@ var mysql = require('mysql');
 var conf = require('../conf.json');
 var UserModelController = require('./UserModelController');
 var bcrypt = require('bcrypt-nodejs');
+var DevLoggingController = require('./DevLoggingController');
+var logger = new DevLoggingController();
 
 var pool = mysql.createPool({
     host: conf.database.host,
@@ -16,14 +18,16 @@ var DatabaseController = function () {
 }
 
 DatabaseController.prototype.hash = function (password) {
-    bcrypt.hash(password, 10, function (err, hash) {
-        if (!err) {
-            console.log("DBController, PW:" + password, "HASH: " + hash);
-            return hash;
-        } else {
-            console.log('Fehler: ' + hash);
-        }
-    });
+return password;
+//TODO Julian: not working ;)
+    // bcrypt.hash(password, 10, function (err, hash) {
+    //     if (!err) {
+    //         console.log("DBController, PW:" + password, "HASH: " + hash);
+    //         return hash;
+    //     } else {
+    //         console.log('Fehler: ' + hash);
+    //     }
+    // });
 }
 
 DatabaseController.prototype.connect = function (startServerCallback) {
@@ -108,52 +112,37 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             familyName = req.user.displayName.split(" ")[1];
         } else familyName = req.user.name.familyName;
 
-
-        console.log("external signup ");
-        Object.keys(req.user).forEach(function (key) {
-          var val = req.user[key];
-          console.log(key + " :" + val);
-        })
-
-
-
         var queryString = "INSERT INTO USERS SET " +
-            "familyName=" + connection.escape(req.user.familyName) + ", " +
+            "familyName=" + connection.escape(req.user.name.familyName) + ", " +
             "name=" + connection.escape(req.user.name.givenName) + ", " +
             "userID=" + connection.escape(req.user.emails[0].value) + ", " +
             "street=" + connection.escape(null) + ", " +
             "location=" + connection.escape(null) + ", " +
-            "plz=" + connection.escape(0) + ", " +
-            "telefonNumber=" + connection.escape(req.user.telefon) + ", " +
+            "plz=" + connection.escape(null) + ", " +
+            "telefonNumber=" + connection.escape(null) + ", " +
             "password=" + connection.escape(DatabaseController.prototype.hash(placeholder)) + ", " +
             "billingAdressStreet=" + connection.escape(null) + ", " +
             "billingAdressLocation=" + connection.escape(null) + ", " +
-            "billingAdressPlz=" + connection.escape(0) + ", " +
+            "billingAdressPlz=" + connection.escape(null) + ", " +
             "internal=" + connection.escape(internal);
 
-console.log("external querystring: " + queryString);
         connection.query(queryString,
             function (err) {
                 connection.release();
 
                 if (!err) {
                     var _userModelController = new UserModelController();
-                    console.log("external signup usermodel controller req.body ");
-                    Object.keys(req.body).forEach(function (key) {
-                      var val = req.body[key];
-                      console.log(key + " :" + val);
-                    })
-                    var user = _userModelController.createUserModel(req.body.name,
-                        req.body.vorname,
+                    var user = _userModelController.createUserModel(req.body.familyName,
+                        req.body.name,
                         req.body.email,
                         req.body.password,
-                        req.body.telefon,
+                        req.body.telefonNumber,
                         req.body.street,
-                        req.body.ort,
+                        req.body.location,
                         req.body.plz,
-                        req.body.rech_street,
-                        req.body.rech_ort,
-                        req.body.rech_plz,
+                        req.body.billingAdressStreet,
+                        req.body.billingAdressLocation,
+                        req.body.billingAdressPlz,
                         internal);
                     req.session.user = user;
                     console.log(req.session.user);
@@ -235,9 +224,10 @@ DatabaseController.prototype.updateUser = function (req, res) {
         if (req.body.billingAdressStreet === '') {
             rech_str = req.body.street;
         } else rech_str = req.body.billingAdressStreet;
-
+console.log("req.body.billingAdressLocation: " + req.body.billingAdressLocation);
         if (req.body.billingAdressLocation === '') {
             rech_ort = req.body.location;
+            console.log("req.body.location: " + req.body.location);
         } else rech_ort = req.body.billingAdressLocation;
 
         if (req.body.billingAdressPlz == '') {
@@ -262,6 +252,7 @@ DatabaseController.prototype.updateUser = function (req, res) {
 
                 if (!err) {
                     var _userModelController = new UserModelController();
+                    logger.log("updateUser", req.body)
                     var user = _userModelController.createUserModel(req.body.familyName,
                         req.body.name,
                         req.body.email,
