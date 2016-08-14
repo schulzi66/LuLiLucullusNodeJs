@@ -108,8 +108,17 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             familyName = req.user.displayName.split(" ")[1];
         } else familyName = req.user.name.familyName;
 
+
+        console.log("external signup ");
+        Object.keys(req.user).forEach(function (key) {
+          var val = req.user[key];
+          console.log(key + " :" + val);
+        })
+
+
+
         var queryString = "INSERT INTO USERS SET " +
-            "familyName=" + connection.escape(familyName) + ", " +
+            "familyName=" + connection.escape(req.user.familyName) + ", " +
             "name=" + connection.escape(req.user.name.givenName) + ", " +
             "userID=" + connection.escape(req.user.emails[0].value) + ", " +
             "street=" + connection.escape(null) + ", " +
@@ -122,12 +131,18 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             "billingAdressPlz=" + connection.escape(0) + ", " +
             "internal=" + connection.escape(internal);
 
+console.log("external querystring: " + queryString);
         connection.query(queryString,
             function (err) {
                 connection.release();
 
                 if (!err) {
                     var _userModelController = new UserModelController();
+                    console.log("external signup usermodel controller req.body ");
+                    Object.keys(req.body).forEach(function (key) {
+                      var val = req.body[key];
+                      console.log(key + " :" + val);
+                    })
                     var user = _userModelController.createUserModel(req.body.name,
                         req.body.vorname,
                         req.body.email,
@@ -156,26 +171,26 @@ DatabaseController.prototype.signup = function (req, res, internal) {
     pool.getConnection(function (err, connection) {
         var rech_str, rech_ort, rech_plz;
 
-        if (req.body.rech_street === '') {
+        if (req.body.billingAdressStreet === '') {
             rech_str = req.body.street;
-        } else rech_str = req.body.rech_street;
+        } else rech_str = req.body.billingAdressStreet;
 
-        if (req.body.rech_ort === '') {
-            rech_ort = req.body.ort;
-        } else rech_ort = req.body.rech_ort;
+        if (req.body.billingAdressLocation === '') {
+            rech_ort = req.body.location;
+        } else rech_ort = req.body.billingAdressLocation;
 
-        if (req.body.rech_plz == '') {
+        if (req.body.billingAdressPlz == '') {
             rech_plz = req.body.plz;
-        } else rech_plz = req.body.rech_plz;
+        } else rech_plz = req.body.billingAdressPlz;
 
         var queryString = "INSERT INTO USERS SET " +
-            "familyName=" + connection.escape(req.body.vorname) + ", " +
+            "familyName=" + connection.escape(req.body.familyName) + ", " +
             "name=" + connection.escape(req.body.name) + ", " +
             "userID=" + connection.escape(req.body.email) + ", " +
             "street=" + connection.escape(req.body.street) + ", " +
-            "location=" + connection.escape(req.body.ort) + ", " +
+            "location=" + connection.escape(req.body.location) + ", " +
             "plz=" + connection.escape(req.body.plz) + ", " +
-            "telefonNumber=" + connection.escape(req.body.tel) + ", " +
+            "telefonNumber=" + connection.escape(req.body.telefonNumber) + ", " +
             "password=" + connection.escape(DatabaseController.prototype.hash(req.body.password)) + ", " +
             "billingAdressStreet=" + connection.escape(rech_str) + ", " +
             "billingAdressLocation=" + connection.escape(rech_ort) + ", " +
@@ -189,17 +204,17 @@ DatabaseController.prototype.signup = function (req, res, internal) {
 
                 if (!err) {
                     var _userModelController = new UserModelController();
-                    var user = _userModelController.createUserModel(req.body.name,
-                        req.body.vorname,
+                    var user = _userModelController.createUserModel(req.body.familyName,
+                        req.body.name,
                         req.body.email,
                         req.body.password,
-                        req.body.telefon,
+                        req.body.telefonNumber,
                         req.body.street,
-                        req.body.ort,
+                        req.body.location,
                         req.body.plz,
-                        req.body.rech_street,
-                        req.body.rech_ort,
-                        req.body.rech_plz,
+                        req.body.billingAdressStreet,
+                        req.body.billingAdressLocation,
+                        req.body.billingAdressPlz,
                         internal);
                     req.session.user = user;
                     res.redirect('/');
@@ -217,26 +232,25 @@ DatabaseController.prototype.updateUser = function (req, res) {
     pool.getConnection(function (err, connection) {
         var rech_str, rech_ort, rech_plz;
 
-        if (req.body.rech_street === '') {
+        if (req.body.billingAdressStreet === '') {
             rech_str = req.body.street;
-        } else rech_str = req.body.rech_street;
+        } else rech_str = req.body.billingAdressStreet;
 
-        if (req.body.rech_ort === '') {
-            rech_ort = req.body.ort;
-        } else rech_ort = req.body.rech_ort;
+        if (req.body.billingAdressLocation === '') {
+            rech_ort = req.body.location;
+        } else rech_ort = req.body.billingAdressLocation;
 
-        if (req.body.rech_plz == '') {
+        if (req.body.billingAdressPlz == '') {
             rech_plz = req.body.plz;
-        } else rech_plz = req.body.rech_plz;
+        } else rech_plz = req.body.billingAdressPlz;
 
         var queryString = "UPDATE USERS " +
-            "SET familyName=" + connection.escape(req.body.name) + ", " +
-            "name=" + connection.escape(req.body.vorname) + ", " +
-            "telefonNumber=" + connection.escape(req.body.tel) + ", " +
+            "SET familyName=" + connection.escape(req.body.familyName) + ", " +
+            "name=" + connection.escape(req.body.name) + ", " +
+            "telefonNumber=" + connection.escape(req.body.telefonNumber) + ", " +
             "street=" + connection.escape(req.body.street) + ", " +
-            "location=" + connection.escape(req.body.ort) + ", " +
+            "location=" + connection.escape(req.body.location) + ", " +
             "plz=" + connection.escape(req.body.plz) + ", " +
-            "telefonNumber=" + connection.escape(req.body.tel) + ", " +
             "billingAdressStreet=" + connection.escape(rech_str) + ", " +
             "billingAdressLocation=" + connection.escape(rech_ort) + ", " +
             "billingAdressPlz=" + connection.escape(rech_plz) + " " +
@@ -248,17 +262,17 @@ DatabaseController.prototype.updateUser = function (req, res) {
 
                 if (!err) {
                     var _userModelController = new UserModelController();
-                    var user = _userModelController.createUserModel(req.body.name,
-                        req.body.vorname,
+                    var user = _userModelController.createUserModel(req.body.familyName,
+                        req.body.name,
                         req.body.email,
                         req.body.password,
-                        req.body.telefon,
+                        req.body.telefonNumber,
                         req.body.street,
-                        req.body.ort,
+                        req.body.location,
                         req.body.plz,
-                        req.body.rech_street,
-                        req.body.rech_ort,
-                        req.body.rech_plz
+                        req.body.billingAdressStreet,
+                        req.body.billingAdressLocation,
+                        req.body.billingAdressPlz
                     );
                     req.session.user = user;
                     res.redirect('/');
