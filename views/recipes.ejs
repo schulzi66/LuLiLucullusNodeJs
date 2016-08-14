@@ -33,8 +33,14 @@
         </section>
     </div>
 
-    <div id="filter-bar" hidden>
-        Hier stehen später alle Filterwerte.
+    <div id="filter-bar">
+      <div id="inputFields" style="display:inline-block">
+        <input type="checkbox" id="check_vegetarian"/><label for="check_vegetarian">Vegetarisch</label><br />
+        <input type="checkbox" id="check_allergy_nut"/><label for="check_allergy_nut">Nussallergie</label><br />
+      </div>
+      <div id="filterSubmit" style="display:inline-block">
+        <button id="filterSubmitBtn" class="btn text-uppercase text-spat">Filtern!</button>
+      </div>
     </div>
 
     <div class="row container">
