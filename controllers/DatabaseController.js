@@ -18,7 +18,7 @@ var DatabaseController = function () {
 }
 
 DatabaseController.prototype.hash = function (password) {
-return password;
+    return password;
 //TODO Julian: not working ;)
     // bcrypt.hash(password, 10, function (err, hash) {
     //     if (!err) {
@@ -57,7 +57,7 @@ DatabaseController.prototype.getUserByEmail = function (req, res, email, callbac
 
 DatabaseController.prototype.loadRecipesOverview = function (callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT recipeID, recipeName, shortDescription, baseDescription, pictureRef FROM RECIPES";
+        var queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM RECIPES";
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -75,11 +75,17 @@ DatabaseController.prototype.loadRecipesOverview = function (callback) {
 DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
     pool.getConnection(function (err, connection) {
         //var queryString = "SELECT Recipes.*, RecipeIngredients.* FROM RECIPES JOIN RecipeIngredients ON Recipes.recipeid=RecipeIngredients.recipeid WHERE recipes.recipeID=" + connection.escape(id);
-        var queryString = "SELECT RecipeIngredients.amount, ingredients.ingredientName " +
-                            "FROM Ingredients " +
-                            "JOIN RecipeIngredients " +
-                            "ON RecipeIngredients.ingredientID=ingredients.ingredientID " +
-                            "WHERE RecipeIngredients.recipeID=" + connection.escape(id);
+        var queryString = "SELECT RecipeIngredients.amount, " +
+            "Ingredients.ingredientName, Units.unitName, Recipes.recipeName, Recipes.baseDescription, Recipes.pictureRef " +
+            "FROM RecipeIngredients " +
+            "JOIN Ingredients " +
+            "ON Ingredients.ingredientID=RecipeIngredients.ingredientID " +
+            "JOIN Units " +
+            "ON RecipeIngredients.unitID=Units.unitID " +
+            "JOIN Recipes " +
+            "ON Recipes.recipeID=RecipeIngredients.recipeID " +
+            "WHERE RecipeIngredients.recipeID= " +
+            connection.escape(id);
         console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
@@ -224,7 +230,7 @@ DatabaseController.prototype.updateUser = function (req, res) {
         if (req.body.billingAdressStreet === '') {
             rech_str = req.body.street;
         } else rech_str = req.body.billingAdressStreet;
-console.log("req.body.billingAdressLocation: " + req.body.billingAdressLocation);
+        console.log("req.body.billingAdressLocation: " + req.body.billingAdressLocation);
         if (req.body.billingAdressLocation === '') {
             rech_ort = req.body.location;
             console.log("req.body.location: " + req.body.location);

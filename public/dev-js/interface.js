@@ -4,6 +4,7 @@ function loadRecipesOverview() {
     var socket = io.connect();   //TCP Socket connection to load recipes overview from db
     socket.emit('loadRecipesOverview');
     socket.on('loadedRecipesOverview', function (recipes) {
+        console.log(recipes);
         var container = $('ul.recipes');
         $.each(recipes, function (i) {
             var recipe_list_element =
@@ -26,18 +27,55 @@ function loadRecipeFromId(id) {
     var socket = io.connect();
     socket.emit('loadRecipeFromId', id);
     socket.on('loadedRecipe', function (recipe) {
-        var container = $('#ingredients-wrapper');
+        console.log(recipe);
+        var recipe_image = '<img class="img-responsive img-rounded" src="' + convertPictureRefToPath(recipe.pictureRef) + '">';
+        $('#recipe-image-wrapper').append(recipe_image);
+
+        var recipe_details =
+            '<div class="recipe-header-information">' +
+                '<div class="recipe-container-row row">' +
+                    '<div class="col-md-4">' +
+                        '<p class="h3">' + recipe.recipeName + '</p>' +
+                    '</div>' +
+                    '<div class="col-md-2">' +
+                        '<a href="#">' +
+                            '<p class="recipe-print-icon h3">' +
+                                '<span class="glyphicon glyphicon-print"> </span>' +
+                            '</p>' +
+                        '</a>' +
+                    '</div>' +
+                    '<div class="col-md-3">' +
+                        '<p class="h3">Bewertung</p>' +
+                    '</div>' +
+                    '<div class="col-md-3 recicpe-rating-wrapper">' +
+                        '<ul id="el" class="c-rating">' +
+                        '</ul>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        $('#recipe-details-page-wrapper').append(recipe_details);
+
+        var recipe_base_description =
+            '<div class="recipe-container-row row">' +
+                '<p class="h3 recipe-instructions">Zubereitung</p>' +
+                '<p  class="recipe-instructions">' +
+                    recipe.baseDescription +
+                '</p>' +
+            '</div>'
+        $('#recipe-preparation').append(recipe_base_description);
+
         $.each(recipe, function (i) {
             var recipe_ingredients_list =
                 '<ul class="recipe-ingredients-list recipe-ingredients">' +
                 '<li class="recipe-ingredients-list-item-first-column">' +
-                    recipe.ingredientName[i] +
+                    recipe.ingredientName +
                 '</li>' +
                 '<li class="recipe-ingredients-list-item-second-column">' +
-                    recipe.amount[i] +
+                    recipe.amount + " " + recipe.unitName +
                 '</li>' +
                 '</ul>';
-            container.append(recipe_ingredients_list);
+
+            $('#ingredients-wrapper').append(recipe_ingredients_list);
             //TODO Julian: display recipe data. recipe has all the informations from db. dont forget the id
         });
     });

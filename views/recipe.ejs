@@ -5,36 +5,15 @@
 <% include partials/navbar %>
 <body>
 <div class="container">
-    <div class="recipe-header-information">
-        <div class="recipe-container-row row">
-            <div class="col-md-4">
-                <p class="h3">Rezeptname</p>
-            </div>
-            <div class="col-md-2">
-                <a href="#">
-                    <p class="recipe-print-icon h3">
-                        <span class="glyphicon glyphicon-print"> </span>
-                    </p>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <p class="h3">Bewertung</p>
-            </div>
-            <div class="col-md-3 recicpe-rating-wrapper">
-                <ul id="el" class="c-rating">
-                </ul>
-            </div>
-        </div>
+    <div id="recipe-details-page-wrapper">
     </div>
     <div class="col-md-6">
-        <div class="recipe-image-wrapper">
-            <img class="img-responsive img-rounded" src="http://placehold.it/500x250">
+        <div id="recipe-image-wrapper">
         </div>
     </div>
     <div class="recipe-container-row row col-md-6">
         <div>
             <p class="h3 recipe-ingredients-headline">Zutaten</p>
-
             <div id="ingredients-wrapper" class="recipe-ingredients-list-wrapper recipe-ingredients">
                 <script>
                     loadRecipeFromId(0); //TODO use right id from recipe
@@ -42,25 +21,11 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12">
-        <div class="recipe-container-row row">
-            <p class="h3 recipe-instructions">Zubereitung</p>
-            <p class="recipe-instructions">
-                Sit mouthbrooder anderson pork jelly donut gummies temptation cocktail aperol sour german peach slow
-                fuck stuffy in a suit cape breeze fancy free flashback feeler cocktail dba_open american meteorological
-                society centripetal force. Scotch bishop cocktail deauville cocktail fuck in the graveyard golf cocktail
-                masala chai royal bitch coconut dream #2 big dipper cherry heaven popeye exif_imagetype ftp_chdir
-                hw_edittext botha melkot inches of mercury (hg) tsunami. Kanyu read v xdg-open anabolic steroid #2
-                silver bronx southern comfort sour chocolate paradise grateful dead #3 nudge pink gin tonic incredible
-                cocktail schoko royal tequila stinger oki sun apd_dump_function_table array_intersect array_splice
-                pdf_create_bookmark swf_getframe vpopmail_alias_get_all lysian pascal son of the wind god, depicted as a
-                monkey, a great devotee of rama who helped rama in his fight with ravana..
-            </p>
-        </div>
+    <div id="recipe-preparation" class="col-md-12">
     </div>
 
 </div>
-<script src="/thirdparty/dev-js/rating.js"></script>
+<!-- <script src="/thirdparty/dev-js/rating.js"></script>
 <script>
     var el = document.querySelector('#el');
     var currentRating = 0; //TODO: get from database
@@ -73,6 +38,6 @@
     // rating instance
     var recipeRating = rating(el, currentRating, maxRating, callback);
 </script>
-
+-->
 </body>
 </html>

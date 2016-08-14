@@ -249,7 +249,7 @@ html {
     margin-top: 20px
 }
 
-.recipe-image-wrapper {
+#recipe-image-wrapper {
     width: 100%;
     padding-left: 0px;
 }

@@ -125,11 +125,16 @@ app.use(bodyParser.json());
 /**
  * Cleanup dist dir after shutdown
  */
+
 function myCleanup() {
-    var appDir = path.dirname(require.main.filename);
-    console.log(appDir);
-    fs.unlinkSync(appDir + "/../public/dist/main.css");
-    fs.unlinkSync(appDir + "/../public/dist/main.js");
+    if(process.env.NODE_ENV === 'production') {
+        var appDir = path.dirname(require.main.filename);
+        console.log(appDir);
+        fs.unlinkSync(appDir + "/../public/dist/main.css");
+        fs.unlinkSync(appDir + "/../public/dist/main.js");
+    } else {
+        console.log("Development mode activated");
+    }
 };
 
 module.exports = app;
