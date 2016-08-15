@@ -4,7 +4,6 @@ function loadRecipesOverview() {
     var socket = io.connect();   //TCP Socket connection to load recipes overview from db
     socket.emit('loadRecipesOverview');
     socket.on('loadedRecipesOverview', function (recipes) {
-        console.log(recipes);
         var container = $('ul.recipes');
         $.each(recipes, function (i) {
             var recipe_list_element =
@@ -27,15 +26,14 @@ function loadRecipeFromId(id) {
     var socket = io.connect();
     socket.emit('loadRecipeFromId', id);
     socket.on('loadedRecipe', function (recipe) {
-        console.log(recipe);
-        var recipe_image = '<img class="img-responsive img-rounded" src="' + convertPictureRefToPath(recipe.pictureRef) + '">';
+        var recipe_image = '<img class="img-responsive img-rounded" src="' + convertPictureRefToPath(recipe[0].pictureRef) + '">';
         $('#recipe-image-wrapper').append(recipe_image);
 
         var recipe_details =
             '<div class="recipe-header-information">' +
                 '<div class="recipe-container-row row">' +
                     '<div class="col-md-4">' +
-                        '<p class="h3">' + recipe.recipeName + '</p>' +
+                        '<p class="h3">' + recipe[0].recipeName + '</p>' +
                     '</div>' +
                     '<div class="col-md-2">' +
                         '<a href="#">' +
@@ -59,7 +57,7 @@ function loadRecipeFromId(id) {
             '<div class="recipe-container-row row">' +
                 '<p class="h3 recipe-instructions">Zubereitung</p>' +
                 '<p  class="recipe-instructions">' +
-                    recipe.baseDescription +
+                    recipe[0].baseDescription +
                 '</p>' +
             '</div>'
         $('#recipe-preparation').append(recipe_base_description);
@@ -68,15 +66,14 @@ function loadRecipeFromId(id) {
             var recipe_ingredients_list =
                 '<ul class="recipe-ingredients-list recipe-ingredients">' +
                 '<li class="recipe-ingredients-list-item-first-column">' +
-                    recipe.ingredientName +
+                    recipe[i].ingredientName +
                 '</li>' +
                 '<li class="recipe-ingredients-list-item-second-column">' +
-                    recipe.amount + " " + recipe.unitName +
+                    recipe[i].amount + " " + recipe[i].unitName +
                 '</li>' +
                 '</ul>';
 
             $('#ingredients-wrapper').append(recipe_ingredients_list);
-            //TODO Julian: display recipe data. recipe has all the informations from db. dont forget the id
         });
     });
 }

@@ -90,8 +90,8 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-                console.log("ROWS" + rows[0]);
-                callback(rows[0]);
+                console.log("ROWS" + rows);
+                callback(rows);
             }
         });
         connection.on('error', function (err) {
