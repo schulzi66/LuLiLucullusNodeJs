@@ -300,6 +300,25 @@ html {
     color: #fff;
 }
 
+#filterSubmitBtn {
+  color: #fff;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+#filterSubmitBox {
+  color: #fff;
+  position:absolute;
+  bottom:0;
+  right:0;
+}
+
+#filter-bar {
+  position: relative;
+  border: 1px solid black;
+  padding: 5px;
+}
+
 /* -----------------------------------------------------------------------------
     Rating styles
 ----------------------------------------------------------------------------- */

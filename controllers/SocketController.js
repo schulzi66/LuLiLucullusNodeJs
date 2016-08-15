@@ -23,6 +23,15 @@ function onConnection(socket) {
         })
     });
     //End Region
+
+    //Region Recipe Filter
+    socket.on('loadFilteredRecipes', function(){
+      var _dbController = new DatabaseController();
+      _dbController.loadFilteredRecipes(function(recipeFilter){
+        socket.emit('loadedFilteredRecipes', filteredRecipes);
+      })
+    })
+    //End Region
 }
 
 module.exports = SocketController;
