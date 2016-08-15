@@ -1,5 +1,7 @@
 "use strict";
-//Region Recipes
+/* #####################################
+    Load recipe overview
+ ##################################### */
 function loadRecipesOverview() {
     var socket = io.connect();   //TCP Socket connection to load recipes overview from db
     socket.emit('loadRecipesOverview');
@@ -14,7 +16,7 @@ function loadRecipesOverview() {
                 '<h3 class="recipes-overview-headline text-uppercase">' + recipes[i].recipeName + '</h3>' +
                 '<p class="recipes-overview-short-description">' + recipes[i].shortDescription + '</p>' +
                 '<p>' +
-                '<a class="recipes-overview-btn btn btn-primary btn-sm" href="recipes/recipe"> Weitere Informationen ... </a>' +
+                '<a class="recipes-overview-btn btn btn-primary btn-sm" href="recipes/recipe?id=' + recipes[i].recipeID + '"> Weitere Informationen ... </a>' +
                 '</p>' +
                 '</li>';
             container.append(recipe_list_element);
@@ -22,6 +24,9 @@ function loadRecipesOverview() {
     })
 }
 
+/* #####################################
+ Load single recipe by ID
+ ##################################### */
 function loadRecipeFromId(id) {
     var socket = io.connect();
     socket.emit('loadRecipeFromId', id);
@@ -77,10 +82,10 @@ function loadRecipeFromId(id) {
         });
     });
 }
-//End Region
 
-//Region filter
-
+/* #####################################
+    Region filter
+ ##################################### */
 function loadFilterOptions() {
   var socket = io.connect();
   socket.emit('loadFilterOptions');
@@ -102,4 +107,3 @@ jQuery(document).ready(function () {
     loadFilterOptions();
 });
 
-//End Region
