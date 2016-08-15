@@ -45,4 +45,4 @@ INSERT INTO RecipeIngredients SET
   amount = '40',
   recipeID = '2',
   ingredientID = '4',
-  unitID = '3';
+  unitID = '1';
