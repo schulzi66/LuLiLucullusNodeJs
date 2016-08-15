@@ -33,11 +33,12 @@
         </section>
     </div>
 
-    <div id="filter-bar">
+    <div id="filter-bar" hidden>
       <div id="inputFields" style="display:inline-block">
-        <input type="checkbox" id="check_vegetarian"/><label for="check_vegetarian">&nbsp;Vegetarisch</label><br />
+        <!--<input type="checkbox" id="check_vegetarian"/><label for="check_vegetarian">&nbsp;Vegetarisch</label><br />
         <input type="checkbox" id="check_allergy_nut"/><label for="check_allergy_nut">&nbsp;Nussallergie</label><br />
-        <input type="checkbox" id="check_allergy_nut"/><label for="check_lactose_intolerance">&nbsp;Laktoseintoleranz</label>
+        <input type="checkbox" id="check_allergy_nut"/><label for="check_lactose_intolerance">&nbsp;Laktoseintoleranz</label>-->
+        <script type="text/javascript">loadFilterOptions();</script>
       </div>
       <div id="filterSubmitBox" style="display:inline-block">
         <button id="filterSubmitBtn" class="btn text-uppercase text-spat" onclick="loadFilteredRecipes()">Filtern!</button>
