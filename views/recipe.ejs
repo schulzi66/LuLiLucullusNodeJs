@@ -16,7 +16,10 @@
             <p class="h3 recipe-ingredients-headline">Zutaten</p>
             <div id="ingredients-wrapper" class="recipe-ingredients-list-wrapper recipe-ingredients">
                 <script>
-                    loadRecipeFromId(); //TODO use right id from recipe
+                    /**
+                     * JUST A FREAKIN ANNOYING SHIT WORKAROUND!!!
+                     */
+                    loadRecipeFromId(parseInt(document.URL.split('=')[1])); //TODO use right id from recipe
                 </script>
             </div>
         </div>
