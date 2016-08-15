@@ -35,11 +35,12 @@
 
     <div id="filter-bar">
       <div id="inputFields" style="display:inline-block">
-        <input type="checkbox" id="check_vegetarian"/><label for="check_vegetarian">Vegetarisch</label><br />
-        <input type="checkbox" id="check_allergy_nut"/><label for="check_allergy_nut">Nussallergie</label><br />
+        <input type="checkbox" id="check_vegetarian"/><label for="check_vegetarian">&nbsp;Vegetarisch</label><br />
+        <input type="checkbox" id="check_allergy_nut"/><label for="check_allergy_nut">&nbsp;Nussallergie</label><br />
+        <input type="checkbox" id="check_allergy_nut"/><label for="check_lactose_intolerance">&nbsp;Laktoseintoleranz</label>
       </div>
-      <div id="filterSubmit" style="display:inline-block">
-        <button id="filterSubmitBtn" class="btn text-uppercase text-spat">Filtern!</button>
+      <div id="filterSubmitBox" style="display:inline-block">
+        <button id="filterSubmitBtn" class="btn text-uppercase text-spat" onclick="loadFilteredRecipes()">Filtern!</button>
       </div>
     </div>
 
