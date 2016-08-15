@@ -15,6 +15,10 @@ a {
     color: #40434E;
 }
 
+a:hover {
+    color: #4A1921;
+}
+
 p:not(.slider-paragraph) {
     text-align: justify;
 }
