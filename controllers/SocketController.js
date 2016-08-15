@@ -25,12 +25,12 @@ function onConnection(socket) {
     //End Region
 
     //Region Recipe Filter
-    socket.on('loadFilteredRecipes', function(){
+    socket.on('loadFilterOptions', function(){
       var _dbController = new DatabaseController();
-      _dbController.loadFilteredRecipes(function(recipeFilter){
-        socket.emit('loadedFilteredRecipes', filteredRecipes);
+      _dbController.loadFilterOptions(function(filterOptions){
+        socket.emit('loadedFilterOptions', filterOptions);
       })
-    })
+    });
     //End Region
 }
 

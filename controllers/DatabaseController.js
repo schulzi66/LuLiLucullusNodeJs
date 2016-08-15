@@ -101,6 +101,23 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
     });
 };
 
+DatabaseController.prototype.loadFilterOptions = function (callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT allergenID, allergenName FROM allergenes";
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+};
+
 /*DatabaseController.prototype.saveRatingForRecipe = function (rating, id, callback) {
  pool.getConnection(function (err, connection) {
  var queryString = "INSERT INTO Ratings SET stars= " +

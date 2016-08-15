@@ -80,15 +80,26 @@ function loadRecipeFromId(id) {
 //End Region
 
 //Region filter
+
+function loadFilterOptions() {
+  var socket = io.connect();
+  socket.emit('loadFilterOptions');
+  socket.on('loadedFilterOptions', function(filterOptions){
+    var container = $('ul.filterOptions');
+    $.each(filterOptions, function(i){
+      var filterOption_list_element =
+        '<input type="checkbox" />' +
+        '<label>&nbsp;' + filterOptions[i].allergenName + '</label><br />'
+    })
+  })
+}
+
 jQuery(document).ready(function () {
     jQuery('#recipe-filter').on('click', function (event) {
         jQuery('#filter-bar').toggle('show');
     });
 
-    jQuery('#filterSubmitBtn').on('click', function (event){
-      var vegetarianChecked = $('#check_vegetarian').prop('checked');
-      var allergyNutChecked = $('#check_allergy_nut').prop('checked');
-    })
+    loadFilterOptions();
 });
 
 //End Region
