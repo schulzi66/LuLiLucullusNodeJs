@@ -31,7 +31,6 @@ function loadRecipeFromId(id) {
     var socket = io.connect();
     socket.emit('loadRecipeFromId', id);
     socket.on('loadedRecipe', function (recipe) {
-        console.log(recipe);
         var recipe_image = '<img class="img-responsive img-rounded" src="' + convertPictureRefToPath(recipe[0].pictureRef) + '">';
         $('#recipe-image-wrapper').append(recipe_image);
 
