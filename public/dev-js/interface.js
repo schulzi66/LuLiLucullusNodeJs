@@ -103,7 +103,4 @@ jQuery(document).ready(function () {
     jQuery('#recipe-filter').on('click', function (event) {
         jQuery('#filter-bar').toggle('show');
     });
-
-    loadFilterOptions();
 });
-
