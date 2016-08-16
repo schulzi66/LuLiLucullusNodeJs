@@ -1,25 +1,21 @@
+
+<!-- TODO: Dropdown not working (dont know why) -->
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/administration">Adminbereich</a>
+        <a class="navbar-brand" href="/administration">Administration</a>
     </div>
     <ul class="nav navbar-top-links navbar-right">
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <li class="dropdown open">
+            <a class="dropdown-toggle" data-toggle="dropdown" data-target=".dropdown-user" href="#">
                 <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
-            <ul class="dropdown-menu dropdown-user">
-                <li><a tabindex="-1" href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+            <ul class="dropdown-menu dropdown-user in">
+                <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
                 </li>
-                <li><a tabindex="-1" href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
                 </li>
                 <li class="divider"></li>
-                <li><a tabindex="-1" href="/login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a href="/login"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                 </li>
             </ul>
         </li>
