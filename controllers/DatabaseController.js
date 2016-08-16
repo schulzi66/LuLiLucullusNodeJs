@@ -57,7 +57,7 @@ DatabaseController.prototype.getUserByEmail = function (req, res, email, callbac
 
 DatabaseController.prototype.getAdminByEmail = function (req, res, email, callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT * FROM EMPLOYEES WHERE emailAdress=" + connection.escape(email) +
+        var queryString = "SELECT * FROM EMPLOYEES WHERE EMPLOYEEID=" + connection.escape(email) +
         "AND ADMIN=" + true;
         console.log("queryString for admin: " + queryString);
         connection.query(queryString, function (err, rows) {
