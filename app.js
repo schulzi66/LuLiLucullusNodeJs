@@ -12,7 +12,9 @@ var helmet = require('helmet');
 var fs = require('fs');
 var cleanup = require('./public/dev-js/cleanup').Cleanup(myCleanup);
 
-// setup routes
+/**
+ * Setup routes
+ */
 var index = require('./routes/index');
 var contact = require('./routes/contact');
 var services = require('./routes/services');
@@ -33,8 +35,15 @@ var twitter = require('./routes/logins/twitter');
 var xing = require('./routes/logins/xing');
 var profile = require('./routes/profile');
 var profile_external = require('./routes/profile-external');
-var administration = require('./routes/admin/administration');
+
+/**
+ * Administration routes
+ */
 var administration_login = require('./routes/logins/administration-login');
+var administration = require('./routes/admin/administration');
+var recipe_upload = require('./routes/admin/upload');
+var orders = require('./routes/admin/orders');
+
 var app = express();
 
 
@@ -79,9 +88,11 @@ app.use('/login/facebook', facebook);
 app.use('/login/google', google);
 app.use('/login/twitter', twitter);
 app.use('/login/xing', xing);
+
 app.use('/administration', administration);
 app.use('/administration-login', administration_login);
-
+app.use('/administration/upload', recipe_upload);
+app.use('/administration/orders', orders);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
