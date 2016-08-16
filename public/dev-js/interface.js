@@ -99,6 +99,7 @@ function loadFilterOptions() {
   })
 }
 
+//TODO COLIN: warum ist das im interface?
 jQuery(document).ready(function () {
     jQuery('#recipe-filter').on('click', function (event) {
         jQuery('#filter-bar').toggle('show');
