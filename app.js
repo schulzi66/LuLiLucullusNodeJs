@@ -33,6 +33,8 @@ var twitter = require('./routes/logins/twitter');
 var xing = require('./routes/logins/xing');
 var profile = require('./routes/profile');
 var profile_external = require('./routes/profile-external');
+var administration = require('./routes/administration');
+var administration_login = require('./routes/logins/administration-login');
 var app = express();
 
 
@@ -77,6 +79,8 @@ app.use('/login/facebook', facebook);
 app.use('/login/google', google);
 app.use('/login/twitter', twitter);
 app.use('/login/xing', xing);
+app.use('/administration', administration);
+app.use('/administration-login', administration_login);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

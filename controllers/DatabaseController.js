@@ -55,6 +55,25 @@ DatabaseController.prototype.getUserByEmail = function (req, res, email, callbac
     });
 };
 
+DatabaseController.prototype.getAdminByEmail = function (req, res, email, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT * FROM EMPLOYEES WHERE emailAdress=" + connection.escape(email) +
+        "AND ADMIN=" + true;
+        console.log("queryString for admin: " + queryString);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(req, res, rows[0]);
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+};
+
 DatabaseController.prototype.loadRecipesOverview = function (callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM RECIPES";

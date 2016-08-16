@@ -65,7 +65,7 @@ CREATE TABLE Employees
   street VARCHAR(50) NOT NULL,
   houseNumber VARCHAR(10) NOT NULL,
   contactNumber VARCHAR(10) NOT NULL,
-  emailAdress VARCHAR(50) NOT NULL,
+  admin BOOLEAN,
   PRIMARY KEY (employeeID)
 );
 

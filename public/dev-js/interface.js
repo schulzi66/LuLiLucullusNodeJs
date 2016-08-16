@@ -105,3 +105,14 @@ jQuery(document).ready(function () {
         jQuery('#filter-bar').toggle('show');
     });
 });
+
+
+/* #####################################
+    Region Administration
+ ##################################### */
+
+// Method to create a new Recipe
+function insertNewRecipe(recipe) {
+  var socket = io.connect();
+  socket.emit('insertNewRecipe', recipe);
+}
