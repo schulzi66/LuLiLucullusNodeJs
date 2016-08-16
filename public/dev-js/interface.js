@@ -33,7 +33,6 @@ function loadRecipeFromId(id) {
     socket.on('loadedRecipe', function (recipe) {
         var recipe_image = '<img class="img-responsive img-rounded" src="' + convertPictureRefToPath(recipe[0].pictureRef) + '">';
         $('#recipe-image-wrapper').append(recipe_image);
-
         var recipe_details =
             '<div class="recipe-header-information">' +
                 '<div class="recipe-container-row row">' +

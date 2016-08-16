@@ -1,6 +1,13 @@
 <title>Lulilucullus Gourmet</title>
 <head>
     <base href="http://localhost:3000/"/>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <% var env = process.env.NODE_ENV || 'development'; %>
 
     <% if(env === 'development'){ %>
@@ -17,11 +24,13 @@
     <script src="dev-js/template.js"></script>
     <script src="dev-js/pictureRef.js"></script>
     <script src="dev-js/interface.js"></script>
+    <script src="dev-js/admin.js"></script>
 
     <link rel="stylesheet" href="/thirdparty/dev-css/bootstrap.css"/>
     <link rel="stylesheet" href="/thirdparty/dev-css/jquery.sweet-dropdown.css"/>
     <link rel="stylesheet" href="/thirdparty/dev-css/font-awesome.min.css"/>
     <link rel="stylesheet" href="/dev-css/app.css"/>
+    <link rel="stylesheet" href="/dev-css/admin.css"/>
 
     <% } else if(env === 'production') { %>
     <script src="/dist/main.js"></script>

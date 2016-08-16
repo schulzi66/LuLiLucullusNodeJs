@@ -33,7 +33,7 @@ var twitter = require('./routes/logins/twitter');
 var xing = require('./routes/logins/xing');
 var profile = require('./routes/profile');
 var profile_external = require('./routes/profile-external');
-var administration = require('./routes/administration');
+var administration = require('./routes/admin/administration');
 var administration_login = require('./routes/logins/administration-login');
 var app = express();
 
