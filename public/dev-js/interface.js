@@ -33,6 +33,7 @@ function loadRecipeFromId(id) {
     socket.on('loadedRecipe', function (recipe) {
         var recipe_image = '<img class="img-responsive img-rounded" src="' + convertPictureRefToPath(recipe[0].pictureRef) + '">';
         $('#recipe-image-wrapper').append(recipe_image);
+
         var recipe_details =
             '<div class="recipe-header-information">' +
                 '<div class="recipe-container-row row">' +
@@ -89,19 +90,39 @@ function loadFilterOptions() {
   var socket = io.connect();
   socket.emit('loadFilterOptions');
   socket.on('loadedFilterOptions', function(filterOptions){
-    var container = $('ul.filterOptions');
     $.each(filterOptions, function(i){
-      var filterOption_list_element =
-        '<input type="checkbox" />' +
-        '<label>&nbsp;' + filterOptions[i].allergenName + '</label><br />'
+      var filter_options =
+        '<div id="filterOptions">' +
+          '<div id="filterOptions_allergens">' +
+            '<input type="checkbox" id="' + filterOptions[i].allergenName + '" />' +
+            '<label for="' + filterOptions[i].allergenName + '">&nbsp;' + filterOptions[i].allergenName + '</label>' +
+          '</div>' +
+          '<div id="filterOptions_styles">' +
+            '<input type="checkbox" id="' + filterOptions[i].styleName + '" />' +
+            '<label for="' + filterOptions[i].styleName + '">&nbsp;' + filterOptions[i].styleName + '</label>' +
+          '</div>' +
+        '</div>';
+       $('#inputFields').append(filter_options);
     })
+
+
+
+
+
+
+
+
+    //$.each(filterOptions, function(i){
+      //var filterOption_list_element =
+        //'<input type="checkbox" />' +
+        //'<label>&nbsp;' + filterOptions[i].allergenName + '</label><br />'
   })
 }
 
 //TODO COLIN: warum ist das im interface?
 jQuery(document).ready(function () {
     jQuery('#recipe-filter').on('click', function (event) {
-        jQuery('#filter-bar').toggle('show');
+        jQuery('#filter-bar').slideToggle('show');
     });
 });
 

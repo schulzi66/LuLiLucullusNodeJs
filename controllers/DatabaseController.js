@@ -119,10 +119,11 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
 
 DatabaseController.prototype.loadFilterOptions = function (callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT allergenID, allergenName FROM allergenes";
+        var queryString = "SELECT * FROM allergenes";
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
+                logger.log(rows);
                 callback(rows);
             }
         });
