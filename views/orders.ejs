@@ -19,7 +19,6 @@
                     <% var currentMonth = monthNames[new Date().getMonth()]; %>
                    Bestellübersicht <%= currentMonth %>
                 </div>
-                <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
                         <table width="100%" class="table table-striped table-bordered table-hover"
@@ -33,7 +32,8 @@
                                 <th>Freigeben</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="orderOverview">
+                            <script>initOrdersOverview()</script>
                             <tr class="odd gradeX">
                                 <td>Kunde 1</td>
                                 <td>Rezept 1</td>

@@ -104,14 +104,6 @@ function loadFilterOptions() {
         '</div>';
        $('#inputFields').append(filter_options);
     })
-
-
-
-
-
-
-
-
     //$.each(filterOptions, function(i){
       //var filterOption_list_element =
         //'<input type="checkbox" />' +
@@ -119,20 +111,8 @@ function loadFilterOptions() {
   })
 }
 
-//TODO COLIN: warum ist das im interface?
 jQuery(document).ready(function () {
     jQuery('#recipe-filter').on('click', function (event) {
         jQuery('#filter-bar').slideToggle('show');
     });
 });
-
-
-/* #####################################
-    Region Administration
- ##################################### */
-
-// Method to create a new Recipe
-function insertNewRecipe(recipe) {
-  var socket = io.connect();
-  socket.emit('insertNewRecipe', recipe);
-}
