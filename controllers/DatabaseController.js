@@ -119,11 +119,17 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
 
 DatabaseController.prototype.loadFilterOptions = function (callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT * FROM allergenes";
+        var queryString = "SELECT DISTINCT r.recipeName, a.allergenName, s.styleName, c.courseName FROM recipes AS r " +
+                          "JOIN recipeingredients AS ri ON r.recipeID = ri.recipeID " +
+                          "JOIN styles AS s ON s.styleID = r.styleID " +
+                          "JOIN courses AS c ON c.courseID = r.courseID " +
+                          "JOIN ingredients AS i ON i.ingredientID = ri.ingredientID " +
+                          "JOIN ingredientsallergenes AS ia ON i.ingredientID = ia.ingredientID " +
+                          "JOIN allergenes AS a ON a.allergenID = ia.allergenID ";
+
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-                logger.log(rows);
                 callback(rows);
             }
         });
