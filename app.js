@@ -35,6 +35,7 @@ var twitter = require('./routes/logins/twitter');
 var xing = require('./routes/logins/xing');
 var profile = require('./routes/profile');
 var profile_external = require('./routes/profile-external');
+//TODO: Kochboxen, Gutscheine und Kochkurse seiten fehlen
 
 /**
  * Administration routes
