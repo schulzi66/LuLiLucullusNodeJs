@@ -1,3 +1,7 @@
+/* #####################################
+    Load all orders to render an order overview in administration
+ ##################################### */
+
 function initOrdersOverview() {
     var socket = io.connect();   //TCP Socket connection to load recipes overview from db
     socket.emit('loadOrdersOverview');

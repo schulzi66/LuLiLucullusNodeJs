@@ -53,12 +53,12 @@ DatabaseController.prototype.getUserByEmail = function (req, res, email, callbac
             return;
         });
     });
-};
+}
 
 DatabaseController.prototype.getAdminByEmail = function (req, res, email, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "SELECT * FROM EMPLOYEES WHERE employeeID=" + connection.escape(email) +
-        "AND isAdmin=" + true;
+            "AND isAdmin=" + true;
         console.log("queryString for admin: " + queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
@@ -72,7 +72,7 @@ DatabaseController.prototype.getAdminByEmail = function (req, res, email, callba
             return;
         });
     });
-};
+}
 
 DatabaseController.prototype.loadRecipesOverview = function (callback) {
     pool.getConnection(function (err, connection) {
@@ -89,7 +89,7 @@ DatabaseController.prototype.loadRecipesOverview = function (callback) {
             return;
         });
     });
-};
+}
 
 DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
     pool.getConnection(function (err, connection) {
@@ -115,7 +115,7 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
             return;
         });
     });
-};
+}
 
 DatabaseController.prototype.loadFilterOptions = function (callback) {
     pool.getConnection(function (err, connection) {
@@ -133,7 +133,24 @@ DatabaseController.prototype.loadFilterOptions = function (callback) {
             return;
         });
     });
-};
+}
+
+DatabaseController.prototype.loadOrders = function (callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT * FROM orders";
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                logger.log(rows);
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
 
 /*DatabaseController.prototype.saveRatingForRecipe = function (rating, id, callback) {
  pool.getConnection(function (err, connection) {
