@@ -1,3 +1,9 @@
+DROP DATABASE IF EXISTS webdev;
+
+CREATE DATABASE IF NOT EXISTS webdev;
+
+USE webdev;
+
 CREATE TABLE Ingredients
 (
   ingredientID INT NOT NULL,
@@ -24,18 +30,20 @@ CREATE TABLE Courses
 
 CREATE TABLE Users
 (
-  familyName VARCHAR(100),
   name VARCHAR(50),
+  familyName VARCHAR(100),
   userID VARCHAR(100) NOT NULL,
-  street VARCHAR(100),
-  location VARCHAR(100),
-  plz VARCHAR(50),
-  telefonNumber VARCHAR(100),
+  street VARCHAR(50),
+  location VARCHAR(50),
+  houseNumber VARCHAR(10),
+  telephoneNumber VARCHAR(20),
   password VARCHAR(250) NOT NULL,
-  billingAdressStreet VARCHAR(100),
-  billingAdressLocation VARCHAR(100),
-  billingAdressPlz VARCHAR(100),
-  internal BOOLEAN,
+  plz VARCHAR(5) NOT NULL,
+  billingAddressStreet VARCHAR(100) NOT NULL,
+  billingAddressLocation VARCHAR(100) NOT NULL,
+  billingAddressHouseNumber VARCHAR(10) NOT NULL,
+  billingAddressPlz VARCHAR(5) NOT NULL,
+  internal BOOLEAN NOT NULL,
   PRIMARY KEY (userID)
 );
 
@@ -58,14 +66,22 @@ CREATE TABLE IngredientsAllergenes
 
 CREATE TABLE Employees
 (
-  employeeID INT NOT NULL,
+  employeeID VARCHAR(100) NOT NULL,
   name VARCHAR(50) NOT NULL,
   familyName VARCHAR(50) NOT NULL,
   location VARCHAR(50) NOT NULL,
   street VARCHAR(50) NOT NULL,
   houseNumber VARCHAR(10) NOT NULL,
+<<<<<<< HEAD
+  telephoneNumber VARCHAR(10) NOT NULL,
+  emailAddress VARCHAR(50) NOT NULL,
+  plz VARCHAR(5) NOT NULL,
+  isAdmin BOOLEAN NOT NULL,
+  password VARCHAR(250) NOT NULL,
+=======
   contactNumber VARCHAR(10) NOT NULL,
   admin BOOLEAN,
+>>>>>>> origin/master
   PRIMARY KEY (employeeID)
 );
 
@@ -79,7 +95,7 @@ CREATE TABLE BookingTypes
 CREATE TABLE Units
 (
   unitID INT NOT NULL,
-  unitName VARCHAR(10) NOT NULL,
+  unitName VARCHAR(50) NOT NULL,
   PRIMARY KEY (unitID),
   UNIQUE (unitName)
 );
@@ -88,10 +104,10 @@ CREATE TABLE Recipes
 (
   recipeID INT NOT NULL,
   recipeName VARCHAR(100) NOT NULL,
-  shortDescription VARCHAR(100),
-  baseDescription VARCHAR(250) NOT NULL,
   instructions LONGTEXT NOT NULL,
   pictureRef VARCHAR(256) NOT NULL,
+  shortDescription LONGTEXT NOT NULL,
+  baseDescription LONGTEXT NOT NULL,
   styleID INT NOT NULL,
   courseID INT NOT NULL,
   PRIMARY KEY (recipeID),
@@ -115,7 +131,7 @@ CREATE TABLE RecipeIngredients
 CREATE TABLE Ratings
 (
   stars INT,
-  comment TEXT,
+  comment LONGTEXT,
   userID VARCHAR(100) NOT NULL,
   recipeID INT NOT NULL,
   PRIMARY KEY (userID, recipeID),
@@ -132,6 +148,7 @@ CREATE TABLE Bookings
   dateEnd DATE NOT NULL,
   street VARCHAR(50) NOT NULL,
   houseNumber VARCHAR(10) NOT NULL,
+  plz VARCHAR(5) NOT NULL,
   userID VARCHAR(100) NOT NULL,
   typeID INT NOT NULL,
   PRIMARY KEY (bookingID),
@@ -144,7 +161,7 @@ CREATE TABLE BookingEmployees
   dateBegin DATE NOT NULL,
   dateEnd DATE NOT NULL,
   bookingID INT NOT NULL,
-  employeeID INT NOT NULL,
+  employeeID VARCHAR(100) NOT NULL,
   PRIMARY KEY (bookingID, employeeID),
   FOREIGN KEY (bookingID) REFERENCES Bookings(bookingID),
   FOREIGN KEY (employeeID) REFERENCES Employees(employeeID)
