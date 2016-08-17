@@ -15,7 +15,7 @@ function initOrdersOverview() {
                 '<td>' + orders[i].recipeName + '</td>' +
                 '<td>' + orders[i].orderAmount + '</td>' +
                 '<td class="center">' + orders[i].orderDate + '</td>' +
-                '<td class="center"><a href="#"><span class="glyphicons glyphicons-ok"></span></a></td>' +
+                '<td class="center"><a class="ordersOverviewRelease" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>' +
                 '</tr>';
 
             container.append(ordersOverview);

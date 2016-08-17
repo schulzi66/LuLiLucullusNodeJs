@@ -39,14 +39,14 @@
                                 <td>Rezept 1</td>
                                 <td>1</td>
                                 <td class="center">16. August 2016</td>
-                                <td class="center"><span class="glyphicons glyphicons-ok"></span></td>
+                                <td class="center"><a class="ordersOverviewRelease" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>
                             </tr>
                             <tr class="even gradeC">
                                 <td>Kunde 2</td>
                                 <td>Rezept 2</td>
                                 <td>2</td>
                                 <td class="center">17. August 2016</td>
-                                <td class="center"><span class="glyphicons glyphicons-remove"></span></td>
+                                <td class="center"><a class="ordersOverviewRelease" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>
                             </tr>
                             </tbody>
                         </table>
@@ -62,6 +62,16 @@
     <!-- /.row -->
 </div>
 
+<script>
+    $('.ordersOverviewRelease').on('click', function (e) {
+        e.preventDefault();
+        var singleOrder = $(this).parents("tr:first");
+        var array = [];
+        $.each(singleOrder[0].cells, function (i) {
+            array.push(singleOrder[0].cells[i]);
+        });
+    });
+</script>
 </body>
 <% include partials/footer %>
 </html>
