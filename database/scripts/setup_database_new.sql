@@ -35,13 +35,11 @@ CREATE TABLE Users
   userID VARCHAR(100) NOT NULL,
   street VARCHAR(50),
   location VARCHAR(50),
-  houseNumber VARCHAR(10),
-  telephoneNumber VARCHAR(20),
-  password VARCHAR(250) NOT NULL,
+  telefonNumber VARCHAR(20),
   plz VARCHAR(5) NOT NULL,
+  password VARCHAR(250) NOT NULL,
   billingAddressStreet VARCHAR(100) NOT NULL,
   billingAddressLocation VARCHAR(100) NOT NULL,
-  billingAddressHouseNumber VARCHAR(10) NOT NULL,
   billingAddressPlz VARCHAR(5) NOT NULL,
   internal BOOLEAN NOT NULL,
   PRIMARY KEY (userID)
@@ -71,17 +69,11 @@ CREATE TABLE Employees
   familyName VARCHAR(50) NOT NULL,
   location VARCHAR(50) NOT NULL,
   street VARCHAR(50) NOT NULL,
-  houseNumber VARCHAR(10) NOT NULL,
-<<<<<<< HEAD
-  telephoneNumber VARCHAR(10) NOT NULL,
-  emailAddress VARCHAR(50) NOT NULL,
   plz VARCHAR(5) NOT NULL,
+  telefonNumber VARCHAR(10) NOT NULL,
   isAdmin BOOLEAN NOT NULL,
   password VARCHAR(250) NOT NULL,
-=======
-  contactNumber VARCHAR(10) NOT NULL,
   admin BOOLEAN,
->>>>>>> origin/master
   PRIMARY KEY (employeeID)
 );
 
