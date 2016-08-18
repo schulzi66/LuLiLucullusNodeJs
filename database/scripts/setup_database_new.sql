@@ -73,7 +73,6 @@ CREATE TABLE Employees
   telefonNumber VARCHAR(10) NOT NULL,
   isAdmin BOOLEAN NOT NULL,
   password VARCHAR(250) NOT NULL,
-  admin BOOLEAN,
   PRIMARY KEY (employeeID)
 );
 
