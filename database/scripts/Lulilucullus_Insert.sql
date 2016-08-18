@@ -16,7 +16,9 @@ VALUES
 (0, 'Hausmannskost')
 ,(1, 'Asiatisch')
 ,(2, 'Indisch')
-,(3, 'Mexikanisch');
+,(3, 'Mexikanisch')
+,(4, 'Amerikanisch')
+,(5, 'Französisch');
 
 -- Courses
 INSERT INTO COURSES (courseID, courseName)
@@ -24,7 +26,8 @@ VALUES
 (0, 'Vorspeise')
 ,(1, 'Hauptgang')
 ,(2, 'Dessert')
-,(3, 'Salat');
+,(3, 'Salat')
+,(4, 'Beilage');
 
 -- Users
 INSERT INTO Users (name, familyName, userID, street, location, telefonNumber, plz, password, billingAddressStreet, billingAddressLocation, billingAddressPlz, internal)
@@ -69,7 +72,10 @@ VALUES
 -- Recipes
 INSERT INTO Recipes (recipeID, recipeName, instructions, pictureRef, shortDescription, baseDescription, styleID, courseID)
 VALUES
-(0, 'Pfannkuchen', 'Alle Zutaten miteinander Verrühren. Dann in der Pfanne braten.', 'PictureRefPfannkuchen', 'Einen einfachen Pfannkuchen machen', 'Ein einfaches Rezept um einen Pfannkuchen zu machen. Ohne viel Arbeit.', 0, 1);
+(0, 'Pfannkuchen', 'Alle Zutaten miteinander Verrühren. Dann in der Pfanne braten.', 'PictureRefPfannkuchen', 'Einen einfachen Pfannkuchen machen', 'Ein einfaches Rezept um einen Pfannkuchen zu machen. Ohne viel Arbeit.', 0, 1)
+, (1, 'Hamburger','Leckerer Hamburger der total toll schmeckt und auch so toll ist', 'Super tolle lange Beschreibung', 'Mach erst das dann dies', 'pictureRefHamburger', 4,1 )
+, (2, 'Fischsuppe', 'Eine Schmackhafte Fischsuppe zum Frühstück', 'Super tolle lange Beschreibung', 'Einen Fisch längs halbieren und dann in den Topf damit', 'pictureRefFischsuppe', 1, 0)
+, (3, 'Baguette', 'Eine französisches Baguette zum Frühstück', 'Super tolle lange Beschreibung', 'Ein Baguette aufschneiden und dann in den Topf damit', 'pictureRefBaguette', 5, 4);
 
 -- RecipeIngredients
 INSERT INTO RecipeIngredients (recipeID, ingredientID, amount, unitID)
