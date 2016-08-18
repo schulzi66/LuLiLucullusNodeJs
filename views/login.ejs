@@ -54,6 +54,7 @@
                 <div class="g-recaptcha" data-sitekey="6LdJByQTAAAAANS8XkjlNFggN77IHrJnMiKX6bdB"></div>
             </div>-->
             <button type="submit" class="btn btn-sm btn-primary">Login</button>
+
             <div id="login-img-buttons">
                 <a href="/login/facebook"><img id="login-img" src="/img/login/facebook.png"></a>
                 <a href="/login/google"><img id="login-img" src="/img/login/googleplus.png"></a>
@@ -61,9 +62,10 @@
                 <a href="/login/xing"><img id="login-img" src="/img/login/xing.png"></a>
             </div>
         </form>
-
+        <form action="/login/resetPassword" method="post">
+            <button type="submit" class="btn btn-sm btn-primary">Reset Password</button>
+        </form>
         <hr>
-
         <p>Need an account? <a href="/signup">Signup</a></p>
         <p>Or go <a href="/">home</a>.</p>
 
