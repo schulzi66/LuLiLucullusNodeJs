@@ -35,6 +35,10 @@ var twitter = require('./routes/logins/twitter');
 var xing = require('./routes/logins/xing');
 var profile = require('./routes/profile');
 var profile_external = require('./routes/profile-external');
+
+var reset_password = require('./routes/logins/reset-password');
+var change_password = require('./routes/logins/change-password');
+
 //TODO: Kochboxen, Gutscheine und Kochkurse seiten fehlen
 
 /**
@@ -89,6 +93,8 @@ app.use('/login/facebook', facebook);
 app.use('/login/google', google);
 app.use('/login/twitter', twitter);
 app.use('/login/xing', xing);
+app.use('/login/reset-password', reset_password);
+app.use('/login/change-password', change_password);
 
 app.use('/administration', administration);
 app.use('/administration-login', administration_login);

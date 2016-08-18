@@ -1,18 +1,21 @@
 
 <!-- TODO: Dropdown not working (dont know why) -->
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<!--<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <a class="navbar-brand" href="/administration">Administration</a>
     </div>
     <ul class="nav navbar-top-links navbar-right">
         <li class="dropdown open">
-            <a class="dropdown-toggle" data-toggle="dropdown" data-target=".dropdown-user" href="#">
+            <a class="dropdown-toggle" data-toggle="dropdown" data-target=".dropdown-user" href="/administration" onclick="dropdown()">
                 <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
+            <button id="adminDropdown" class="dropdown-toggle">
+                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            </button>
             <ul class="dropdown-menu dropdown-user in">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
+                <li><a href="/administration"><i class="fa fa-user fa-fw"></i>User Profile</a>
                 </li>
-                <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
+                <li><a href="/administration"><i class="fa fa-gear fa-fw"></i>Settings</a>
                 </li>
                 <li class="divider"></li>
                 <li><a href="/login"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
@@ -20,4 +23,73 @@
             </ul>
         </li>
     </ul>
+</nav>-->
+
+
+<!--<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Administration</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-fw"></i><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>-->
+
+<!--<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="btnTest">Dropdown Example
+            <span class="caret"></span>
+        </button>
+        <div id="dropdownTest" hidden>
+            <ul class="navbar navbar-nav navbar-right">
+                <li class="dropdown">
+                    <ul class="dropdown-menu">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>

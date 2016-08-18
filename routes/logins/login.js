@@ -6,12 +6,16 @@ var bcrypt = require('bcrypt-nodejs');
 var DatabaseController = require('../../controllers/DatabaseController');
 var _dbController = new DatabaseController();
 
+var DevLoggingController = require('../../controllers/DevLoggingController');
+var logger = new DevLoggingController();
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 /* GET login page. */
 router.get('/', function (req, res) {
-    res.render('login');
+    res.render('login', {message: req.session.message});
+    req.session.message = undefined;
 });
 
 // Use application-level middleware for common functionality, including
@@ -54,7 +58,6 @@ router.post('/', passport.authenticate('local-login', {failureRedirect: '/login'
         _dbController.getUserByEmail(req, res, req.user, loginUser);
     });
 
-
 /* GET Profil page */
 router.get('/profile', isLoggedIn,
     function (req, res) {
@@ -75,7 +78,6 @@ function isLoggedIn(req, res, next) {
 //Callback function after the login result returns from the database
 function loginUser(req, res, user) {
     //user has no account or wrong email is provided
-
     if (user === undefined) {
         req.session.message = 'Scheinbar haben Sie keine Account bei uns.';
         res.redirect('/signup');

@@ -32,6 +32,13 @@ function onConnection(socket) {
       })
     });
     //End Region
+
+    socket.on('loadOrdersOverview', function(){
+        var _dbController = new DatabaseController();
+        _dbController.loadOrders(function(ordersOverview){
+            socket.emit('loadedOrdersOverview', ordersOverview);
+        })
+    });
 }
 
 module.exports = SocketController;

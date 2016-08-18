@@ -53,12 +53,34 @@ DatabaseController.prototype.getUserByEmail = function (req, res, email, callbac
             return;
         });
     });
-};
+}
+//TODO:
+DatabaseController.prototype.insertPassRequest = function (reqDate, authenticationCode, email) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "INSERT INTO PASSWORDRESETS SET " +
+        "dateOfReset=" + connection.escape(reqDate) + ", " +
+        "resetCode=" + connection.escape(authenticationCode) + ", " +
+        "closed=" + false + ", " +
+        "userId=" + connection.escape(email);
+
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
 
 DatabaseController.prototype.getAdminByEmail = function (req, res, email, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "SELECT * FROM EMPLOYEES WHERE employeeID=" + connection.escape(email) +
-        "AND isAdmin=" + true;
+            "AND isAdmin=" + true;
         console.log("queryString for admin: " + queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
@@ -72,7 +94,7 @@ DatabaseController.prototype.getAdminByEmail = function (req, res, email, callba
             return;
         });
     });
-};
+}
 
 DatabaseController.prototype.loadRecipesOverview = function (callback) {
     pool.getConnection(function (err, connection) {
@@ -89,7 +111,7 @@ DatabaseController.prototype.loadRecipesOverview = function (callback) {
             return;
         });
     });
-};
+}
 
 DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
     pool.getConnection(function (err, connection) {
@@ -115,7 +137,7 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
             return;
         });
     });
-};
+}
 
 DatabaseController.prototype.loadFilterOptions = function (callback) {
     pool.getConnection(function (err, connection) {
@@ -139,7 +161,24 @@ DatabaseController.prototype.loadFilterOptions = function (callback) {
             return;
         });
     });
-};
+}
+
+DatabaseController.prototype.loadOrders = function (callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT * FROM orders";
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                logger.log(rows);
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
 
 /*DatabaseController.prototype.saveRatingForRecipe = function (rating, id, callback) {
  pool.getConnection(function (err, connection) {
@@ -167,9 +206,9 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             "plz=" + connection.escape(null) + ", " +
             "telefonNumber=" + connection.escape(null) + ", " +
             "password=" + connection.escape(DatabaseController.prototype.hash(placeholder)) + ", " +
-            "billingAdressStreet=" + connection.escape(null) + ", " +
-            "billingAdressLocation=" + connection.escape(null) + ", " +
-            "billingAdressPlz=" + connection.escape(null) + ", " +
+            "billingAddressStreet=" + connection.escape(null) + ", " +
+            "billingAddressLocation=" + connection.escape(null) + ", " +
+            "billingAddressPlz=" + connection.escape(null) + ", " +
             "internal=" + connection.escape(internal);
 
         connection.query(queryString,
@@ -227,9 +266,9 @@ DatabaseController.prototype.signup = function (req, res, internal) {
             "plz=" + connection.escape(req.body.plz) + ", " +
             "telefonNumber=" + connection.escape(req.body.telefonNumber) + ", " +
             "password=" + connection.escape(DatabaseController.prototype.hash(req.body.password)) + ", " +
-            "billingAdressStreet=" + connection.escape(rech_str) + ", " +
-            "billingAdressLocation=" + connection.escape(rech_ort) + ", " +
-            "billingAdressPlz=" + connection.escape(rech_plz) + ", " +
+            "billingAddressStreet=" + connection.escape(rech_str) + ", " +
+            "billingAddressLocation=" + connection.escape(rech_ort) + ", " +
+            "billingAddressPlz=" + connection.escape(rech_plz) + ", " +
             "internal=" + connection.escape(internal);
 
         connection.query(queryString,
@@ -270,7 +309,6 @@ DatabaseController.prototype.updateUser = function (req, res) {
         if (req.body.billingAdressStreet === '') {
             rech_str = req.body.street;
         } else rech_str = req.body.billingAdressStreet;
-        console.log("req.body.billingAdressLocation: " + req.body.billingAdressLocation);
         if (req.body.billingAdressLocation === '') {
             rech_ort = req.body.location;
             console.log("req.body.location: " + req.body.location);
@@ -287,9 +325,9 @@ DatabaseController.prototype.updateUser = function (req, res) {
             "street=" + connection.escape(req.body.street) + ", " +
             "location=" + connection.escape(req.body.location) + ", " +
             "plz=" + connection.escape(req.body.plz) + ", " +
-            "billingAdressStreet=" + connection.escape(rech_str) + ", " +
-            "billingAdressLocation=" + connection.escape(rech_ort) + ", " +
-            "billingAdressPlz=" + connection.escape(rech_plz) + " " +
+            "billingAddressStreet=" + connection.escape(rech_str) + ", " +
+            "billingAddressLocation=" + connection.escape(rech_ort) + ", " +
+            "billingAddressPlz=" + connection.escape(rech_plz) + " " +
             "WHERE userID= " + connection.escape(req.body.email);
 
         connection.query(queryString,

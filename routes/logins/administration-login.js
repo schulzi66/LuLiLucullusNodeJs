@@ -11,7 +11,8 @@ var LocalStrategy = require('passport-local').Strategy;
 
 /* GET Administration page. */
 router.get('/', function(req, res) {
-    res.render('administration-login', { user: req.session.user} ); //reg.session.user is also used as administration user
+    res.render('administration-login', { user: req.session.user , message: req.session.message} ); //reg.session.user is also used as administration user
+    req.session.message = undefined;
 });
 
 // Use application-level middleware for common functionality, including
@@ -49,14 +50,15 @@ passport.deserializeUser(function (user, cb) {
 /* Post local login Command */
 router.post('/', passport.authenticate('local-login', {failureRedirect: '/administration-login'}),
     function (req, res) {
-      console.log("authenticate administration-login" + req.user);
         _dbController.getAdminByEmail(req, res, req.user, loginAdmin);
     });
 
 //Callback function after the login result returns from the database
 function loginAdmin(req, res, user) {
+console.log("loginAdmin retun user value: " + user);
     if (user === undefined) {
         req.session.message = 'Sie besitzen nicht die nötigen Berechtigungen';
+        res.redirect('/administration-login');
     } else if (user) {
         var stored_hash;
         stored_hash = user.password;

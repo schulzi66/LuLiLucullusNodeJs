@@ -3,7 +3,6 @@ DROP DATABASE IF EXISTS webdev;
 CREATE DATABASE IF NOT EXISTS webdev;
 
 USE webdev;
-
 CREATE TABLE Ingredients
 (
   ingredientID INT NOT NULL,
@@ -33,14 +32,14 @@ CREATE TABLE Users
   name VARCHAR(50),
   familyName VARCHAR(100),
   userID VARCHAR(100) NOT NULL,
-  street VARCHAR(50),
-  location VARCHAR(50),
-  telefonNumber VARCHAR(20),
-  plz VARCHAR(5) NOT NULL,
+  street VARCHAR(100),
+  location VARCHAR(100),
+  telefonNumber VARCHAR(50),
   password VARCHAR(250) NOT NULL,
+  plz VARCHAR(50) NOT NULL,
   billingAddressStreet VARCHAR(100) NOT NULL,
   billingAddressLocation VARCHAR(100) NOT NULL,
-  billingAddressPlz VARCHAR(5) NOT NULL,
+  billingAddressPlz VARCHAR(50) NOT NULL,
   internal BOOLEAN NOT NULL,
   PRIMARY KEY (userID)
 );
@@ -66,14 +65,13 @@ CREATE TABLE Employees
 (
   employeeID VARCHAR(100) NOT NULL,
   name VARCHAR(50) NOT NULL,
-  familyName VARCHAR(50) NOT NULL,
-  location VARCHAR(50) NOT NULL,
-  street VARCHAR(50) NOT NULL,
-  plz VARCHAR(5) NOT NULL,
-  telefonNumber VARCHAR(10) NOT NULL,
-  isAdmin BOOLEAN NOT NULL,
+  familyName VARCHAR(100) NOT NULL,
+  location VARCHAR(100) NOT NULL,
+  street VARCHAR(100) NOT NULL,
+  plz VARCHAR(50) NOT NULL,
+  telefonNumber VARCHAR(50) NOT NULL,
   password VARCHAR(250) NOT NULL,
-  admin BOOLEAN,
+  isAdmin BOOLEAN NOT NULL,
   PRIMARY KEY (employeeID)
 );
 
@@ -90,6 +88,16 @@ CREATE TABLE Units
   unitName VARCHAR(50) NOT NULL,
   PRIMARY KEY (unitID),
   UNIQUE (unitName)
+);
+
+CREATE TABLE PasswordResets
+(
+  dateOfReset DATE NOT NULL,
+  resetCode VARCHAR(50),
+  closed BOOLEAN NOT NULL,
+  userID VARCHAR(100) NOT NULL,
+  PRIMARY KEY (dateOfReset, userID),
+  FOREIGN KEY (userID) REFERENCES Users(userID)
 );
 
 CREATE TABLE Recipes
@@ -139,7 +147,6 @@ CREATE TABLE Bookings
   location VARCHAR(50) NOT NULL,
   dateEnd DATE NOT NULL,
   street VARCHAR(50) NOT NULL,
-  houseNumber VARCHAR(10) NOT NULL,
   plz VARCHAR(5) NOT NULL,
   userID VARCHAR(100) NOT NULL,
   typeID INT NOT NULL,
@@ -166,5 +173,14 @@ CREATE TABLE BookingRecipes
   recipeID INT NOT NULL,
   PRIMARY KEY (bookingID, recipeID),
   FOREIGN KEY (bookingID) REFERENCES Bookings(bookingID),
+  FOREIGN KEY (recipeID) REFERENCES Recipes(recipeID)
+);
+
+CREATE TABLE MyRecipes
+(
+  userID VARCHAR(100) NOT NULL,
+  recipeID INT NOT NULL,
+  PRIMARY KEY (userID, recipeID),
+  FOREIGN KEY (userID) REFERENCES Users(userID),
   FOREIGN KEY (recipeID) REFERENCES Recipes(recipeID)
 );
