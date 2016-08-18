@@ -24,7 +24,7 @@
                         <table width="100%" class="table table-striped table-bordered table-hover"
                                id="dataTables-example">
                             <thead>
-                            <tr>
+                            <tr id="ordersTableHead">
                                 <th>Kunde</th>
                                 <th>Artikel</th>
                                 <th>Menge</th>
@@ -66,12 +66,13 @@
     $('.ordersOverviewRelease').on('click', function (e) {
         e.preventDefault();
         var singleOrder = $(this).parents("tr:first");
+        var fields = $('#ordersTableHead');
         var array = [];
+        console.log(fields[0].innerText);
         $.each(singleOrder[0].cells, function (i) {
             array.push(singleOrder[0].cells[i].innerText);
         });
-        array.splice(array.length-1, 1);
-        console.log(array);
+        insertIntoOrdersTable(details);
     });
 </script>
 </body>
