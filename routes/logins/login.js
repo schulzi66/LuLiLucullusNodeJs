@@ -11,7 +11,8 @@ var LocalStrategy = require('passport-local').Strategy;
 
 /* GET login page. */
 router.get('/', function (req, res) {
-    res.render('login');
+    res.render('login', {message: req.session.message});
+    req.session.message = undefined;   
 });
 
 // Use application-level middleware for common functionality, including
