@@ -1,186 +1,97 @@
-DROP DATABASE IF EXISTS webdev;
-
-CREATE DATABASE IF NOT EXISTS webdev;
-
+-- Inserts into DB. Example data.
+-- Feel free to extend sample data.
 USE webdev;
-CREATE TABLE Ingredients
-(
-  ingredientID INT NOT NULL,
-  ingredientName VARCHAR(50) NOT NULL,
-  PRIMARY KEY (ingredientID),
-  UNIQUE (ingredientName)
-);
 
-CREATE TABLE Styles
-(
-  styleID INT NOT NULL,
-  styleName VARCHAR(50) NOT NULL,
-  PRIMARY KEY (styleID),
-  UNIQUE (styleName)
-);
+-- Ingredients
+INSERT INTO Ingredients (ingredientID, ingredientName)
+VALUES
+(0, 'Wasser')
+,(1, 'Weizenmehl')
+,(2, 'Ei')
+,(3, 'Milch');
 
-CREATE TABLE Courses
-(
-  courseID INT NOT NULL,
-  courseName VARCHAR(50) NOT NULL,
-  PRIMARY KEY (courseID),
-  UNIQUE (courseName)
-);
+-- Styles
+INSERT INTO Styles (styleID, styleName)
+VALUES
+(0, 'Hausmannskost')
+,(1, 'Asiatisch')
+,(2, 'Indisch')
+,(3, 'Mexikanisch')
+,(4, 'Amerikanisch')
+,(5, 'Französisch');
 
-CREATE TABLE Users
-(
-  name VARCHAR(50),
-  familyName VARCHAR(100),
-  userID VARCHAR(100) NOT NULL,
-  street VARCHAR(100),
-  location VARCHAR(100),
-  telefonNumber VARCHAR(50),
-  password VARCHAR(250) NOT NULL,
-  plz VARCHAR(50) NOT NULL,
-  billingAddressStreet VARCHAR(100) NOT NULL,
-  billingAddressLocation VARCHAR(100) NOT NULL,
-  billingAddressPlz VARCHAR(50) NOT NULL,
-  internal BOOLEAN NOT NULL,
-  PRIMARY KEY (userID)
-);
+-- Courses
+INSERT INTO COURSES (courseID, courseName)
+VALUES
+(0, 'Vorspeise')
+,(1, 'Hauptgang')
+,(2, 'Dessert')
+,(3, 'Salat')
+,(4, 'Beilage');
 
-CREATE TABLE Allergenes
-(
-  allergenID INT NOT NULL,
-  allergenName VARCHAR(50) NOT NULL,
-  PRIMARY KEY (allergenID),
-  UNIQUE (allergenName)
-);
+-- Users
+INSERT INTO Users (name, familyName, userID, street, location, telefonNumber, plz, password, billingAddressStreet, billingAddressLocation, billingAddressPlz, internal)
+VALUES
+('Max', 'Mustermann', 'mmuster@test.de', 'Teststraße 123', 'TestOrt', '123456789', '12345', 'password1', 'Rechnungsstraße 321', 'Rechnungsort', '54321', true);
 
-CREATE TABLE IngredientsAllergenes
-(
-  ingredientID INT NOT NULL,
-  allergenID INT NOT NULL,
-  PRIMARY KEY (ingredientID, allergenID),
-  FOREIGN KEY (ingredientID) REFERENCES Ingredients(ingredientID),
-  FOREIGN KEY (allergenID) REFERENCES Allergenes(allergenID)
-);
+-- Allergenes
+INSERT INTO Allergenes (allergenID, allergenName)
+VALUES
+(0, 'Laktose')
+,(1, 'Gluten')
+,(2, 'Schalentiere')
+,(3, 'Erdnüsse');
 
-CREATE TABLE Employees
-(
-  employeeID VARCHAR(100) NOT NULL,
-  name VARCHAR(50) NOT NULL,
-  familyName VARCHAR(100) NOT NULL,
-  location VARCHAR(100) NOT NULL,
-  street VARCHAR(100) NOT NULL,
-  plz VARCHAR(50) NOT NULL,
-  telefonNumber VARCHAR(50) NOT NULL,
-  password VARCHAR(250) NOT NULL,
-  isAdmin BOOLEAN NOT NULL,
-  PRIMARY KEY (employeeID)
-);
+-- IngredientsAllergenes
+INSERT INTO IngredientsAllergenes (ingredientID, allergenID)
+VALUES
+(3,0);
 
-CREATE TABLE BookingTypes
-(
-  typeID INT NOT NULL,
-  type VARCHAR(50) NOT NULL,
-  PRIMARY KEY (typeID)
-);
+-- Employees
+INSERT INTO Employees (employeeID, name, familyName, location, street, plz, telefonNumber, isAdmin, password)
+VALUES
+('employee@id.com', 'MAVorname', 'MANachname', 'Mitarbeiterort', 'Mitarbeiterstraße', '12345', '123654789', true, '98765');
 
-CREATE TABLE Units
-(
-  unitID INT NOT NULL,
-  unitName VARCHAR(50) NOT NULL,
-  PRIMARY KEY (unitID),
-  UNIQUE (unitName)
-);
+-- BookingTypes
+INSERT INTO BookingTypes (typeID, type)
+VALUES
+(0, 'Kochen'),
+(1, 'Gastroservice'),
+(2, 'Messe');
 
-CREATE TABLE PasswordResets
-(
-  dateOfReset DATE NOT NULL,
-  resetCode VARCHAR(50),
-  closed BOOLEAN NOT NULL,
-  userID VARCHAR(100) NOT NULL,
-  PRIMARY KEY (dateOfReset, userID),
-  FOREIGN KEY (userID) REFERENCES Users(userID)
-);
+-- Units
+INSERT INTO Units (unitID, unitName)
+VALUES
+(0, 'Gramm')
+,(1, 'Kilogramm')
+,(2, 'Liter')
+,(3, 'Milliliter')
+,(4, 'Stück')
+,(5, 'Prise');
 
-CREATE TABLE Recipes
-(
-  recipeID INT NOT NULL,
-  recipeName VARCHAR(100) NOT NULL,
-  instructions LONGTEXT NOT NULL,
-  pictureRef VARCHAR(256) NOT NULL,
-  shortDescription LONGTEXT NOT NULL,
-  baseDescription LONGTEXT NOT NULL,
-  styleID INT NOT NULL,
-  courseID INT NOT NULL,
-  PRIMARY KEY (recipeID),
-  FOREIGN KEY (styleID) REFERENCES Styles(styleID),
-  FOREIGN KEY (courseID) REFERENCES Courses(courseID),
-  UNIQUE (recipeName)
-);
+-- Recipes
+INSERT INTO Recipes (recipeID, recipeName, instructions, pictureRef, shortDescription, baseDescription, styleID, courseID)
+VALUES
+(0, 'Pfannkuchen', 'Alle Zutaten miteinander Verrühren. Dann in der Pfanne braten.', 'PictureRefPfannkuchen', 'Einen einfachen Pfannkuchen machen', 'Ein einfaches Rezept um einen Pfannkuchen zu machen. Ohne viel Arbeit.', 0, 1)
+, (1, 'Hamburger','Leckerer Hamburger der total toll schmeckt und auch so toll ist', 'Super tolle lange Beschreibung', 'Mach erst das dann dies', 'pictureRefHamburger', 4,1 )
+, (2, 'Fischsuppe', 'Eine Schmackhafte Fischsuppe zum Frühstück', 'Super tolle lange Beschreibung', 'Einen Fisch längs halbieren und dann in den Topf damit', 'pictureRefFischsuppe', 1, 0)
+, (3, 'Baguette', 'Eine französisches Baguette zum Frühstück', 'Super tolle lange Beschreibung', 'Ein Baguette aufschneiden und dann in den Topf damit', 'pictureRefBaguette', 5, 4);
 
-CREATE TABLE RecipeIngredients
-(
-  amount FLOAT NOT NULL,
-  recipeID INT NOT NULL,
-  ingredientID INT NOT NULL,
-  unitID INT NOT NULL,
-  PRIMARY KEY (recipeID, ingredientID),
-  FOREIGN KEY (recipeID) REFERENCES Recipes(recipeID),
-  FOREIGN KEY (ingredientID) REFERENCES Ingredients(ingredientID),
-  FOREIGN KEY (unitID) REFERENCES Units(unitID)
-);
+-- RecipeIngredients
+INSERT INTO RecipeIngredients (recipeID, ingredientID, amount, unitID)
+VALUES
+(0, 0, 100, 3)
+,(0, 1, 500, 0)
+,(0, 2, 2, 4)
+,(0, 3, 300, 3);
 
-CREATE TABLE Ratings
-(
-  stars INT,
-  comment LONGTEXT,
-  userID VARCHAR(100) NOT NULL,
-  recipeID INT NOT NULL,
-  PRIMARY KEY (userID, recipeID),
-  FOREIGN KEY (userID) REFERENCES Users(userID),
-  FOREIGN KEY (recipeID) REFERENCES Recipes(recipeID)
-);
+-- Ratings
+INSERT INTO Ratings (stars, comment, userID, recipeID)
+VALUES
+(5, 'Super Rezept. Mein Favorit.', 'mmuster@test.de', 0);
 
-CREATE TABLE Bookings
-(
-  bookingID INT NOT NULL,
-  eventName VARCHAR(100) NOT NULL,
-  dateBegin DATE NOT NULL,
-  location VARCHAR(50) NOT NULL,
-  dateEnd DATE NOT NULL,
-  street VARCHAR(50) NOT NULL,
-  plz VARCHAR(5) NOT NULL,
-  userID VARCHAR(100) NOT NULL,
-  typeID INT NOT NULL,
-  PRIMARY KEY (bookingID),
-  FOREIGN KEY (userID) REFERENCES Users(userID),
-  FOREIGN KEY (typeID) REFERENCES BookingTypes(typeID)
-);
+-- Bookings
 
-CREATE TABLE BookingEmployees
-(
-  dateBegin DATE NOT NULL,
-  dateEnd DATE NOT NULL,
-  bookingID INT NOT NULL,
-  employeeID VARCHAR(100) NOT NULL,
-  PRIMARY KEY (bookingID, employeeID),
-  FOREIGN KEY (bookingID) REFERENCES Bookings(bookingID),
-  FOREIGN KEY (employeeID) REFERENCES Employees(employeeID)
-);
+-- BookingEmployees
 
-CREATE TABLE BookingRecipes
-(
-  amountOfServings INT NOT NULL,
-  bookingID INT NOT NULL,
-  recipeID INT NOT NULL,
-  PRIMARY KEY (bookingID, recipeID),
-  FOREIGN KEY (bookingID) REFERENCES Bookings(bookingID),
-  FOREIGN KEY (recipeID) REFERENCES Recipes(recipeID)
-);
-
-CREATE TABLE MyRecipes
-(
-  userID VARCHAR(100) NOT NULL,
-  recipeID INT NOT NULL,
-  PRIMARY KEY (userID, recipeID),
-  FOREIGN KEY (userID) REFERENCES Users(userID),
-  FOREIGN KEY (recipeID) REFERENCES Recipes(recipeID)
-);
+-- BookingRecipes
