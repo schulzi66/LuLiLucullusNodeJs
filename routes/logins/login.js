@@ -12,7 +12,7 @@ var LocalStrategy = require('passport-local').Strategy;
 /* GET login page. */
 router.get('/', function (req, res) {
     res.render('login', {message: req.session.message});
-    req.session.message = undefined;   
+    req.session.message = undefined;
 });
 
 // Use application-level middleware for common functionality, including
@@ -55,6 +55,12 @@ router.post('/', passport.authenticate('local-login', {failureRedirect: '/login'
         _dbController.getUserByEmail(req, res, req.user, loginUser);
     });
 
+
+/* Reset Password Command */
+
+router.post('/resetPassword', function (req, res) {
+        console.log("WUHA JULIAN DID It");
+    });
 
 /* GET Profil page */
 router.get('/profile', isLoggedIn,
