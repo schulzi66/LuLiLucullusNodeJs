@@ -78,7 +78,6 @@ function isLoggedIn(req, res, next) {
 //Callback function after the login result returns from the database
 function loginUser(req, res, user) {
     //user has no account or wrong email is provided
-
     if (user === undefined) {
         req.session.message = 'Scheinbar haben Sie keine Account bei uns.';
         res.redirect('/signup');
