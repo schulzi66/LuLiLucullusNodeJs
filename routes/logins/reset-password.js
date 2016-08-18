@@ -34,7 +34,7 @@ function sendMailToUser(req, res, user) {
       from: conf.mail.auth.user, // sender address
       to: user.userId, //TODO CHEck mail // list of receivers
       subject: 'Passwort zurücksetzen Lulilucullus', // Subject line
-      text: "Sehr geehrte/geehrter " + user.name + " " + user.familyName + ","
+      text: "Sehr geehrte/geehrter " + user.name + " " + user.familyName + "," +
       "ihr Passwort wurde zurückgesetzt. Ihr Code für die Zurücksetzung lautet: " + authenticationCode +
       "Für das Zurücksetzten besuchen Sie: localhost:3000/login/change-password" // plaintext body
   };
@@ -44,7 +44,7 @@ function sendMailToUser(req, res, user) {
           console.log(error);
       } else {
           req.session.message = "Ihre Anfrage wurde erfolgreich &uuml;bermittelt. Überprüfen Sie Ihr Email Postfach";
-          res.redirect('/contact');
+          res.redirect('/login/changePasswort');
       }
   });
 
