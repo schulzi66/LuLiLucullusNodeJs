@@ -54,6 +54,28 @@ DatabaseController.prototype.getUserByEmail = function (req, res, email, callbac
         });
     });
 }
+//TODO:
+DatabaseController.prototype.insertPassRequest = function (reqDate, authenticationCode, email) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "INSERT INTO PASSWORDRESETS SET " +
+        "dateOfReset=" + connection.escape(reqDate) + ", " +
+        "resetCode=" + connection.escape(authenticationCode) + ", " +
+        "closed=" + false + ", " +
+        "userId=" + connection.escape(email);
+
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
 
 DatabaseController.prototype.getAdminByEmail = function (req, res, email, callback) {
     pool.getConnection(function (err, connection) {
