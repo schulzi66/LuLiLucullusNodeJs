@@ -3,12 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    res.render('reset-password', {user: req.session.user});
+    res.render('change-password', {user: req.session.user});
 });
 
-
-/* Reset Password Command */
+/* Change Password Command */
 router.post('/', function (req, res) {
-    console.log("########### RESET PASSWORD");
-    });
+    console.log("########### CHANGE PASSWORD");
+});
 module.exports = router;
