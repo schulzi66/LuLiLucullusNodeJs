@@ -6,4 +6,9 @@ router.get('/', function (req, res) {
     res.render('reset-password', {user: req.session.user});
 });
 
+
+/* Reset Password Command */
+router.post('/', function (req, res) {
+console.log("--------------------------------yesheaydfaisodfnawdf");
+    });
 module.exports = router;

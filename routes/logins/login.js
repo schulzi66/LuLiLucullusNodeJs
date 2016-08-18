@@ -58,12 +58,6 @@ router.post('/', passport.authenticate('local-login', {failureRedirect: '/login'
         _dbController.getUserByEmail(req, res, req.user, loginUser);
     });
 
-
-/* Reset Password Command */
-router.post('/resetPassword', function (req, res) {
-  
-    });
-
 /* GET Profil page */
 router.get('/profile', isLoggedIn,
     function (req, res) {
