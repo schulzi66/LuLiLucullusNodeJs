@@ -97,16 +97,16 @@ function loadFilterOptions() {
     var recipeNames = [];
 
     for (var i = 0; i < filterOptions.length; i++){
-        if (!allergens.includes(filterOptions[i].allergenName)){
+        if (!allergens.includes(filterOptions[i].allergenName) && filterOptions[i].allergenName !== null){
             allergens.push(filterOptions[i].allergenName);
         }
-        if (!styles.includes(filterOptions[i].styleName)){
+        if (!styles.includes(filterOptions[i].styleName) && filterOptions[i].styleName !== null){
             styles.push(filterOptions[i].styleName);
         }
-        if (!courses.includes(filterOptions[i].courseName)){
+        if (!courses.includes(filterOptions[i].courseName) && filterOptions[i].courseName !== null){
             courses.push(filterOptions[i].courseName);
         }
-        if (!recipeNames.includes(filterOptions[i].recipeName)){
+        if (!recipeNames.includes(filterOptions[i].recipeName) && filterOptions[i].recipeName !== null){
             recipeNames.push(filterOptions[i].recipeName);
         }
     }
@@ -133,7 +133,7 @@ function loadFilterOptions() {
 
     ////////////Section Styles////////////
     $('#inputFields').append('<div id="filterOptionsStyles" class="col-md-4"><h3>Arten</h3>');
-    courses.forEach(createStyleSection);
+    styles.forEach(createStyleSection);
     function createStyleSection(element, index, array){
         var currentStyle =
         '<input type="checkbox" id="' + element + '" />' +
