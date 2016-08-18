@@ -68,8 +68,10 @@
         var singleOrder = $(this).parents("tr:first");
         var array = [];
         $.each(singleOrder[0].cells, function (i) {
-            array.push(singleOrder[0].cells[i]);
+            array.push(singleOrder[0].cells[i].innerText);
         });
+        array.splice(array.length-1, 1);
+        console.log(array);
     });
 </script>
 </body>
