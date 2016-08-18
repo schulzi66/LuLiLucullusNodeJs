@@ -6,6 +6,9 @@ var bcrypt = require('bcrypt-nodejs');
 var DatabaseController = require('../../controllers/DatabaseController');
 var _dbController = new DatabaseController();
 
+var DevLoggingController = require('../../controllers/DevLoggingController');
+var logger = new DevLoggingController();
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -57,9 +60,8 @@ router.post('/', passport.authenticate('local-login', {failureRedirect: '/login'
 
 
 /* Reset Password Command */
-
 router.post('/resetPassword', function (req, res) {
-        console.log("WUHA JULIAN DID It");
+  
     });
 
 /* GET Profil page */
