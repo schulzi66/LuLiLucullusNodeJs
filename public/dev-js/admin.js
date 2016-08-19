@@ -7,7 +7,7 @@ function initOrdersOverview() {
     socket.emit('loadOrdersOverview');
     socket.on('loadedOrdersOverview', function (orders) {
         var container = $('#orderOverview');
-        console.log(orders);
+
         $.each(orders, function (i) {
             var ordersOverview =
                 '<tr class="odd gradeX">' +
@@ -25,8 +25,8 @@ function initOrdersOverview() {
 
 function insertIntoOrdersTable(orderDetails) {
     var socket = io.connect();
-    socket.emit('loadOrdersOverview', orderDetails);
-    socket.on('loadedOrdersOverview', function (orders) {
+    socket.emit('insertOrders', orderDetails);
+    socket.on('insertedOrders', function (orders) {
         console.log(orderDetails);
         console.log(orders);
     });

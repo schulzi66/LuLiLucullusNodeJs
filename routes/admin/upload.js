@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET upload page. */
 router.get('/', function(req, res) {
-    res.render('upload', { user: req.session.user} );
+    if (req.session.user !== undefined && req.session.user.isAdmin !== undefined) {
+        res.render('upload', {user: req.session.user});
+    } else {
+        res.render('administration-login');
+    }
 });
 
 module.exports = router;

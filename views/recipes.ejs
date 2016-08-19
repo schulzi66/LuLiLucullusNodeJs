@@ -5,7 +5,7 @@
 <% include partials/navbar %>
 <body>
 <div class="container container-margin">
-
+    <% include partials/breadcrumb %>
     <div class="row" style="text-align: center">
         <section class="col-sm-6">
             <div class="btn-group">
@@ -17,12 +17,14 @@
     </div>
 
     <div id="filter-bar">
-      <div id="inputFields" class="row">
-        <script type="text/javascript">loadFilterOptions();</script>
-      </div>
-      <div id="filterSubmitBox" style="display:inline-block">
-        <button id="filterSubmitBtn" class="btn btn-sm text-uppercase text-spat" onclick="loadFilteredRecipes()">Filtern!</button>
-      </div>
+        <div id="inputFields" class="row">
+            <script type="text/javascript">loadFilterOptions();</script>
+        </div>
+        <div id="filterSubmitBox" style="display:inline-block">
+            <button id="filterSubmitBtn" class="btn btn-sm text-uppercase text-spat" onclick="loadFilteredRecipes()">
+                Filtern!
+            </button>
+        </div>
     </div>
 
     <div class="row container">

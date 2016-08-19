@@ -5,9 +5,7 @@
 <% include partials/navbar %>
 <body>
 <div class="container">
-
     <div class="col-sm-6 col-sm-offset-3">
-
         <h1><span class="fa fa-sign-in"></span> Signup</h1>
         <% if (typeof message !== 'undefined') { %>
         <div class="alert alert-warning">
@@ -43,29 +41,28 @@
                 <input type="text" class="form-control" id="street" name="street" placeholder="Stra&szlig;e + HNr"
                        value="" required>
                 <input type="text" class="form-control" id="plz" name="plz" placeholder="PLZ" value="" required>
-                <input type="text" class="form-control" id="ort" name="location" placeholder="Wohnort" value="" required>
+                <input type="text" class="form-control" id="ort" name="location" placeholder="Wohnort" value=""
+                       required>
             </div>
             <div class="form-group">
                 <label for="rechnungsadresse" class="control-label">Rechnungsadresse</label>
                 <input type="text" class="form-control" id="rech_street" name="billingAdressStreet"
                        placeholder="Stra&szlig;e + HNr"
                        value="">
-                <input type="text" class="form-control" id="rech_plz" name="billingAdressPlz" placeholder="PLZ" value="">
-                <input type="text" class="form-control" id="rech_ort" name="billingAdressLocation" placeholder="Wohnort" value="">
+                <input type="text" class="form-control" id="rech_plz" name="billingAdressPlz" placeholder="PLZ"
+                       value="">
+                <input type="text" class="form-control" id="rech_ort" name="billingAdressLocation" placeholder="Wohnort"
+                       value="">
             </div>
             <!--<div class="form-group">
                  <div class="g-recaptcha" data-sitekey="6LdJByQTAAAAANS8XkjlNFggN77IHrJnMiKX6bdB"></div>
                 </div>-->
             <button type="submit" class="btn btn-sm btn-primary">Signup</button>
         </form>
-
         <hr>
-
         <p>Already have an account? <a href="/login">Login</a></p>
         <p>Or go <a href="/">home</a>.</p>
-
     </div>
-
 </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 "use strict";
 /* #####################################
-    Load recipe overview
+ Load recipe overview
  ##################################### */
 function loadRecipesOverview() {
     var socket = io.connect();   //TCP Socket connection to load recipes overview from db
@@ -36,34 +36,34 @@ function loadRecipeFromId(id) {
 
         var recipe_details =
             '<div class="recipe-header-information">' +
-                '<div class="recipe-container-row row">' +
-                    '<div class="col-md-4">' +
-                        '<p class="h3">' + recipe[0].recipeName + '</p>' +
-                    '</div>' +
-                    '<div class="col-md-2">' +
-                        '<a href="#">' +
-                            '<p class="recipe-print-icon h3">' +
-                                '<span class="glyphicon glyphicon-print"> </span>' +
-                            '</p>' +
-                        '</a>' +
-                    '</div>' +
-                    '<div class="col-md-3">' +
-                        '<p class="h3">Bewertung</p>' +
-                    '</div>' +
-                    '<div class="col-md-3 recicpe-rating-wrapper">' +
-                        '<ul id="el" class="c-rating">' +
-                        '</ul>' +
-                    '</div>' +
-                '</div>' +
+            '<div class="recipe-container-row row">' +
+            '<div class="col-md-4">' +
+            '<p class="h3">' + recipe[0].recipeName + '</p>' +
+            '</div>' +
+            '<div class="col-md-2">' +
+            '<a href="#">' +
+            '<p class="recipe-print-icon h3">' +
+            '<span class="glyphicon glyphicon-print"> </span>' +
+            '</p>' +
+            '</a>' +
+            '</div>' +
+            '<div class="col-md-3">' +
+            '<p class="h3">Bewertung</p>' +
+            '</div>' +
+            '<div class="col-md-3 recicpe-rating-wrapper">' +
+            '<ul id="el" class="c-rating">' +
+            '</ul>' +
+            '</div>' +
+            '</div>' +
             '</div>';
         $('#recipe-details-page-wrapper').append(recipe_details);
 
         var recipe_base_description =
             '<div class="recipe-container-row row">' +
-                '<p class="h3 recipe-instructions">Zubereitung</p>' +
-                '<p  class="recipe-instructions">' +
-                    recipe[0].baseDescription +
-                '</p>' +
+            '<p class="h3 recipe-instructions">Zubereitung</p>' +
+            '<p  class="recipe-instructions">' +
+            recipe[0].baseDescription +
+            '</p>' +
             '</div>'
         $('#recipe-preparation').append(recipe_base_description);
 
@@ -71,10 +71,10 @@ function loadRecipeFromId(id) {
             var recipe_ingredients_list =
                 '<ul class="recipe-ingredients-list recipe-ingredients">' +
                 '<li class="recipe-ingredients-list-item-first-column">' +
-                    recipe[i].ingredientName +
+                recipe[i].ingredientName +
                 '</li>' +
                 '<li class="recipe-ingredients-list-item-second-column">' +
-                    recipe[i].amount + " " + recipe[i].unitName +
+                recipe[i].amount + " " + recipe[i].unitName +
                 '</li>' +
                 '</ul>';
 
@@ -84,85 +84,83 @@ function loadRecipeFromId(id) {
 }
 
 /* #####################################
-    Region filter
+ Region filter
  ##################################### */
 function loadFilterOptions() {
-  var socket = io.connect();
-  socket.emit('loadFilterOptions');
-  socket.on('loadedFilterOptions', function(filterOptions){
-    console.log(filterOptions[0]);
-    var allergens = [];
-    var styles = [];
-    var courses = [];
-    var recipeNames = [];
+    var socket = io.connect();
+    socket.emit('loadFilterOptions');
+    socket.on('loadedFilterOptions', function (filterOptions) {
+        console.log(filterOptions[0]);
+        var allergens = [];
+        var styles = [];
+        var courses = [];
+        var recipeNames = [];
 
-    for (var i = 0; i < filterOptions.length; i++){
-        if (!allergens.includes(filterOptions[i].allergenName) && filterOptions[i].allergenName !== null){
-            allergens.push(filterOptions[i].allergenName);
+        for (var i = 0; i < filterOptions.length; i++) {
+            if (!allergens.includes(filterOptions[i].allergenName) && filterOptions[i].allergenName !== null) {
+                allergens.push(filterOptions[i].allergenName);
+            }
+            if (!styles.includes(filterOptions[i].styleName) && filterOptions[i].styleName !== null) {
+                styles.push(filterOptions[i].styleName);
+            }
+            if (!courses.includes(filterOptions[i].courseName) && filterOptions[i].courseName !== null) {
+                courses.push(filterOptions[i].courseName);
+            }
+            if (!recipeNames.includes(filterOptions[i].recipeName) && filterOptions[i].recipeName !== null) {
+                recipeNames.push(filterOptions[i].recipeName);
+            }
         }
-        if (!styles.includes(filterOptions[i].styleName) && filterOptions[i].styleName !== null){
-            styles.push(filterOptions[i].styleName);
+
+        ////////////Section Allergens////////////
+        $('#inputFields').append('<div id="filterOptionsAllergens" class="col-md-4"><h3>Allergene</h3>');
+        allergens.forEach(createAllergenSection);
+        function createAllergenSection(element, index, array) {
+            var currentAllergen =
+                '<input type="checkbox" id="' + element + '" />' +
+                '<label for="' + element + '">&nbsp;' + element + '</label><br />';
+            $('#filterOptionsAllergens').append(currentAllergen);
         }
-        if (!courses.includes(filterOptions[i].courseName) && filterOptions[i].courseName !== null){
-            courses.push(filterOptions[i].courseName);
+
+        ////////////Section Courses////////////
+        $('#inputFields').append('<div id="filterOptionsCourses" class="col-md-4"><h3>Kurse</h3>');
+        courses.forEach(createCourseSection);
+        function createCourseSection(element, index, array) {
+            var currentCourse =
+                '<input type="checkbox" id="' + element + '" />' +
+                '<label for="' + element + '">&nbsp;' + element + '</label><br />';
+            $('#filterOptionsCourses').append(currentCourse);
         }
-        if (!recipeNames.includes(filterOptions[i].recipeName) && filterOptions[i].recipeName !== null){
-            recipeNames.push(filterOptions[i].recipeName);
+
+        ////////////Section Styles////////////
+        $('#inputFields').append('<div id="filterOptionsStyles" class="col-md-4"><h3>Arten</h3>');
+        styles.forEach(createStyleSection);
+        function createStyleSection(element, index, array) {
+            var currentStyle =
+                '<input type="checkbox" id="' + element + '" />' +
+                '<label for="' + element + '">&nbsp;' + element + '</label><br />';
+            $('#filterOptionsStyles').append(currentStyle);
         }
-    }
-
-    ////////////Section Allergens////////////
-    $('#inputFields').append('<div id="filterOptionsAllergens" class="col-md-4"><h3>Allergene</h3>');
-    allergens.forEach(createAllergenSection);
-    function createAllergenSection(element, index, array){
-        var currentAllergen =
-        '<input type="checkbox" id="' + element + '" />' +
-        '<label for="' + element + '">&nbsp;' + element + '</label><br />';
-        $('#filterOptionsAllergens').append(currentAllergen);
-    }
-
-    ////////////Section Courses////////////
-    $('#inputFields').append('<div id="filterOptionsCourses" class="col-md-4"><h3>Kurse</h3>');
-    courses.forEach(createCourseSection);
-    function createCourseSection(element, index, array){
-        var currentCourse =
-        '<input type="checkbox" id="' + element + '" />' +
-        '<label for="' + element + '">&nbsp;' + element + '</label><br />';
-        $('#filterOptionsCourses').append(currentCourse);
-    }
-
-    ////////////Section Styles////////////
-    $('#inputFields').append('<div id="filterOptionsStyles" class="col-md-4"><h3>Arten</h3>');
-    styles.forEach(createStyleSection);
-    function createStyleSection(element, index, array){
-        var currentStyle =
-        '<input type="checkbox" id="' + element + '" />' +
-        '<label for="' + element + '">&nbsp;' + element + '</label><br />';
-        $('#filterOptionsStyles').append(currentStyle);
-    }
 
 
-
-    for(var j = 0; j < allergens.length; j++){
-        console.log(allergens[j]);
-    }
-    for(var j = 0; j < courses.length; j++){
-        console.log(courses[j]);
-    }
-    for(var j = 0; j < recipeNames.length; j++){
-        console.log(recipeNames[j]);
-    }
-    for(var j = 0; j < styles.length; j++){
-        console.log(styles[j]);
-    }
-
+        for (var j = 0; j < allergens.length; j++) {
+            console.log(allergens[j]);
+        }
+        for (var j = 0; j < courses.length; j++) {
+            console.log(courses[j]);
+        }
+        for (var j = 0; j < recipeNames.length; j++) {
+            console.log(recipeNames[j]);
+        }
+        for (var j = 0; j < styles.length; j++) {
+            console.log(styles[j]);
+        }
 
 
-    //$.each(filterOptions, function(i){
-      //var filterOption_list_element =
+        //$.each(filterOptions, function(i){
+        //var filterOption_list_element =
         //'<input type="checkbox" />' +
         //'<label>&nbsp;' + filterOptions[i].allergenName + '</label><br />'
-  })
+    })
 }
 
 jQuery(document).ready(function () {

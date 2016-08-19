@@ -5,13 +5,10 @@
 
 <% include partials/navbar %>
 <body>
-
 <div class="container">
-
+    <% include partials/breadcrumb %>
     <div class="col-sm-6 col-sm-offset-3">
-
         <h1><span class="fa fa-envelope-o"></span> Contact</h1>
-
         <% if (typeof message !== 'undefined') { %>
         <div class="alert alert-success">
             <%= message %>
@@ -36,7 +33,6 @@
             <button type="submit" class="btn btn-sm btn-primary">Send</button>
         </form>
     </div>
-
 </div>
 </body>
 <% include partials/footer %>

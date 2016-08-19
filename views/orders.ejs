@@ -4,6 +4,7 @@
 <% include partials/adminHeader %>
 <body>
 <div class="container">
+    <% include partials/breadcrumb %>
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Bestellungen</h1>
@@ -72,12 +73,14 @@
         e.preventDefault();
         var singleOrder = $(this).parents("tr:first");
         var fields = $('#ordersTableHead');
-        var details = {};
+        var json = {};
 
         $.each(singleOrder[0].cells, function (i) {
-            details["" + fields[0].cells[i].innerText.toLocaleLowerCase()] = "" + singleOrder[0].cells[i].innerText;
+            json["" + fields[0].cells[i].innerText.toLocaleLowerCase()] = "" + singleOrder[0].cells[i].innerText;
         });
-        insertIntoOrdersTable(details);
+        var orderDetails = JSON.stringify(json);
+
+        insertIntoOrdersTable(orderDetails);
     });
 </script>
 </body>

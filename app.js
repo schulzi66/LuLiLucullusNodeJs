@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'development';
+require('events').EventEmitter.prototype._maxListeners = 50;
 
 var express = require('express');
 var session = require('express-session');

@@ -1,0 +1,22 @@
+<ol class="breadcrumb">
+</ol>
+
+
+<script>
+    function firstLetterToUpperCase(str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    }
+
+    var current = window.location.pathname.split("/");
+    $.each(current, function (i) {
+        if(current[i] == "") {
+            current[i] = "#";
+        }
+
+        var breadcrumb_navigation =
+                '<li class="breadcrumb-item"><a href="' + current[i] +'" >' + firstLetterToUpperCase(current[i]) + '</a></li>';
+        $('.breadcrumb').append(breadcrumb_navigation);
+    });
+</script>

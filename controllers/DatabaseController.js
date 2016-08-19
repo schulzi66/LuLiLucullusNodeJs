@@ -182,7 +182,6 @@ DatabaseController.prototype.loadOrders = function (callback) {
 
 DatabaseController.prototype.insertOrderInformation = function (details, callback) {
     pool.getConnection(function (err, connection) {
-        console.log(details);
         var queryString = "UPDATE TABLE Orders SET " +
             "eventName=" + connection.escape(details.anlass) +
             ", userName=" + connection.escape(details.kunde) +
