@@ -5,8 +5,10 @@ var nodemailer = require('nodemailer');
 
 var DatabaseController = require('../../controllers/DatabaseController');
 var _dbController = new DatabaseController();
+var DevLoggingController = require('../../controllers/DevLoggingController');
+var logger = new DevLoggingController();
 
-/* GET home page. */
+/* GET Reset Password page. */
 router.get('/', function (req, res) {
     res.render('reset-password', {user: req.session.user});
 });
@@ -35,12 +37,14 @@ console.log("user:  " + user);
 
       var mailOptions = {
           from: conf.mail.auth.user, // sender address
-          to: user.userId, //TODO CHEck mail // list of receivers
+          to: req.body.email, //TODO CHEck mail // list of receivers
           subject: 'Passwort zurücksetzen Lulilucullus', // Subject line
           text: "Sehr geehrte/geehrter " + user.name + " " + user.familyName + "," +
           "ihr Passwort wurde zurückgesetzt. Ihr Code für die Zurücksetzung lautet: " + authenticationCode +
           "Für das Zurücksetzten besuchen Sie: localhost:3000/login/change-password" // plaintext body
       };
+
+      logger.log("mailOptions", mailOptions);
 
       transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
@@ -51,7 +55,7 @@ console.log("user:  " + user);
           }
       });
 
-      _dbController.insertPasswordRequest(createRequestDate(), authenticationCode, user.USERID);
+      _dbController.insertPasswordRequest(createRequestDate(), authenticationCode, req.body.email);
   }
   //user has no account
   else {
@@ -62,7 +66,6 @@ console.log("user:  " + user);
 
 function createRequestDate() {
   var date = new Date();
-  date = date.getDate() + "." + (date.getMonth()+1) + "." + date.getFullYear() + " - " + date.getHours() + ":" + date.getMinutes();
   console.log("DATE: " + date);
   return date;
 }
