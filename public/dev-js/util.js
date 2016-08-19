@@ -14,3 +14,7 @@ Util.fixRootEntry = function(str) {
     str = "#";
     return str;
 }
+
+Util.lookup = function (fileExtension) {
+    return fileExtension;
+}

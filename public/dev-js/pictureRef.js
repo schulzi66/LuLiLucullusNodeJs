@@ -6,7 +6,3 @@ function convertPictureRefToPath(pictureRef) {
     //TODO: check if file exists
     return path;
 }
-
-function lookup(fileExtension) {
-    return fileExtension;
-}
