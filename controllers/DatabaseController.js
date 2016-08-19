@@ -126,6 +126,7 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
             "ON Recipes.recipeID=RecipeIngredients.recipeID " +
             "WHERE RecipeIngredients.recipeID=" +
             connection.escape(id);
+        console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
