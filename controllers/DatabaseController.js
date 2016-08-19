@@ -58,10 +58,10 @@ DatabaseController.prototype.getUserByEmail = function (req, res, email, callbac
 DatabaseController.prototype.insertPassRequest = function (reqDate, authenticationCode, email) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO PASSWORDRESETS SET " +
-        "dateOfReset=" + connection.escape(reqDate) + ", " +
-        "resetCode=" + connection.escape(authenticationCode) + ", " +
-        "closed=" + false + ", " +
-        "userId=" + connection.escape(email);
+            "dateOfReset=" + connection.escape(reqDate) + ", " +
+            "resetCode=" + connection.escape(authenticationCode) + ", " +
+            "closed=" + false + ", " +
+            "userId=" + connection.escape(email);
 
         connection.query(queryString, function (err, rows) {
             connection.release();
@@ -126,7 +126,6 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
             "ON Recipes.recipeID=RecipeIngredients.recipeID " +
             "WHERE RecipeIngredients.recipeID=" +
             connection.escape(id);
-        console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -143,12 +142,12 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
 DatabaseController.prototype.loadFilterOptions = function (callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "SELECT r.recipeName, s.styleName, c.courseName, ri.amount, i.ingredientName, a.allergenName FROM recipes AS r " +
-                          "JOIN courses AS c ON c.courseID = r.courseID " +
-                          "JOIN styles AS s ON s.styleID = r.styleID " +
-                          "LEFT JOIN recipeingredients AS ri ON ri.recipeID = r.recipeID " +
-                          "LEFT JOIN ingredients AS i ON i.ingredientID = ri.ingredientID " +
-                          "LEFT JOIN ingredientsallergenes AS ia ON ia.ingredientID = i.ingredientID " +
-                          "LEFT JOIN allergenes AS a ON a.allergenID = ia.allergenID";
+            "JOIN courses AS c ON c.courseID = r.courseID " +
+            "JOIN styles AS s ON s.styleID = r.styleID " +
+            "LEFT JOIN recipeingredients AS ri ON ri.recipeID = r.recipeID " +
+            "LEFT JOIN ingredients AS i ON i.ingredientID = ri.ingredientID " +
+            "LEFT JOIN ingredientsallergenes AS ia ON ia.ingredientID = i.ingredientID " +
+            "LEFT JOIN allergenes AS a ON a.allergenID = ia.allergenID";
 
         connection.query(queryString, function (err, rows) {
             connection.release();
