@@ -159,7 +159,31 @@ DatabaseController.prototype.loadFilterOptions = function (callback) {
 
 DatabaseController.prototype.loadOrders = function (callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT * FROM orders";
+        var queryString = "SELECT * FROM orders WHERE isReleased=" + false;
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                logger.log(rows);
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.insertOrderInformation = function (details, callback) {
+    pool.getConnection(function (err, connection) {
+        console.log(details);
+        var queryString = "UPDATE TABLE Orders SET " +
+            "eventName=" + connection.escape(details.anlass) +
+            ", userName=" + connection.escape(details.kunde) +
+            ", recipe=" + connection.escape(details.artikel) +
+            ", amount=" + connection.escape(details.menge) +
+            ", orderDate=" + connection.escape(details.auftragsdatum) +
+            ", isReleased=" + true;
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {

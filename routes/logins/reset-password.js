@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var conf = require('../conf.json');
+var conf = require('../../conf.json');
 var nodemailer = require('nodemailer');
 
 var DatabaseController = require('../../controllers/DatabaseController');

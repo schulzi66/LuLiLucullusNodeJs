@@ -25,17 +25,24 @@ function onConnection(socket) {
     //End Region
 
     //Region Recipe Filter
-    socket.on('loadFilterOptions', function(){
-      var _dbController = new DatabaseController();
-      _dbController.loadFilterOptions(function(filterOptions){
-        socket.emit('loadedFilterOptions', filterOptions);
-      })
+    socket.on('loadFilterOptions', function () {
+        var _dbController = new DatabaseController();
+        _dbController.loadFilterOptions(function (filterOptions) {
+            socket.emit('loadedFilterOptions', filterOptions);
+        })
     });
     //End Region
 
-    socket.on('loadOrdersOverview', function(){
+    socket.on('loadOrdersOverview', function () {
         var _dbController = new DatabaseController();
-        _dbController.loadOrders(function(ordersOverview){
+        _dbController.loadOrders(function (ordersOverview) {
+            socket.emit('loadedOrdersOverview', ordersOverview);
+        })
+    });
+
+    socket.on('loadOrdersOverview', function () {
+        var _dbController = new DatabaseController();
+        _dbController.insertOrderInformation(function (ordersOverview) {
             socket.emit('loadedOrdersOverview', ordersOverview);
         })
     });
