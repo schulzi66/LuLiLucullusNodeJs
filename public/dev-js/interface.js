@@ -8,7 +8,6 @@ function loadRecipesOverview() {
     socket.on('loadedRecipesOverview', function (recipes) {
         var container = $('ul.recipes');
         $.each(recipes, function (i) {
-          alert("Hier müsste jetzt 4 mal ein alert kommen julian ;) " +   recipes[i].recipeName);
             var recipe_list_element =
                 '<li class="recipes-overview-item">' +
                 '<object class="recipes-image-fallback" data="img/default.png" type="image/png">' +
@@ -91,7 +90,6 @@ function loadFilterOptions() {
     var socket = io.connect();
     socket.emit('loadFilterOptions');
     socket.on('loadedFilterOptions', function (filterOptions) {
-        console.log(filterOptions[0]);
         var allergens = [];
         var styles = [];
         var courses = [];
@@ -141,21 +139,6 @@ function loadFilterOptions() {
                 '<label for="' + element + '">&nbsp;' + element + '</label><br />';
             $('#filterOptionsStyles').append(currentStyle);
         }
-
-
-        for (var j = 0; j < allergens.length; j++) {
-            console.log(allergens[j]);
-        }
-        for (var j = 0; j < courses.length; j++) {
-            console.log(courses[j]);
-        }
-        for (var j = 0; j < recipeNames.length; j++) {
-            console.log(recipeNames[j]);
-        }
-        for (var j = 0; j < styles.length; j++) {
-            console.log(styles[j]);
-        }
-
 
         //$.each(filterOptions, function(i){
         //var filterOption_list_element =

@@ -11,12 +11,12 @@
 
     var current = window.location.pathname.split("/");
     $.each(current, function (i) {
-        if(current[i] == "") {
+        if (current[i] == "") {
             current[i] = "#";
         }
 
         var breadcrumb_navigation =
-                '<li class="breadcrumb-item"><a href="' + current[i] +'" >' + firstLetterToUpperCase(current[i]) + '</a></li>';
+                '<li class="breadcrumb-item"><a href="' + current[i] + '" >' + firstLetterToUpperCase(current[i]) + '</a></li>';
         $('.breadcrumb').append(breadcrumb_navigation);
     });
 </script>
