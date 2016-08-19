@@ -31,9 +31,11 @@ function loadRecipeFromId(id) {
     var socket = io.connect();
     socket.emit('loadRecipeFromId', id);
     socket.on('loadedRecipe', function (recipe) {
-        var recipe_image = '<img class="img-responsive img-rounded" src="' + convertPictureRefToPath(recipe[0].pictureRef) + '">';
+        var recipe_image = '<object class="recipes-image-fallback" data="img/default.png" type="image/png">' +
+            '<img class="img-responsive img-rounded" src="' + convertPictureRefToPath(recipe[0].pictureRef) + '">' +
+            '</object>';
         $('#recipe-image-wrapper').append(recipe_image);
-
+        //TODO: Print Preview stylen
         var recipe_details =
             '<div class="recipe-header-information">' +
             '<div class="recipe-container-row row">' +
@@ -41,13 +43,13 @@ function loadRecipeFromId(id) {
             '<p class="h3">' + recipe[0].recipeName + '</p>' +
             '</div>' +
             '<div class="col-md-2">' +
-            '<a href="#">' +
+            '<a onclick="window.print()">' +
             '<p class="recipe-print-icon h3">' +
             '<span class="glyphicon glyphicon-print"> </span>' +
             '</p>' +
             '</a>' +
             '</div>' +
-            '<div class="col-md-3">' +
+            '<div class="col-md-3 rating">' +
             '<p class="h3">Bewertung</p>' +
             '</div>' +
             '<div class="col-md-3 recicpe-rating-wrapper">' +
@@ -150,7 +152,7 @@ jQuery(document).ready(function () {
     jQuery('#recipe-filter').on('click', function (event) {
         jQuery('#filter-bar').slideToggle('show');
     });
-    $('#btnTest').on('click', function(event){
-        $('#dropdownTest').slideToggle('show');
+    $('#lulilucullusAdminDropdownToggler').on('click', function(event){
+        $('#lulilucullusAdminDropdown').slideToggle('show');
     });
 });

@@ -1,0 +1,21 @@
+@media print {
+    #header-wrapper {
+        display: none;
+    }
+    #navbar {
+        display: none;
+    }
+    .breadcrumb {
+        display: none;
+    }
+    .recipe-print-icon {
+        display: none;
+    }
+    .rating {
+        display: none;
+    }
+    .recipes-image-fallback {
+        width: 150px;
+        height: auto;
+    }
+}
