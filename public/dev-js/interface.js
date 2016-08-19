@@ -144,25 +144,23 @@ function loadFilterOptions() {
     })
 }
 
-jQuery(document).ready(function () {
-
 $(document).ready(function () {
     $('#recipe-filter').on('click', function (event) {
         $('#filter-bar').slideToggle('show');
     });
+
+    $('#filterSubmitBtn').on('click', function () {
+        var selectedOptions = [];
+        $('input:checked').each(function () {
+            selectedOptions.push(this.id);
+        });
+    });
+
     $('#lulilucullusAdminDropdownToggler').on('click', function (e) {
         e.stopPropagation();
         $('#lulilucullusAdminDropdown').slideToggle('show');
-
-    $('#filterSubmitBtn').on('click', function() {
-        var selectedOptions = [];
-        $('input:checked').each(function() {
-            selectedOptions.push(this.id);
-        });
-        console.log(selectedOptions);
     });
-
-    $('html').click(function() {
+    $('html').click(function () {
         $('#lulilucullusAdminDropdown').slideToggle('hide');
     });
 
