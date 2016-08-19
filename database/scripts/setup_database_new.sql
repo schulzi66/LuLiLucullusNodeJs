@@ -150,6 +150,7 @@ CREATE TABLE Bookings
   plz VARCHAR(10) NOT NULL,
   userID VARCHAR(100) NOT NULL,
   typeID INT NOT NULL,
+  isReleased BOOLEAN NOT NULL,
   PRIMARY KEY (bookingID),
   FOREIGN KEY (userID) REFERENCES Users(userID),
   FOREIGN KEY (typeID) REFERENCES BookingTypes(typeID)
