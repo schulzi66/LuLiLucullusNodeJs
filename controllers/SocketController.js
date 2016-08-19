@@ -13,8 +13,8 @@ function onConnection(socket) {
     //Region Recepies
     socket.on('loadRecipesOverview', function () {
         var _dbController = new DatabaseController();
-        _dbController.loadRecipesOverview(function (recepiesOverview) {
-            socket.emit('loadedRecipesOverview', recepiesOverview);
+        _dbController.loadRecipesOverview(function (recipesOverview) {
+            socket.emit('loadedRecipesOverview', recipesOverview);
         })
     });
 
@@ -22,7 +22,7 @@ function onConnection(socket) {
         var _dbController = new DatabaseController();
         _dbController.loadRecipeFromId(id, function (recipe) {
             socket.emit('loadedRecipe', recipe);
-        })
+        });
     });
     //End Region
 
@@ -31,7 +31,7 @@ function onConnection(socket) {
         var _dbController = new DatabaseController();
         _dbController.loadFilterOptions(function (filterOptions) {
             socket.emit('loadedFilterOptions', filterOptions);
-        })
+        });
     });
     //End Region
 
@@ -39,14 +39,14 @@ function onConnection(socket) {
         var _dbController = new DatabaseController();
         _dbController.loadOrders(function (ordersOverview) {
             socket.emit('loadedOrdersOverview', ordersOverview);
-        })
+        });
     });
 
     socket.on('insertOrders', function () {
         var _dbController = new DatabaseController();
         _dbController.insertOrderInformation(function (orderDetails) {
             socket.emit('insertedOrders', orderDetails);
-        })
+        });
     });
 }
 
