@@ -141,6 +141,7 @@ function loadFilterOptions() {
                 '<label for="' + element + '">&nbsp;' + element + '</label><br />';
             $('#filterOptionsStyles').append(currentStyle);
         }
+
         //$.each(filterOptions, function(i){
         //var filterOption_list_element =
         //'<input type="checkbox" />' +
@@ -148,11 +149,21 @@ function loadFilterOptions() {
     })
 }
 
-jQuery(document).ready(function () {
-    jQuery('#recipe-filter').on('click', function (event) {
-        jQuery('#filter-bar').slideToggle('show');
+$(document).ready(function () {
+    $('#recipe-filter').on('click', function (event) {
+        $('#filter-bar').slideToggle('show');
     });
-    $('#lulilucullusAdminDropdownToggler').on('click', function(event){
+    $('#lulilucullusAdminDropdownToggler').on('click', function (event) {
         $('#lulilucullusAdminDropdown').slideToggle('show');
     });
+
+    $(document).click(function (e) {
+        e.stopPropagation();
+        var container = $("#lulilucullusAdminDropdownToggler");
+
+        //check if the clicked area is dropDown or not
+        if (container.has(e.target).length === 0) {
+            $('#lulilucullusAdminDropdown').slideToggle('hide');
+        }
+    })
 });
