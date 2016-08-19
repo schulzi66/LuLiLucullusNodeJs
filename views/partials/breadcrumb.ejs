@@ -18,7 +18,6 @@
         if (current[i] == "") {
             current[i] = "Home";
         }
-
         var breadcrumb_navigation =
                 '<li class="breadcrumb-item"><a href="' + fixRootEntry(current[i]) + '" >' + firstLetterToUpperCase(current[i]) + '</a></li>';
         $('.breadcrumb').append(breadcrumb_navigation);

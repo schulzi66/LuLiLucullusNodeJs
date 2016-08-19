@@ -82,9 +82,18 @@
 
         insertIntoOrdersTable(orderDetails);
         singleOrder.remove();
+        if ($('#orderOverview').has("td").length > 0) {
+            console.log(singleOrder.children());
+        } else if($('#orderOverview').has("td").length == 0){
+            console.log("EMpTY!");
+            var emptyTable =
+                    '<tr class="odd gradeX">' +
+                    '<td colspan="' + singleOrder[0].cells.length + '"> Keine offenen Bestellungen! </td>' +
+                    '</tr>';
+            $('#orderOverview').append(emptyTable);
+        }
     });
 </script>
-<% include partials/adminHeader %>
 </body>
 <% include partials/footer %>
 </html>
