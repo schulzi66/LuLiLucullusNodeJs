@@ -1,4 +1,6 @@
 var DatabaseController = require('./DatabaseController');
+var DevLoggingController = require('./DevLoggingController');
+var logger = new DevLoggingController();
 
 var SocketController = function () {
 }
@@ -12,6 +14,7 @@ function onConnection(socket) {
     socket.on('loadRecipesOverview', function () {
         var _dbController = new DatabaseController();
         _dbController.loadRecipesOverview(function (recepiesOverview) {
+          logger.log("loadRecipesOverview", recepiesOverview)
             socket.emit('loadedRecipesOverview', recepiesOverview);
         })
     });

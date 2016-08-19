@@ -8,6 +8,7 @@ function loadRecipesOverview() {
     socket.on('loadedRecipesOverview', function (recipes) {
         var container = $('ul.recipes');
         $.each(recipes, function (i) {
+          alert("Hier müsste jetzt 4 mal ein alert kommen julian ;) " +   recipes[i].recipeName);
             var recipe_list_element =
                 '<li class="recipes-overview-item">' +
                 '<object class="recipes-image-fallback" data="img/default.png" type="image/png">' +

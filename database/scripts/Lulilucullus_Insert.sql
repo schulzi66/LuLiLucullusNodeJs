@@ -73,9 +73,9 @@ VALUES
 INSERT INTO Recipes (recipeID, recipeName, instructions, pictureRef, shortDescription, baseDescription, styleID, courseID)
 VALUES
 (0, 'Pfannkuchen', 'Alle Zutaten miteinander Verrühren. Dann in der Pfanne braten.', 'PictureRefPfannkuchen', 'Einen einfachen Pfannkuchen machen', 'Ein einfaches Rezept um einen Pfannkuchen zu machen. Ohne viel Arbeit.', 0, 1)
-, (1, 'Hamburger','Leckerer Hamburger der total toll schmeckt und auch so toll ist', 'Super tolle lange Beschreibung', 'Mach erst das dann dies', 'pictureRefHamburger', 4,1 )
-, (2, 'Fischsuppe', 'Eine Schmackhafte Fischsuppe zum Frühstück', 'Super tolle lange Beschreibung', 'Einen Fisch längs halbieren und dann in den Topf damit', 'pictureRefFischsuppe', 1, 0)
-, (3, 'Baguette', 'Eine französisches Baguette zum Frühstück', 'Super tolle lange Beschreibung', 'Ein Baguette aufschneiden und dann in den Topf damit', 'pictureRefBaguette', 5, 4);
+, (1, 'Hamburger','Leckerer Hamburger der total toll schmeckt und auch so toll ist', 'pictureRefHamburger', 'Super tolle lange Beschreibung', 'Mach erst das dann dies', 4,1 )
+, (2, 'Fischsuppe', 'Eine Schmackhafte Fischsuppe zum Frühstück', 'pictureRefFischsuppe', 'Super tolle lange Beschreibung', 'Einen Fisch längs halbieren und dann in den Topf damit', 1, 0)
+, (3, 'Baguette', 'Eine französisches Baguette zum Frühstück', 'pictureRefBaguette', 'Super tolle lange Beschreibung', 'Ein Baguette aufschneiden und dann in den Topf damit', 5, 4);
 
 -- RecipeIngredients
 INSERT INTO RecipeIngredients (recipeID, ingredientID, amount, unitID)
