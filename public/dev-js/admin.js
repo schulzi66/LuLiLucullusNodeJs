@@ -8,7 +8,6 @@ function initOrdersOverview() {
     socket.on('loadedOrdersOverview', function (orders) {
         var container = $('#orderOverview');
         var tableRow;
-        var today = new Date().getTime();
         $.each(orders, function (i) {
             if(i % 2 == 0) {
                 tableRow = '<tr class="even gradeC">';
@@ -21,9 +20,9 @@ function initOrdersOverview() {
                 '<td class="center">' + orders[i].customerName + '</td>' +
                 '<td class="center">' + orders[i].recipeName + '</td>' +
                 '<td class="center">' + orders[i].orderAmount + '</td>' +
-                '<td class="center">' + orders[i].orderDate + '</td>' +
-                '<td class="center">' + orders[i].orderDate + '</td>' +
-                '<td class="center">' + (today - orders[i].orderDate) + '</td>' +
+                '<td class="center">' + Util.convertMySQLTimestampToValidTimestamp(orders[i].orderDate) + '</td>' +
+                '<td class="center">' + Util.getMaturityPeriod(orders[i].orderDate) + " Tagen" + '</td>' +
+                '<td class="center">' +
                 '<a class="ordersOverviewRelease" href="administration/orders#">' +
                 '<span class="glyphicon glyphicon-ok">' +
                 '</span>' +
