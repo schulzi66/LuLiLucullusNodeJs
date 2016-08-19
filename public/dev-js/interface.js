@@ -112,40 +112,36 @@ function loadFilterOptions() {
             }
         }
 
-        ////////////Section Allergens////////////
         $('#inputFields').append('<div class="panel panel-default" id="filterOptionsAllergens" class="col-md-4"><div class="panel-heading">Allergene</div>');
-        allergens.forEach(createAllergenSection);
-        function createAllergenSection(element, index, array) {
+        $.each(allergens, function (i) {
             var currentAllergen =
-                '<input type="checkbox" id="' + element + '" />' +
-                '<label for="' + element + '">&nbsp;' + element + '</label><br />';
+                '<input type="checkbox" id="' + allergens[i] + '" />' +
+                '<label for="' + allergens[i] + '">&nbsp;' + allergens[i] + '</label><br />';
             $('#filterOptionsAllergens').append(currentAllergen);
-        }
+        });
 
-        ////////////Section Courses////////////
-        $('#inputFields').append('<div class="panel panel-default" id="filterOptionsCourses" class="col-md-4"><div class="panel-heading">Kurse</div>');
-        courses.forEach(createCourseSection);
-        function createCourseSection(element, index, array) {
+
+        $('#inputFields').append('<div class="panel panel-default" id="filterOptionsCourses" class="col-md-4"><div class="panel-heading">Menüart</div>');
+        $.each(courses, function (i) {
             var currentCourse =
-                '<input type="checkbox" id="' + element + '" />' +
-                '<label for="' + element + '">&nbsp;' + element + '</label><br />';
+                '<input type="checkbox" id="' + courses[i] + '" />' +
+                '<label for="' + courses[i] + '">&nbsp;' + courses[i] + '</label><br />';
             $('#filterOptionsCourses').append(currentCourse);
-        }
+        });
 
-        ////////////Section Styles////////////
-        $('#inputFields').append('<div class="panel panel-default" id="filterOptionsStyles" class="col-md-4"><div class="panel-heading">Arten</div>');
-        styles.forEach(createStyleSection);
-        function createStyleSection(element, index, array) {
+        $('#inputFields').append('<div class="panel panel-default" id="filterOptionsStyles" class="col-md-4"><div class="panel-heading">Region</div>');
+        $.each(styles, function (i) {
             var currentStyle =
-                '<input type="checkbox" id="' + element + '" />' +
-                '<label for="' + element + '">&nbsp;' + element + '</label><br />';
+                '<input type="checkbox" id="' + styles[i] + '" />' +
+                '<label for="' + styles[i] + '">&nbsp;' + styles[i] + '</label><br />';
             $('#filterOptionsStyles').append(currentStyle);
-        }
-    })
+        });
+    });
 }
 
 $(document).ready(function () {
-    $('#recipe-filter').on('click', function (event) {
+    $('#recipe-filter').on('click', function (e) {
+        e.stopPropagation();
         $('#filter-bar').slideToggle('show');
     });
 

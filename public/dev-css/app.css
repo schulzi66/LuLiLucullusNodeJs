@@ -313,18 +313,20 @@ html {
   margin-right: 5px;
 }
 
+/*#filter-bar {
+    width: 70%;
+    position: absolute;
+    margin: 0 10% 0 10%;
+    display: block;
+}*/
+
+
 /*#filterSubmitBox {
   color: #fff;
   position:absolute;
   bottom:0;
   right:0;
 }
-
-#filter-bar {
-  position: relative;
-  border: 1px solid black;
-  padding: 5px;
-}*/
 
 /* -----------------------------------------------------------------------------
     Rating styles
