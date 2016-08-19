@@ -14,7 +14,6 @@ function onConnection(socket) {
     socket.on('loadRecipesOverview', function () {
         var _dbController = new DatabaseController();
         _dbController.loadRecipesOverview(function (recepiesOverview) {
-          logger.log("loadRecipesOverview", recepiesOverview)
             socket.emit('loadedRecipesOverview', recepiesOverview);
         })
     });
@@ -46,7 +45,6 @@ function onConnection(socket) {
     socket.on('insertOrders', function () {
         var _dbController = new DatabaseController();
         _dbController.insertOrderInformation(function (orderDetails) {
-            console.log("SocketController " + orderDetails);
             socket.emit('insertedOrders', orderDetails);
         })
     });
