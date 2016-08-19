@@ -313,7 +313,7 @@ html {
   margin-right: 5px;
 }
 
-#filterSubmitBox {
+/*#filterSubmitBox {
   color: #fff;
   position:absolute;
   bottom:0;
@@ -324,7 +324,7 @@ html {
   position: relative;
   border: 1px solid black;
   padding: 5px;
-}
+}*/
 
 /* -----------------------------------------------------------------------------
     Rating styles

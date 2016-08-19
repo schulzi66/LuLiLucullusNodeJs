@@ -113,7 +113,7 @@ function loadFilterOptions() {
         }
 
         ////////////Section Allergens////////////
-        $('#inputFields').append('<div id="filterOptionsAllergens" class="col-md-4"><h3>Allergene</h3>');
+        $('#inputFields').append('<div class="panel panel-default" id="filterOptionsAllergens" class="col-md-4"><div class="panel-heading">Allergene</div>');
         allergens.forEach(createAllergenSection);
         function createAllergenSection(element, index, array) {
             var currentAllergen =
@@ -123,7 +123,7 @@ function loadFilterOptions() {
         }
 
         ////////////Section Courses////////////
-        $('#inputFields').append('<div id="filterOptionsCourses" class="col-md-4"><h3>Kurse</h3>');
+        $('#inputFields').append('<div class="panel panel-default" id="filterOptionsCourses" class="col-md-4"><div class="panel-heading">Kurse</div>');
         courses.forEach(createCourseSection);
         function createCourseSection(element, index, array) {
             var currentCourse =
@@ -133,7 +133,7 @@ function loadFilterOptions() {
         }
 
         ////////////Section Styles////////////
-        $('#inputFields').append('<div id="filterOptionsStyles" class="col-md-4"><h3>Arten</h3>');
+        $('#inputFields').append('<div class="panel panel-default" id="filterOptionsStyles" class="col-md-4"><div class="panel-heading">Arten</div>');
         styles.forEach(createStyleSection);
         function createStyleSection(element, index, array) {
             var currentStyle =
@@ -141,13 +141,10 @@ function loadFilterOptions() {
                 '<label for="' + element + '">&nbsp;' + element + '</label><br />';
             $('#filterOptionsStyles').append(currentStyle);
         }
-
-        //$.each(filterOptions, function(i){
-        //var filterOption_list_element =
-        //'<input type="checkbox" />' +
-        //'<label>&nbsp;' + filterOptions[i].allergenName + '</label><br />'
     })
 }
+
+jQuery(document).ready(function () {
 
 $(document).ready(function () {
     $('#recipe-filter').on('click', function (event) {
@@ -156,6 +153,13 @@ $(document).ready(function () {
     $('#lulilucullusAdminDropdownToggler').on('click', function (e) {
         e.stopPropagation();
         $('#lulilucullusAdminDropdown').slideToggle('show');
+
+    $('#filterSubmitBtn').on('click', function() {
+        var selectedOptions = [];
+        $('input:checked').each(function() {
+            selectedOptions.push(this.id);
+        });
+        console.log(selectedOptions);
     });
 
     $('html').click(function() {
