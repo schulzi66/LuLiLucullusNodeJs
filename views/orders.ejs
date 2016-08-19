@@ -35,25 +35,9 @@
                             </tr>
                             </thead>
                             <tbody id="orderOverview">
-                            <script>initOrdersOverview()</script>
-                            <tr class="odd gradeX">
-                                <td>Anlass 1</td>
-                                <td>Kunde 1</td>
-                                <td>Rezept 1</td>
-                                <td>1</td>
-                                <td class="center">16. August 2016</td>
-                                <td class="center"><a class="ordersOverviewRelease" href="#"><span
-                                                class="glyphicon glyphicon-ok"></span></a></td>
-                            </tr>
-                            <tr class="even gradeC">
-                                <td>Anlass 2</td>
-                                <td>Kunde 2</td>
-                                <td>Rezept 2</td>
-                                <td>2</td>
-                                <td class="center">17. August 2016</td>
-                                <td class="center"><a class="ordersOverviewRelease" href="#"><span
-                                                class="glyphicon glyphicon-ok"></span></a></td>
-                            </tr>
+                            <script>
+                                initOrdersOverview();
+                            </script>
                             </tbody>
                         </table>
                     </div>
@@ -82,10 +66,8 @@
 
         insertIntoOrdersTable(orderDetails);
         singleOrder.remove();
-        if ($('#orderOverview').has("td").length > 0) {
-            console.log(singleOrder.children());
-        } else if($('#orderOverview').has("td").length == 0){
-            console.log("EMpTY!");
+
+        if ($('#orderOverview').has("td").length == 0) {
             var emptyTable =
                     '<tr class="odd gradeX">' +
                     '<td colspan="' + singleOrder[0].cells.length + '"> Keine offenen Bestellungen! </td>' +

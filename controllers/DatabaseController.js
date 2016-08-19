@@ -58,10 +58,10 @@ DatabaseController.prototype.getUserByEmail = function (req, res, email, callbac
 DatabaseController.prototype.insertPasswordRequest = function (reqDate, authenticationCode, email) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO PASSWORDRESETS SET " +
-        "dateOfReset=" + connection.escape(reqDate) + ", " +
-        "resetCode=" + connection.escape(authenticationCode) + ", " +
-        "closed=" + false + ", " +
-        "userId=" + connection.escape(email);
+            "dateOfReset=" + connection.escape(reqDate) + ", " +
+            "resetCode=" + connection.escape(authenticationCode) + ", " +
+            "closed=" + false + ", " +
+            "userId=" + connection.escape(email);
 
         connection.query(queryString, function (err, rows) {
             connection.release();
@@ -165,11 +165,10 @@ DatabaseController.prototype.loadFilterOptions = function (callback) {
 
 DatabaseController.prototype.loadOrders = function (callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT * FROM orders WHERE isReleased=" + false;
+        var queryString = "SELECT * FROM bookings WHERE isReleased=" + false;
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-                logger.log(rows);
                 callback(rows);
             }
         });
@@ -182,17 +181,17 @@ DatabaseController.prototype.loadOrders = function (callback) {
 
 DatabaseController.prototype.insertOrderInformation = function (details, callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "UPDATE TABLE Orders SET " +
+        var queryString = "UPDATE TABLE bookings SET " +
             "eventName=" + connection.escape(details.anlass) +
             ", userName=" + connection.escape(details.kunde) +
             ", recipe=" + connection.escape(details.artikel) +
             ", amount=" + connection.escape(details.menge) +
             ", orderDate=" + connection.escape(details.auftragsdatum) +
+            ",typeID=" + connection.escape(3) +
             ", isReleased=" + true;
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-                logger.log(rows);
                 callback(rows);
             }
         });

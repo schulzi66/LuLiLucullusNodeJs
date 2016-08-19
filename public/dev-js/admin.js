@@ -27,8 +27,7 @@ function insertIntoOrdersTable(orderDetails) {
     var socket = io.connect();
     socket.emit('insertOrders', orderDetails);
     socket.on('insertedOrders', function (orders) {
-        console.log(orderDetails);
-        console.log(orders);
+        console.log("I DID IT!" + orders);
     });
 }
 
