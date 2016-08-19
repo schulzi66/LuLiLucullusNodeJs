@@ -2,24 +2,13 @@
 </ol>
 
 <script>
-    function firstLetterToUpperCase(str) {
-        return str.replace(/\w\S*/g, function (txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        });
-    }
-
-    function fixRootEntry(str) {
-        str = "#";
-        return str;
-    }
-
     var current = window.location.pathname.split("/");
     $.each(current, function (i) {
         if (current[i] == "") {
             current[i] = "Home";
         }
         var breadcrumb_navigation =
-                '<li class="breadcrumb-item"><a href="' + fixRootEntry(current[i]) + '" >' + firstLetterToUpperCase(current[i]) + '</a></li>';
+                '<li class="breadcrumb-item"><a href="' + Util.fixRootEntry(current[i]) + '" >' + Util.firstLetterToUpperCase(current[i]) + '</a></li>';
         $('.breadcrumb').append(breadcrumb_navigation);
     });
 </script>
