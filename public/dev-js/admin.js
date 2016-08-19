@@ -7,16 +7,28 @@ function initOrdersOverview() {
     socket.emit('loadOrdersOverview');
     socket.on('loadedOrdersOverview', function (orders) {
         var container = $('#orderOverview');
-
+        var tableRow;
+        var today = new Date().getTime();
         $.each(orders, function (i) {
+            if(i % 2 == 0) {
+                tableRow = '<tr class="even gradeC">';
+            } else {
+                tableRow = '<tr class="odd gradeX">';
+            }
             var ordersOverview =
-                '<tr class="odd gradeX">' +
-                '<td>' + orders[i].eventName + '</td>' +
-                '<td>' + orders[i].customerName + '</td>' +
-                '<td>' + orders[i].recipeName + '</td>' +
-                '<td>' + orders[i].orderAmount + '</td>' +
+                tableRow +
+                '<td class="center">' + orders[i].eventName + '</td>' +
+                '<td class="center">' + orders[i].customerName + '</td>' +
+                '<td class="center">' + orders[i].recipeName + '</td>' +
+                '<td class="center">' + orders[i].orderAmount + '</td>' +
                 '<td class="center">' + orders[i].orderDate + '</td>' +
-                '<td class="center"><a class="ordersOverviewRelease" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>' +
+                '<td class="center">' + orders[i].orderDate + '</td>' +
+                '<td class="center">' + (today - orders[i].orderDate) + '</td>' +
+                '<a class="ordersOverviewRelease" href="administration/orders#">' +
+                '<span class="glyphicon glyphicon-ok">' +
+                '</span>' +
+                '</a>' +
+                '</td>' +
                 '</tr>';
             container.append(ordersOverview);
         });
@@ -39,3 +51,4 @@ function insertNewRecipe(recipe) {
     var socket = io.connect();
     socket.emit('insertNewRecipe', recipe);
 }
+
