@@ -57,7 +57,8 @@ INSERT INTO BookingTypes (typeID, type)
 VALUES
 (0, 'Kochen'),
 (1, 'Gastroservice'),
-(2, 'Messe');
+(2, 'Messe'),
+(3, 'Bestellung');
 
 -- Units
 INSERT INTO Units (unitID, unitName)
@@ -99,3 +100,8 @@ VALUES
 -- BookingEmployees
 
 -- BookingRecipes
+INSERT INTO BookingRecipes (amountOfServings, bookingID, recipeID)
+VALUES
+(2,2,2)
+,(1,1,1)
+,(1,3,3);

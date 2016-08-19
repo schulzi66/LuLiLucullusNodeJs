@@ -140,14 +140,14 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
 }
 
 DatabaseController.prototype.loadFilterOptions = function (callback) {
+    var queryString = "SELECT recipes.recipeName, styles.styleName, courses.courseName, recipeingredients.amount, ingredients.ingredientName, allergenes.allergenName FROM recipes" +
+        "JOIN courses ON courses.courseID = recipes.courseID " +
+        "JOIN styles ON styles.styleID = recipes.styleID " +
+        "LEFT JOIN recipeingredients ON recipeingredients.recipeID = recipe.recipeID " +
+        "LEFT JOIN ingredients ON ingredients.ingredientID = recipeingredients.ingredientID " +
+        "LEFT JOIN ingredientsallergenes ON ingredientsallergenes.ingredientID = ingredients.ingredientID " +
+        "LEFT JOIN allergenes ON allergenes.allergenID = ingredientsallergenes.allergenID";
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT r.recipeName, s.styleName, c.courseName, ri.amount, i.ingredientName, a.allergenName FROM recipes AS r " +
-            "JOIN courses AS c ON c.courseID = r.courseID " +
-            "JOIN styles AS s ON s.styleID = r.styleID " +
-            "LEFT JOIN recipeingredients AS ri ON ri.recipeID = r.recipeID " +
-            "LEFT JOIN ingredients AS i ON i.ingredientID = ri.ingredientID " +
-            "LEFT JOIN ingredientsallergenes AS ia ON ia.ingredientID = i.ingredientID " +
-            "LEFT JOIN allergenes AS a ON a.allergenID = ia.allergenID";
 
         connection.query(queryString, function (err, rows) {
             connection.release();
@@ -165,7 +165,18 @@ DatabaseController.prototype.loadFilterOptions = function (callback) {
 
 DatabaseController.prototype.loadOrders = function (callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT * FROM bookings WHERE isReleased=" + false;
+        var queryString =
+            "SELECT bookings.eventName, " +
+                    "UNIX_TIMESTAMP(bookings.dateBegin) AS orderDate, " +
+                    "concat(users.name,' ', users.familyName) AS customerName, " +
+                    "recipes.recipeName, " +
+                    "bookingRecipes.amountOfServings AS orderAmount " +
+            "FROM bookings " +
+            "JOIN bookingRecipes ON bookingRecipes.bookingID = bookings.bookingID " +
+            "JOIN users ON users.userID = bookings.userID " +
+            "JOIN recipes ON  recipes.recipeID = bookingRecipes.recipeID " +
+            "WHERE isReleased=" + false;
+        console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -183,12 +194,12 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
     pool.getConnection(function (err, connection) {
         var queryString = "UPDATE TABLE bookings SET " +
             "eventName=" + connection.escape(details.anlass) +
-            ", userName=" + connection.escape(details.kunde) +
-            ", recipe=" + connection.escape(details.artikel) +
-            ", amount=" + connection.escape(details.menge) +
-            ", orderDate=" + connection.escape(details.auftragsdatum) +
+            ",userName=" + connection.escape(details.kunde) +
+            ",recipe=" + connection.escape(details.artikel) +
+            ",amount=" + connection.escape(details.menge) +
+            ",orderDate=" + connection.escape(details.auftragsdatum) +
             ",typeID=" + connection.escape(3) +
-            ", isReleased=" + true;
+            ",isReleased=" + true;
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
