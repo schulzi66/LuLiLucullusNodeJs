@@ -115,7 +115,7 @@ function loadFilterOptions() {
         $('#inputFields').append('<div class="panel panel-default" id="filterOptionsAllergens" class="col-md-4"><div class="panel-heading">Allergene</div>');
         $.each(allergens, function (i) {
             var currentAllergen =
-                '<input type="checkbox" id="' + allergens[i] + '" />' +
+                '<input type="checkbox" id="' + allergens[i] + '" data-type="allergen" />' +
                 '<label for="' + allergens[i] + '">&nbsp;' + allergens[i] + '</label><br />';
             $('#filterOptionsAllergens').append(currentAllergen);
         });
@@ -124,7 +124,7 @@ function loadFilterOptions() {
         $('#inputFields').append('<div class="panel panel-default" id="filterOptionsCourses" class="col-md-4"><div class="panel-heading">Menüart</div>');
         $.each(courses, function (i) {
             var currentCourse =
-                '<input type="checkbox" id="' + courses[i] + '" />' +
+                '<input type="checkbox" id="' + courses[i] + '" data-type="course" />' +
                 '<label for="' + courses[i] + '">&nbsp;' + courses[i] + '</label><br />';
             $('#filterOptionsCourses').append(currentCourse);
         });
@@ -132,7 +132,7 @@ function loadFilterOptions() {
         $('#inputFields').append('<div class="panel panel-default" id="filterOptionsStyles" class="col-md-4"><div class="panel-heading">Region</div>');
         $.each(styles, function (i) {
             var currentStyle =
-                '<input type="checkbox" id="' + styles[i] + '" />' +
+                '<input type="checkbox" id="' + styles[i] + '" data-type="style" />' +
                 '<label for="' + styles[i] + '">&nbsp;' + styles[i] + '</label><br />';
             $('#filterOptionsStyles').append(currentStyle);
         });
@@ -148,8 +148,10 @@ $(document).ready(function () {
     $('#filterSubmitBtn').on('click', function () {
         var selectedOptions = [];
         $('input:checked').each(function () {
-            selectedOptions.push(this.id);
+            selectedOptions.push(this.getAttribute('data-type') + ":" + this.id);
         });
+        //for testing - PLEASE LEAVE IT THERE!
+        //console.log(selectedOptions);
     });
 
     $('#lulilucullusAdminDropdownToggler').on('click', function (e) {
