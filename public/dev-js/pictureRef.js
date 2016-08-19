@@ -5,4 +5,4 @@ function convertPictureRefToPath(pictureRef) {
     var path = imgDir + pictureRef + fileExtension[0];
     //TODO: check if file exists
     return path;
-}
+}ˆ
