@@ -81,8 +81,10 @@
         var orderDetails = JSON.stringify(json);
 
         insertIntoOrdersTable(orderDetails);
+        singleOrder.remove();
     });
 </script>
+<% include partials/adminHeader %>
 </body>
 <% include partials/footer %>
 </html>

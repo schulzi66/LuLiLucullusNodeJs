@@ -153,17 +153,13 @@ $(document).ready(function () {
     $('#recipe-filter').on('click', function (event) {
         $('#filter-bar').slideToggle('show');
     });
-    $('#lulilucullusAdminDropdownToggler').on('click', function (event) {
+    $('#lulilucullusAdminDropdownToggler').on('click', function (e) {
+        e.stopPropagation();
         $('#lulilucullusAdminDropdown').slideToggle('show');
     });
 
-    $(document).click(function (e) {
-        e.stopPropagation();
-        var container = $("#lulilucullusAdminDropdownToggler");
+    $('html').click(function() {
+        $('#lulilucullusAdminDropdown').slideToggle('hide');
+    });
 
-        //check if the clicked area is dropDown or not
-        if (container.has(e.target).length === 0) {
-            $('#lulilucullusAdminDropdown').slideToggle('hide');
-        }
-    })
 });
