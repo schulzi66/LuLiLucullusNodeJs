@@ -68,7 +68,6 @@
     </div>
     <!-- /.row -->
 </div>
-
 <script>
     $('.ordersOverviewRelease').on('click', function (e) {
         e.preventDefault();
@@ -79,6 +78,7 @@
         $.each(singleOrder[0].cells, function (i) {
             json["" + fields[0].cells[i].innerText.toLocaleLowerCase()] = "" + singleOrder[0].cells[i].innerText;
         });
+        json["freigeben"] = true;
         var orderDetails = JSON.stringify(json);
         console.log(orderDetails);
         insertIntoOrdersTable(orderDetails);
