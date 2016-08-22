@@ -21,7 +21,8 @@ function initOrdersOverview() {
                 '<td class="center">' + orders[i].recipeName + '</td>' +
                 '<td class="center">' + orders[i].orderAmount + '</td>' +
                 '<td class="center">' + Util.convertMySQLTimestampToValidTimestamp(orders[i].orderDate) + '</td>' +
-                '<td class="center">' + Util.getMaturityPeriod(orders[i].orderDate) + " Tagen" + '</td>' +
+                '<td class="center">' + Util.convertMySQLTimestampToValidTimestamp(orders[i].maturityDate) + '</td>' +
+                '<td class="center">' + Util.getMaturityPeriod(orders[i].orderDate, orders[i].maturityDate) + " Tagen" + '</td>' +
                 '<td class="center">' +
                 '<a class="ordersOverviewRelease" href="#">' +
                 '<span class="glyphicon glyphicon-ok">' +

@@ -222,6 +222,7 @@ DatabaseController.prototype.loadOrders = function (callback) {
         var queryString =
             "SELECT bookings.eventName, " +
                     "UNIX_TIMESTAMP(bookings.dateBegin) AS orderDate, " +
+                    "UNIX_TIMESTAMP(bookings.dateEnd) AS maturityDate, " +
                     "concat(users.name,' ', users.familyName) AS customerName, " +
                     "recipes.recipeName, " +
                     "bookingRecipes.amountOfServings AS orderAmount " +
