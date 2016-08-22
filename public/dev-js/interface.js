@@ -158,8 +158,9 @@ $(document).ready(function () {
         e.stopPropagation();
         $('#lulilucullusAdminDropdown').slideToggle('show');
     });
-    $('html').click(function () {
-        $('#lulilucullusAdminDropdown').slideToggle('hide');
+    $('html').click(function (e) {
+        e.preventDefault();
+        $('#lulilucullusAdminDropdown').hide("slow");
     });
 
 });

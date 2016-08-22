@@ -23,7 +23,7 @@ function initOrdersOverview() {
                 '<td class="center">' + Util.convertMySQLTimestampToValidTimestamp(orders[i].orderDate) + '</td>' +
                 '<td class="center">' + Util.getMaturityPeriod(orders[i].orderDate) + " Tagen" + '</td>' +
                 '<td class="center">' +
-                '<a class="ordersOverviewRelease" href="administration/orders#">' +
+                '<a class="ordersOverviewRelease" href="#">' +
                 '<span class="glyphicon glyphicon-ok">' +
                 '</span>' +
                 '</a>' +

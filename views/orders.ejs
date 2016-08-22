@@ -80,7 +80,7 @@
             json["" + fields[0].cells[i].innerText.toLocaleLowerCase()] = "" + singleOrder[0].cells[i].innerText;
         });
         var orderDetails = JSON.stringify(json);
-
+        console.log(orderDetails);
         insertIntoOrdersTable(orderDetails);
         singleOrder.remove();
 
