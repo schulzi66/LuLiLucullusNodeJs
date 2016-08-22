@@ -156,11 +156,10 @@ $(document).ready(function () {
 
     $('#lulilucullusAdminDropdownToggler').on('click', function (e) {
         e.stopPropagation();
-        $('#lulilucullusAdminDropdown').slideToggle('show');
+        $('#lulilucullusAdminDropdown').show('slow');
     });
-    $('html').click(function (e) {
-        e.preventDefault();
-        $('#lulilucullusAdminDropdown').hide("slow");
+    $('html').click(function () {
+        $('#lulilucullusAdminDropdown').hide('slow');
     });
 
 });
