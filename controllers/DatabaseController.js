@@ -77,6 +77,60 @@ DatabaseController.prototype.insertPasswordRequest = function (reqDate, authenti
     });
 }
 
+DatabaseController.prototype.getPasswordRequest = function (userId, authenticationCode, callback) {
+    pool.getConnection(function (err, connection) {
+      var queryString = "SELECT * FROM PASSWORDRESETS WHERE USERID=" + connection.escape(userId) +
+      "AND RESETCODE =" +connection.escape(authenticationCode);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+              callback(rows)
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.closePasswordRequest = function (passwordRequest, callback) {
+    pool.getConnection(function (err, connection) {
+      // var queryString = "SELECT * FROM PASSWORDRESETS WHERE USERID=" + connection.escape(userId) +
+      // "AND RESETCODE =" +connection.escape(authenticationCode);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+              callback(rows)
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.changePassword = function (passwordRequest, callback) {
+    pool.getConnection(function (err, connection) {
+      // var queryString = "SELECT * FROM PASSWORDRESETS WHERE USERID=" + connection.escape(userId) +
+      // "AND RESETCODE =" +connection.escape(authenticationCode);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+              callback(rows)
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
 DatabaseController.prototype.getAdminByEmail = function (req, res, email, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "SELECT * FROM EMPLOYEES WHERE employeeID=" + connection.escape(email) +
