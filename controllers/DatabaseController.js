@@ -97,12 +97,12 @@ DatabaseController.prototype.getPasswordRequest = function (userId, authenticati
 
 DatabaseController.prototype.closePasswordRequest = function (passwordRequest, callback) {
     pool.getConnection(function (err, connection) {
-      // var queryString = "SELECT * FROM PASSWORDRESETS WHERE USERID=" + connection.escape(userId) +
-      // "AND RESETCODE =" +connection.escape(authenticationCode);
+      var queryString = "UPDATE PASSWORDRESETS SET CLOSED = TRUE WHERE RESETCODE = " + connection.escape(passwordRequest.resetCode)+
+      " And userId ="+ connection.escape(passwordRequest.userID);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-              callback(rows)
+              callback(passwordRequest.userID, passwordRequest.oldPassword, passwordRequest.newPassword);
             }
         });
 
@@ -115,7 +115,7 @@ DatabaseController.prototype.closePasswordRequest = function (passwordRequest, c
 
 DatabaseController.prototype.changePassword = function (passwordRequest, callback) {
     pool.getConnection(function (err, connection) {
-      // var queryString = "SELECT * FROM PASSWORDRESETS WHERE USERID=" + connection.escape(userId) +
+      // var queryString = "UPDATE USERS SET PASSWORD WHERE USERID=" + connection.escape(userId) +
       // "AND RESETCODE =" +connection.escape(authenticationCode);
         connection.query(queryString, function (err, rows) {
             connection.release();
