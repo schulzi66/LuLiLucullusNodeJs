@@ -94,9 +94,9 @@ VALUES
 -- Bookings
 INSERT INTO Bookings (bookingID, eventName, dateBegin, dateEnd, street, plz, location, userId, typeID, isReleased)
 VALUES
-(1, 'Bestellung Hochzeit', '2016-08-22 12:00:00', '2016-08-22 12:00:00', 'Musterstraße 2', '12345', 'Musterort', 'mmuster@test.de', 3, false)
-,(2, 'Bestellung Geburtstag', '2016-08-27 12:00:00', '2016-08-27 12:00:00', 'Musterstraße 3', '22345', 'Musterort', 'mmuster@test.de', 3, false)
-,(3, 'Bestellung Geburtstag', '2016-08-27 12:00:00', '2016-08-27 12:00:00', 'Musterstraße 23', '99821', 'Musterort', 'mmuster@test.de', 3, false);
+(1, 'Bestellung Hochzeit', '2016-08-22 12:00:00', '2016-08-30 12:00:00', 'Musterstraße 2', '12345', 'Musterort', 'mmuster@test.de', 3, false)
+,(2, 'Bestellung Geburtstag', '2016-08-27 12:00:00', '2016-09-10 12:00:00', 'Musterstraße 3', '22345', 'Musterort', 'mmuster@test.de', 3, false)
+,(3, 'Bestellung Geburtstag', '2016-08-27 12:00:00', '2016-10-22 12:00:00', 'Musterstraße 23', '99821', 'Musterort', 'mmuster@test.de', 3, false);
 -- BookingEmployees
 
 -- BookingRecipes

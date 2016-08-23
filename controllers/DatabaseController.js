@@ -222,6 +222,7 @@ DatabaseController.prototype.loadOrders = function (callback) {
         var queryString =
             "SELECT bookings.eventName, " +
                     "UNIX_TIMESTAMP(bookings.dateBegin) AS orderDate, " +
+                    "UNIX_TIMESTAMP(bookings.dateEnd) AS maturityDate, " +
                     "concat(users.name,' ', users.familyName) AS customerName, " +
                     "recipes.recipeName, " +
                     "bookingRecipes.amountOfServings AS orderAmount " +
@@ -254,7 +255,9 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
             ",orderDate=" + connection.escape(details.auftragsdatum) +
             ",typeID=" + connection.escape(3) +
             ",isReleased=" + true;
+        //TODO: typeID dynamic
         connection.query(queryString, function (err, rows) {
+            console.log(queryString);
             connection.release();
             if (!err) {
                 callback(rows);

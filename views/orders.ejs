@@ -31,6 +31,7 @@
                                 <th>Artikel</th>
                                 <th>Menge</th>
                                 <th>Auftragsdatum</th>
+                                <th>Fälligkeitsdatum</th>
                                 <th>Fällig in</th>
                                 <th>Freigeben</th>
                             </tr>
@@ -42,6 +43,7 @@
                                 <td>Kunde 1</td>
                                 <td>Rezept 1</td>
                                 <td>1</td>
+                                <td class="center">20. August 2016</td>
                                 <td class="center">26. August 2016</td>
                                 <td class="center">7 Tagen</td>
                                 <td class="center"><a class="ordersOverviewRelease" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>
@@ -51,6 +53,7 @@
                                 <td>Kunde 2</td>
                                 <td>Rezept 2</td>
                                 <td>2</td>
+                                <td class="center">26. August 2016</td>
                                 <td class="center">31. August 2016</td>
                                 <td class="center">14 Tagen</td>
                                 <td class="center"><a class="ordersOverviewRelease" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>
@@ -68,19 +71,19 @@
     </div>
     <!-- /.row -->
 </div>
-
 <script>
     $('.ordersOverviewRelease').on('click', function (e) {
         e.preventDefault();
         var singleOrder = $(this).parents("tr:first");
         var fields = $('#ordersTableHead');
         var json = {};
-
+        console.log($(this).parents("tr:first"));
         $.each(singleOrder[0].cells, function (i) {
             json["" + fields[0].cells[i].innerText.toLocaleLowerCase()] = "" + singleOrder[0].cells[i].innerText;
         });
+        json["freigeben"] = true;
         var orderDetails = JSON.stringify(json);
-
+        console.log(orderDetails);
         insertIntoOrdersTable(orderDetails);
         singleOrder.remove();
 

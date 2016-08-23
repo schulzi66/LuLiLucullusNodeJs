@@ -25,8 +25,6 @@ Util.convertMySQLTimestampToValidTimestamp = function(timestamp) {
     return moment(timestamp*1000).format('LL');
 }
 //TODO: calculation
-Util.getMaturityPeriod = function (maturityDate) {
-    var dateFormatted = moment.duration(moment().diff(maturityDate));
-    var period = dateFormatted.asDays();
-    return period;
+Util.getMaturityPeriod = function (orderDate, maturityDate) {
+    return Math.abs(maturityDate - orderDate)/60/60/24;
 }
