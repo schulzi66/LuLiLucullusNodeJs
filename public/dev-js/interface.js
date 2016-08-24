@@ -10,9 +10,7 @@ function loadRecipesOverview() {
         $.each(recipes, function (i) {
             var recipe_list_element =
                 '<li class="recipes-overview-item">' +
-                '<object class="recipes-image-fallback" data="img/default.png" type="image/png">' +
                 '<img src="' + convertPictureRefToPath(recipes[i].pictureRef) + '"' + '>' +
-                '</object>' +
                 '<h3 class="recipes-overview-headline text-uppercase">' + recipes[i].recipeName + '</h3>' +
                 '<p class="recipes-overview-short-description">' + recipes[i].shortDescription + '</p>' +
                 '<p>' +
@@ -31,9 +29,8 @@ function loadRecipeFromId(id) {
     var socket = io.connect();
     socket.emit('loadRecipeFromId', id);
     socket.on('loadedRecipe', function (recipe) {
-        var recipe_image = '<object class="recipes-image-fallback" data="img/default.png" type="image/png">' +
-            '<img class="img-responsive img-rounded" src="' + convertPictureRefToPath(recipe[0].pictureRef) + '">' +
-            '</object>';
+        var recipe_image =
+            '<img class="img-responsive img-rounded" data-failover="img/default.png" src="' + convertPictureRefToPath(recipe[0].pictureRef) + '">';
         $('#recipe-image-wrapper').append(recipe_image);
         //TODO: Print Preview stylen
         var recipe_details =
