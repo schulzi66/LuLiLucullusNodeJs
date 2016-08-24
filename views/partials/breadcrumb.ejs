@@ -2,13 +2,17 @@
 </ol>
 
 <script>
-    var current = window.location.pathname.split("/");
-    $.each(current, function (i) {
-        if (current[i] == "") {
-            current[i] = "Home";
-        }
-        var breadcrumb_navigation =
-                '<li class="breadcrumb-item"><a href="' + Util.fixRootEntry(current[i]) + '" >' + Util.firstLetterToUpperCase(current[i]) + '</a></li>';
-        $('.breadcrumb').append(breadcrumb_navigation);
+    $(document).on('ready', function () {
+        var current = window.location.pathname.split("/");
+        $.each(current, function (i) {
+            if (current[i] == "") {
+                current[i] = "Home";
+            }
+            var breadcrumb_navigation =
+                    '<li class="breadcrumb-item"><a href="' + Util.fixRootEntry(current[i]) + '" >' + Util.firstLetterToUpperCase(current[i]) + '</a></li>';
+            $('.breadcrumb').append(breadcrumb_navigation);
+        });
+        $('.breadcrumb > li:last-child > a').attr('href', document.URL);
+        console.log();
     });
 </script>
