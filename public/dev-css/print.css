@@ -18,4 +18,10 @@
         width: 150px;
         height: auto;
     }
+    #copyrightPrint {
+        visibility: visible;
+    }
+    #footer-wrapper {
+        visibility: hidden;
+    }
 }
