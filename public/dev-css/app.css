@@ -251,15 +251,14 @@ html {
 /* -----------------------------------------------------------------------------
     Recipe Details Styles
 ----------------------------------------------------------------------------- */
+#copyrightPrint {
+    visibility: hidden;
+}
 
 .recipe-instructions {
     margin-top: 20px
 }
 
-#recipe-image-wrapper {
-    width: 100%;
-    padding-left: 0px;
-}
 .recipe-container-row {
     margin-left: auto;
     margin-right: auto;
@@ -270,7 +269,7 @@ html {
     margin-left: 90px;
 }
 
-.recicpe-rating-wrapper {
+.recipe-rating-wrapper {
     margin-top: 7px;
 }
 
