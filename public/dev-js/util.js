@@ -12,8 +12,10 @@ Util.firstLetterToUpperCase = function (str) {
 }
 
 Util.fixRootEntry = function (str) {
-    str = "#";
-    return str;
+    if(str === 'Home') {
+        str = "#";
+        return str;
+    }
 }
 
 Util.lookup = function (fileExtension) {
