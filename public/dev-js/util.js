@@ -26,7 +26,11 @@ Util.convertMySQLTimestampToValidTimestamp = function(timestamp) {
     moment.locale('de');
     return moment(timestamp*1000).format('LL');
 }
-//TODO: calculation
+
 Util.getMaturityPeriod = function (orderDate, maturityDate) {
-    return Math.abs(maturityDate - orderDate)/60/60/24;
+    return (Math.abs(maturityDate - orderDate)/60/60/24);
+}
+
+Util.calculateIngredientsAmount = function () {
+    console.log("test");
 }

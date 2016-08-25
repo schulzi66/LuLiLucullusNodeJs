@@ -25,7 +25,7 @@ function loadRecipesOverview() {
 /* #####################################
  Load single recipe by ID
  ##################################### */
-function loadRecipeFromId(id) {
+function loadRecipeFromId(id, portions) {
     var socket = io.connect();
     socket.emit('loadRecipeFromId', id);
     socket.on('loadedRecipe', function (recipe) {
@@ -69,11 +69,11 @@ function loadRecipeFromId(id) {
         $.each(recipe, function (i) {
             var recipe_ingredients_list =
                 '<ul class="recipe-ingredients-list recipe-ingredients">' +
-                '<li class="recipe-ingredients-list-item-first-column">' +
+                '<li id="ingredientList_ ' + i + '" class="recipe-ingredients-list-item-first-column">' +
                 recipe[i].ingredientName +
                 '</li>' +
                 '<li class="recipe-ingredients-list-item-second-column">' +
-                recipe[i].amount + " " + recipe[i].unitName +
+                portions * recipe[i].amount + " " + recipe[i].unitName +
                 '</li>' +
                 '</ul>';
 
