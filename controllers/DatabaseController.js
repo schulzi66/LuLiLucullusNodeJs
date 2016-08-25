@@ -18,16 +18,8 @@ var DatabaseController = function () {
 }
 
 DatabaseController.prototype.hash = function (password) {
-    return password;
-//TODO Julian: not working ;)
-    // bcrypt.hash(password, 10, function (err, hash) {
-    //     if (!err) {
-    //         console.log("DBController, PW:" + password, "HASH: " + hash);
-    //         return hash;
-    //     } else {
-    //         console.log('Fehler: ' + hash);
-    //     }
-    // });
+    var hash = bcrypt.hashSync(password);
+    return hash;
 }
 
 DatabaseController.prototype.connect = function (startServerCallback) {
@@ -54,7 +46,7 @@ DatabaseController.prototype.getUserByEmail = function (req, res, email, callbac
         });
     });
 }
-//TODO:
+
 DatabaseController.prototype.insertPasswordRequest = function (reqDate, authenticationCode, email) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO PASSWORDRESETS SET " +
@@ -77,14 +69,16 @@ DatabaseController.prototype.insertPasswordRequest = function (reqDate, authenti
     });
 }
 
-DatabaseController.prototype.getPasswordRequest = function (userId, authenticationCode, callback) {
+DatabaseController.prototype.getOpenPasswordRequest = function (req, res, callback) {
     pool.getConnection(function (err, connection) {
-      var queryString = "SELECT * FROM PASSWORDRESETS WHERE USERID=" + connection.escape(userId) +
-      "AND RESETCODE =" +connection.escape(authenticationCode);
+      var queryString = "SELECT * FROM PASSWORDRESETS WHERE USERID=" + connection.escape(req.body.userID) + " " +
+      "AND CLOSED= " + false + " " +
+      "AND RESETCODE =" + connection.escape(req.body.authenticationCode);
+      console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-              callback(rows)
+              callback(req, res, rows[0])
             }
         });
 
@@ -95,14 +89,14 @@ DatabaseController.prototype.getPasswordRequest = function (userId, authenticati
     });
 }
 
-DatabaseController.prototype.closePasswordRequest = function (passwordRequest, callback) {
+DatabaseController.prototype.closePasswordRequest = function (req, res, passwordRequest, callback) {
     pool.getConnection(function (err, connection) {
       var queryString = "UPDATE PASSWORDRESETS SET CLOSED = TRUE WHERE RESETCODE = " + connection.escape(passwordRequest.resetCode)+
       " And userId ="+ connection.escape(passwordRequest.userID);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-              callback(passwordRequest.userID, passwordRequest.oldPassword, passwordRequest.newPassword);
+              callback(res, passwordRequest.userID, req.body.password);
             }
         });
 
@@ -113,14 +107,14 @@ DatabaseController.prototype.closePasswordRequest = function (passwordRequest, c
     });
 }
 
-DatabaseController.prototype.changePassword = function (passwordRequest, callback) {
+DatabaseController.prototype.changePassword = function (res, userId, newPassword, callback) {
     pool.getConnection(function (err, connection) {
-      // var queryString = "UPDATE USERS SET PASSWORD WHERE USERID=" + connection.escape(userId) +
-      // "AND RESETCODE =" +connection.escape(authenticationCode);
+      var queryString = "UPDATE USERS SET PASSWORD=" + connection.escape(DatabaseController.prototype.hash(newPassword)) + " " +
+      "WHERE USERID=" + connection.escape(userId);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-              callback(rows)
+              callback(res);
             }
         });
 
@@ -300,6 +294,8 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             "billingAddressLocation=" + connection.escape(null) + ", " +
             "billingAddressPlz=" + connection.escape(null) + ", " +
             "internal=" + connection.escape(internal);
+
+            console.log("external signup: " + queryString);
 
         connection.query(queryString,
             function (err) {

@@ -55,31 +55,17 @@ router.post('/', passport.authenticate('local-login', {failureRedirect: '/admini
 
 //Callback function after the login result returns from the database
 function loginAdmin(req, res, user) {
-console.log("loginAdmin retun user value: " + user);
     if (user === undefined) {
         req.session.message = 'Sie besitzen nicht die nötigen Berechtigungen';
         res.redirect('/administration-login');
-    } else if (user) {
-        var stored_hash;
-        stored_hash = user.password;
+    } else if (bcrypt.compareSync(req.body.password, user.password)) {
         req.session.user = user;
         req.session.user.displayName = user.familyName + " " + user.name;
         res.redirect('/administration');
-
-//TODO JULIAN bcrypt fix!
-        // bcrypt.compare("" + req.body.password, stored_hash, function (err, res) {
-        //     if (err) {
-        //         req.session.message = 'Falsche Emailadresse oder falsches Passwort.';
-        //         res.redirect('/login');
-        //     } else if (res === true) {
-        //         //save user across the routes
-        //
-        //         req.session.user = user;
-        //         req.session.user.displayName = user.vorname + " " + user.name;
-        //         console.log("res: "+ res);
-        //         res.redirect('/');
-        //     }
-        // });
+    }
+    else {
+      req.session.message = 'Falsches Passwort';
+      res.redirect('/administration-login');
     }
 }
 

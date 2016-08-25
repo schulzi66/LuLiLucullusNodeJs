@@ -10,14 +10,21 @@ router.get('/', function (req, res) {
 
 /* Change Password Command */
 router.post('/', function (req, res) {
-  console.log("req.body.userid: "+  req.body.userID);
-  console.log("req.body.authenticationCode: "+  req.body.authenticationCode);
-    _dbController.getPasswordRequest(req.body.userID, req.body.authenticationCode, function (passwordRequest) {
+    _dbController.getOpenPasswordRequest(req, res, function (req, res, passwordRequest) {
       //passwordRequest exists
       if (passwordRequest !== undefined) {
-        _dbController.closePasswordRequest(passwordRequest, function (userId, oldPassword, newPassword) {
-          _dbController.changePassword(userId, oldPassword, newPassword);
+        _dbController.closePasswordRequest(req, res, passwordRequest, function (res, userId, newPassword) {
+          _dbController.changePassword(res, userId, newPassword, function () {
+            req.session.message = undefined;
+            res.redirect("/login");
+          });
         });
+      }
+      //no password request with requestcode exists
+      else {
+        // req.session.message = ;
+        res.render('change-password', {message: 'Es liegt kein aktueller Antrag auf eine Änderung des Passworts mit den eingegebenen Daten vor.'});
+        // req.session.message = undefined;
       }
     })
 });
