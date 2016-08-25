@@ -59,11 +59,13 @@ html {
 .form-group > label {
     padding: 0;
 }
-
+.portions-input {
+    width: 25%;
+}
 /* -----------------------------------------------------------------------------
     Button styles
 -----------------------------------------------------------------------------*/
-.btn {
+.btn:not(.btn-portions) {
     background-color: #702632;
     border-color: #4a1921;
     margin-bottom: 20px;
@@ -74,6 +76,11 @@ html {
     border-color: #4a1921;
 }
 
+.btn-portions {
+    top: 0px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
 /* -----------------------------------------------------------------------------
     Header styles
 -----------------------------------------------------------------------------*/
@@ -302,6 +309,10 @@ html {
 .recipe-ingredients-list-item-second-column {
     padding-right: 40px;
     float: right;
+}
+
+#portionsWrapper {
+    margin-top: 2%;
 }
 /* -----------------------------------------------------------------------------
     Recipe Filter Styles

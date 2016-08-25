@@ -20,18 +20,11 @@
                     /**
                      * JUST A FREAKIN ANNOYING SHITTY WORKAROUND!!!
                      */
-                    loadRecipeFromId(parseInt(document.URL.split('=')[1]), parseInt(document.URL.split('=')[2])); //TODO use right id from recipe
+                    loadRecipeFromId(parseInt(document.URL.split('=')[1]), parseInt(document.URL.split('=')[2]));
                 </script>
             </div>
         </div>
-        <div>
-            <form id="calculateIngredientsForm">
-                <label for="portions" class="col-sm-2 control-label">Portionen</label>
-                <input id="ingredientsAmount" class="form-control" name="portions" value="1"></input>
-                <button id="submit" name="submit" type="submit">
-                    <span class="glyphicon glyphicon-refresh"></span>
-                </button>
-            </form>
+        <div id="portionsWrapper">
         </div>
     </div>
     <div id="recipe-preparation" class="col-md-12">

@@ -79,6 +79,19 @@ function loadRecipeFromId(id, portions) {
 
             $('#ingredients-wrapper').append(recipe_ingredients_list);
         });
+        var recipe_portions =
+            '<form id="calculateIngredientsForm" class="form-inline">' +
+                '<div class="form-group">' +
+                    '<label class="col-sm-2 control-label sr-only"  for="portions">Portionen</label>' +
+                    '<div class="input-group">' +
+                        '<div class="input-group-addon">Portionen</div>' +
+                        '<input type="hidden" name="id" value="' + id + '">' +
+                        '<input id="ingredientsAmount" class="form-control portions-input" name="portions" value="1">' +
+                        '<span class="input-group-btn"><button id="submit" type="submit" class="btn-portions btn glyphicon glyphicon-refresh"/></span>' +
+                    '</div>' +
+                '</div>' +
+            '</form>';
+        $('#portionsWrapper').append(recipe_portions);
     });
 }
 
