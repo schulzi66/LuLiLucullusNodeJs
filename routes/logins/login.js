@@ -81,27 +81,15 @@ function loginUser(req, res, user) {
     if (user === undefined) {
         req.session.message = 'Scheinbar haben Sie keine Account bei uns.';
         res.redirect('/signup');
-    } else if (user) {
-        var stored_hash;
-        stored_hash = user.password;
-        req.session.user = user;
-        req.session.user.displayName = user.familyName + " " + user.name;
-        res.redirect('/');
-
-//TODO JULIAN bcrypt fix!
-        // bcrypt.compare("" + req.body.password, stored_hash, function (err, res) {
-        //     if (err) {
-        //         req.session.message = 'Falsche Emailadresse oder falsches Passwort.';
-        //         res.redirect('/login');
-        //     } else if (res === true) {
-        //         //save user across the routes
-        //
-        //         req.session.user = user;
-        //         req.session.user.displayName = user.vorname + " " + user.name;
-        //         console.log("res: "+ res);
-        //         res.redirect('/');
-        //     }
-        // });
+    } else if (bcrypt.compareSync(req.body.password, user.password)) {
+      //user has entered correct password
+      req.session.user = user;
+      req.session.user.displayName = user.name + " " + user.familyName;
+      res.redirect('/');
+    }
+    else {
+      req.session.message = 'Falsches Passwort';
+      res.redirect('/login');
     }
 }
 

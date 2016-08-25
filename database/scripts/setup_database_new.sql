@@ -36,10 +36,10 @@ CREATE TABLE Users
   location VARCHAR(100),
   telefonNumber VARCHAR(50),
   password VARCHAR(250) NOT NULL,
-  plz VARCHAR(50) NOT NULL,
-  billingAddressStreet VARCHAR(100) NOT NULL,
-  billingAddressLocation VARCHAR(100) NOT NULL,
-  billingAddressPlz VARCHAR(50) NOT NULL,
+  plz VARCHAR(50),
+  billingAddressStreet VARCHAR(100),
+  billingAddressLocation VARCHAR(100),
+  billingAddressPlz VARCHAR(50),
   internal BOOLEAN NOT NULL,
   PRIMARY KEY (userID)
 );
