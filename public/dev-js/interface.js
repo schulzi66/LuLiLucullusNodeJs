@@ -26,13 +26,16 @@ function loadRecipesOverview() {
  Load single recipe by ID
  ##################################### */
 function loadRecipeFromId(id, portions) {
+    if(isNaN(portions)) {
+        portions = 1;
+    }
     var socket = io.connect();
     socket.emit('loadRecipeFromId', id);
     socket.on('loadedRecipe', function (recipe) {
         var recipe_image =
             '<img class="img-responsive img-rounded" data-failover="img/default.png" src="' + convertPictureRefToPath(recipe[0].pictureRef) + '">';
         $('#recipe-image-wrapper').append(recipe_image);
-        //TODO: Print Preview stylen
+
         var recipe_details =
             '<div class="recipe-header-information">' +
             '<div class="recipe-container-row row">' +
@@ -80,7 +83,7 @@ function loadRecipeFromId(id, portions) {
             $('#ingredients-wrapper').append(recipe_ingredients_list);
         });
         var recipe_portions =
-            '<form id="calculateIngredientsForm" class="form-inline">' +
+            '<form id="calculateIngredientsForm" class="hidden-print form-inline">' +
                 '<div class="form-group">' +
                     '<label class="col-sm-2 control-label sr-only"  for="portions">Portionen</label>' +
                     '<div class="input-group">' +
