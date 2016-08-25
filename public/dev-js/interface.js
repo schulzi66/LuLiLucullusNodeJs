@@ -89,7 +89,7 @@ function loadRecipeFromId(id, portions) {
                     '<div class="input-group">' +
                         '<div class="input-group-addon">Portionen</div>' +
                         '<input type="hidden" name="id" value="' + id + '">' +
-                        '<input id="ingredientsAmount" class="form-control portions-input" name="portions" value="1">' +
+                        '<input id="ingredientsAmount" class="form-control portions-input" name="portions" value="' + portions +'">' +
                         '<span class="input-group-btn"><button id="submit" type="submit" class="btn-portions btn glyphicon glyphicon-refresh"/></span>' +
                     '</div>' +
                 '</div>' +

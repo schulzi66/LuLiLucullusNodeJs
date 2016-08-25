@@ -12,8 +12,11 @@ Util.firstLetterToUpperCase = function (str) {
 }
 
 Util.fixRootEntry = function (str) {
+    console.log(str);
     if(str === 'Home') {
         str = "#";
+        return str;
+    } else {
         return str;
     }
 }
