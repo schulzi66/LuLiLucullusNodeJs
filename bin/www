@@ -9,8 +9,6 @@ var debug = require('debug')('lulilucullu:server');
 var http = require('http');
 var DbController = require('./../controllers/DatabaseController');
 var SocketController = require('./../controllers/SocketController');
-// var conf = require('../conf.json');
-var compressor = require('node-minify');
 
 /**
  * Get port from environment and store in Express.
@@ -25,44 +23,6 @@ app.set('port', port);
 var _dbController = new DbController();
 var connection = _dbController.connect(startServer);
 
-/**
- * Minify js and css files
- */
-if(process.env.NODE_ENV == 'production') {
-    new compressor.minify({
-        type: 'gcc',
-        fileIn: [
-            'public/thirdparty/dev-js/jquery-2.1.4.js',
-            'public/thirdparty/dev-js/bootstrap.js',
-            'public/thirdparty/dev-js/cookieconsent.js',
-            'public/thirdparty/dev-js/jquery.sweet-dropdown.js',
-            'public/thirdparty/dev-js/rating.js',
-            'public/dev-js/cleanup.js'
-            //'public/thirdparty/dev-js/socket.io.min.js'
-        ],
-        fileOut: 'public/dist/main.js',
-        callback: function (err) {
-            console.log(err);
-        }
-    });
-
-    new compressor.minify({
-        type: 'yui-css',
-        fileIn: [
-            'public/thirdparty/dev-css/bootstrap.css',
-            'public/thirdparty/dev-css/font-awesome.min.css',
-            'public/thirdparty/dev-css/jquery.sweet-dropdown.css',
-            'public/dev-css/app.css',
-            'public/dev-css/admin.css',
-            'public/dev-css/print.css'
-        ],
-        fileOut: 'public/dist/main.css',
-        callback: function (err) {
-            console.log(err);
-        }
-    });
-
-}
 /**
  * Create HTTP server.
  */

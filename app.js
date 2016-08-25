@@ -10,8 +10,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var conf = require('./conf.json');
 var helmet = require('helmet');
-var fs = require('fs');
-var cleanup = require('./public/dev-js/cleanup').Cleanup(myCleanup);
 
 /**
  * Setup routes
@@ -59,8 +57,6 @@ app.set('view engine', 'ejs');
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(session({
     secret: conf.session.secret,
@@ -101,6 +97,7 @@ app.use('/administration', administration);
 app.use('/administration-login', administration_login);
 app.use('/administration/upload', recipe_upload);
 app.use('/administration/orders', orders);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
@@ -144,20 +141,5 @@ app.use(bodyParser.urlencoded({
  * Parses the text as JSON and exposes the resulting object on req.body.
  */
 app.use(bodyParser.json());
-
-/**
- * Cleanup dist dir after shutdown
- */
-
-function myCleanup() {
-    if(process.env.NODE_ENV === 'production') {
-        var appDir = path.dirname(require.main.filename);
-        console.log(appDir);
-        fs.unlinkSync(appDir + "/../public/dist/main.css");
-        fs.unlinkSync(appDir + "/../public/dist/main.js");
-    } else {
-        console.log("Development mode activated");
-    }
-};
 
 module.exports = app;

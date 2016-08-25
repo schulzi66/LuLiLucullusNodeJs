@@ -5,12 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="Lulilucullus GmbH Webpage">
     <meta name="author" content="">
 
     <% var env = process.env.NODE_ENV || 'development'; %>
-
-    <% if(env === 'development'){ %>
+    
     <!--
         THIRD PARTY SCRIPTS
      -->
@@ -43,14 +42,6 @@
     <link rel="stylesheet" href="/dev-css/app.css"/>
     <link rel="stylesheet" href="/dev-css/admin.css"/>
     <link rel="stylesheet" href="/dev-css/print.css"/>
-
-    <% } else if(env === 'production') { %>
-    <script src="/dist/main.js"></script>
-    <script src="dev-js/interface.js"></script>
-    <script src="/thirdparty/dev-js/socket.io.js"></script>
-    <script src="/dev-js/admin.js"></script>
-    <link rel="stylesheet" href="/dist/main.css"/>
-    <% } %>
 
     <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
     <script type="text/javascript">
