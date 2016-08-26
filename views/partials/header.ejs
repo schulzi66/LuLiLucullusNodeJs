@@ -7,8 +7,8 @@
              class="lulilucullus-dropdown lulilucullusMain-dropdown lulilucullus-dropdown-left"
              style="position:absolute; overflow:hidden;">
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/contact">Kontakt</a></li>
+                <li><a href="/"><i class="fa fa- fa-home"> Home</i></a></li>
+                <li><a href="/contact"><i class="fa fa-envelope"> Kontakt</i></a></li>
                 <li><a href="/catering">Catering</a></li>
                 <li><a href="/rent-a-cook">Rent a Cook</a></li>
                 <li><a href="/kochboxen">Kochboxen</a></li>
@@ -28,7 +28,7 @@
     <ul class="navbar-right ">
         <% if(locals.user) { %>
         <a class="dropdown-toggle lulilucullusDropdownToggler" id="lulilucullusDropdownToggler">
-            <i class="fa fa- fa-user"> <span><%= user.displayName %></span></i>
+            <span><%= user.displayName %></span>
         </a>
         <% } else { %>
         <a href="/login" class="dropdown-toggle lulilucullusDropdownToggler" id="lulilucullusDropdownToggler">
@@ -40,9 +40,9 @@
              style="position:absolute; overflow:hidden;">
             <ul>
                 <% if (user.provider) { %>
-                <li><a href="/login/profile-external">Profilverwaltung</a></li>
+                <li><a href="/login/profile-external"><i class="fa fa-user fa-fw"></i>Profilverwaltung</a></li>
                 <% } else { %>
-                <li><a href="/login/profile">Profilverwaltung</a></li>
+                <li><a href="/login/profile"><i class="fa fa-user fa-fw"></i>Profilverwaltung</a></li>
                 <% } %>
 
                 <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
