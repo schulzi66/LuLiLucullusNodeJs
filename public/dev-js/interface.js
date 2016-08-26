@@ -167,6 +167,9 @@ $(document).ready(function () {
         //console.log(selectedOptions);
     });
 
+    /**
+     * Admin Page Dropdown
+     */
     $('#lulilucullusAdminDropdownToggler').on('click', function (e) {
         e.stopPropagation();
         $('#lulilucullusAdminDropdown').show('slow');
@@ -175,4 +178,25 @@ $(document).ready(function () {
         $('#lulilucullusAdminDropdown').hide('slow');
     });
 
+    /**
+     * Main Header Dropdown
+     */
+    $('#lulilucullusMainDropdownToggler').on('click', function (e) {
+        e.stopPropagation();
+        $('#lulilucullusMainDropdown').show('slow');
+    });
+    $('html').click(function () {
+        $('#lulilucullusMainDropdown').hide('slow');
+    });
+
+    /**
+     * Main Header Name Dropdown
+     */
+    $('#lulilucullusDropdownToggler').on('click', function (e) {
+        e.stopPropagation();
+        $('#lulilucullusDropdown').show('slow');
+    });
+    $('html').click(function () {
+        $('#lulilucullusDropdown').hide('slow');
+    });
 });

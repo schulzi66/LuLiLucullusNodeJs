@@ -8,6 +8,7 @@
 * {
     font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
 }
+
 body {
     background-color: #f8f8f8;
     margin-bottom: 60px;
@@ -59,9 +60,11 @@ html {
 .form-group > label {
     padding: 0;
 }
+
 .portions-input {
     width: 25%;
 }
+
 /* -----------------------------------------------------------------------------
     Button styles
 -----------------------------------------------------------------------------*/
@@ -81,6 +84,7 @@ html {
     background-color: #eee;
     border: 1px solid #ccc;
 }
+
 /* -----------------------------------------------------------------------------
     Header styles
 -----------------------------------------------------------------------------*/
@@ -124,33 +128,77 @@ html {
 }
 
 /* -----------------------------------------------------------------------------
-    Dropdown styles
+    Header and Dropdown Styles
 -----------------------------------------------------------------------------*/
-.dropdown-menu {
-    position: fixed;
-}
-
-#dropdown-logout {
-    left: 89% !important;
-}
-
-#dropdown-standard, #dropdown-logout, #dropdown-recipe-categories {
-    background-color: rgba(255, 255, 250, 0.4)
-
-}
-
-.dropdown-menu ul {
+.lulilucullus-dropdown {
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+    display: none;
+    float: right;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
     background-color: transparent;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
 
-#dropdown-recipe-categories {
-    top: 105px !important;
-    left: 42.95% !important;
+.lulilucullusMain-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: transparent;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
 
-.h3 {
-    margin-top: 5px;
-    margin-bottom: 20px;
+.lulilucullus-dropdown-left {
+    right: auto;
+    left: 0;
+}
+
+.lulilucullus-dropdown-right {
+    right: 0;
+    left: auto;
+}
+
+.lulilucullusMain-dropdown > ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.lulilucullus-dropdown > ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+#lulilucullusDropdownToggler {
+    float: right;
+    padding-right: 40px;
+}
+
+.divider {
+    background: rgba(255, 255, 255, 0.08);
 }
 
 /* -----------------------------------------------------------------------------
@@ -173,7 +221,7 @@ html {
 }
 
 .carousel-caption {
-    background-color: rgba(248,248,248,0.6);
+    background-color: rgba(248, 248, 248, 0.6);
 
 }
 
@@ -314,6 +362,7 @@ html {
 #portionsWrapper {
     margin-top: 2%;
 }
+
 /* -----------------------------------------------------------------------------
     Recipe Filter Styles
 ----------------------------------------------------------------------------- */
@@ -323,9 +372,9 @@ html {
 }
 
 #filterSubmitBtn {
-  color: #fff;
-  margin-bottom: 5px;
-  margin-right: 5px;
+    color: #fff;
+    margin-bottom: 5px;
+    margin-right: 5px;
 }
 
 /*#filter-bar {
@@ -334,7 +383,6 @@ html {
     margin: 0 10% 0 10%;
     display: block;
 }*/
-
 
 /*#filterSubmitBox {
   color: #fff;
