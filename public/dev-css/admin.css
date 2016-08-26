@@ -367,9 +367,6 @@ table.dataTable thead .sorting:after {
 /*
     Dropdown menu Header
 */
-.lulilucullusAdmin-dropdown {
-    left: 0;
-}
 
 .lulilucullusAdmin-dropdown > ul {
     list-style: none;

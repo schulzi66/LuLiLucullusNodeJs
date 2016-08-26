@@ -6,7 +6,7 @@
         <div id="lulilucullusMainDropdown"
              class="lulilucullus-dropdown lulilucullusMain-dropdown lulilucullus-dropdown-left"
              style="position:absolute; overflow:hidden;">
-            <ul class="list-inline" aria-labelledby="dropdownMenuDivider">
+            <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/contact">Kontakt</a></li>
                 <li><a href="/catering">Catering</a></li>
@@ -45,7 +45,7 @@
         <% if (locals.user) { %>
         <div id="lulilucullusDropdown" class="lulilucullus-dropdown lulilucullus-dropdown-right"
              style="position:absolute; overflow:hidden;">
-            <ul class="list-inline" aria-labelledby="dropdownMenuDivider">
+            <ul>
                 <% if (user.provider) { %>
                 <li><a href="/login/profile-external">Profilverwaltung</a></li>
                 <% } else { %>
