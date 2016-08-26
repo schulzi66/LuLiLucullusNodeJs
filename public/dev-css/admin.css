@@ -373,7 +373,7 @@ table.dataTable thead .sorting:after {
     padding-left: 10px;
 }
 
-#lulilucullusAdminDropdownToggler {
+.lulilucullusAdminDropdownToggler {
     float:right;
     padding: 15px;
 }

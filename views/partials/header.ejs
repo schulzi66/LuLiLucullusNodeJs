@@ -22,13 +22,6 @@
                 <li><a href="/login">Rezepte</a></li>
                 <% } %>
                 <li><a href="#">Meine Rezepte</a></li>
-                <% if (locals.user) { %>
-                <% if (user.provider) { %>
-                <li><a href="/login/profile-external">Profilverwaltung</a></li>
-                <% } else { %>
-                <li><a href="/login/profile">Profilverwaltung</a></li>
-                <% } %>
-                <% } %>
             </ul>
         </div>
     </ul>

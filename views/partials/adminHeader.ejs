@@ -2,22 +2,20 @@
     <div class="navbar-header">
         <a class="navbar-brand" href="/administration">Administration</a>
     </div>
-    <ul class="container-fluid">
+    <ul class="navbar-right ">
+        <% if(locals.user) { %>
         <a class="dropdown-toggle lulilucullusAdminDropdownToggler" id="lulilucullusAdminDropdownToggler">
-            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            <i class="fa fa- fa-user"> <span><%= user.displayName %></span></i>
         </a>
-        <div id="lulilucullusAdminDropdown" class="lulilucullus-dropdown lulilucullusAdmin-dropdown lulilucullus-dropdown-right"
-             style="position:absolute; overflow:hidden;">
-            <ul class="navbar-navbar-right">
-                <li><a href="profile"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                </li>
-                <% if(locals.user !== undefined && locals.user.isAdmin !== undefined) { %>
+        <% } else { %>
+        <% } %>
+        <% if (locals.user && locals.user.isAdmin !== undefined) { %>
+        <div id="lulilucullusAdminDropdown" class="lulilucullus-dropdown lulilucullusAdmin-dropdown lulilucullus-dropdown-right">
+            <ul>
+                <li><a href="/login/profile">Profilverwaltung</a></li>
                 <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
-                    <% } else { %>
-                <li><a href="/administration-login"><i class="fa fa-sign-in fa-fw"></i>Login</a>
-                    <% } %>
-                </li>
             </ul>
         </div>
+        <% } %>
     </ul>
 </nav>
