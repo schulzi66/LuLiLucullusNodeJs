@@ -14,12 +14,10 @@ var pool = mysql.createPool({
     connectionLimit: conf.database.connectionLimit
 });
 
+/**
+* Constr & Init Methods
+*/
 var DatabaseController = function () {
-}
-
-DatabaseController.prototype.hash = function (password) {
-    var hash = bcrypt.hashSync(password);
-    return hash;
 }
 
 DatabaseController.prototype.connect = function (startServerCallback) {
@@ -29,22 +27,13 @@ DatabaseController.prototype.connect = function (startServerCallback) {
     });
 }
 
-DatabaseController.prototype.getUserByEmail = function (req, res, email, callback) {
-    pool.getConnection(function (err, connection) {
-        var queryString = "SELECT * FROM USERS WHERE USERID=" + connection.escape(email);
-        console.log("queryString: " + queryString);
-        connection.query(queryString, function (err, rows) {
-            connection.release();
-            if (!err) {
-                callback(req, res, rows[0]);
-            }
-        });
+/**
+* Password Methods
+*/
 
-        connection.on('error', function (err) {
-            console.log("ERR: " + err);
-            return;
-        });
-    });
+DatabaseController.prototype.hash = function (password) {
+    var hash = bcrypt.hashSync(password);
+    return hash;
 }
 
 DatabaseController.prototype.insertPasswordRequest = function (reqDate, authenticationCode, email) {
@@ -125,11 +114,14 @@ DatabaseController.prototype.changePassword = function (res, userId, newPassword
     });
 }
 
-DatabaseController.prototype.getAdminByEmail = function (req, res, email, callback) {
-    pool.getConnection(function (err, connection) {
-        var queryString = "SELECT * FROM EMPLOYEES WHERE employeeID=" + connection.escape(email) +
-            "AND isAdmin=" + true;
+/**
+* Users Methods
+*/
 
+DatabaseController.prototype.getUserByEmail = function (req, res, email, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT * FROM USERS WHERE USERID=" + connection.escape(email);
+        console.log("queryString: " + queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -143,136 +135,6 @@ DatabaseController.prototype.getAdminByEmail = function (req, res, email, callba
         });
     });
 }
-
-DatabaseController.prototype.loadRecipesOverview = function (callback) {
-    pool.getConnection(function (err, connection) {
-        var queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM RECIPES";
-        connection.query(queryString, function (err, rows) {
-            connection.release();
-            if (!err) {
-                callback(rows);
-            }
-        });
-
-        connection.on('error', function (err) {
-            console.log("ERR: " + err);
-            return;
-        });
-    });
-}
-
-DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
-    pool.getConnection(function (err, connection) {
-        var queryString = "SELECT RecipeIngredients.amount, " +
-            "Ingredients.ingredientName, Units.unitName, Recipes.recipeName, Recipes.baseDescription, Recipes.pictureRef " +
-            "FROM RecipeIngredients " +
-            "JOIN Ingredients " +
-            "ON Ingredients.ingredientID=RecipeIngredients.ingredientID " +
-            "JOIN Units " +
-            "ON RecipeIngredients.unitID=Units.unitID " +
-            "JOIN Recipes " +
-            "ON Recipes.recipeID=RecipeIngredients.recipeID " +
-            "WHERE RecipeIngredients.recipeID=" +
-            connection.escape(id);
-        connection.query(queryString, function (err, rows) {
-            connection.release();
-            if (!err) {
-                callback(rows);
-            }
-        });
-        connection.on('error', function (err) {
-            console.log("ERR: " + err);
-            return;
-        });
-    });
-}
-
-DatabaseController.prototype.loadFilterOptions = function (callback) {
-    var queryString = "SELECT recipes.recipeName, styles.styleName, courses.courseName, recipeingredients.amount, ingredients.ingredientName, allergenes.allergenName FROM recipes" +
-        "JOIN courses ON courses.courseID = recipes.courseID " +
-        "JOIN styles ON styles.styleID = recipes.styleID " +
-        "LEFT JOIN recipeingredients ON recipeingredients.recipeID = recipe.recipeID " +
-        "LEFT JOIN ingredients ON ingredients.ingredientID = recipeingredients.ingredientID " +
-        "LEFT JOIN ingredientsallergenes ON ingredientsallergenes.ingredientID = ingredients.ingredientID " +
-        "LEFT JOIN allergenes ON allergenes.allergenID = ingredientsallergenes.allergenID";
-    pool.getConnection(function (err, connection) {
-
-        connection.query(queryString, function (err, rows) {
-            connection.release();
-            if (!err) {
-                callback(rows);
-            }
-        });
-
-        connection.on('error', function (err) {
-            console.log("ERR: " + err);
-            return;
-        });
-    });
-}
-
-DatabaseController.prototype.loadOrders = function (callback) {
-    pool.getConnection(function (err, connection) {
-        var queryString =
-            "SELECT bookings.eventName, " +
-                    "UNIX_TIMESTAMP(bookings.dateBegin) AS orderDate, " +
-                    "UNIX_TIMESTAMP(bookings.dateEnd) AS maturityDate, " +
-                    "concat(users.name,' ', users.familyName) AS customerName, " +
-                    "recipes.recipeName, " +
-                    "bookingRecipes.amountOfServings AS orderAmount " +
-            "FROM bookings " +
-            "JOIN bookingRecipes ON bookingRecipes.bookingID = bookings.bookingID " +
-            "JOIN users ON users.userID = bookings.userID " +
-            "JOIN recipes ON  recipes.recipeID = bookingRecipes.recipeID " +
-            "WHERE isReleased=" + false;
-        console.log(queryString);
-        connection.query(queryString, function (err, rows) {
-            connection.release();
-            if (!err) {
-                callback(rows);
-            }
-        });
-        connection.on('error', function (err) {
-            console.log("ERR: " + err);
-            return;
-        });
-    });
-}
-
-DatabaseController.prototype.insertOrderInformation = function (details, callback) {
-    pool.getConnection(function (err, connection) {
-        var queryString = "UPDATE TABLE bookings SET " +
-            "eventName=" + connection.escape(details.anlass) +
-            ",userName=" + connection.escape(details.kunde) +
-            ",recipe=" + connection.escape(details.artikel) +
-            ",amount=" + connection.escape(details.menge) +
-            ",orderDate=" + connection.escape(details.auftragsdatum) +
-            ",typeID=" + connection.escape(3) +
-            ",isReleased=" + true;
-        //TODO: typeID dynamic
-        connection.query(queryString, function (err, rows) {
-            console.log(queryString);
-            connection.release();
-            if (!err) {
-                callback(rows);
-            }
-        });
-        connection.on('error', function (err) {
-            console.log("ERR: " + err);
-            return;
-        });
-    });
-}
-
-/*DatabaseController.prototype.saveRatingForRecipe = function (rating, id, callback) {
- pool.getConnection(function (err, connection) {
- var queryString = "INSERT INTO Ratings SET stars= " +
- connection.escape(rating) + ", recipeId=" + connection.escape(id) +
- ", userId=" + connection.escape(user.id) +
- "WHERE "
- });
- };*/
-
 DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal, method_token) {
     pool.getConnection(function (err, connection) {
         var familyName;
@@ -446,4 +308,169 @@ DatabaseController.prototype.updateUser = function (req, res) {
         });
     });
 }
+
+/**
+* Employees Methods
+*/
+
+DatabaseController.prototype.getAdminByEmail = function (req, res, email, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT * FROM EMPLOYEES WHERE employeeID=" + connection.escape(email) +
+            "AND isAdmin=" + true;
+
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(req, res, rows[0]);
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+/**
+* Recipes Methods
+*/
+
+DatabaseController.prototype.loadRecipesOverview = function (callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM RECIPES";
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT RecipeIngredients.amount, " +
+            "Ingredients.ingredientName, Units.unitName, Recipes.recipeName, Recipes.baseDescription, Recipes.pictureRef " +
+            "FROM RecipeIngredients " +
+            "JOIN Ingredients " +
+            "ON Ingredients.ingredientID=RecipeIngredients.ingredientID " +
+            "JOIN Units " +
+            "ON RecipeIngredients.unitID=Units.unitID " +
+            "JOIN Recipes " +
+            "ON Recipes.recipeID=RecipeIngredients.recipeID " +
+            "WHERE RecipeIngredients.recipeID=" +
+            connection.escape(id);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+/**
+* Filter Methods
+*/
+
+DatabaseController.prototype.loadFilterOptions = function (callback) {
+    var queryString = "SELECT recipes.recipeName, styles.styleName, courses.courseName, recipeingredients.amount, ingredients.ingredientName, allergenes.allergenName FROM recipes" +
+        "JOIN courses ON courses.courseID = recipes.courseID " +
+        "JOIN styles ON styles.styleID = recipes.styleID " +
+        "LEFT JOIN recipeingredients ON recipeingredients.recipeID = recipe.recipeID " +
+        "LEFT JOIN ingredients ON ingredients.ingredientID = recipeingredients.ingredientID " +
+        "LEFT JOIN ingredientsallergenes ON ingredientsallergenes.ingredientID = ingredients.ingredientID " +
+        "LEFT JOIN allergenes ON allergenes.allergenID = ingredientsallergenes.allergenID";
+    pool.getConnection(function (err, connection) {
+
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+/**
+* Bookings Methods
+*/
+
+DatabaseController.prototype.loadOrders = function (callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString =
+            "SELECT bookings.eventName, " +
+                    "UNIX_TIMESTAMP(bookings.dateBegin) AS orderDate, " +
+                    "UNIX_TIMESTAMP(bookings.dateEnd) AS maturityDate, " +
+                    "concat(users.name,' ', users.familyName) AS customerName, " +
+                    "recipes.recipeName, " +
+                    "bookingRecipes.amountOfServings AS orderAmount " +
+            "FROM bookings " +
+            "JOIN bookingRecipes ON bookingRecipes.bookingID = bookings.bookingID " +
+            "JOIN users ON users.userID = bookings.userID " +
+            "JOIN recipes ON  recipes.recipeID = bookingRecipes.recipeID " +
+            "WHERE isReleased=" + false;
+        console.log(queryString);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.insertOrderInformation = function (details, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "UPDATE TABLE bookings SET " +
+            "eventName=" + connection.escape(details.anlass) +
+            ",userName=" + connection.escape(details.kunde) +
+            ",recipe=" + connection.escape(details.artikel) +
+            ",amount=" + connection.escape(details.menge) +
+            ",orderDate=" + connection.escape(details.auftragsdatum) +
+            ",typeID=" + connection.escape(3) +
+            ",isReleased=" + true;
+        //TODO: typeID dynamic
+        connection.query(queryString, function (err, rows) {
+            console.log(queryString);
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+/*DatabaseController.prototype.saveRatingForRecipe = function (rating, id, callback) {
+ pool.getConnection(function (err, connection) {
+ var queryString = "INSERT INTO Ratings SET stars= " +
+ connection.escape(rating) + ", recipeId=" + connection.escape(id) +
+ ", userId=" + connection.escape(user.id) +
+ "WHERE "
+ });
+ };*/
+
 module.exports = DatabaseController;
