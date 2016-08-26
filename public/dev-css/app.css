@@ -116,6 +116,9 @@ html {
     color: #fff;
 }
 
+.lulilucullus-navbar {
+    padding-top: 5px;
+}
 /* -----------------------------------------------------------------------------
     Login Button styles
 -----------------------------------------------------------------------------*/
@@ -151,27 +154,6 @@ html {
     box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
 
-.lulilucullusMain-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    display: none;
-    min-width: 160px;
-    padding: 5px 0;
-    margin: 2px 0 0;
-    font-size: 14px;
-    text-align: left;
-    list-style: none;
-    background-color: transparent;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, .15);
-    border-radius: 4px;
-    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-}
-
 .lulilucullus-dropdown-left {
     right: auto;
     left: 0;
@@ -182,9 +164,9 @@ html {
     left: auto;
 }
 
-.lulilucullusMain-dropdown > ul {
-    list-style: none;
-    padding-left: 10px;
+.lulilucullusMain-dropdown {
+    left: 0;
+    float: none;
 }
 
 .lulilucullus-dropdown > ul {
@@ -192,13 +174,10 @@ html {
     padding-left: 10px;
 }
 
-#lulilucullusDropdownToggler {
+.lulilucullusDropdownToggler {
     float: right;
-    padding-right: 40px;
-}
+    padding: 0px 75px 0px 0px;
 
-.divider {
-    background: rgba(255, 255, 255, 0.08);
 }
 
 /* -----------------------------------------------------------------------------

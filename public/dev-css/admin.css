@@ -368,25 +368,7 @@ table.dataTable thead .sorting:after {
     Dropdown menu Header
 */
 .lulilucullusAdmin-dropdown {
-    position: absolute;
-    top: 100%;
     left: 0;
-    z-index: 1000;
-    display: none;
-    float: right;
-    min-width: 160px;
-    padding: 5px 0;
-    margin: 2px 0 0;
-    font-size: 14px;
-    text-align: left;
-    list-style: none;
-    background-color: transparent;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, .15);
-    border-radius: 4px;
-    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
 
 .lulilucullusAdmin-dropdown > ul {
@@ -396,4 +378,5 @@ table.dataTable thead .sorting:after {
 
 #lulilucullusAdminDropdownToggler {
     float:right;
+    padding: 15px;
 }
