@@ -152,6 +152,9 @@ function loadFilterOptions() {
     });
 }
 
+/**
+ * CLICK EVENTS
+ */
 $(document).ready(function () {
     $('#recipe-filter').on('click', function (e) {
         e.stopPropagation();
