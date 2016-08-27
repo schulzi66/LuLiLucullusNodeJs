@@ -162,12 +162,25 @@ $(document).ready(function () {
     });
 
     $('#filterSubmitBtn').on('click', function () {
+        var filteroptions = [];
         var selectedOptions = [];
+
         $('input:checked').each(function () {
             selectedOptions.push(this.getAttribute('data-type') + ":" + this.id);
         });
-        //for testing - PLEASE LEAVE IT THERE!
-        //console.log(selectedOptions);
+
+        for(var i = 0; i < selectedOptions.length; i++){
+            var currentOptionType = selectedOptions[i].split(':')[0];
+            var currentOption = selectedOptions[i].split(':')[1];
+            filteroptions.push({
+                key: currentOptionType,
+                option: currentOption
+            });
+        }
+
+
+        console.log(filteroptions);
+        loadFilteredRecipes(filteroptions);
     });
 
     /**

@@ -384,15 +384,33 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
 */
 
 DatabaseController.prototype.loadFilterOptions = function (callback) {
-    var queryString = "SELECT recipes.recipeName, styles.styleName, courses.courseName, recipeingredients.amount, ingredients.ingredientName, allergenes.allergenName FROM recipes" +
-        "JOIN courses ON courses.courseID = recipes.courseID " +
-        "JOIN styles ON styles.styleID = recipes.styleID " +
-        "LEFT JOIN recipeingredients ON recipeingredients.recipeID = recipe.recipeID " +
-        "LEFT JOIN ingredients ON ingredients.ingredientID = recipeingredients.ingredientID " +
-        "LEFT JOIN ingredientsallergenes ON ingredientsallergenes.ingredientID = ingredients.ingredientID " +
-        "LEFT JOIN allergenes ON allergenes.allergenID = ingredientsallergenes.allergenID";
+    var queryString = "SELECT r.recipeName, s.styleName, c.courseName, ri.amount, i.ingredientName, a.allergenName FROM recipes AS r " +
+        "JOIN courses AS c ON c.courseID = r.courseID " +
+        "JOIN styles AS s ON s.styleID = r.styleID " +
+        "LEFT JOIN recipeingredients AS ri ON ri.recipeID = r.recipeID " +
+        "LEFT JOIN ingredients AS i ON i.ingredientID = ri.ingredientID " +
+        "LEFT JOIN ingredientsallergenes AS ia ON ia.ingredientID = i.ingredientID " +
+        "LEFT JOIN allergenes AS a ON a.allergenID = ia.allergenID";
     pool.getConnection(function (err, connection) {
 
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.loadFilteredRecipes = function (filteroptions, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM RECIPES " +
+            "WHERE xyz";
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {

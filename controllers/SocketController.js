@@ -33,6 +33,13 @@ function onConnection(socket) {
             socket.emit('loadedFilterOptions', filterOptions);
         });
     });
+
+    socket.on('loadFilteredRecipes', function(filteroptions){
+        var _dbController  = new DatabaseController();
+        _dbController.loadFilteredRecipes(function(filteroptions){
+            socket.emit('loadedFilteredRecipes', filteroptions);
+        });
+    });
     //End Region
 
     socket.on('loadOrdersOverview', function () {
