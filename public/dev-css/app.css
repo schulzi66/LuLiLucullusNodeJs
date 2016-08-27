@@ -247,7 +247,7 @@ html {
 
 }
 
-.carousel-control {
+.carousel-control, .carousel-control:hover {
     color: #912F40;
 }
 /* -----------------------------------------------------------------------------
