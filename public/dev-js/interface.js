@@ -32,6 +32,7 @@ function loadRecipeFromId(id, portions) {
     var socket = io.connect();
     socket.emit('loadRecipeFromId', id);
     socket.on('loadedRecipe', function (recipe) {
+        console.log(recipe[0]);
         var recipe_image =
             '<img class="img-responsive img-rounded" data-failover="img/default.png" src="' + Util.convertPictureRefToPath(recipe[0].pictureRef) + '">';
         $('#recipe-image-wrapper').append(recipe_image);

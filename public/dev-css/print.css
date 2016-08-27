@@ -19,6 +19,7 @@
         height: auto;
     }
     #copyrightPrint {
+        padding-left: 15px;
         visibility: visible;
     }
     #footer-wrapper {
