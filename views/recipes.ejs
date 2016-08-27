@@ -6,7 +6,7 @@
 <body>
 <div class="container container-margin">
     <% include partials/breadcrumb %>
-    <div class="row" style="text-align: center">
+    <div class="row">
         <section class="col-sm-6">
             <div class="btn-group">
                 <button id="recipe-filter" class="btn btn-sm text-uppercase text-spat">
@@ -16,13 +16,13 @@
         </section>
     </div>
 
-    <div id="filter-bar">
+    <div id="filter-bar" class="container">
         <div id="inputFields" class="row">
             <script type="text/javascript">
                 loadFilterOptions();
             </script>
         </div>
-        <div id="filterSubmitBox" style="display:inline-block">
+        <div id="filterSubmitBox">
             <button id="filterSubmitBtn" class="btn btn-sm text-uppercase text-spat">
                 Rezepte filtern
             </button>

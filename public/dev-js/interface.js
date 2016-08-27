@@ -26,7 +26,7 @@ function loadRecipesOverview() {
  Load single recipe by ID
  ##################################### */
 function loadRecipeFromId(id, portions) {
-    if(isNaN(portions)) {
+    if (isNaN(portions)) {
         portions = 1;
     }
     var socket = io.connect();
@@ -84,15 +84,15 @@ function loadRecipeFromId(id, portions) {
         });
         var recipe_portions =
             '<form id="calculateIngredientsForm" class="hidden-print form-inline">' +
-                '<div class="form-group">' +
-                    '<label class="col-sm-2 control-label sr-only"  for="portions">Portionen</label>' +
-                    '<div class="input-group">' +
-                        '<div class="input-group-addon">Portionen</div>' +
-                        '<input type="hidden" name="id" value="' + id + '">' +
-                        '<input id="ingredientsAmount" class="form-control portions-input" name="portions" value="' + portions +'">' +
-                        '<span class="input-group-btn"><button id="submit" type="submit" class="btn-portions btn glyphicon glyphicon-refresh"/></span>' +
-                    '</div>' +
-                '</div>' +
+            '<div class="form-group">' +
+            '<label class="col-sm-2 control-label sr-only"  for="portions">Portionen</label>' +
+            '<div class="input-group">' +
+            '<div class="input-group-addon">Portionen</div>' +
+            '<input type="hidden" name="id" value="' + id + '">' +
+            '<input id="ingredientsAmount" class="form-control portions-input" name="portions" value="' + portions + '">' +
+            '<span class="input-group-btn"><button id="submit" type="submit" class="btn-portions btn glyphicon glyphicon-refresh"/></span>' +
+            '</div>' +
+            '</div>' +
             '</form>';
         $('#portionsWrapper').append(recipe_portions);
     });
@@ -128,8 +128,10 @@ function loadFilterOptions() {
         $('#inputFields').append('<div class="panel panel-default" id="filterOptionsAllergens" class="col-md-4"><div class="panel-heading">Allergene</div>');
         $.each(allergens, function (i) {
             var currentAllergen =
+                '<div class="filterOptionsWrapper">' +
                 '<input type="checkbox" id="' + allergens[i] + '" data-type="allergen" />' +
-                '<label for="' + allergens[i] + '">&nbsp;' + allergens[i] + '</label><br />';
+                '<label for="' + allergens[i] + '">&nbsp;' + allergens[i] + '</label><br />' +
+                '</div>';
             $('#filterOptionsAllergens').append(currentAllergen);
         });
 
@@ -137,16 +139,20 @@ function loadFilterOptions() {
         $('#inputFields').append('<div class="panel panel-default" id="filterOptionsCourses" class="col-md-4"><div class="panel-heading">Menüart</div>');
         $.each(courses, function (i) {
             var currentCourse =
+                '<div class="filterOptionsWrapper">' +
                 '<input type="checkbox" id="' + courses[i] + '" data-type="course" />' +
-                '<label for="' + courses[i] + '">&nbsp;' + courses[i] + '</label><br />';
+                '<label for="' + courses[i] + '">&nbsp;' + courses[i] + '</label><br />' +
+                '</div>';
             $('#filterOptionsCourses').append(currentCourse);
         });
 
         $('#inputFields').append('<div class="panel panel-default" id="filterOptionsStyles" class="col-md-4"><div class="panel-heading">Region</div>');
         $.each(styles, function (i) {
             var currentStyle =
+                '<div class="filterOptionsWrapper">' +
                 '<input type="checkbox" id="' + styles[i] + '" data-type="style" />' +
-                '<label for="' + styles[i] + '">&nbsp;' + styles[i] + '</label><br />';
+                '<label for="' + styles[i] + '">&nbsp;' + styles[i] + '</label><br />' +
+                '</div>';
             $('#filterOptionsStyles').append(currentStyle);
         });
     });
@@ -167,7 +173,7 @@ $(document).ready(function () {
             selectedOptions.push(this.getAttribute('data-type') + ":" + this.id);
         });
 
-        for(var i = 0; i < selectedOptions.length; i++){
+        for (var i = 0; i < selectedOptions.length; i++) {
             var currentOptionType = selectedOptions[i].split(':')[0];
             var currentOption = selectedOptions[i].split(':')[1];
             filteroptions.push({

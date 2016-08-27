@@ -68,6 +68,10 @@ html {
 /* -----------------------------------------------------------------------------
     Button styles
 -----------------------------------------------------------------------------*/
+.btn-sm {
+    color: #f8f8f8
+}
+
 .btn:not(.btn-portions) {
     background-color: #702632;
     border-color: #4a1921;
@@ -405,18 +409,8 @@ html {
     margin-right: 5px;
 }
 
-/*#filter-bar {
-    width: 70%;
-    position: absolute;
-    margin: 0 10% 0 10%;
-    display: block;
-}*/
-
-/*#filterSubmitBox {
-  color: #fff;
-  position:absolute;
-  bottom:0;
-  right:0;
+.filterOptionsWrapper {
+    padding-left: 20px;
 }
 
 /* -----------------------------------------------------------------------------
