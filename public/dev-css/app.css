@@ -185,10 +185,10 @@ html {
     min-width: 160px;
     padding: 5px 0;
     margin: 2px 0 0;
-    font-size: 14px;
+    font-size: 15px;
     text-align: left;
     list-style: none;
-    background-color: transparent;
+    background-color: rgba(248, 248, 248, .75);
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .15);
