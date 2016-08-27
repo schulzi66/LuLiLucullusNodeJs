@@ -405,10 +405,21 @@ DatabaseController.prototype.loadFilterOptions = function (callback) {
     });
 }
 
-DatabaseController.prototype.loadFilteredRecipes = function (filteroptions, callback) {
+DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM RECIPES " +
-            "WHERE xyz";
+        var queryString = "";
+        if (filterOptions.length == 0)
+            queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM RECIPES";
+        else {
+            queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM recipes AS r" +
+                          "JOIN courses AS c ON c.courseID = r.courseID " +
+                          "JOIN styles AS s ON s.styleID = r.styleID " +
+                          "LEFT JOIN recipeingredients AS ri ON ri.recipeID = r.recipeID " +
+                          "LEFT JOIN ingredients AS i ON i.ingredientID = ri.ingredientID " +
+                          "LEFT JOIN ingredientsallergenes AS ia ON ia.ingredientID = i.ingredientID " +
+                          "LEFT JOIN allergenes AS a ON a.allergenID = ia.allergenID " +
+                          "WHERE recipeID = 1";
+        }
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
