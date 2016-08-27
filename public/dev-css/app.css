@@ -39,6 +39,19 @@ html {
 }
 
 /* -----------------------------------------------------------------------------
+    Logo styles
+-----------------------------------------------------------------------------*/
+#logo {
+    overflow: hidden;
+    position: absolute;
+    left: -25%;
+    top: -300%;
+    height: 130px;
+    width: 180px;
+    z-index: 9999;
+}
+
+/* -----------------------------------------------------------------------------
     Footer styles
 -----------------------------------------------------------------------------*/
 #footer-wrapper {
@@ -114,14 +127,6 @@ html {
 
 .nav.nav-inline .nav {
     text-align: center;
-}
-
-.nav-item > .nav-link {
-    padding: 0;
-}
-.nav-logo {
-    height: 65px;
-    width: 100px;
 }
 
 #dropdown-recipe-categorie {
@@ -398,6 +403,9 @@ html {
 /* -----------------------------------------------------------------------------
     Recipe Filter Styles
 ----------------------------------------------------------------------------- */
+#filter-bar {
+    display: none;
+}
 
 #recipe-filter {
     color: #fff;
@@ -413,6 +421,15 @@ html {
     padding-left: 20px;
 }
 
+.filterOptionsLabel {
+    font-weight: normal;
+    padding-left: 5px;
+}
+
+.panel-heading {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
 /* -----------------------------------------------------------------------------
     Rating styles
 ----------------------------------------------------------------------------- */

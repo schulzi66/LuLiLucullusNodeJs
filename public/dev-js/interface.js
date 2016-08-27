@@ -130,7 +130,7 @@ function loadFilterOptions() {
             var currentAllergen =
                 '<div class="filterOptionsWrapper">' +
                 '<input type="checkbox" id="' + allergens[i] + '" data-type="allergen" />' +
-                '<label for="' + allergens[i] + '">&nbsp;' + allergens[i] + '</label><br />' +
+                '<label class="filterOptionsLabel" for="' + allergens[i] + '">&nbsp;' + allergens[i] + '</label><br />' +
                 '</div>';
             $('#filterOptionsAllergens').append(currentAllergen);
         });
@@ -141,7 +141,7 @@ function loadFilterOptions() {
             var currentCourse =
                 '<div class="filterOptionsWrapper">' +
                 '<input type="checkbox" id="' + courses[i] + '" data-type="course" />' +
-                '<label for="' + courses[i] + '">&nbsp;' + courses[i] + '</label><br />' +
+                '<label class="filterOptionsLabel" for="' + courses[i] + '">&nbsp;' + courses[i] + '</label><br />' +
                 '</div>';
             $('#filterOptionsCourses').append(currentCourse);
         });
@@ -151,7 +151,7 @@ function loadFilterOptions() {
             var currentStyle =
                 '<div class="filterOptionsWrapper">' +
                 '<input type="checkbox" id="' + styles[i] + '" data-type="style" />' +
-                '<label for="' + styles[i] + '">&nbsp;' + styles[i] + '</label><br />' +
+                '<label class="filterOptionsLabel" for="' + styles[i] + '">&nbsp;' + styles[i] + '</label><br />' +
                 '</div>';
             $('#filterOptionsStyles').append(currentStyle);
         });
@@ -164,7 +164,7 @@ function loadFilterOptions() {
 $(document).ready(function () {
     $('#recipe-filter').on('click', function (e) {
         e.stopPropagation();
-        $('#filter-bar').slideToggle('show');
+        $('#filter-bar').slideToggle();
     });
 
     $('#filterSubmitBtn').on('click', function () {
