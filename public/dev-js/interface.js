@@ -162,9 +162,7 @@ $(document).ready(function () {
     });
 
     $('#filterSubmitBtn').on('click', function () {
-        var filteroptions = [];
         var selectedOptions = [];
-
         $('input:checked').each(function () {
             selectedOptions.push(this.getAttribute('data-type') + ":" + this.id);
         });

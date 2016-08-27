@@ -103,6 +103,11 @@ html {
     margin-top: 30px;
 }
 
+.button-sidemenu {
+    cursor: pointer;
+    width: 3%;
+}
+
 .nav.nav-inline .nav {
     text-align: center;
 }
@@ -114,6 +119,44 @@ html {
 
 #dropdown-recipe-categorie {
     color: #fff;
+}
+.lulilucullusMain-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: none;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: transparent;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.lulilucullusMain-dropdown-left {
+    right: 0;
+    left: auto;
+}
+.lulilucullusMainDropdown {
+    z-index: 9999;
+}
+
+.lulilucullusMain-dropdown > ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+#lulilucullusMainDropdownToggler {
+    float:right;
 }
 
 .lulilucullus-navbar {

@@ -43,7 +43,6 @@ DatabaseController.prototype.insertPasswordRequest = function (reqDate, authenti
             "resetCode=" + connection.escape(authenticationCode) + ", " +
             "closed=" + false + ", " +
             "userId=" + connection.escape(email);
-
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -63,7 +62,6 @@ DatabaseController.prototype.getOpenPasswordRequest = function (req, res, callba
       var queryString = "SELECT * FROM PASSWORDRESETS WHERE USERID=" + connection.escape(req.body.userID) + " " +
       "AND CLOSED= " + false + " " +
       "AND RESETCODE =" + connection.escape(req.body.authenticationCode);
-      console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
