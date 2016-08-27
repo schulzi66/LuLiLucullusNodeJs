@@ -220,7 +220,7 @@ html {
 .lulilucullusDropdownToggler {
     float: right;
     padding: 0px 75px 0px 0px;
-
+    cursor: pointer;
 }
 
 /* -----------------------------------------------------------------------------
