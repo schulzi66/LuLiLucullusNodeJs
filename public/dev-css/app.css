@@ -112,9 +112,12 @@ html {
     text-align: center;
 }
 
+.nav-item > .nav-link {
+    padding: 0;
+}
 .nav-logo {
-    height: 50px;
-    width: 84px;
+    height: 65px;
+    width: 100px;
 }
 
 #dropdown-recipe-categorie {
