@@ -38,7 +38,7 @@ Util.convertPictureRefToPath = function (pictureRef) {
     var imgDir = "img/";
     var fileExtension = [".png", ".jpg"];
     pictureRef = pictureRef.split('pictureRef')[1].toLowerCase();
-    var path = imgDir + pictureRef + fileExtension[0];
+    var path = imgDir + pictureRef + fileExtension[1];
     //TODO: check if file exist
     return path;
 }

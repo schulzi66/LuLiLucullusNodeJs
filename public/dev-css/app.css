@@ -44,11 +44,15 @@ html {
 #logo {
     overflow: hidden;
     position: absolute;
-    left: -25%;
-    top: -300%;
-    height: 130px;
-    width: 180px;
+    left: -30%;
+    top: -350%;
+    height: 145px;
+    width: 200px;
     z-index: 9999;
+}
+
+.logo-link, .logo-link:visited, .logo-link:hover, .logo-link:active {
+    text-decoration: none;
 }
 
 /* -----------------------------------------------------------------------------
