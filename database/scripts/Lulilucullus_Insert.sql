@@ -30,7 +30,14 @@ VALUES
 ,(22, 'Fischfilet')
 ,(23, 'Garnelen')
 ,(24, 'Cayennepfeffer')
-,(25, 'Safran');
+,(25, 'Safran')
+,(26, 'Rinderfilet')
+,(27, 'Rucola')
+,(28, 'Parmesan')
+,(29, 'Zitronen')
+,(30, 'Pinienkerne')
+,(31, 'Balsamico')
+,(32, 'Meersalz');
 
 -- Styles
 INSERT INTO Styles (styleID, styleName)
@@ -109,7 +116,8 @@ Den Ofen auf 200°C (Ober-/Unterhitze) vorheizen. Die Buns für 12 Minuten backe
 Währenddessen die Burger zubereiten. Den Grill vorbereiten und den Grillrost etwas einölen. Die Burger können jedoch auch in einer Pfanne gebraten werden.
 Rinderhack, Zwiebel, Knoblauch, Worcestershiresauce, Salz und Pfeffer in einer Schüssel gut vermischen. Das Bier hinzufügen und nochmals gut durchmischen. Zu Patties formen.
 Auf den Grill legen und pro Seite ca. 5 Minuten grillen. Oder eine Pfanne auf mittlerer Hitze mit etwas Öl erhitzen und die Patties 5 Minuten von jeder Seite braten. Jeweils 1 Burger in ein Brötchen legen.', 4,1 )
-,(2, 'Fischsuppe Sèteois', 'pictureRefFischsuppe', 'Schnell und einfach zuzubereitende sehr leckere und raffinierte Fischsuppe', 'Arbeitszeit: ca. 45 Min. / Schwierigkeitsgrad: normal / Kalorien p. P.: keine Angabe', 'Das Gemüse putzen, die Schalotten in Streifen (nicht in Ringe), die Karotten in dünne Scheiben und die hellgrünen Teile des Lauchs in breite Streifen schneiden. Schalotten und Karotten im Olivenöl etwa 10 Minuten langsam andünsten, salzen und den Zucker hinzugeben. Die Schalotten sollten keine Farbe bekommen. Nach 5 Minuten den Lauch hinzugeben. Ab und zu umrühren. \n\nNach 10 Minuten mit dem Weißwein ablöschen, aufkochen lassen und den Fischfond angießen. In der Zwischenzeit die Tomaten häuten (muss nicht sein), entkernen, die Stielansätze und Kerne entfernen, Fruchtfleisch in kleine Würfel schneiden. \n\nDie Fischfilets in mundgerechte Stücke schneiden, von den Shrimps die Schale entfernen und den Rückendarm herausziehen. Alles in den Gemüse-Fischfond gleiten lassen und 10 Minuten gar ziehen lassen. Die Knoblauchzehen in dünne Scheiben schneiden und zur Suppe geben. Mit Cayennepfeffer und Safranpulver würzen.\n\nKurz vor dem Servieren die Tomatenwürfel hinzugeben, sie sollten nicht mehr kochen. Optional einen guten Schuss Anisette (z. B. Pernod).\n\nMit Baguettescheiben servieren. \nKleine Abwandlung: Die Brotscheiben im Backofen rösten, mit aufgeschnittenen Knoblauchzehen einreiben. In die Teller das Röstbrot geben und die Suppe darauf verteilen.', 0, 0);
+,(2, 'Fischsuppe Sèteois', 'pictureRefFischsuppe', 'Schnell und einfach zuzubereitende sehr leckere und raffinierte Fischsuppe', 'Arbeitszeit: ca. 45 Min. / Schwierigkeitsgrad: normal / Kalorien p. P.: keine Angabe', 'Das Gemüse putzen, die Schalotten in Streifen (nicht in Ringe), die Karotten in dünne Scheiben und die hellgrünen Teile des Lauchs in breite Streifen schneiden. Schalotten und Karotten im Olivenöl etwa 10 Minuten langsam andünsten, salzen und den Zucker hinzugeben. Die Schalotten sollten keine Farbe bekommen. Nach 5 Minuten den Lauch hinzugeben. Ab und zu umrühren. \n\nNach 10 Minuten mit dem Weißwein ablöschen, aufkochen lassen und den Fischfond angießen. In der Zwischenzeit die Tomaten häuten (muss nicht sein), entkernen, die Stielansätze und Kerne entfernen, Fruchtfleisch in kleine Würfel schneiden. \n\nDie Fischfilets in mundgerechte Stücke schneiden, von den Shrimps die Schale entfernen und den Rückendarm herausziehen. Alles in den Gemüse-Fischfond gleiten lassen und 10 Minuten gar ziehen lassen. Die Knoblauchzehen in dünne Scheiben schneiden und zur Suppe geben. Mit Cayennepfeffer und Safranpulver würzen.\n\nKurz vor dem Servieren die Tomatenwürfel hinzugeben, sie sollten nicht mehr kochen. Optional einen guten Schuss Anisette (z. B. Pernod).\n\nMit Baguettescheiben servieren. \nKleine Abwandlung: Die Brotscheiben im Backofen rösten, mit aufgeschnittenen Knoblauchzehen einreiben. In die Teller das Röstbrot geben und die Suppe darauf verteilen.', 0, 0)
+,(3, 'Carpaccio vom Rind mit Pinienkernen, Rucola und Parmesan', 'pictureRefCarpaccio', 'Ein italienischer Klassiker. Immer wieder lecker!', 'Arbeitszeit: ca. 15 Min. / Schwierigkeitsgrad: pfiffig / Kalorien p. P.: keine Angabe', '4 Teller mit Balsamico beträufeln und mit einem Pinsel verteilen, so dass der gesamte Teller dünn bedeckt ist. \n\nDie Pinienkerne anrösten und den Rucola waschen.\n\nDie dünnen Rinderfilet-Scheiben, den Rucola und die Pinienkerne auf die Teller geben, und den Parmesan hauchdünn darüber hobeln. Jetzt mit Salz, Zitronensaft und Pfeffer würzen, das Olivenöl darüber träufeln. Ich nehme auch noch etwas Balsamico dazu.\n\nDann in sofort mit dem Baguette servieren.\n\nDamit das Rinderfilet leichter in hauchdünne Scheiben geschnitten werden kann, friert man das Filet vorher etwas an. Dazu braucht man aber noch entweder ein sehr scharfes Messer, oder eine Aufschnittmaschine. Ansonsten kann man sich auch in der Art helfen, dass man die etwas dickeren Scheiben zwischen 2 Gefrierbeutel legt und mit einem Fleischklopfer oder einer Kasserolle vorsichtig flach klopft, oder das Filet beim Metzger aufschneiden lässt.', 6, 0);
 
 -- RecipeIngredients
 INSERT INTO RecipeIngredients (recipeID, ingredientID, amount, unitID)
@@ -146,7 +154,17 @@ VALUES
 ,(2, 23, 4, 9)
 ,(2, 24, 1, 5)
 ,(2, 25, 1, 5)
-,(2, 13, 2, 9);
+,(2, 13, 2, 9)
+
+,(3, 26, 400, 0)
+,(3, 27, 1, 8)
+,(3, 28, 1, 4)
+,(3, 29, 2, 9)
+,(3, 30, 100, 0)
+,(3, 31, 30, 3)
+,(3, 32, 1, 5)
+,(3, 8, 1, 5)
+,(3, 18, 5, 6);
 
 -- Ratings
 INSERT INTO Ratings (stars, comment, userID, recipeID)
