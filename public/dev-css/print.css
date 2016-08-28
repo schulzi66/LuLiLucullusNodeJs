@@ -25,4 +25,10 @@
     #footer-wrapper {
         visibility: hidden;
     }
+    .recipe-image  {
+        max-height: 250px;
+    }
+    .recipe-time-needed {
+        font-weight: 300;
+    }
 }

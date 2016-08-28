@@ -33,7 +33,7 @@ function loadRecipeFromId(id, portions) {
             portions = 1;
         }
         var recipe_image =
-            '<img class="img-responsive img-rounded" data-failover="img/default.png" src="' + Util.convertPictureRefToPath(recipe[0].pictureRef) + '">';
+            '<img class="recipe-image img-responsive img-rounded" data-failover="img/default.png" src="' + Util.convertPictureRefToPath(recipe[0].pictureRef) + '">';
         $('#recipe-image-wrapper').append(recipe_image);
 
         var recipe_details =
@@ -63,7 +63,7 @@ function loadRecipeFromId(id, portions) {
         var recipe_base_description =
             '<div class="recipe-container-row row">' +
             '<p class="h3 recipe-instructions">Zubereitung</p>' +
-            '<p  class="recipe-instructions">' +
+            '<p  class="recipe-instructions recipe-time-needed">' +
             recipe[0].timeNeeded +
             '</p>' +
             '<p  class="recipe-instructions">' +
