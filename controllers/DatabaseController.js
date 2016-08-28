@@ -354,7 +354,7 @@ DatabaseController.prototype.loadRecipesOverview = function (callback) {
 DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "SELECT RecipeIngredients.amount, " +
-            "Ingredients.ingredientName, Units.unitName, Recipes.recipeName, Recipes.baseDescription, Recipes.pictureRef " +
+            "Ingredients.ingredientName, Units.unitName, Recipes.recipeName, Recipes.timeNeeded, Recipes.baseDescription, Recipes.pictureRef " +
             "FROM RecipeIngredients " +
             "JOIN Ingredients " +
             "ON Ingredients.ingredientID=RecipeIngredients.ingredientID " +
@@ -365,6 +365,7 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
             "WHERE RecipeIngredients.recipeID=" +
             connection.escape(id);
         connection.query(queryString, function (err, rows) {
+            console.log("LoadRecipeByID: " + queryString);
             connection.release();
             if (!err) {
                 callback(rows);
@@ -426,7 +427,6 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
                 "ON allergenes.allergenID = ingredientsallergenes.allergenID";
         }
         connection.query(queryString, function (err, rows) {
-            console.log("DBCONTROLLER: " + queryString);
             connection.release();
             if (!err) {
                 callback(rows);

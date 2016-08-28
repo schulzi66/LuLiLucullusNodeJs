@@ -65,6 +65,9 @@ function loadRecipeFromId(id, portions) {
             '<div class="recipe-container-row row">' +
             '<p class="h3 recipe-instructions">Zubereitung</p>' +
             '<p  class="recipe-instructions">' +
+            recipe[0].timeNeeded +
+            '</p>' +
+            '<p  class="recipe-instructions">' +
             recipe[0].baseDescription +
             '</p>' +
             '</div>'

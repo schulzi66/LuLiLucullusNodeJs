@@ -107,6 +107,7 @@ CREATE TABLE Recipes
   instructions LONGTEXT NOT NULL,
   pictureRef VARCHAR(256) NOT NULL,
   shortDescription LONGTEXT NOT NULL,
+  timeNeeded VARCHAR(255),
   baseDescription LONGTEXT NOT NULL,
   styleID INT NOT NULL,
   courseID INT NOT NULL,
