@@ -26,13 +26,12 @@ function loadRecipesOverview() {
  Load single recipe by ID
  ##################################### */
 function loadRecipeFromId(id, portions) {
-    if (isNaN(portions)) {
-        portions = 1;
-    }
     var socket = io.connect();
     socket.emit('loadRecipeFromId', id);
     socket.on('loadedRecipe', function (recipe) {
-        console.log(recipe[0]);
+        if (isNaN(portions)) {
+            portions = 1;
+        }
         var recipe_image =
             '<img class="img-responsive img-rounded" data-failover="img/default.png" src="' + Util.convertPictureRefToPath(recipe[0].pictureRef) + '">';
         $('#recipe-image-wrapper').append(recipe_image);
