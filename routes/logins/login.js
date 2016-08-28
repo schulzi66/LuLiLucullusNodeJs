@@ -14,7 +14,11 @@ var LocalStrategy = require('passport-local').Strategy;
 
 /* GET login page. */
 router.get('/', function (req, res) {
-    res.render('login', {message: req.session.message});
+    res.render('login', {
+        message: req.session.message,
+        req: req,
+        res: res
+    });
     req.session.message = undefined;
 });
 
@@ -82,14 +86,14 @@ function loginUser(req, res, user) {
         req.session.message = 'Scheinbar haben Sie keine Account bei uns.';
         res.redirect('/signup');
     } else if (bcrypt.compareSync(req.body.password, user.password)) {
-      //user has entered correct password
-      req.session.user = user;
-      req.session.user.displayName = user.name + " " + user.familyName;
-      res.redirect('/');
+        //user has entered correct password
+        req.session.user = user;
+        req.session.user.displayName = user.name + " " + user.familyName;
+        res.redirect(req.session.redirectTo || '/');
     }
     else {
-      req.session.message = 'Falsches Passwort';
-      res.redirect('/login');
+        req.session.message = 'Falsches Passwort';
+        res.redirect('/login');
     }
 }
 
