@@ -15,8 +15,8 @@ var pool = mysql.createPool({
 });
 
 /**
-* Constr & Init Methods
-*/
+ * Constr & Init Methods
+ */
 var DatabaseController = function () {
 }
 
@@ -28,8 +28,8 @@ DatabaseController.prototype.connect = function (startServerCallback) {
 }
 
 /**
-* Password Methods
-*/
+ * Password Methods
+ */
 
 DatabaseController.prototype.hash = function (password) {
     var hash = bcrypt.hashSync(password);
@@ -59,13 +59,13 @@ DatabaseController.prototype.insertPasswordRequest = function (reqDate, authenti
 
 DatabaseController.prototype.getOpenPasswordRequest = function (req, res, callback) {
     pool.getConnection(function (err, connection) {
-      var queryString = "SELECT * FROM PASSWORDRESETS WHERE USERID=" + connection.escape(req.body.userID) + " " +
-      "AND CLOSED= " + false + " " +
-      "AND RESETCODE =" + connection.escape(req.body.authenticationCode);
+        var queryString = "SELECT * FROM PASSWORDRESETS WHERE USERID=" + connection.escape(req.body.userID) + " " +
+            "AND CLOSED= " + false + " " +
+            "AND RESETCODE =" + connection.escape(req.body.authenticationCode);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-              callback(req, res, rows[0])
+                callback(req, res, rows[0])
             }
         });
 
@@ -78,12 +78,12 @@ DatabaseController.prototype.getOpenPasswordRequest = function (req, res, callba
 
 DatabaseController.prototype.closePasswordRequest = function (req, res, passwordRequest, callback) {
     pool.getConnection(function (err, connection) {
-      var queryString = "UPDATE PASSWORDRESETS SET CLOSED = TRUE WHERE RESETCODE = " + connection.escape(passwordRequest.resetCode)+
-      " And userId ="+ connection.escape(passwordRequest.userID);
+        var queryString = "UPDATE PASSWORDRESETS SET CLOSED = TRUE WHERE RESETCODE = " + connection.escape(passwordRequest.resetCode) +
+            " And userId =" + connection.escape(passwordRequest.userID);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-              callback(res, passwordRequest.userID, req.body.password);
+                callback(res, passwordRequest.userID, req.body.password);
             }
         });
 
@@ -96,12 +96,12 @@ DatabaseController.prototype.closePasswordRequest = function (req, res, password
 
 DatabaseController.prototype.changePassword = function (res, userId, newPassword, callback) {
     pool.getConnection(function (err, connection) {
-      var queryString = "UPDATE USERS SET PASSWORD=" + connection.escape(DatabaseController.prototype.hash(newPassword)) + " " +
-      "WHERE USERID=" + connection.escape(userId);
+        var queryString = "UPDATE USERS SET PASSWORD=" + connection.escape(DatabaseController.prototype.hash(newPassword)) + " " +
+            "WHERE USERID=" + connection.escape(userId);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-              callback(res);
+                callback(res);
             }
         });
 
@@ -113,8 +113,8 @@ DatabaseController.prototype.changePassword = function (res, userId, newPassword
 }
 
 /**
-* Users Methods
-*/
+ * Users Methods
+ */
 
 DatabaseController.prototype.getUserByEmail = function (req, res, email, callback) {
     pool.getConnection(function (err, connection) {
@@ -155,7 +155,7 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
             "billingAddressPlz=" + connection.escape(null) + ", " +
             "internal=" + connection.escape(internal);
 
-            console.log("external signup: " + queryString);
+        console.log("external signup: " + queryString);
 
         connection.query(queryString,
             function (err) {
@@ -308,8 +308,8 @@ DatabaseController.prototype.updateUser = function (req, res) {
 }
 
 /**
-* Employees Methods
-*/
+ * Employees Methods
+ */
 
 DatabaseController.prototype.getAdminByEmail = function (req, res, email, callback) {
     pool.getConnection(function (err, connection) {
@@ -331,8 +331,8 @@ DatabaseController.prototype.getAdminByEmail = function (req, res, email, callba
 }
 
 /**
-* Recipes Methods
-*/
+ * Recipes Methods
+ */
 
 DatabaseController.prototype.loadRecipesOverview = function (callback) {
     pool.getConnection(function (err, connection) {
@@ -378,8 +378,8 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
 }
 
 /**
-* Filter Methods
-*/
+ * Filter Methods
+ */
 
 DatabaseController.prototype.loadFilterOptions = function (callback) {
     var queryString = "SELECT r.recipeName, s.styleName, c.courseName, ri.amount, i.ingredientName, a.allergenName FROM recipes AS r " +
@@ -390,7 +390,6 @@ DatabaseController.prototype.loadFilterOptions = function (callback) {
         "LEFT JOIN ingredientsallergenes AS ia ON ia.ingredientID = i.ingredientID " +
         "LEFT JOIN allergenes AS a ON a.allergenID = ia.allergenID";
     pool.getConnection(function (err, connection) {
-
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -411,22 +410,28 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
         if (filterOptions.length == 0)
             queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM RECIPES";
         else {
-            queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM recipes AS r" +
-                          "JOIN courses AS c ON c.courseID = r.courseID " +
-                          "JOIN styles AS s ON s.styleID = r.styleID " +
-                          "LEFT JOIN recipeingredients AS ri ON ri.recipeID = r.recipeID " +
-                          "LEFT JOIN ingredients AS i ON i.ingredientID = ri.ingredientID " +
-                          "LEFT JOIN ingredientsallergenes AS ia ON ia.ingredientID = i.ingredientID " +
-                          "LEFT JOIN allergenes AS a ON a.allergenID = ia.allergenID " +
-                          "WHERE recipeID = 1";
+            queryString = "SELECT DISTINCT Recipes.recipeID, recipeName, shortDescription, pictureRef" +
+                "FROM recipes " +
+                "JOIN courses " +
+                "ON courses.courseID = recipes.courseID " +
+                "JOIN styles " +
+                "ON styles.styleID = recipes.styleID " +
+                "LEFT JOIN recipeingredients " +
+                "ON recipeingredients.recipeID = recipes.recipeID " +
+                "LEFT JOIN ingredients " +
+                "ON ingredients.ingredientID = recipeingredients.ingredientID " +
+                "LEFT JOIN ingredientsallergenes " +
+                "ON ingredientsallergenes.ingredientID = ingredients.ingredientID " +
+                "LEFT JOIN allergenes " +
+                "ON allergenes.allergenID = ingredientsallergenes.allergenID";
         }
         connection.query(queryString, function (err, rows) {
+            console.log("DBCONTROLLER: " + queryString);
             connection.release();
             if (!err) {
                 callback(rows);
             }
         });
-
         connection.on('error', function (err) {
             console.log("ERR: " + err);
             return;
@@ -435,18 +440,18 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
 }
 
 /**
-* Bookings Methods
-*/
+ * Bookings Methods
+ */
 
 DatabaseController.prototype.loadOrders = function (callback) {
     pool.getConnection(function (err, connection) {
         var queryString =
             "SELECT bookings.eventName, " +
-                    "UNIX_TIMESTAMP(bookings.dateBegin) AS orderDate, " +
-                    "UNIX_TIMESTAMP(bookings.dateEnd) AS maturityDate, " +
-                    "concat(users.name,' ', users.familyName) AS customerName, " +
-                    "recipes.recipeName, " +
-                    "bookingRecipes.amountOfServings AS orderAmount " +
+            "UNIX_TIMESTAMP(bookings.dateBegin) AS orderDate, " +
+            "UNIX_TIMESTAMP(bookings.dateEnd) AS maturityDate, " +
+            "concat(users.name,' ', users.familyName) AS customerName, " +
+            "recipes.recipeName, " +
+            "bookingRecipes.amountOfServings AS orderAmount " +
             "FROM bookings " +
             "JOIN bookingRecipes ON bookingRecipes.bookingID = bookings.bookingID " +
             "JOIN users ON users.userID = bookings.userID " +
