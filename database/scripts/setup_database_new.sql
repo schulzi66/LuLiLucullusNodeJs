@@ -104,10 +104,9 @@ CREATE TABLE Recipes
 (
   recipeID INT NOT NULL,
   recipeName VARCHAR(100) NOT NULL,
-  instructions LONGTEXT NOT NULL,
   pictureRef VARCHAR(256) NOT NULL,
   shortDescription LONGTEXT NOT NULL,
-  timeNeeded VARCHAR(255),
+  timeNeeded VARCHAR(255) NOT NULL,
   baseDescription LONGTEXT NOT NULL,
   styleID INT NOT NULL,
   courseID INT NOT NULL,
