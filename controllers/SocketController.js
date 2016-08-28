@@ -34,10 +34,10 @@ function onConnection(socket) {
         });
     });
 
-    socket.on('loadFilteredRecipes', function(filteroptions){
+    socket.on('loadFilteredRecipes', function(filterOptions){
         var _dbController  = new DatabaseController();
-        _dbController.loadFilteredRecipes(function(filteroptions){
-            socket.emit('loadedFilteredRecipes', filteroptions);
+        _dbController.loadFilteredRecipes(function(filterOptions){
+            socket.emit('loadedFilteredRecipes', filterOptions);
         });
     });
     //End Region

@@ -159,6 +159,26 @@ function loadFilterOptions() {
     });
 }
 
+function loadFilteredRecipes(filterOptions) {
+    var socket = io.connect();
+    socket.emit('loadFilteredRecipes', filterOptions);
+    socket.on('loadedFilteredRecipes', function(filteredRecipes){
+        var container = $('ul.recipes');
+        $.each(filteredRecipes, function (i) {
+            var recipe_list_element =
+                '<li class="recipes-overview-item">' +
+                '<img src="' + Util.convertPictureRefToPath(filteredRecipes[i].pictureRef) + '"' + '>' +
+                '<h3 class="recipes-overview-headline text-uppercase">' + filteredRecipes[i].recipeName + '</h3>' +
+                '<p class="recipes-overview-short-description">' + filteredRecipes[i].shortDescription + '</p>' +
+                '<p>' +
+                '<a class="recipes-overview-btn btn btn-primary btn-sm" href="recipes/recipe?id=' + filteredRecipes[i].recipeID + '"> Weitere Informationen ... </a>' +
+                '</p>' +
+                '</li>';
+            container.append(recipe_list_element);
+        });
+    });
+}
+
 /**
  * CLICK EVENTS
  */
@@ -170,6 +190,7 @@ $(document).ready(function () {
 
     $('#filterSubmitBtn').on('click', function () {
         var selectedOptions = [];
+        var filterOptions = [];
         $('input:checked').each(function () {
             selectedOptions.push(this.getAttribute('data-type') + ":" + this.id);
         });
@@ -177,15 +198,15 @@ $(document).ready(function () {
         for (var i = 0; i < selectedOptions.length; i++) {
             var currentOptionType = selectedOptions[i].split(':')[0];
             var currentOption = selectedOptions[i].split(':')[1];
-            filteroptions.push({
+            filterOptions.push({
                 key: currentOptionType,
                 option: currentOption
             });
         }
 
 
-        console.log(filteroptions);
-        loadFilteredRecipes(filteroptions);
+        console.log(filterOptions);
+        loadFilteredRecipes(filterOptions);
     });
 
     /**
