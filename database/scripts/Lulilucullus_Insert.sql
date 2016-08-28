@@ -47,7 +47,8 @@ VALUES
 ,(2, 'Indisch')
 ,(3, 'Mexikanisch')
 ,(4, 'Amerikanisch')
-,(5, 'Französisch');
+,(5, 'Französisch')
+,(6, 'Italienisch');
 
 -- Courses
 INSERT INTO COURSES (courseID, courseName)
