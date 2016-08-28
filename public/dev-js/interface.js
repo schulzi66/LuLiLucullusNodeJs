@@ -162,7 +162,7 @@ function loadFilterOptions() {
 function loadFilteredRecipes(filterOptions) {
     var socket = io.connect();
     socket.emit('loadFilteredRecipes', filterOptions);
-    socket.on('loadedFilteredRecipes', function(filteredRecipes){
+    socket.on('loadedFilteredRecipes', function (filteredRecipes) {
         var container = $('ul.recipes');
         $.each(filteredRecipes, function (i) {
             var recipe_list_element =
@@ -203,8 +203,6 @@ $(document).ready(function () {
                 option: currentOption
             });
         }
-
-
         console.log(filterOptions);
         loadFilteredRecipes(filterOptions);
     });
