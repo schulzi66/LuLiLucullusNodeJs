@@ -12,7 +12,7 @@ Util.fixRootEntry = function (str) {
         str = "#";
         return str;
     } else {
-        return str;
+        return str
     }
 }
 
@@ -34,7 +34,7 @@ Util.calculateIngredientsAmount = function () {
 }
 
 Util.convertPictureRefToPath = function (pictureRef) {
-    var imgDir = "img/";
+    var imgDir = "img/recipes/";
     var fileExtension = [".png", ".jpg"];
     pictureRef = pictureRef.split('pictureRef')[1].toLowerCase();
     var path = imgDir + pictureRef + fileExtension[1];
