@@ -42,10 +42,10 @@
             <ul>
                 <% if (user.provider) { %>
                 <li><a href="/login/profile-external"><i class="fa fa-user fa-fw"></i>Profilverwaltung</a></li>
+                <% } else if(user.provider && user.provider.isAdmin !== undefined)  {%>
                 <% } else { %>
                 <li><a href="/login/profile"><i class="fa fa-user fa-fw"></i>Profilverwaltung</a></li>
                 <% } %>
-
                 <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
             </ul>
         </div>
