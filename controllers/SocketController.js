@@ -49,10 +49,10 @@ function onConnection(socket) {
         });
     });
 
-    socket.on('insertOrders', function () {
+    socket.on('insertOrders', function (orderDetails) {
         var _dbController = new DatabaseController();
-        _dbController.insertOrderInformation(function (orderDetails) {
-            socket.emit('insertedOrders', orderDetails);
+        _dbController.insertOrderInformation(orderDetails, function () {
+            socket.emit('insertedOrders');
         });
     });
 }

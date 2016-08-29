@@ -473,14 +473,14 @@ DatabaseController.prototype.loadOrders = function (callback) {
 
 DatabaseController.prototype.insertOrderInformation = function (details, callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "UPDATE TABLE bookings SET " +
+        var queryString = "INSERT INTO TABLE bookings SET " +
             "eventName=" + connection.escape(details.anlass) +
             ",userName=" + connection.escape(details.kunde) +
             ",recipe=" + connection.escape(details.artikel) +
             ",amount=" + connection.escape(details.menge) +
             ",orderDate=" + connection.escape(details.auftragsdatum) +
             ",typeID=" + connection.escape(3) +
-            ",isReleased=" + true;
+            ",isReleased=" + connection.escape(details.freigeben);
         //TODO: typeID dynamic
         connection.query(queryString, function (err, rows) {
             console.log(queryString);
