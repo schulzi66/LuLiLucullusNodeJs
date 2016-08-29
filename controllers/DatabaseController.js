@@ -342,7 +342,6 @@ DatabaseController.prototype.setAdminOnlineStatus = function (user, onlineStatus
 
             }
         });
-
         connection.on('error', function (err) {
             console.log("ERR: " + err);
             return;
@@ -494,7 +493,7 @@ DatabaseController.prototype.loadOrders = function (callback) {
             "UNIX_TIMESTAMP(bookings.dateBegin) AS orderDate, " +
             "UNIX_TIMESTAMP(bookings.dateEnd) AS maturityDate, " +
             "concat(users.name,' ', users.familyName) AS customerName, " +
-            "recipes.recipeName, bookings.bookingID, " +
+            "recipes.recipeName, bookings.bookingID, bookings.typeID, " +
             "bookingRecipes.amountOfServings AS orderAmount " +
             "FROM bookings " +
             "JOIN bookingRecipes ON bookingRecipes.bookingID = bookings.bookingID " +
@@ -523,7 +522,7 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
             ",recipe=" + connection.escape(details.artikel) +
             ",amount=" + connection.escape(details.menge) +
             ",orderDate=" + connection.escape(details.auftragsdatum) +
-            ",typeID=" + connection.escape(3) +
+            ",typeID=" + connection.escape(details.typeId) +
             ",isReleased=" + connection.escape(details.freigeben);
         //TODO: typeID dynamic
         connection.query(queryString, function (err, rows) {

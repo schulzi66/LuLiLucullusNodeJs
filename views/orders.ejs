@@ -61,7 +61,9 @@
         $.each(singleOrder[0].cells, function (i) {
             json["" + fields[0].cells[i].innerText.toLocaleLowerCase()] = "" + singleOrder[0].cells[i].innerText;
         });
-        json["id"] = $(this).parents("tr:first").find(":hidden").not("script").val();
+        json["id"] = $(this).parents("tr:first").find("input[type=hidden]:first").not("script").val();
+        json["typeID"] = $(this).parents("tr:first").find("input[type=hidden]:last").not("script").val();
+
         json["freigeben"] = true;
         var orderDetails = JSON.stringify(json);
         console.log("OrderDetails: " + orderDetails);
