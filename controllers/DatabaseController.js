@@ -429,6 +429,7 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
+                console.log(rows);
                 callback(rows);
             }
         });
