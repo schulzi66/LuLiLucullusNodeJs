@@ -1,8 +1,8 @@
 var DatabaseController = require('./DatabaseController');
-var _dbController = new DatabaseController();
-
 var DevLoggingController = require('./DevLoggingController');
+
 var logger = new DevLoggingController();
+var _dbController = new DatabaseController();
 
 var SocketController = function () {
 }
@@ -48,6 +48,7 @@ function onConnection(socket) {
     });
 
     socket.on('insertOrders', function (orderDetails) {
+        _dbController.setReleaseFlag(orderDetails);
         _dbController.insertOrderInformation(orderDetails, function () {
             socket.emit('insertedOrders');
         });
@@ -60,6 +61,7 @@ function onConnection(socket) {
     socket.on('connectUser', function () {
       //has to check if an admin is online
       _dbController.getOnlineAdmins(function (onlineAdmins) {
+<<<<<<< HEAD
         //no admin is online
         if (onlineAdmins === undefined) {
           //chat has to disply no one online
@@ -69,6 +71,9 @@ function onConnection(socket) {
           //chat has to display "You are talking to Name Familiy Name"
           socket.emit('adminOnline', onlineAdmins[0]);
         }
+=======
+
+>>>>>>> origin/master
       })
     })
 

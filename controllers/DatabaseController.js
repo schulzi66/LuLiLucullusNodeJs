@@ -488,7 +488,7 @@ DatabaseController.prototype.loadOrders = function (callback) {
             "UNIX_TIMESTAMP(bookings.dateBegin) AS orderDate, " +
             "UNIX_TIMESTAMP(bookings.dateEnd) AS maturityDate, " +
             "concat(users.name,' ', users.familyName) AS customerName, " +
-            "recipes.recipeName, " +
+            "recipes.recipeName, bookings.bookingID, " +
             "bookingRecipes.amountOfServings AS orderAmount " +
             "FROM bookings " +
             "JOIN bookingRecipes ON bookingRecipes.bookingID = bookings.bookingID " +
@@ -534,6 +534,24 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
     });
 }
 
+DatabaseController.prototype.setReleaseFlag = function (details, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "ALTER TABLE bookings SET " +
+            "isReleased=" + true +
+            " WHERE bookingID =" + connection.escape(details.bookingID);
+        connection.query(queryString, function (err, rows) {
+            console.log(queryString);
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
 /*DatabaseController.prototype.saveRatingForRecipe = function (rating, id, callback) {
  pool.getConnection(function (err, connection) {
  var queryString = "INSERT INTO Ratings SET stars= " +
