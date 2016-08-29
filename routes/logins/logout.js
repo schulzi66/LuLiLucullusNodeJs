@@ -10,15 +10,14 @@ var logger = new DevLoggingController();
 
 /* Logout user */
 router.get('/', function(req, res) {
-    req.session.destroy(function () {
-      // console.log("req.client: "+  req.client);
-      // logger.log("logout", req.client);
-      // console.log("req.session.user: " + req.session.user);
-      // console.log("locals.user: " + locals.user);
-        // _dbController.setAdminOnlineStatus(re, true);
-        req.logout();
-        res.redirect("/");
-    });
+  //only if user is admin
+  if (req.session.user.isAdmin !== undefined) {
+    _dbController.setAdminOnlineStatus(req.session.user, false);
+  }
+  req.session.destroy(function () {
+      req.logout();
+      res.redirect("/");
+  });
 });
 
 module.exports = router;
