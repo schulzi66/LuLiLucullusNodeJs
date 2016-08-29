@@ -1,4 +1,6 @@
 var DatabaseController = require('./DatabaseController');
+var _dbController = new DatabaseController();
+
 var DevLoggingController = require('./DevLoggingController');
 var logger = new DevLoggingController();
 
@@ -12,14 +14,12 @@ SocketController.prototype.startServerSocket = function (io, server) {
 function onConnection(socket) {
     //Region Recepies
     socket.on('loadRecipesOverview', function () {
-        var _dbController = new DatabaseController();
         _dbController.loadRecipesOverview(function (recipesOverview) {
             socket.emit('loadedRecipesOverview', recipesOverview);
         })
     });
 
     socket.on('loadRecipeFromId', function (id) {
-        var _dbController = new DatabaseController();
         _dbController.loadRecipeFromId(id, function (recipe) {
             socket.emit('loadedRecipe', recipe);
         });
@@ -28,14 +28,12 @@ function onConnection(socket) {
 
     //Region Recipe Filter
     socket.on('loadFilterOptions', function () {
-        var _dbController = new DatabaseController();
         _dbController.loadFilterOptions(function (filterOptions) {
             socket.emit('loadedFilterOptions', filterOptions);
         });
     });
 
     socket.on('loadFilteredRecipes', function(filterOptions){
-        var _dbController  = new DatabaseController();
         _dbController.loadFilteredRecipes(function(filterOptions){
             socket.emit('loadedFilteredRecipes', filterOptions);
         });
@@ -44,14 +42,12 @@ function onConnection(socket) {
 
     //Region Orders
     socket.on('loadOrdersOverview', function () {
-        var _dbController = new DatabaseController();
         _dbController.loadOrders(function (ordersOverview) {
             socket.emit('loadedOrdersOverview', ordersOverview);
         });
     });
 
     socket.on('insertOrders', function (orderDetails) {
-        var _dbController = new DatabaseController();
         _dbController.insertOrderInformation(orderDetails, function () {
             socket.emit('insertedOrders');
         });
@@ -62,7 +58,10 @@ function onConnection(socket) {
 
     //User opens chat
     socket.on('connectUser', function () {
-      
+      //has to check if an admin is online
+      _dbController.getOnlineAdmins(function (onlineAdmins) {
+        
+      })
     })
 
     socket.on('receiveChatMessage', function () {

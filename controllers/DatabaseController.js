@@ -333,15 +333,31 @@ DatabaseController.prototype.getAdminByEmail = function (req, res, email, callba
 
 DatabaseController.prototype.setAdminOnlineStatus = function (user, onlineStatus) {
     pool.getConnection(function (err, connection) {
-      logger.log("setAdminOnlineStatus", user);
         var queryString = "UPDATE EMPLOYEES SET isOnline=" + connection.escape(onlineStatus) +
         " WHERE employeeID=" + connection.escape(user.employeeID) +
             " AND isAdmin=" + true;
-            console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
 
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.getOnlineAdmins = function (callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT * FROM EMPLOYEES WHERE isAdmin=" + true +
+        " AND isOnline=" + true;
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+              callback(rows);
             }
         });
 
