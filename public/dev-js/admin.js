@@ -16,6 +16,7 @@ function initOrdersOverview() {
             }
             var ordersOverview =
                 tableRow +
+                '<input type="hidden" value="' + orders[i].bookingID + '">' +
                 '<td class="center">' + orders[i].eventName + '</td>' +
                 '<td class="center">' + orders[i].customerName + '</td>' +
                 '<td class="center">' + orders[i].recipeName + '</td>' +
@@ -30,7 +31,6 @@ function initOrdersOverview() {
                 '</a>' +
                 '</td>' +
                 '</tr>';
-            container.append('<input hidden id="orderBookingID_'+ i +'" value="' + orders[i].bookingID + '">');
             container.append(ordersOverview);
         });
     });
