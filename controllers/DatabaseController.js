@@ -524,7 +524,6 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
             ",orderDate=" + connection.escape(details.auftragsdatum) +
             ",typeID=" + connection.escape(details.typeId) +
             ",isReleased=" + connection.escape(details.freigeben);
-        //TODO: typeID dynamic
         connection.query(queryString, function (err, rows) {
             console.log(queryString);
             connection.release();
