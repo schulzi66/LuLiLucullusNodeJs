@@ -360,6 +360,12 @@ table.dataTable thead .sorting:after {
     font-weight: bold;
 }
 
+.brand {
+    position: absolute;
+    left: 50%;
+    margin-left: -50px !important;
+    display: block;
+}
 /*
     Dropdown menu Header
 */
