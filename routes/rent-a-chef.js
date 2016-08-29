@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET recipes page. */
 router.get('/', function(req, res) {
-    res.render('rentaCook', { user: req.session.user} );
+    res.render('rent-a-chef', { user: req.session.user} );
 });
 
 module.exports = router;
