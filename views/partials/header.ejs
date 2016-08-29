@@ -41,12 +41,12 @@
              style="position:absolute; overflow:hidden;">
             <ul>
                 <% if (user.provider) { %>
-                <li><a href="/login/profile-external"><i class="fa fa-user fa-fw"></i>Profilverwaltung</a></li>
+                <li><a href="/login/profile-external"><i class="fa fa-user fa-fw"> Profilverwaltung</i></a></li>
                 <% } else if(user.provider && user.provider.isAdmin !== undefined)  {%>
                 <% } else { %>
-                <li><a href="/login/profile"><i class="fa fa-user fa-fw"></i>Profilverwaltung</a></li>
+                <li><a href="/login/profile"><i class="fa fa-user fa-fw"> Profilverwaltung</i></a></li>
                 <% } %>
-                <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                <li><a href="/logout"><i class="fa fa-sign-out fa-fw"> Logout</i></a>
             </ul>
         </div>
         <% } %>
