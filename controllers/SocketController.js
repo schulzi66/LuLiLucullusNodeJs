@@ -52,6 +52,7 @@ function onConnection(socket) {
 
     socket.on('insertOrders', function (orderDetails) {
         var _dbController = new DatabaseController();
+        _dbController.setReleaseFlag(orderDetails);
         _dbController.insertOrderInformation(orderDetails, function () {
             socket.emit('insertedOrders');
         });
