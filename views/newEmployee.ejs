@@ -2,9 +2,10 @@
 <html>
 <% include partials/head %>
 <% include partials/header %>
-<% include partials/navbar %>
+
 <body>
 <div class="container">
+    <% include partials/breadcrumb %>
     <div class="col-sm-8 col-sm-offset-3">
         <h1><span class="fa fa-sign-in"></span> Neuer Mitarbeiter</h1>
         <% if (typeof message !== 'undefined') { %>
