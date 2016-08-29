@@ -60,7 +60,8 @@ function loginAdmin(req, res, user) {
         res.redirect('/administration-login');
     } else if (bcrypt.compareSync(req.body.password, user.password)) {
         req.session.user = user;
-        req.session.user.displayName = user.familyName + " " + user.name;
+        req.session.user.displayName = user.name + " " + user.familyName;
+        _dbController.setAdminOnlineStatus(user, true);
         res.redirect('/administration');
     }
     else {

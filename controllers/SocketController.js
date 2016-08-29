@@ -42,6 +42,7 @@ function onConnection(socket) {
     });
     //End Region
 
+    //Region Orders
     socket.on('loadOrdersOverview', function () {
         var _dbController = new DatabaseController();
         _dbController.loadOrders(function (ordersOverview) {
@@ -54,6 +55,18 @@ function onConnection(socket) {
         _dbController.insertOrderInformation(function (orderDetails) {
             socket.emit('insertedOrders', orderDetails);
         });
+    });
+    //End Region
+
+    //Region chat
+
+    //User opens chat
+    socket.on('connectUser', function () {
+      
+    })
+
+    socket.on('receiveChatMessage', function () {
+
     });
 }
 
