@@ -3,7 +3,7 @@
         <a class="navbar-brand" href="/administration">Administration</a>
     </div>
     <ul class="navbar-right ">
-        <% if(locals.user) { %>
+        <% if(locals.user && locals.user.isAdmin !== undefined) { %>
         <a class="dropdown-toggle lulilucullusAdminDropdownToggler" id="lulilucullusAdminDropdownToggler">
             <i class="fa fa- fa-user"> <span><%= user.displayName %></span></i>
         </a>

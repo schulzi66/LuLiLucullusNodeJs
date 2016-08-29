@@ -26,7 +26,7 @@ Util.convertMySQLTimestampToValidTimestamp = function (timestamp) {
 }
 
 Util.getMaturityPeriod = function (orderDate, maturityDate) {
-    return (Math.abs(maturityDate - orderDate) / 60 / 60 / 24);
+    return Math.round(Math.abs(maturityDate - orderDate) / 60 / 60 / 24);
 }
 
 Util.calculateIngredientsAmount = function () {
