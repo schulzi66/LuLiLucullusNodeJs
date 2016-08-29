@@ -352,7 +352,7 @@ table.dataTable thead .sorting:after {
 /*
     Needed because it got overwritten by global styles
 */
-#panel-footer-blue {
+.panel-footer-blue {
     color: #337ab7;
 }
 
