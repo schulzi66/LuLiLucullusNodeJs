@@ -356,12 +356,8 @@ table.dataTable thead .sorting:after {
     color: #337ab7;
 }
 
-/*
-    Breadcrumb navigation
-*/
-.breadcrumb {
-    margin-bottom: 0;
-    background-color: transparent;
+.admin-panel-text {
+    font-weight: bold;
 }
 
 /*
