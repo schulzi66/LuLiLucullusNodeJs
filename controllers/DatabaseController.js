@@ -449,7 +449,11 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
         if (filterOptions.length == 0)
             queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM RECIPES";
         else {
-            queryString = "SELECT DISTINCT Recipes.recipeID, recipeName, shortDescription, pictureRef" +
+            var allergenString = "";
+            for (var i = 0; i < filterOptions.allergens.length; i++){
+                allergenString.append("" + filterOptions.allergens + "");
+            }
+            queryString = "SELECT DISTINCT recipes.recipeID, recipeName, shortDescription, pictureRef " +
                 "FROM recipes " +
                 "JOIN courses " +
                 "ON courses.courseID = recipes.courseID " +
@@ -462,8 +466,10 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
                 "LEFT JOIN ingredientsallergenes " +
                 "ON ingredientsallergenes.ingredientID = ingredients.ingredientID " +
                 "LEFT JOIN allergenes " +
-                "ON allergenes.allergenID = ingredientsallergenes.allergenID";
+                "ON allergenes.allergenID = ingredientsallergenes.allergenID "
+                "WHERE allergenes.allergenName NOT IN (" + allergenString + ")";
         }
+        console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {

@@ -32,9 +32,9 @@ function onConnection(socket) {
             socket.emit('loadedFilterOptions', filterOptions);
         });
     });
-
+    
     socket.on('loadFilteredRecipes', function (filterOptions) {
-        _dbController.loadFilteredRecipes(function (filterOptions) {
+        _dbController.loadFilteredRecipes(filterOptions, function (filterOptions) {
             socket.emit('loadedFilteredRecipes', filterOptions);
         });
     });

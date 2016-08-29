@@ -166,6 +166,7 @@ function loadFilteredRecipes(filterOptions) {
     socket.emit('loadFilteredRecipes', filterOptions);
     socket.on('loadedFilteredRecipes', function (filteredRecipes) {
         var container = $('ul.recipes');
+        container.children().remove();
         $.each(filteredRecipes, function (i) {
             var recipe_list_element =
                 '<li class="recipes-overview-item">' +
