@@ -37,7 +37,7 @@
                        pattern="?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
             </div>
             <div class="form-group">
-              <label for="adresse" class="control-label">Adresse</label>
+                <label for="adresse" class="control-label">Adresse</label>
                 <input type="text" class="form-control" id="street" name="street" placeholder="Stra&szlig;e + HNr"
                        value="" required>
                 <input type="text" class="form-control" id="plz" name="plz" placeholder="PLZ" value="" required>
@@ -45,8 +45,9 @@
                        required>
             </div>
             <div class="from-group">
-              <label for="administrator" class="control-label">Administrator</label>
-              <input type="checkbox" class="form-control" id="isAdmin" name="isAdmin" value="Administrator">
+                <div class="checkbox">
+                    <label><input id="isAdmin" name="isAdmin" type="checkbox" value="">Administrator</label>
+                </div>
             </div>
             <button type="submit" class="btn btn-sm btn-primary">Erstellen</button>
         </form>
