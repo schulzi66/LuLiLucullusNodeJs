@@ -61,12 +61,24 @@ function onConnection(socket) {
     socket.on('connectUser', function () {
       //has to check if an admin is online
       _dbController.getOnlineAdmins(function (onlineAdmins) {
+<<<<<<< HEAD
+        //no admin is online
+        if (onlineAdmins === undefined) {
+          //chat has to disply no one online
+          socket.emit('noAdminOnline');
+        }
+        else {
+          //chat has to display "You are talking to Name Familiy Name"
+          socket.emit('adminOnline', onlineAdmins[0]);
+        }
+=======
 
+>>>>>>> origin/master
       })
     })
 
-    socket.on('receiveChatMessage', function () {
-
+    socket.on('receiveChatMessage', function (message) {
+      console.log(message);
     });
 }
 

@@ -356,8 +356,8 @@ DatabaseController.prototype.getOnlineAdmins = function (callback) {
         " AND isOnline=" + true;
         connection.query(queryString, function (err, rows) {
             connection.release();
-            if (!err) {
-              callback(rows);
+            if (!err) {              
+              callback(rows[0]);
             }
         });
 
