@@ -80,7 +80,7 @@ VALUES
 -- Employees
 INSERT INTO Employees (employeeID, name, familyName, location, street, plz, telefonNumber, isAdmin, password)
 VALUES
-('employee@id.com', 'MAVorname', 'MANachname', 'Mitarbeiterort', 'Mitarbeiterstraße', '12345', '123654789', true, '98765');
+('employee@id.com', 'MAVorname', 'MANachname', 'Mitarbeiterort', 'Mitarbeiterstraße', '12345', '123654789', true, '$10$jLtT3WKE48lvdeGXo7Be7e388OCn2NPce895bUmpOg/k46LjpCZ5m');
 
 -- BookingTypes
 INSERT INTO BookingTypes (typeID, type)
