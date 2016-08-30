@@ -16,6 +16,8 @@ function initOrdersOverview() {
             }
             var ordersOverview =
                 tableRow +
+                '<input type="hidden" name="bookingID" value="' + orders[i].bookingID + '">' +
+                '<input type="hidden" name="typeID" value="' + orders[i].typeID + '">' +
                 '<td class="center">' + orders[i].eventName + '</td>' +
                 '<td class="center">' + orders[i].customerName + '</td>' +
                 '<td class="center">' + orders[i].recipeName + '</td>' +

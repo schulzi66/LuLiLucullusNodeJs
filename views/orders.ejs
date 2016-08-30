@@ -38,26 +38,6 @@
                             </thead>
                             <tbody id="orderOverview">
                             <script>initOrdersOverview()</script>
-                            <tr class="odd gradeX">
-                                <td>Anlass 1</td>
-                                <td>Kunde 1</td>
-                                <td>Rezept 1</td>
-                                <td>1</td>
-                                <td class="center">20. August 2016</td>
-                                <td class="center">26. August 2016</td>
-                                <td class="center">7 Tagen</td>
-                                <td class="center"><a class="ordersOverviewRelease" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>
-                            </tr>
-                            <tr class="even gradeC">
-                                <td>Anlass 2</td>
-                                <td>Kunde 2</td>
-                                <td>Rezept 2</td>
-                                <td>2</td>
-                                <td class="center">26. August 2016</td>
-                                <td class="center">31. August 2016</td>
-                                <td class="center">14 Tagen</td>
-                                <td class="center"><a class="ordersOverviewRelease" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -72,19 +52,22 @@
     <!-- /.row -->
 </div>
 <script>
-    $('.ordersOverviewRelease').on('click', function (e) {
+    $(document).on('click', '.ordersOverviewRelease', function (e) {
         e.preventDefault();
         var singleOrder = $(this).parents("tr:first");
         var fields = $('#ordersTableHead');
         var json = {};
-        console.log($(this).parents("tr:first"));
+
         $.each(singleOrder[0].cells, function (i) {
             json["" + fields[0].cells[i].innerText.toLocaleLowerCase()] = "" + singleOrder[0].cells[i].innerText;
         });
+        json["bookingID"] = $(this).parents("tr:first").find("input[type=hidden]:first").not("script").val();
+        json["typeID"] = $(this).parents("tr:first").find("input[type=hidden]:last").not("script").val();
+
         json["freigeben"] = true;
-        var orderDetails = JSON.stringify(json);
-        console.log(orderDetails);
-        insertIntoOrdersTable(orderDetails);
+
+        console.log("OrderDetails: " + json);
+        insertIntoOrdersTable(json);
         singleOrder.remove();
 
         if ($('#orderOverview').has("td").length == 0) {

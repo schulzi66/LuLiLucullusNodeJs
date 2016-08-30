@@ -1,9 +1,15 @@
 <nav class="navbar navbar-default">
-    <div class="navbar-header">
+    <div class="navbar-left">
         <a class="navbar-brand" href="/administration">Administration</a>
     </div>
-    <ul class="navbar-right ">
-        <% if(locals.user) { %>
+    <div class="navbar-header">
+        <a class="navbar-brand brand" href="#">
+            <img alt="Brand" src="/img/logo.svg">
+        </a>
+    </div>
+
+    <ul class="navbar-right">
+        <% if(locals.user && locals.user.isAdmin !== undefined) { %>
         <a class="dropdown-toggle lulilucullusAdminDropdownToggler" id="lulilucullusAdminDropdownToggler">
             <i class="fa fa- fa-user"> <span><%= user.displayName %></span></i>
         </a>
@@ -12,8 +18,8 @@
         <% if (locals.user && locals.user.isAdmin !== undefined) { %>
         <div id="lulilucullusAdminDropdown" class="lulilucullus-dropdown lulilucullusAdmin-dropdown lulilucullus-dropdown-right">
             <ul>
-                <li><a href="/login/profile">Profilverwaltung</a></li>
-                <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                <li><a href="/login/profile"><i class="fa fa-user"> Profilverwaltung</i></a></li>
+                <li><a href="/logout"><i class="fa fa-sign-out"> Logout</i></a>
             </ul>
         </div>
         <% } %>

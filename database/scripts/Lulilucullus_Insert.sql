@@ -80,7 +80,7 @@ VALUES
 -- Employees
 INSERT INTO Employees (employeeID, name, familyName, location, street, plz, telefonNumber, isAdmin, password)
 VALUES
-('employee@id.com', 'MAVorname', 'MANachname', 'Mitarbeiterort', 'Mitarbeiterstraße', '12345', '123654789', true, '98765');
+('employee@id.com', 'MAVorname', 'MANachname', 'Mitarbeiterort', 'Mitarbeiterstraße', '12345', '123654789', true, '$10$jLtT3WKE48lvdeGXo7Be7e388OCn2NPce895bUmpOg/k46LjpCZ5m');
 
 -- BookingTypes
 INSERT INTO BookingTypes (typeID, type)
@@ -176,7 +176,9 @@ INSERT INTO Bookings (bookingID, eventName, dateBegin, dateEnd, street, plz, loc
 VALUES
 (1, 'Bestellung Hochzeit', '2016-08-22 12:00:00', '2016-08-30 12:00:00', 'Musterstraße 2', '12345', 'Musterort', 'mmuster@test.de', 3, false)
 ,(2, 'Bestellung Geburtstag', '2016-08-27 12:00:00', '2016-09-10 12:00:00', 'Musterstraße 3', '22345', 'Musterort', 'mmuster@test.de', 3, false)
-,(3, 'Bestellung Geburtstag', '2016-08-27 12:00:00', '2016-10-22 12:00:00', 'Musterstraße 23', '99821', 'Musterort', 'mmuster@test.de', 3, false);
+,(3, 'Bestellung Geburtstag', '2016-08-27 12:00:00', '2016-10-22 12:00:00', 'Musterstraße 23', '99821', 'Musterort', 'mmuster@test.de', 3, false)
+,(4, 'Bestellung Goldhochzeit', '2016-08-29 12:00:00', '2016-11-27 12:00:00', 'Musterstraße 12', '53881', 'Musterort', 'mmuster@test.de', 3, false);;
+
 -- BookingEmployees
 
 -- BookingRecipes
@@ -184,4 +186,6 @@ INSERT INTO BookingRecipes (amountOfServings, bookingID, recipeID)
 VALUES
 (2,2,2)
 ,(1,1,1)
-,(1,3,3);
+,(1,3,3)
+,(20, 4, 0);
+

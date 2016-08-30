@@ -314,17 +314,17 @@ table.dataTable thead .sorting:after {
 }
 
 .panel-red {
-    border-color: #d9534f;
+    border-color: #912F40;
 }
 
 .panel-red > .panel-heading {
-    border-color: #d9534f;
+    border-color: #912F40;
     color: #fff;
-    background-color: #d9534f;
+    background-color: #912F40;
 }
 
 .panel-red a {
-    color: #d9534f;
+    color: #912F40;
 }
 
 .panel-red a:hover {
@@ -352,21 +352,26 @@ table.dataTable thead .sorting:after {
 /*
     Needed because it got overwritten by global styles
 */
-#panel-footer-blue {
+.panel-footer-blue {
     color: #337ab7;
 }
 
-/*
-    Breadcrumb navigation
-*/
-.breadcrumb {
-    margin-bottom: 0;
-    background-color: transparent;
+.admin-panel-text {
+    font-weight: bold;
 }
 
+.brand {
+    position: absolute;
+    left: 50%;
+    margin-left: -50px !important;
+    display: block;
+}
 /*
     Dropdown menu Header
 */
+.lulilucullusAdmin-dropdown {
+    min-width: 160px;
+}
 
 .lulilucullusAdmin-dropdown > ul {
     list-style: none;

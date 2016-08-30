@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 var DbController = require('../../controllers/DatabaseController');
+var DevLoggingController = require('../../controllers/DevLoggingController');
+var logger = new DevLoggingController();
 
 /* GET signup page. */
 router.get('/', function (req, res, next) {
@@ -9,10 +11,9 @@ router.get('/', function (req, res, next) {
     req.session.message = undefined;
 });
 
-var existing_user;
 router.post('/', function (req, res) {
   var _dbController = new DbController();
-    _dbController.getUserByEmail(req, res, req.body.email, function (data) {
+    _dbController.getUserByEmail(req, res, req.body.email, function (req, res, existing_user) {
       if (existing_user === undefined) {
           _dbController.signup(req, res, true);
       } else {

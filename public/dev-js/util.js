@@ -12,7 +12,7 @@ Util.fixRootEntry = function (str) {
         str = "#";
         return str;
     } else {
-        return str;
+        return str
     }
 }
 
@@ -26,18 +26,16 @@ Util.convertMySQLTimestampToValidTimestamp = function (timestamp) {
 }
 
 Util.getMaturityPeriod = function (orderDate, maturityDate) {
-    return (Math.abs(maturityDate - orderDate) / 60 / 60 / 24);
+    return Math.round(Math.abs(maturityDate - orderDate) / 60 / 60 / 24);
 }
 
-Util.calculateIngredientsAmount = function () {
-    console.log("test");
+Util.calculateRecipeIngredientsAmount = function () {
 }
 
 Util.convertPictureRefToPath = function (pictureRef) {
-    var imgDir = "img/";
+    var imgDir = "img/recipes/";
     var fileExtension = [".png", ".jpg"];
     pictureRef = pictureRef.split('pictureRef')[1].toLowerCase();
     var path = imgDir + pictureRef + fileExtension[1];
-    //TODO: check if file exist
     return path;
 }
