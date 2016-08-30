@@ -55,19 +55,19 @@ router.post('/', passport.authenticate('local-login', {failureRedirect: '/admini
 
 //Callback function after the login result returns from the database
 function loginAdmin(req, res, user) {
-    if (user === undefined) {
-        req.session.message = 'Sie besitzen nicht die nötigen Berechtigungen';
-        res.redirect('/administration-login');
-    } else if (bcrypt.compareSync(req.body.password, user.password)) {
-        req.session.user = user;
-        req.session.user.displayName = user.name + " " + user.familyName;
-        _dbController.setAdminOnlineStatus(user, true);
-        res.redirect('/administration');
-    }
-    else {
-      req.session.message = 'Falsches Passwort';
-      res.redirect('/administration-login');
-    }
+  if (user === undefined) {
+    req.session.message = 'Sie besitzen nicht die nötigen Berechtigungen';
+    res.redirect('/administration-login');
+  }
+  else if (bcrypt.compareSync(req.body.password, user.password)) {
+    req.session.user = user;
+    req.session.user.displayName = user.name + " " + user.familyName;
+    _dbController.setAdminOnlineStatus(user, true);
+    res.redirect('/administration');
+  } else {
+    req.session.message = 'Falsches Passwort';
+    res.redirect('/administration-login');
+  }
 }
 
 module.exports = router;
