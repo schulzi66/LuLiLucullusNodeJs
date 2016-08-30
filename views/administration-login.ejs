@@ -9,6 +9,11 @@
 
         <h1><span class="fa fa-sign-in"></span> Administration Login</h1>
         <!-- LOGIN FORM -->
+        <% if (typeof message !== 'undefined') { %>
+        <div class="alert alert-warning">
+            <%= message %>
+        </div>
+        <% } %>
         <form action="/administration-login" method="post">
             <div class="form-group">
                 <label>Email</label>
