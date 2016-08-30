@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {
     //Get user object from database
     console.log("req.body.email: " +  req.body.email);
-    _dbController.getUserByEmail(req, res, req.body.email, sendMailToUser); //TODO: check req.body.email
+    _dbController.getUserByEmail(req, res, req.body.email, sendMailToUser);
 });
 
 function sendMailToUser(req, res, user) {
@@ -41,7 +41,7 @@ console.log("user:  " + user);
           subject: 'Passwort zurücksetzen Lulilucullus', // Subject line
           text: "Sehr geehrte/geehrter " + user.name + " " + user.familyName + ", " +
           "ihr Passwort wurde zurückgesetzt. Ihr Code für die Zurücksetzung lautet: " + authenticationCode +
-          "Für das Zurücksetzten besuchen Sie: localhost:3000/login/change-password" // plaintext body
+          " Für das Zurücksetzten besuchen Sie: localhost:3000/login/change-password" // plaintext body
       };
 
       logger.log("mailOptions", mailOptions);

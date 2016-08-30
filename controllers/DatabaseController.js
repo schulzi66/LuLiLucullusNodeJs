@@ -43,6 +43,8 @@ DatabaseController.prototype.insertPasswordRequest = function (reqDate, authenti
             "resetCode=" + connection.escape(authenticationCode) + ", " +
             "closed=" + false + ", " +
             "userId=" + connection.escape(email);
+
+            console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -98,6 +100,24 @@ DatabaseController.prototype.changePassword = function (res, userId, newPassword
     pool.getConnection(function (err, connection) {
         var queryString = "UPDATE USERS SET PASSWORD=" + connection.escape(DatabaseController.prototype.hash(newPassword)) + " " +
             "WHERE USERID=" + connection.escape(userId);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(res);
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.changeEmployeePassword = function (res, userId, newPassword, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "UPDATE EMPLOYEES SET PASSWORD=" + connection.escape(DatabaseController.prototype.hash(newPassword)) + " " +
+            "WHERE EMPLOYEEID=" + connection.escape(userId);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -328,8 +348,7 @@ DatabaseController.prototype.getAdminByEmail = function (req, res, email, callba
             return;
         });
     });
-}
-;
+};
 
 DatabaseController.prototype.setAdminOnlineStatus = function (user, onlineStatus) {
     pool.getConnection(function (err, connection) {
@@ -355,7 +374,7 @@ DatabaseController.prototype.getOnlineAdmins = function (callback) {
         " AND isOnline=" + true;
         connection.query(queryString, function (err, rows) {
             connection.release();
-            if (!err) {              
+            if (!err) {
               callback(rows[0]);
             }
         });
@@ -366,6 +385,57 @@ DatabaseController.prototype.getOnlineAdmins = function (callback) {
         });
     });
 }
+
+
+DatabaseController.prototype.getEmployeeByEmail = function (req, res, email, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT * FROM EMPLOYEES WHERE employeeID=" + connection.escape(email);
+
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(req, res, rows[0]);
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+};
+
+DatabaseController.prototype.insertNewEmployee = function (req, res) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "INSERT INTO EMPLOYEES SET " +
+            "employeeID=" + connection.escape(req.body.employeeID) + ", " +
+            "name=" + connection.escape(req.body.name) + ", " +
+            "familyName=" + connection.escape(req.body.familyName) + ", " +
+            "location=" + connection.escape(req.body.location) + ", " +
+            "street=" + connection.escape(req.body.street) + ", " +
+            "plz=" + connection.escape(req.body.plz) + ", " +
+            "telefonNumber=" + connection.escape(req.body.telefonNumber) + ", " +
+            "isAdmin=" + connection.escape(req.body.isAdmin) + ", " +
+            "password=" + connection.escape(DatabaseController.prototype.hash(req.body.password));
+
+        connection.query(queryString,
+            function (err) {
+                console.log(queryString);
+                connection.release();
+
+                if (!err) {
+
+                }
+            });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+
 
 /**
  * Recipes Methods
