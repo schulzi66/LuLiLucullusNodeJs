@@ -542,7 +542,7 @@ DatabaseController.prototype.setReleaseFlag = function (details, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "ALTER TABLE bookings SET " +
             "isReleased=" + true +
-            " WHERE bookingID =" + connection.escape(details.bookingID);
+            " WHERE bookingID=" + connection.escape(details.bookingID);
         connection.query(queryString, function (err, rows) {
             console.log(queryString);
             connection.release();
