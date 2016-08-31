@@ -514,7 +514,6 @@ DatabaseController.prototype.loadRecipesOverview = function (callback) {
                 callback(rows);
             }
         });
-
         connection.on('error', function (err) {
             console.log("ERR: " + err);
             return;
@@ -536,7 +535,27 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
             "WHERE RecipeIngredients.recipeID=" +
             connection.escape(id);
         connection.query(queryString, function (err, rows) {
-            console.log("LoadRecipeByID: " + queryString);
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+/**
+ * Load recipe names
+ * @param id
+ * @param callback
+ */
+DatabaseController.prototype.loadRecipeNames = function (callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT recipeName FROM recipes";
+        connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
                 callback(rows);

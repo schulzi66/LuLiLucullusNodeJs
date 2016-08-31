@@ -101,6 +101,22 @@ function loadRecipeFromId(id, portions) {
     });
 }
 
+
+function loadRecipeNamesForOrder() {
+    var socket = io.connect();
+    socket.emit('loadRecipeNames');
+    socket.on('loadedRecipeNames', function (recipeNames) {
+        var container = $("#recipeSelection");
+        console.log(recipeNames);
+        $.each(recipeNames, function (i) {
+            var options = "" +
+                "<option>" +
+                recipeNames[i].recipeName +
+                "</option>";
+            container.append(options);
+        });
+    });
+}
 /* #####################################
  Region filter
  ##################################### */

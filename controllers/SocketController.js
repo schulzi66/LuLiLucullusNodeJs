@@ -26,6 +26,12 @@ function onConnection(socket) {
     });
     //End Region
 
+    socket.on('loadRecipeNames', function () {
+        _dbController.loadRecipeNames(function (recipeNames) {
+            socket.emit('loadedRecipeNames', recipeNames);
+        })
+    });
+
     //Region Recipe Filter
     socket.on('loadFilterOptions', function () {
         _dbController.loadFilterOptions(function (filterOptions) {
