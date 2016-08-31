@@ -121,6 +121,7 @@ CREATE TABLE Recipes
   baseDescription LONGTEXT NOT NULL,
   styleID INT NOT NULL,
   courseID INT NOT NULL,
+  recipePrice VARCHAR(50) NOT NULL,
   PRIMARY KEY (recipeID),
   FOREIGN KEY (styleID) REFERENCES Styles(styleID),
   FOREIGN KEY (courseID) REFERENCES Courses(courseID),

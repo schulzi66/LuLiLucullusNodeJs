@@ -554,7 +554,7 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
  */
 DatabaseController.prototype.loadRecipeNames = function (callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT recipeName FROM recipes";
+        var queryString = "SELECT recipeName, recipePrice FROM recipes";
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
