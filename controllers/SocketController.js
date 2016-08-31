@@ -47,7 +47,7 @@ function onConnection(socket) {
         });
     });
 
-    socket.on('insertOrders', function (orderDetails) {
+    socket.on('releaseOrder', function (orderDetails) {
         _dbController.setReleaseFlag(orderDetails);
     });
     //End Region

@@ -8,41 +8,48 @@ function initOrdersOverview() {
     socket.on('loadedOrdersOverview', function (orders) {
         var container = $('#orderOverview');
         var tableRow;
-        $.each(orders, function (i) {
-            if(i % 2 == 0) {
-                tableRow = '<tr class="even gradeC">';
-            } else {
-                tableRow = '<tr class="odd gradeX">';
-            }
-            var ordersOverview =
-                tableRow +
-                '<input type="hidden" name="bookingID" value="' + orders[i].bookingID + '">' +
-                '<input type="hidden" name="typeID" value="' + orders[i].typeID + '">' +
-                '<td class="center">' + orders[i].eventName + '</td>' +
-                '<td class="center">' + orders[i].customerName + '</td>' +
-                '<td class="center">' + orders[i].recipeName + '</td>' +
-                '<td class="center">' + orders[i].orderAmount + '</td>' +
-                '<td class="center">' + Util.convertMySQLTimestampToValidTimestamp(orders[i].orderDate) + '</td>' +
-                '<td class="center">' + Util.convertMySQLTimestampToValidTimestamp(orders[i].maturityDate) + '</td>' +
-                '<td class="center">' + Util.getMaturityPeriod(orders[i].orderDate, orders[i].maturityDate) + " Tagen" + '</td>' +
-                '<td class="center">' +
-                '<a class="ordersOverviewRelease" href="#">' +
-                '<span class="glyphicon glyphicon-ok">' +
-                '</span>' +
-                '</a>' +
-                '</td>' +
-                '</tr>';
-            container.append(ordersOverview);
-        });
+
+        if (orders.length > 0) {
+            $.each(orders, function (i) {
+                if (i % 2 == 0) {
+                    tableRow = '<tr class="even gradeC">';
+                } else {
+                    tableRow = '<tr class="odd gradeX">';
+                }
+                var ordersOverview =
+                    tableRow +
+                    '<input type="hidden" name="bookingID" value="' + orders[i].bookingID + '">' +
+                    '<input type="hidden" name="typeID" value="' + orders[i].typeID + '">' +
+                    '<td class="center">' + orders[i].eventName + '</td>' +
+                    '<td class="center">' + orders[i].customerName + '</td>' +
+                    '<td class="center">' + orders[i].recipeName + '</td>' +
+                    '<td class="center">' + orders[i].orderAmount + '</td>' +
+                    '<td class="center">' + Util.convertMySQLTimestampToValidTimestamp(orders[i].orderDate) + '</td>' +
+                    '<td class="center">' + Util.convertMySQLTimestampToValidTimestamp(orders[i].maturityDate) + '</td>' +
+                    '<td class="center">' + Util.getMaturityPeriod(orders[i].orderDate, orders[i].maturityDate) + " Tagen" + '</td>' +
+                    '<td class="center">' +
+                    '<a class="ordersOverviewRelease" href="#">' +
+                    '<span class="glyphicon glyphicon-ok">' +
+                    '</span>' +
+                    '</a>' +
+                    '</td>' +
+                    '</tr>';
+                container.append(ordersOverview);
+            });
+        } else if (orders.length == 0) {
+            container.append('<tr class="odd gradeX">' + '<td colspan="100%"> Keine offenen Bestellungen! </td>' + '</tr>');
+        }
     });
+
 }
 
 function insertIntoOrdersTable(orderDetails) {
     var socket = io.connect();
-    socket.emit('insertOrders', orderDetails);
-    socket.on('insertedOrders', function (orders) {
-        console.log("I DID IT!" + orders);
-    });
+    socket.emit('releaseOrder', orderDetails);
+}
+
+function sendConfirmation(json) {
+    console.log("test");
 }
 
 /* #####################################
