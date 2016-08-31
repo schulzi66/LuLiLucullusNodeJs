@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<% include partials/head %>
+<% include partials/header %>
+
+<% include partials/navbar %>
+<body>
+<div class="container">
+    <% include partials/breadcrumb %>
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1><span class="fa fa-gift"></span> Kochbox bestellen</h1>
+        <% if (typeof message !== 'undefined') { %>
+        <div class="alert alert-success">
+            <%= message %>
+        </div>
+        <% } %>
+        <form action="/kochboxen" method="post">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Gericht</label>
+                <select class="form-control" id="recipeSelection">
+                    <script>loadRecipeNamesForOrder();</script>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary">Bestellung aufgeben</button>
+        </form>
+    </div>
+</div>
+</body>
+<% include partials/footer %>
+</html>
