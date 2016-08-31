@@ -88,7 +88,8 @@ VALUES
 (0, 'Kochen'),
 (1, 'Gastroservice'),
 (2, 'Messe'),
-(3, 'Bestellung');
+(3, 'Bestellung'),
+(4, 'Kochkurs');
 
 -- Units
 INSERT INTO Units (unitID, unitName)
@@ -177,7 +178,8 @@ VALUES
 (1, 'Bestellung Hochzeit', '2016-08-22 12:00:00', '2016-08-30 12:00:00', 'Musterstraße 2', '12345', 'Musterort', 'mmuster@test.de', 3, false)
 ,(2, 'Bestellung Geburtstag', '2016-08-27 12:00:00', '2016-09-10 12:00:00', 'Musterstraße 3', '22345', 'Musterort', 'mmuster@test.de', 3, false)
 ,(3, 'Bestellung Geburtstag', '2016-08-27 12:00:00', '2016-10-22 12:00:00', 'Musterstraße 23', '99821', 'Musterort', 'mmuster@test.de', 3, false)
-,(4, 'Bestellung Goldhochzeit', '2016-08-29 12:00:00', '2016-11-27 12:00:00', 'Musterstraße 12', '53881', 'Musterort', 'mmuster@test.de', 3, false);;
+,(4, 'Bestellung Goldhochzeit', '2016-08-29 12:00:00', '2016-11-27 12:00:00', 'Musterstraße 12', '53881', 'Musterort', 'mmuster@test.de', 3, false)
+,(5, 'Kochkurs \"Vegetarisch\"', '2016-08-31 18:00:00', 'Köln', '2016-12-22 22:00:00', 'Musterstraße 89', '50999', 'mmuster@test.de', 4, 0);
 
 -- BookingEmployees
 
@@ -187,5 +189,7 @@ VALUES
 (2,2,2)
 ,(1,1,1)
 ,(1,3,3)
-,(20, 4, 0);
+,(20, 4, 0)
+,(1, 5, 0);
+
 
