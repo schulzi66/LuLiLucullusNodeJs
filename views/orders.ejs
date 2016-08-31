@@ -63,17 +63,16 @@
         });
         json["bookingID"] = $(this).parents("tr:first").find("input[type=hidden]:first").not("script").val();
         json["typeID"] = $(this).parents("tr:first").find("input[type=hidden]:last").not("script").val();
-
         json["freigeben"] = true;
 
-        console.log("OrderDetails: " + json);
         insertIntoOrdersTable(json);
+        sendConfirmation(json);
         singleOrder.remove();
 
         if ($('#orderOverview').has("td").length == 0) {
             var emptyTable =
                     '<tr class="odd gradeX">' +
-                    '<td colspan="' + singleOrder[0].cells.length + '"> Keine offenen Bestellungen! </td>' +
+                    '<td colspan="100%"> Keine offenen Bestellungen! </td>' +
                     '</tr>';
             $('#orderOverview').append(emptyTable);
         }
