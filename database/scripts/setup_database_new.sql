@@ -101,6 +101,16 @@ CREATE TABLE PasswordResets
   FOREIGN KEY (userID) REFERENCES Users(userID)
 );
 
+CREATE TABLE EmployeesPasswordResets
+(
+  dateOfReset DATETIME NOT NULL,
+  resetCode VARCHAR(50),
+  closed BOOLEAN NOT NULL,
+  employeeID VARCHAR(100) NOT NULL,
+  PRIMARY KEY (dateOfReset, employeeID),
+  FOREIGN KEY (employeeID) REFERENCES Employees(employeeID)
+);
+
 CREATE TABLE Recipes
 (
   recipeID INT NOT NULL,

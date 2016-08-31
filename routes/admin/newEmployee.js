@@ -60,7 +60,7 @@ function sendMailToEmployee(req, res, employee) {
         req.body.isAdmin = false;
       }
       _dbController.insertNewEmployee(req, res);
-      _dbController.insertPasswordRequest(createRequestDate(), authenticationCode, req.body.employeeID);
+      _dbController.insertEmployeesPasswordRequest(createRequestDate(), authenticationCode, req.body.employeeID);
   }
   //employee has alread an account
   else {

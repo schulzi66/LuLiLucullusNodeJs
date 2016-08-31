@@ -114,10 +114,74 @@ DatabaseController.prototype.changePassword = function (res, userId, newPassword
     });
 }
 
-DatabaseController.prototype.changeEmployeePassword = function (res, userId, newPassword, callback) {
+DatabaseController.prototype.insertEmployeesPasswordRequest = function (reqDate, authenticationCode, email) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "INSERT INTO EMPLOYEESPASSWORDRESETS SET " +
+            "dateOfReset=" + connection.escape(reqDate) + ", " +
+            "resetCode=" + connection.escape(authenticationCode) + ", " +
+            "closed=" + false + ", " +
+            "employeeID=" + connection.escape(email);
+
+            console.log(queryString);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.getOpenEmployeesPasswordRequest = function (req, res, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT * FROM EMPLOYEESPASSWORDRESETS WHERE EMPLOYEEID=" + connection.escape(req.body.userID) + " " +
+            "AND CLOSED= " + false + " " +
+            "AND RESETCODE =" + connection.escape(req.body.authenticationCode);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(req, res, rows[0])
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.closeEmployeesPasswordRequest = function (req, res, passwordRequest, callback) {
+    pool.getConnection(function (err, connection) {
+      console.log("closeEmployeesPasswordRequest passwordRequest.employeeID: " + passwordRequest.employeeID);
+        var queryString = "UPDATE EMPLOYEESPASSWORDRESETS SET CLOSED = TRUE WHERE RESETCODE = " + connection.escape(passwordRequest.resetCode) +
+            " And employeeID =" + connection.escape(passwordRequest.employeeID);
+            console.log(queryString);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(res, passwordRequest.employeeID, req.body.password);
+            }
+        });
+
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+
+DatabaseController.prototype.changeEmployeePassword = function (res, employeeID, newPassword, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "UPDATE EMPLOYEES SET PASSWORD=" + connection.escape(DatabaseController.prototype.hash(newPassword)) + " " +
-            "WHERE EMPLOYEEID=" + connection.escape(userId);
+            "WHERE EMPLOYEEID=" + connection.escape(employeeID);
+            console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {

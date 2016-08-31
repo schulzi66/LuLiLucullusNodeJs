@@ -10,11 +10,11 @@ router.get('/', function (req, res) {
 
 /* Change Password Command */
 router.post('/', function (req, res) {
-    _dbController.getOpenPasswordRequest(req, res, function (req, res, passwordRequest) {
+    _dbController.getOpenEmployeesPasswordRequest(req, res, function (req, res, passwordRequest) {
       //passwordRequest exists
       if (passwordRequest !== undefined) {
-        _dbController.closePasswordRequest(req, res, passwordRequest, function (res, userId, newPassword) {
-          _dbController.changeEmployeePassword(res, userId, newPassword, function () {
+        _dbController.closeEmployeesPasswordRequest(req, res, passwordRequest, function (res, employeeID, newPassword) {
+          _dbController.changeEmployeePassword(res, employeeID, newPassword, function () {
             req.session.message = undefined;
             res.redirect("/login");
           });
