@@ -474,6 +474,9 @@ html {
     margin-right: 5px;
 }
 */
+.ordersDataTable {
+    height: auto !important;
+}
 .panel-body {
     overflow-y: scroll;
     height: 250px;
