@@ -648,21 +648,21 @@ DatabaseController.prototype.loadOrders = function (callback) {
     });
 }
 
-DatabaseController.prototype.insertOrderInformation = function (details, callback) {
+DatabaseController.prototype.insertOrderInformation = function (details) {
     pool.getConnection(function (err, connection) {
-        var queryString = "INSERT INTO TABLE bookings SET " +
+        var queryString = "INSERT INTO bookings VALUES " +
             "eventName=" + connection.escape(details.anlass) +
             ",userName=" + connection.escape(details.kunde) +
             ",recipe=" + connection.escape(details.artikel) +
             ",amount=" + connection.escape(details.menge) +
             ",orderDate=" + connection.escape(details.auftragsdatum) +
-            ",typeID=" + connection.escape(details.typeId) +
+            ",typeID=" + connection.escape(details.typeID) +
             ",isReleased=" + connection.escape(details.freigeben);
-        connection.query(queryString, function (err, rows) {
+        connection.query(queryString, function (err) {
             console.log(queryString);
             connection.release();
             if (!err) {
-                callback(rows);
+                console.log("Success");
             }
         });
         connection.on('error', function (err) {
@@ -672,16 +672,16 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
     });
 }
 
-DatabaseController.prototype.setReleaseFlag = function (details, callback) {
+DatabaseController.prototype.setReleaseFlag = function (details) {
     pool.getConnection(function (err, connection) {
-        var queryString = "ALTER TABLE bookings SET " +
+        var queryString = "UPDATE bookings SET " +
             "isReleased=" + true +
             " WHERE bookingID=" + connection.escape(details.bookingID);
-        connection.query(queryString, function (err, rows) {
+        connection.query(queryString, function (err) {
             console.log(queryString);
             connection.release();
             if (!err) {
-                callback(rows);
+                console.log("Success");
             }
         });
         connection.on('error', function (err) {
