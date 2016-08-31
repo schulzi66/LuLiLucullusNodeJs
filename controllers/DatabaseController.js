@@ -583,24 +583,46 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
             queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM RECIPES";
         else {
             var allergenString = "";
-            for (var i = 0; i < filterOptions.allergens.length; i++){
-                allergenString.append("" + filterOptions.allergens + "");
+            //var styleString = "\x22amerikanisch\x22";
+            //var courseString = "\x22hauptgang\x22";
+            var courseString = "";
+            var styleString = "";
+
+            for (var i = 0; i < filterOptions.length; i++){
+                if (filterOptions[i].key == "allergen") {
+                    allergenString += ", \x22" + filterOptions[i].option + "\x22";
+                }
+                else if (filterOptions[i].key == "course") {
+                    courseString += "\x22" + filterOptions[i].option + "\x22";
+                }
+                else if (filterOptions[i].key == "style") {
+                    styleString += "\x22" + filterOptions[i].option + "\x22";
+                }
             }
-            queryString = "SELECT DISTINCT recipes.recipeID, recipeName, shortDescription, pictureRef " +
-                "FROM recipes " +
-                "JOIN courses " +
-                "ON courses.courseID = recipes.courseID " +
-                "JOIN styles " +
-                "ON styles.styleID = recipes.styleID " +
-                "LEFT JOIN recipeingredients " +
-                "ON recipeingredients.recipeID = recipes.recipeID " +
-                "LEFT JOIN ingredients " +
-                "ON ingredients.ingredientID = recipeingredients.ingredientID " +
-                "LEFT JOIN ingredientsallergenes " +
-                "ON ingredientsallergenes.ingredientID = ingredients.ingredientID " +
-                "LEFT JOIN allergenes " +
-                "ON allergenes.allergenID = ingredientsallergenes.allergenID "
-                "WHERE allergenes.allergenName NOT IN (" + allergenString + ")";
+
+            console.log(courseString);
+            console.log(styleString);
+
+            queryString = "SELECT DISTINCT recipes.recipeID, recipes.recipeName, recipes.shortDescription, recipes.pictureRef FROM recipes " +
+                "JOIN styles ON styles.styleID = recipes.styleID " +
+                "JOIN courses ON courses.courseID = recipes.courseID " +
+                "LEFT JOIN recipeingredients ON recipeingredients.recipeID = recipes.recipeID " +
+                "LEFT JOIN ingredients ON ingredients.ingredientID = recipeingredients.ingredientID " +
+                "LEFT JOIN ingredientsallergenes ON ingredientsallergenes.ingredientID = ingredients.ingredientID " +
+                "LEFT JOIN allergenes ON allergenes.allergenID = ingredientsallergenes.allergenID " +
+                "WHERE recipes.recipeID NOT IN ( " +
+                "SELECT DISTINCT recipes.recipeID FROM allergenes " +
+                "JOIN ingredientsallergenes ON allergenes.allergenID = ingredientsallergenes.allergenID " +
+                "JOIN ingredients ON ingredientsallergenes.ingredientID = ingredients.ingredientID " +
+                "JOIN recipeingredients ON ingredients.ingredientID = recipeingredients.ingredientID " +
+                "JOIN recipes ON recipeingredients.recipeID = recipes.recipeID " +
+                "WHERE allergenes.allergenName IN (\x22\x22" + allergenString + ")) ";
+            if (courseString != ""){
+                queryString += "AND styles.styleName IN (" + styleString + ") ";
+            }
+            if (styleString != ""){
+                queryString += "AND courses.courseName IN (" + courseString + ")";
+            }
         }
         console.log(queryString);
         connection.query(queryString, function (err, rows) {
