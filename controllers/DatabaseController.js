@@ -634,7 +634,6 @@ DatabaseController.prototype.loadOrders = function (callback) {
             "JOIN users ON users.userID = bookings.userID " +
             "JOIN recipes ON  recipes.recipeID = bookingRecipes.recipeID " +
             "WHERE isReleased=" + false;
-        console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -659,10 +658,9 @@ DatabaseController.prototype.insertOrderInformation = function (details) {
             ",typeID=" + connection.escape(details.typeID) +
             ",isReleased=" + connection.escape(details.freigeben);
         connection.query(queryString, function (err) {
-            console.log(queryString);
             connection.release();
             if (!err) {
-                console.log("Success");
+                console.log("Successfully executed Query: " + queryString);
             }
         });
         connection.on('error', function (err) {
@@ -678,10 +676,9 @@ DatabaseController.prototype.setReleaseFlag = function (details) {
             "isReleased=" + true +
             " WHERE bookingID=" + connection.escape(details.bookingID);
         connection.query(queryString, function (err) {
-            console.log(queryString);
             connection.release();
             if (!err) {
-                console.log("Success");
+                console.log("Successfully executed Query: " + queryString);
             }
         });
         connection.on('error', function (err) {

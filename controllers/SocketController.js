@@ -49,9 +49,6 @@ function onConnection(socket) {
 
     socket.on('insertOrders', function (orderDetails) {
         _dbController.setReleaseFlag(orderDetails);
-        _dbController.insertOrderInformation(orderDetails, function () {
-            socket.emit('insertedOrders');
-        });
     });
     //End Region
 
