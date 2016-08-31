@@ -117,6 +117,23 @@ function loadRecipeNamesForOrder() {
         });
     });
 }
+
+function loadBookingTypes() {
+    var socket = io.connect();
+    socket.emit('loadBookingTypes');
+    socket.on('loadedBookingTypes', function (bookingTypes){
+        var container = $("#bookingTypeSelection");
+        console.log(bookingTypes);
+        $.each(bookingTypes, function(i){
+            var options = "" +
+                "<option>" +
+                bookingTypes[i].bookingType +
+                "</option>";
+            container.append(options);
+        });
+    });
+}
+
 /* #####################################
  Region filter
  ##################################### */

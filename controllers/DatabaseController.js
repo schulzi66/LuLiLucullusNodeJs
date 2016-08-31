@@ -568,6 +568,22 @@ DatabaseController.prototype.loadRecipeNames = function (callback) {
     });
 }
 
+DatabaseController.prototype.loadBookingTypes = function (callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT type FROM bookingtypes WHERE type NOT IN ('Bestellung')";
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    })
+}
+
 /**
  * Filter Methods
  */
