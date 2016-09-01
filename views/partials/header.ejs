@@ -36,7 +36,7 @@
         </a>
         <% } else { %>
         <a href="/login" class="dropdown-toggle lulilucullusDropdownToggler" id="lulilucullusDropdownToggler">
-            <i class="fa fa- fa-sign-in"> Login</i>
+            <i class="fa fa-sign-in"> Login</i>
         </a>
         <% } %>
         <% if (locals.user) { %>
@@ -44,12 +44,12 @@
              style="position:absolute; overflow:hidden;">
             <ul>
                 <% if (user.provider) { %>
-                <li><a href="/login/profile-external"><i class="fa fa-user fa-fw"> Profilverwaltung</i></a></li>
+                <li><a href="/login/profile-external"><i class="fa fa-user"> Profilverwaltung</i></a></li>
                 <% } else if(user.provider && user.provider.isAdmin !== undefined)  { %>
                 <% } else { %>
-                <li><a href="/login/profile"><i class="fa fa-user fa-fw"> Profilverwaltung</i></a></li>
+                <li><a href="/login/profile"><i class="fa fa-user"> Profilverwaltung</i></a></li>
                 <% } %>
-                <li><a href="/logout"><i class="fa fa-sign-out fa-fw"> Logout</i></a>
+                <li><a href="/logout"><i class="fa fa-sign-out"> Logout</i></a>
             </ul>
         </div>
         <% } %>
