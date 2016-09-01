@@ -15,8 +15,8 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res) {
-    _dbController.insertOrderInformation(req, res);
-
+    _dbController.insertOrderInformation(req.body, res);
+    console.log(req.body);
     var mailOptions = {
         from: req.body.email, // sender address
         to: conf.mail.auth.user, // list of receivers
@@ -25,7 +25,7 @@ router.post('/', function (req, res) {
         text: req.body.contact_message//, // plaintext body
     };
     var message = "Ihre Anfrage wurde erfolgreich übermittelt.";
-    var redirect = '/contact';
+    var redirect = '/kochboxen';
 
     _mailController.sendEmail(req, res, mailOptions, message, redirect);
 });

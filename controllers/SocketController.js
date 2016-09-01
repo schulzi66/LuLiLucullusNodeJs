@@ -32,6 +32,12 @@ function onConnection(socket) {
         })
     });
 
+    socket.on('loadBookingTypes', function () {
+        _dbController.loadBookingTypes(function (recipeNames) {
+            socket.emit('loadedBookingTypes', recipeNames);
+        })
+    });
+
     //Region Recipe Filter
     socket.on('loadFilterOptions', function () {
         _dbController.loadFilterOptions(function (filterOptions) {

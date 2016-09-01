@@ -554,7 +554,7 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
  */
 DatabaseController.prototype.loadRecipeNames = function (callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT recipeName, recipePrice FROM recipes";
+        var queryString = "SELECT recipeName, recipePrice, recipeID FROM recipes";
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -709,13 +709,14 @@ DatabaseController.prototype.insertOrderInformation = function (details) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO bookings VALUES " +
             "eventName=" + connection.escape(details.anlass) +
-            ",userName=" + connection.escape(details.kunde) +
+            ",userName=" + connection.escape(details.name) +
             ",recipe=" + connection.escape(details.artikel) +
             ",amount=" + connection.escape(details.menge) +
             ",orderDate=" + connection.escape(details.auftragsdatum) +
             ",typeID=" + connection.escape(details.typeID) +
             ",isReleased=" + connection.escape(details.freigeben);
         connection.query(queryString, function (err) {
+            console.log(queryString);
             connection.release();
             if (!err) {
                 console.log("Successfully executed Query: " + queryString);

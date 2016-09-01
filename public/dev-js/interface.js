@@ -10,24 +10,15 @@ function loadRecipesOverview() {
         $.each(recipes, function (i) {
             var recipe_list_element =
                 '<div class="col-sm-6 col-md-4" >' +
-                    '<div class="thumbnail">' +
-                        '<img src="' + Util.convertPictureRefToPath(recipes[i].pictureRef) + '"' + '>' +
-                        '<div class="caption">' +
-                            '<h3 class="recipes-overview-headline text-uppercase">' + recipes[i].recipeName + '</h3>' +
-                            '<p class="recipes-overview-short-description">' + recipes[i].shortDescription + '</p>' +
-                            '<p><a class="btn btn-primary btn-sm" href="recipes/recipe?id=' + recipes[i].recipeID + '"> Weitere Informationen ... </a></p>' +
-                        '</div>'+
-                    '</div>' +
-                '</div>';
-                /*
-                '<li class="recipes-overview-item">' +
+                '<div class="thumbnail">' +
                 '<img src="' + Util.convertPictureRefToPath(recipes[i].pictureRef) + '"' + '>' +
+                '<div class="caption">' +
                 '<h3 class="recipes-overview-headline text-uppercase">' + recipes[i].recipeName + '</h3>' +
                 '<p class="recipes-overview-short-description">' + recipes[i].shortDescription + '</p>' +
-                '<p>' +
-                '<a class="recipes-overview-btn btn btn-primary btn-sm" href="recipes/recipe?id=' + recipes[i].recipeID + '"> Weitere Informationen ... </a>' +
-                '</p>' +
-                '</li>';*/
+                '<p><a class="btn btn-primary btn-sm" href="recipes/recipe?id=' + recipes[i].recipeID + '"> Weitere Informationen ... </a></p>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
             container.append(recipe_list_element);
         });
     })
@@ -118,13 +109,14 @@ function loadRecipeNamesForOrder() {
     socket.emit('loadRecipeNames');
     socket.on('loadedRecipeNames', function (recipeNames) {
         var container = $("#recipeSelection");
-        console.log(recipeNames);
         $.each(recipeNames, function (i) {
             var options =
                 '<option value="' + recipeNames[i].recipePrice + '">' +
                 recipeNames[i].recipeName +
                 "</option>";
+
             container.append(options);
+            $('#recipeID').append('<input class="form-control" type="hidden" value="' + recipeNames[i].recipeID + '">');
         });
     });
 }
@@ -132,10 +124,10 @@ function loadRecipeNamesForOrder() {
 function loadBookingTypes() {
     var socket = io.connect();
     socket.emit('loadBookingTypes');
-    socket.on('loadedBookingTypes', function (bookingTypes){
+    socket.on('loadedBookingTypes', function (bookingTypes) {
         var container = $("#bookingTypeSelection");
         console.log(bookingTypes);
-        $.each(bookingTypes, function(i){
+        $.each(bookingTypes, function (i) {
             var options =
                 '<option>' +
                 bookingTypes[i].bookingType +
