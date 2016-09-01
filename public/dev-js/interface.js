@@ -6,9 +6,20 @@ function loadRecipesOverview() {
     var socket = io.connect();   //TCP Socket connection to load recipes overview from db
     socket.emit('loadRecipesOverview');
     socket.on('loadedRecipesOverview', function (recipes) {
-        var container = $('ul.recipes');
+        var container = $('#recipeContainer');
         $.each(recipes, function (i) {
             var recipe_list_element =
+                '<div class="col-sm-6 col-md-4" >' +
+                    '<div class="thumbnail">' +
+                        '<img src="' + Util.convertPictureRefToPath(recipes[i].pictureRef) + '"' + '>' +
+                        '<div class="caption">' +
+                            '<h3 class="recipes-overview-headline text-uppercase">' + recipes[i].recipeName + '</h3>' +
+                            '<p class="recipes-overview-short-description">' + recipes[i].shortDescription + '</p>' +
+                            '<p><a class="btn btn-primary btn-sm" href="recipes/recipe?id=' + recipes[i].recipeID + '"> Weitere Informationen ... </a></p>' +
+                        '</div>'+
+                    '</div>' +
+                '</div>';
+                /*
                 '<li class="recipes-overview-item">' +
                 '<img src="' + Util.convertPictureRefToPath(recipes[i].pictureRef) + '"' + '>' +
                 '<h3 class="recipes-overview-headline text-uppercase">' + recipes[i].recipeName + '</h3>' +
@@ -16,7 +27,7 @@ function loadRecipesOverview() {
                 '<p>' +
                 '<a class="recipes-overview-btn btn btn-primary btn-sm" href="recipes/recipe?id=' + recipes[i].recipeID + '"> Weitere Informationen ... </a>' +
                 '</p>' +
-                '</li>';
+                '</li>';*/
             container.append(recipe_list_element);
         });
     })
@@ -109,8 +120,8 @@ function loadRecipeNamesForOrder() {
         var container = $("#recipeSelection");
         console.log(recipeNames);
         $.each(recipeNames, function (i) {
-            var options = "" +
-                "<option>" +
+            var options =
+                '<option value="' + recipeNames[i].recipePrice + '">' +
                 recipeNames[i].recipeName +
                 "</option>";
             container.append(options);
@@ -125,10 +136,10 @@ function loadBookingTypes() {
         var container = $("#bookingTypeSelection");
         console.log(bookingTypes);
         $.each(bookingTypes, function(i){
-            var options = "" +
-                "<option>" +
+            var options =
+                '<option>' +
                 bookingTypes[i].bookingType +
-                "</option>";
+                '</option>';
             container.append(options);
         });
     });

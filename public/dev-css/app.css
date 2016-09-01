@@ -249,70 +249,14 @@ html {
 /* -----------------------------------------------------------------------------
     Recipe Overview
 -----------------------------------------------------------------------------*/
-.recipes-container {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: .9375rem;
-    padding-right: .9375rem;
-}
-
-.recipes-overview {
-    text-align: center;
-    margin-top: 1.5em;
-    list-style: none;
-    padding: 0;
-}
-
-.recipes-overview-btn {
-    float: right;
-}
-
-.recipes-overview .recipes-overview-item {
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-    min-height: 140px;
-    max-width: 120px;
-    margin-bottom: 1.5rem;
-    font-size: 0.8rem;
-}
-
-.recipes-overview.recipes .recipes-overview-item {
-    min-height: 275px;
-    max-width: 210px;
-    margin-left: 46px;
-    margin-right: 46px;
-    min-height: 0;
-    vertical-align: baseline;
-}
-
-.recipes .recipes-overview, .recipes .recipes-overview li {
-    padding: 0;
-    list-style: none;
-}
-
-.recipes .recipes-overview {
-    margin-bottom: 1.5em;
-}
-
-.recipes-overview .recipes-overview-item .recipes-overview-headline {
-    font-size: 16px;
-    height: 60px;
-    padding: 0 0.8rem;
-}
-
-.recipes-image-fallback, .recipes-overview .recipes-overview-item img {
-    width: 210px;
-    height: auto;
-    background: transparent;
-    display: block;
-    border-radius: 0px;
-}
-
 .recipes-overview-short-description {
     font-size: 12px;
 }
 
+.thumbnail {
+    background-color: #f8f8f8;
+    border-color: #4A1921;
+}
 /* -----------------------------------------------------------------------------
     Recipe Details Styles
 ----------------------------------------------------------------------------- */
