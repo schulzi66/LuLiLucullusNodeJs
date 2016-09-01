@@ -32,7 +32,7 @@ console.log("user:  " + user);
 
       var mailOptions = {
           from: conf.mail.auth.user, // sender address
-          to: req.body.email, //TODO CHEck mail // list of receivers
+          to: req.body.email, // list of receivers
           subject: 'Passwort zurücksetzen Lulilucullus', // Subject line
           text: "Sehr geehrte/geehrter " + user.name + " " + user.familyName + ", " +
           "ihr Passwort wurde zurückgesetzt. Ihr Code für die Zurücksetzung lautet: " + authenticationCode +

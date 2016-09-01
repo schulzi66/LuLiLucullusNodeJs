@@ -41,8 +41,6 @@ var profile_external = require('./routes/profile-external');
 var reset_password = require('./routes/logins/reset-password');
 var change_password = require('./routes/logins/change-password');
 
-//TODO: Kochboxen, Gutscheine und Kochkurse seiten fehlen
-
 /**
  * Administration routes
  */

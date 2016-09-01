@@ -32,7 +32,7 @@ function sendMailToEmployee(req, res, employee) {
 
       var mailOptions = {
           from: conf.mail.auth.user, // sender address
-          to: req.body.employeeID, //TODO CHEck mail // list of receivers
+          to: req.body.employeeID, // list of receivers
           subject: 'Ihr Account bei Lulilucullus', // Subject line
           text: "Sehr geehrte/geehrter " + req.body.name + " " + req.body.familyName + ", " +
           "es wurde ein neuer Account für Sie erstellt. Ihr Code für die Aktivierung lautet: " + authenticationCode +
