@@ -570,7 +570,7 @@ DatabaseController.prototype.loadRecipeNames = function (callback) {
 
 DatabaseController.prototype.loadBookingTypes = function (callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT type FROM bookingtypes WHERE type NOT IN ('Bestellung')";
+        var queryString = "SELECT type AS bookingType FROM bookingtypes WHERE type NOT IN ('Bestellung')";
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -705,7 +705,7 @@ DatabaseController.prototype.loadOrders = function (callback) {
     });
 }
 
-DatabaseController.prototype.insertOrderInformation = function (details) {
+DatabaseController.prototype.insertOrderInformation = function (details, callback) {
     pool.getConnection(function (err, connection) {
         console.log(details);
         var queryString = "INSERT INTO bookings VALUES " +
@@ -721,6 +721,7 @@ DatabaseController.prototype.insertOrderInformation = function (details) {
             connection.release();
             if (!err) {
                 console.log("Successfully executed Query: " + queryString);
+                callback();
             }
         });
         connection.on('error', function (err) {
