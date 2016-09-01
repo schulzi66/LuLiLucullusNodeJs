@@ -18,11 +18,12 @@ router.post('/', function (req, res) {
     _dbController.insertOrderInformation(req.body, res);
     console.log(req.body);
     var mailOptions = {
-        from: req.body.email, // sender address
-        to: conf.mail.auth.user, // list of receivers
+        from: conf.mail.auth.user, // send receivers
+        to: req.body.email, // receiver address
         //TODO: AuftragsID
         subject: 'Bestelleingangsbestätigung Ihrer Bestellung # bei Lulilucullus', // Subject line
-        text: req.body.contact_message//, // plaintext body
+        text: 'Danke für Ihre Bestellung des Rezepts "' + req.body.recipeName + '". ' +
+                'Diese wird Ihnen am ' + req.body.start + ' zugestellt'
     };
     var message = "Ihre Anfrage wurde erfolgreich übermittelt.";
     var redirect = '/kochboxen';

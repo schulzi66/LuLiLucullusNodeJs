@@ -3,7 +3,8 @@
  Load recipe overview
  ##################################### */
 function loadRecipesOverview() {
-    var socket = io.connect();   //TCP Socket connection to load recipes overview from db
+    //TCP Socket connection to load recipes overview from db
+    var socket = io.connect();
     socket.emit('loadRecipesOverview');
     socket.on('loadedRecipesOverview', function (recipes) {
         var container = $('#recipeContainer');
