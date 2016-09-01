@@ -30,6 +30,14 @@
                     <script>loadRecipeNamesForOrder();</script>
                 </select>
             </div>
+            <div class="form-group">
+                <label>Menge</label>
+                <input id="recipeAmount" type="number" class="form-control" name="amount">
+            </div>
+            <div class="form-group">
+                <label>Preis p. Portion</label>
+                <input id="recipePrice" type="text" class="form-control" name="price" readonly>
+            </div>
             <div class="form-group" id="orderBoxDate">
                 <label>Datum</label>
                 <!--<input type="text" class="form-control" name="date" id="datepicker" required>-->
@@ -38,10 +46,6 @@
                     <span class="input-group-addon">bis</span>
                     <input type="text" class="input-sm form-control" name="end" />
                 </div>
-            </div>
-            <div class="form-group">
-                <label>Preis</label>
-                <input id="recipePrice" type="text" class="form-control" name="price" readonly>
             </div>
             <div class="form-group">
                 <input type="hidden" id="recipeName" class="form-control" name="recipeName">
@@ -61,6 +65,7 @@
 <script>
     $('#orderBoxDate .input-daterange').datepicker({
         startDate: 'today',
+        format: 'dd. mm yyyy',
         clearBtn: true,
         keepEmptyValues: true
     });
