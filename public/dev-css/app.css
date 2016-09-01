@@ -11,7 +11,7 @@
 
 body {
     background-color: #f8f8f8;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
     min-height: 100%;
 }
 
@@ -28,6 +28,7 @@ p:not(.slider-paragraph) {
 }
 
 html {
+    min-height: 100%;
     position: relative;
 }
 
@@ -58,12 +59,23 @@ html {
 /* -----------------------------------------------------------------------------
     Footer styles
 -----------------------------------------------------------------------------*/
-#footer-wrapper {
+.footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: #f8f8f8;
+    height: 50px;
     border-top: 1px solid #e7e7e7;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+.footer > .container {
+    margin-top: 15px;
+}
+
+.container .text-muted {
+    margin-left: 50px;
+    display: inline;
 }
 
 /* -----------------------------------------------------------------------------
