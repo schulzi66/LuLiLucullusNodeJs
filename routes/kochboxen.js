@@ -1,8 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var conf = require('../conf.json');
-var nodemailer = require('nodemailer');
+
 var DatabaseController = require('../controllers/DatabaseController');
+var _dbController = new DatabaseController();
+
+var MailController = require('../controllers/MailController');
+var _mailController = new MailController();
+
 
 /* GET contact page. */
 router.get('/', function (req, res, next) {
@@ -10,17 +15,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res) {
-    var _dbController = new DatabaseController();
-
     _dbController.insertOrderInformation(req, res);
-
-    var transporter = nodemailer.createTransport({
-        service: conf.mail.service,
-        auth: {
-            user: conf.mail.auth.user, // Your email id
-            pass: conf.mail.auth.password // Your password
-        }
-    });
 
     var mailOptions = {
         from: req.body.email, // sender address
@@ -29,15 +24,10 @@ router.post('/', function (req, res) {
         subject: 'Bestelleingangsbestätigung Ihrer Bestellung # bei Lulilucullus', // Subject line
         text: req.body.contact_message//, // plaintext body
     };
+    var message = "Ihre Anfrage wurde erfolgreich &uuml;bermittelt.";
+    var redirect = '/contact';
 
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            req.session.message = "Ihre Anfrage wurde erfolgreich &uuml;bermittelt.";
-            res.redirect('/contact');
-        }
-    });
+    _mailController.sendEmail(req, res, mailOptions, message, redirect);
 });
 
 module.exports = router;

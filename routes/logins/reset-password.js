@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var conf = require('../../conf.json');
-var nodemailer = require('nodemailer');
 
 var DatabaseController = require('../../controllers/DatabaseController');
 var _dbController = new DatabaseController();
+
+var MailController = require('../../controllers/MailController');
+var _mailController = new MailController();
+
 var DevLoggingController = require('../../controllers/DevLoggingController');
 var logger = new DevLoggingController();
 
@@ -24,16 +27,8 @@ router.post('/', function (req, res) {
 function sendMailToUser(req, res, user) {
 console.log("user:  " + user);
   if (user !== undefined) {
-      //send email with authentication code to user
-      var authenticationCode = createAuthenticationcode();
 
-      var transporter = nodemailer.createTransport({
-          service: conf.mail.service,
-          auth: {
-              user: conf.mail.auth.user, // Your email id
-              pass: conf.mail.auth.password // Your password
-          }
-      });
+    var authenticationCode = _mailController.createAuthenticationcode()
 
       var mailOptions = {
           from: conf.mail.auth.user, // sender address
@@ -44,18 +39,12 @@ console.log("user:  " + user);
           " Für das Zurücksetzten besuchen Sie: localhost:3000/login/change-password" // plaintext body
       };
 
-      logger.log("mailOptions", mailOptions);
+      var message = "Ihre Anfrage wurde erfolgreich &uuml;bermittelt. Überprüfen Sie Ihr Email Postfach";
+      var redirect = '/login/change-Password';
 
-      transporter.sendMail(mailOptions, function (error, info) {
-          if (error) {
-              console.log(error);
-          } else {
-              req.session.message = "Ihre Anfrage wurde erfolgreich &uuml;bermittelt. Überprüfen Sie Ihr Email Postfach";
-              res.redirect('/login/change-Password');
-          }
-      });
+      _mailController.sendEmail(req, res, mailOptions, message, redirect);
 
-      _dbController.insertPasswordRequest(createRequestDate(), authenticationCode, req.body.email);
+      _dbController.insertPasswordRequest(_mailController.createRequestDate(), authenticationCode, req.body.email);
   }
   //user has no account
   else {
@@ -64,20 +53,4 @@ console.log("user:  " + user);
   }
 }
 
-function createRequestDate() {
-  var date = new Date();
-  console.log("DATE: " + date);
-  return date;
-}
-
-function createAuthenticationcode()
-{
-    var text = "";
-    var possible = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
-
-    for( var i=0; i < 5; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-}
 module.exports = router;
