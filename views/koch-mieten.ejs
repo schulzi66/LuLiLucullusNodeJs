@@ -23,6 +23,14 @@
                 <input type="email" class="form-control" name="email" required>
             </div>
             <div class="form-group">
+                <label for="lieferadresse" class="control-label">Veranstaltungsadresse</label>
+                <input type="text" class="form-control" id="street" name="street" placeholder="Stra&szlig;e + HNr"
+                       value="" required>
+                <input type="text" class="form-control" id="plz" name="plz" placeholder="PLZ" value="" required>
+                <input type="text" class="form-control" id="ort" name="location" placeholder="Wohnort" value=""
+                       required>
+            </div>
+            <div class="form-group">
                 <label>Art der Veranstaltung</label>
                 <select class="form-control" id="bookingTypeSelection">
                     <script>loadBookingTypes();</script>
@@ -30,7 +38,6 @@
             </div>
             <div class="form-group" id="rentachefDates">
                 <label>Datum</label>
-                <!--<input type="text" class="form-control" name="date" id="datepicker" required>-->
                 <div class="input-daterange input-group" id="datepicker">
                     <input type="text" class="input-sm form-control" name="start" />
                     <span class="input-group-addon">bis</span>

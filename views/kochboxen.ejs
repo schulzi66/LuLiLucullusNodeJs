@@ -24,6 +24,14 @@
                 <input type="email" class="form-control" name="email" required>
             </div>
             <div class="form-group">
+                <label for="lieferadresse" class="control-label">Lieferadresse</label>
+                <input type="text" class="form-control" id="street" name="street" placeholder="Stra&szlig;e + HNr"
+                       value="" required>
+                <input type="text" class="form-control" id="plz" name="plz" placeholder="PLZ" value="" required>
+                <input type="text" class="form-control" id="ort" name="location" placeholder="Wohnort" value=""
+                       required>
+            </div>
+            <div class="form-group">
                 <label>Gericht</label>
                 <select class="form-control" id="recipeSelection">
                     <option>--- Wählen Sie Ihr Wunschrezept aus ---</option>
@@ -50,6 +58,7 @@
             <div class="form-group">
                 <input type="hidden" id="recipeName" class="form-control" name="recipeName">
                 <input type="hidden" id="orderType" class="form-control" name="orderType" value="3">
+                <input type="hidden" id="bookingID" class="form-control" name="bookingID" value="">
             </div>
 
             <div id="recipeID" class="form-group">
@@ -84,4 +93,5 @@
             $('#recipeName').val($('#recipeSelection').find('option:selected').text());
         }).change();
     });
+
 </script>

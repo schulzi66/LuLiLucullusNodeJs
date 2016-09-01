@@ -708,13 +708,22 @@ DatabaseController.prototype.loadOrders = function (callback) {
 DatabaseController.prototype.insertOrderInformation = function (details, callback) {
     pool.getConnection(function (err, connection) {
         console.log(details);
+        /*
+         userID VARCHAR(100) NOT NULL,
+        * */
         var queryString = "INSERT INTO bookings VALUES " +
+            "bookingID=" + connection.escape(details.bookingID) +
             "eventName=" + connection.escape(details.anlass) +
             ",userName=" + connection.escape(details.name) +
             ",recipe=" + connection.escape(details.recipeName) +
             ",amount=" + connection.escape(details.amount) +
-            ",orderDate=" + connection.escape(details.start) +
+            ",dateBegin=" + connection.escape(details.start) +
+            ",dateEnd=" + connection.escape(details.start) +
+            ",street=" + connection.escape(details.street) +
+            ",plz=" + connection.escape(details.plz) +
+            ",location=" + connection.escape(details.location) +
             ",typeID=" + connection.escape(details.orderType) +
+            ",userID=" + connection.escape(details.email) +
             ",isReleased=" + false;
         connection.query(queryString, function (err) {
             console.log(queryString);
