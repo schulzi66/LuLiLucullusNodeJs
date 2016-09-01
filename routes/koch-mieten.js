@@ -11,7 +11,7 @@ var _mailController = new MailController();
 
 /* GET recipes page. */
 router.get('/', function (req, res) {
-    res.render('rent-a-chef', {user: req.session.user});
+    res.render('koch-mieten', {user: req.session.user});
 });
 
 router.post('/', function (req, res) {
