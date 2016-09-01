@@ -10,24 +10,25 @@ var _mailController = new MailController();
 
 
 /* GET recipes page. */
-router.get('/', function(req, res) {
-    res.render('rent-a-chef', { user: req.session.user} );
+router.get('/', function (req, res) {
+    res.render('rent-a-chef', {user: req.session.user});
 });
 
-router.post('/', function (req, res){
-    _dbController.insertOrderInformation(req, res);
+router.post('/', function (req, res) {
+    _dbController.insertOrderInformation(req, function () {
+        var mailOptions = {
+            from: req.body.email,
+            to: conf.mail.auth.user,
+            subject: 'Bestelleingangsbestätigung Ihrer Bestellung # bei Lulilucullus',
+            text: 'Sehr geehrter ' + req.bod.name +',' +
+            'vielen Dank für Ihre Bestellung eines Kochs am ' + req.body.start + '.'
+        };
 
-    var mailOptions = {
-        from: req.body.email,
-        to: conf.mail.auth.user,
-        subject: 'Bestelleingangsbestätigung Ihrer Bestellung # bei Lulilucullus',
-        text: req.body.contact_message
-    };
+        var message = "Ihre Anfrage wurde erfolgreich übermittelt.";
+        var redirect = '/rent-a-chef';
 
-    var message = "Ihre Anfrage wurde erfolgreich übermittelt.";
-    var redirect = '/rent-a-chef';
-
-    _mailController.sendEmail(req, res, mailOptions, message, redirect);
+        _mailController.sendEmail(req, res, mailOptions, message, redirect);
+    });
 });
 
 module.exports = router;

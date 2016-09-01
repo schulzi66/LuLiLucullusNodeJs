@@ -570,7 +570,7 @@ DatabaseController.prototype.loadRecipeNames = function (callback) {
 
 DatabaseController.prototype.loadBookingTypes = function (callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT type FROM bookingtypes WHERE type NOT IN ('Bestellung')";
+        var queryString = "SELECT type AS bookingType FROM bookingtypes WHERE type NOT IN ('Bestellung')";
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -705,21 +705,23 @@ DatabaseController.prototype.loadOrders = function (callback) {
     });
 }
 
-DatabaseController.prototype.insertOrderInformation = function (details) {
+DatabaseController.prototype.insertOrderInformation = function (details, callback) {
     pool.getConnection(function (err, connection) {
+        console.log(details);
         var queryString = "INSERT INTO bookings VALUES " +
             "eventName=" + connection.escape(details.anlass) +
             ",userName=" + connection.escape(details.name) +
-            ",recipe=" + connection.escape(details.artikel) +
-            ",amount=" + connection.escape(details.menge) +
-            ",orderDate=" + connection.escape(details.auftragsdatum) +
-            ",typeID=" + connection.escape(details.typeID) +
-            ",isReleased=" + connection.escape(details.freigeben);
+            ",recipe=" + connection.escape(details.recipeName) +
+            ",amount=" + connection.escape(details.amount) +
+            ",orderDate=" + connection.escape(details.start) +
+            ",typeID=" + connection.escape(details.orderType) +
+            ",isReleased=" + false;
         connection.query(queryString, function (err) {
             console.log(queryString);
             connection.release();
             if (!err) {
                 console.log("Successfully executed Query: " + queryString);
+                callback();
             }
         });
         connection.on('error', function (err) {
