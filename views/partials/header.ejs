@@ -26,6 +26,9 @@
             </ul>
         </div>
     </ul>
+    <ul class="navbar-inner">
+        <a class="nav-center" href="/"><img src="/img/logo.svg"/></a>
+    </ul>
     <ul class="navbar-right ">
         <% if(locals.user) { %>
         <a class="dropdown-toggle lulilucullusDropdownToggler" id="lulilucullusDropdownToggler">
@@ -42,7 +45,7 @@
             <ul>
                 <% if (user.provider) { %>
                 <li><a href="/login/profile-external"><i class="fa fa-user fa-fw"> Profilverwaltung</i></a></li>
-                <% } else if(user.provider && user.provider.isAdmin !== undefined)  {%>
+                <% } else if(user.provider && user.provider.isAdmin !== undefined)  { %>
                 <% } else { %>
                 <li><a href="/login/profile"><i class="fa fa-user fa-fw"> Profilverwaltung</i></a></li>
                 <% } %>
