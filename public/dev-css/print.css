@@ -2,32 +2,41 @@
     #header-wrapper {
         display: none;
     }
+
     #navbar {
         display: none;
     }
+
     .breadcrumb {
         display: none;
     }
+
     .recipe-print-icon {
         display: none;
     }
+
     .rating {
         display: none;
     }
+
     .recipes-image-fallback {
         width: 150px;
         height: auto;
     }
+
     #copyrightPrint {
         padding-left: 15px;
         visibility: visible;
     }
-    #footer-wrapper {
+
+    .footer {
         visibility: hidden;
     }
-    .recipe-image  {
+
+    .recipe-image {
         max-height: 250px;
     }
+
     .recipe-time-needed {
         font-weight: 300;
     }
