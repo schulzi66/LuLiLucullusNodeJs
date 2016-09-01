@@ -39,7 +39,7 @@ console.log("user:  " + user);
           " Für das Zurücksetzten besuchen Sie: localhost:3000/login/change-password" // plaintext body
       };
 
-      var message = "Ihre Anfrage wurde erfolgreich &uuml;bermittelt. Überprüfen Sie Ihr Email Postfach";
+      var message = "Ihre Anfrage wurde erfolgreich übermittelt. Überprüfen Sie Ihr Email Postfach";
       var redirect = '/login/change-Password';
 
       _mailController.sendEmail(req, res, mailOptions, message, redirect);

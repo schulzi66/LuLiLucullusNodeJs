@@ -18,7 +18,7 @@ router.post('/', function (req, res) {
         text: req.body.contact_message//, // plaintext body
     };
 
-    var message = "Ihre Anfrage wurde erfolgreich &uuml;bermittelt.";
+    var message = "Ihre Anfrage wurde erfolgreich übermittelt.";
     var redirect = '/contact';
     _mailController.sendEmail(req, res, mailOptions, message, redirect);
 });

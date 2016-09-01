@@ -24,7 +24,7 @@ router.post('/', function (req, res){
         text: req.body.contact_message
     };
 
-    var message = "Ihre Anfrage wurde erfolgreich &uuml;bermittelt.";
+    var message = "Ihre Anfrage wurde erfolgreich übermittelt.";
     var redirect = '/rent-a-chef';
 
     _mailController.sendEmail(req, res, mailOptions, message, redirect);
