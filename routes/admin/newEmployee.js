@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var conf = require('../../conf.json');
-var nodemailer = require('nodemailer');
 
 var DbController = require('../../controllers/DatabaseController');
 var _dbController = new DbController();
+
+var MailController = require('../../controllers/MailController');
+var _mailController = new MailController();
+
 var DevLoggingController = require('../../controllers/DevLoggingController');
 var logger = new DevLoggingController();
 
@@ -25,15 +28,7 @@ router.post('/', function (req, res) {
 function sendMailToEmployee(req, res, employee) {
   if (employee === undefined) {
       //send email with authentication code to user
-      var authenticationCode = createAuthenticationcode();
-
-      var transporter = nodemailer.createTransport({
-          service: conf.mail.service,
-          auth: {
-              user: conf.mail.auth.user, // Your email id
-              pass: conf.mail.auth.password // Your password
-          }
-      });
+      var authenticationCode = _mailController.createAuthenticationcode();
 
       var mailOptions = {
           from: conf.mail.auth.user, // sender address
@@ -44,23 +39,15 @@ function sendMailToEmployee(req, res, employee) {
           " Für die Aktivierung besuchen Sie: localhost:3000/administration/changeEmployeePassword und geben Sie Ihr neues Passwort ein." // plaintext body
       };
 
-      logger.log("mailOptions", mailOptions);
+      var message = "Dem Benutzer wurde eine Aktivierungs-Email gesendet.";
+      var redirect = '/administration/newEmployee';
+      _mailController.sendEmail(req, res, mailOptions, message, redirect);
 
-      transporter.sendMail(mailOptions, function (error, info) {
-          if (error) {
-              console.log(error);
-          } else {
-              req.session.message = "Dem Benutzer wurde eine Aktivierungs-Email gesendet.";
-              res.redirect('/administration/newEmployee');
-          }
-      });
-      //employee should not be admin
-      console.log("req.body.isAdmin:" + req.body.isAdmin);
       if (req.body.isAdmin === undefined) {
         req.body.isAdmin = false;
       }
       _dbController.insertNewEmployee(req, res);
-      _dbController.insertEmployeesPasswordRequest(createRequestDate(), authenticationCode, req.body.employeeID);
+      _dbController.insertEmployeesPasswordRequest(_mailController.createRequestDate(), authenticationCode, req.body.employeeID);
   }
   //employee has alread an account
   else {
@@ -68,23 +55,4 @@ function sendMailToEmployee(req, res, employee) {
       res.redirect('/administration/newEmployee');
   }
 }
-
-function createRequestDate() {
-  var date = new Date();
-  console.log("DATE: " + date);
-  return date;
-}
-
-function createAuthenticationcode()
-{
-    var text = "";
-    var possible = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
-
-    for( var i=0; i < 5; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-}
-
-
 module.exports = router;
