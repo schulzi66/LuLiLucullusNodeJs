@@ -1716,13 +1716,13 @@
 	$.fn.datepicker.Constructor = Datepicker;
 	var dates = $.fn.datepicker.dates = {
 		en: {
-			days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-			daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-			daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-			months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-			monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-			today: "Today",
-			clear: "Clear",
+			days: ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"],
+			daysShort: ["Mon", "Die", "Mit", "Don", "Fre", "Sam", "Son"],
+			daysMin: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "so"],
+			months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+			monthsShort: ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"],
+			today: "Heute",
+			clear: "Leeren",
 			titleFormat: "MM yyyy"
 		}
 	};
