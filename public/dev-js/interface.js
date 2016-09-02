@@ -82,7 +82,7 @@ function loadRecipeFromId(id, portions) {
                 recipe[i].ingredientName +
                 '</li>' +
                 '<li class="recipe-ingredients-list-item-second-column">' +
-                portions * recipe[i].amount + " " + recipe[i].unitName +
+                Util.calculateRecipeIngredientsAmount(portions * recipe[i].amount) + " " + recipe[i].unitName +
                 '</li>' +
                 '</ul>';
 

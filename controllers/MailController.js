@@ -42,4 +42,9 @@ MailController.prototype.createAuthenticationcode = function () {
   return text;
 }
 
+MailController.prototype.receiveEmailTemplate = function () {
+    var template = Util.getTemplate();
+    return template;
+}
+
 module.exports = MailController;

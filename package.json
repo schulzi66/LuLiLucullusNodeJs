@@ -11,6 +11,7 @@
     "bootstrap": "^3.3.6",
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "~1.4.3",
+    "dateformat": "^1.0.12",
     "debug": "~2.2.0",
     "ejs": "~2.4.1",
     "everyauth": "^0.4.9",

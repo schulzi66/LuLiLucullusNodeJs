@@ -5,6 +5,8 @@ var bcrypt = require('bcrypt-nodejs');
 var DevLoggingController = require('./DevLoggingController');
 var logger = new DevLoggingController();
 
+var dateFormat = require('dateformat');
+
 var pool = mysql.createPool({
     host: conf.database.host,
     user: conf.database.user,
@@ -44,7 +46,7 @@ DatabaseController.prototype.insertPasswordRequest = function (reqDate, authenti
             "closed=" + false + ", " +
             "userId=" + connection.escape(email);
 
-            console.log(queryString);
+        console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -122,7 +124,7 @@ DatabaseController.prototype.insertEmployeesPasswordRequest = function (reqDate,
             "closed=" + false + ", " +
             "employeeID=" + connection.escape(email);
 
-            console.log(queryString);
+        console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -158,10 +160,10 @@ DatabaseController.prototype.getOpenEmployeesPasswordRequest = function (req, re
 
 DatabaseController.prototype.closeEmployeesPasswordRequest = function (req, res, passwordRequest, callback) {
     pool.getConnection(function (err, connection) {
-      console.log("closeEmployeesPasswordRequest passwordRequest.employeeID: " + passwordRequest.employeeID);
+        console.log("closeEmployeesPasswordRequest passwordRequest.employeeID: " + passwordRequest.employeeID);
         var queryString = "UPDATE EMPLOYEESPASSWORDRESETS SET CLOSED = TRUE WHERE RESETCODE = " + connection.escape(passwordRequest.resetCode) +
             " And employeeID =" + connection.escape(passwordRequest.employeeID);
-            console.log(queryString);
+        console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -181,7 +183,7 @@ DatabaseController.prototype.changeEmployeePassword = function (res, employeeID,
     pool.getConnection(function (err, connection) {
         var queryString = "UPDATE EMPLOYEES SET PASSWORD=" + connection.escape(DatabaseController.prototype.hash(newPassword)) + " " +
             "WHERE EMPLOYEEID=" + connection.escape(employeeID);
-            console.log(queryString);
+        console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -417,7 +419,7 @@ DatabaseController.prototype.getAdminByEmail = function (req, res, email, callba
 DatabaseController.prototype.setAdminOnlineStatus = function (user, onlineStatus) {
     pool.getConnection(function (err, connection) {
         var queryString = "UPDATE EMPLOYEES SET isOnline=" + connection.escape(onlineStatus) +
-        " WHERE employeeID=" + connection.escape(user.employeeID) +
+            " WHERE employeeID=" + connection.escape(user.employeeID) +
             " AND isAdmin=" + true;
         connection.query(queryString, function (err, rows) {
             connection.release();
@@ -435,11 +437,11 @@ DatabaseController.prototype.setAdminOnlineStatus = function (user, onlineStatus
 DatabaseController.prototype.getOnlineAdmins = function (callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "SELECT * FROM EMPLOYEES WHERE isAdmin=" + true +
-        " AND isOnline=" + true;
+            " AND isOnline=" + true;
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-              callback(rows[0]);
+                callback(rows[0]);
             }
         });
 
@@ -498,7 +500,6 @@ DatabaseController.prototype.insertNewEmployee = function (req, res) {
         });
     });
 }
-
 
 
 /**
@@ -623,7 +624,7 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
             var courseString = "";
             var styleString = "";
 
-            for (var i = 0; i < filterOptions.length; i++){
+            for (var i = 0; i < filterOptions.length; i++) {
                 if (filterOptions[i].key == "allergen") {
                     allergenString += ", \x22" + filterOptions[i].option + "\x22";
                 }
@@ -652,10 +653,10 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
                 "JOIN recipeingredients ON ingredients.ingredientID = recipeingredients.ingredientID " +
                 "JOIN recipes ON recipeingredients.recipeID = recipes.recipeID " +
                 "WHERE allergenes.allergenName IN (\x22\x22" + allergenString + ")) ";
-            if (courseString != ""){
+            if (courseString != "") {
                 queryString += "AND styles.styleName IN (" + styleString + ") ";
             }
-            if (styleString != ""){
+            if (styleString != "") {
                 queryString += "AND courses.courseName IN (" + courseString + ")";
             }
         }
@@ -705,23 +706,63 @@ DatabaseController.prototype.loadOrders = function (callback) {
     });
 }
 
+DatabaseController.prototype.getRecipeIDByRecipeName = function (details, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT recipeID FROM recipes WHERE recipeName=" + connection.escape(details.recipeName);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                console.log("Successfully executed Query: " + queryString);
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.insertBookingRecipes = function (details, recipeID, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "INSERT INTO bookingRecipes (amountOfServings, bookingID, recipeID) " +
+            "VALUES (" +
+            connection.escape(details.amount) + "," +
+            connection.escape(details.bookingID) + "," +
+            connection.escape(recipeID) + ")";
+        connection.query(queryString, function (err) {
+            console.log("INSERT BOOKING RECIPES: " + queryString);
+            connection.release();
+            if (!err) {
+                console.log("Successfully executed Query: " + queryString);
+                callback();
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
 DatabaseController.prototype.insertOrderInformation = function (details, callback) {
     pool.getConnection(function (err, connection) {
         console.log(details);
-        var queryString = "INSERT INTO bookings VALUES " +
-            "bookingID=" + connection.escape(details.bookingID) +
-            "eventName=" + connection.escape(details.anlass) +
-            ",userName=" + connection.escape(details.name) +
-            ",recipe=" + connection.escape(details.recipeName) +
-            ",amount=" + connection.escape(details.amount) +
-            ",dateBegin=" + connection.escape(details.start) +
-            ",dateEnd=" + connection.escape(details.start) +
-            ",street=" + connection.escape(details.street) +
-            ",plz=" + connection.escape(details.plz) +
-            ",location=" + connection.escape(details.location) +
-            ",typeID=" + connection.escape(details.orderType) +
-            ",userID=" + connection.escape(details.email) +
-            ",isReleased=" + false;
+        var date = new Date(details.start);
+        console.log(date);
+        console.log(dateFormat(date, "yyyy-mm-dd hh:mm:ss"));
+        var queryString = "INSERT INTO bookings (bookingID, eventName, dateBegin, dateEnd, location, street, plz, userID, typeID, isReleased) " +
+            "VALUES (" +
+            connection.escape(details.bookingID) + "," +
+            connection.escape(details.eventName) + "," +
+            connection.escape(dateFormat(date, "yyyy-mm-dd hh:mm:ss")) + "," +
+            connection.escape(dateFormat(date, "yyyy-mm-dd hh:mm:ss")) + "," +
+            connection.escape(details.location) + "," +
+            connection.escape(details.street) + "," +
+            connection.escape(details.plz) + "," +
+            connection.escape(details.email) + "," +
+            connection.escape(details.orderType) + "," +
+            false + ")";
         connection.query(queryString, function (err) {
             console.log(queryString);
             connection.release();

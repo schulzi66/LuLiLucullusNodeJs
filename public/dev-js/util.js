@@ -29,7 +29,9 @@ Util.getMaturityPeriod = function (orderDate, maturityDate) {
     return Math.round(Math.abs(maturityDate - orderDate) / 60 / 60 / 24);
 }
 
-Util.calculateRecipeIngredientsAmount = function () {
+//TODO: calculation
+Util.calculateRecipeIngredientsAmount = function (amount) {
+    return amount;
 }
 
 Util.convertPictureRefToPath = function (pictureRef) {
@@ -42,4 +44,13 @@ Util.convertPictureRefToPath = function (pictureRef) {
 
 Util.generateUUID = function () {
     return '_' + Math.random().toString(36).substr(2, 9);
+}
+
+Util.getTemplate = function () {
+    var client = new XMLHttpRequest();
+    client.open('GET', '/template.html');
+    client.onreadystatechange = function () {
+        alert(client.responseText)
+    }
+    client.send();
 }

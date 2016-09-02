@@ -28,7 +28,7 @@ function sendMailToUser(req, res, user) {
 console.log("user:  " + user);
   if (user !== undefined) {
 
-    var authenticationCode = _mailController.createAuthenticationcode()
+    var authenticationCode = _mailController.createAuthenticationcode();
 
       var mailOptions = {
           from: conf.mail.auth.user, // sender address
