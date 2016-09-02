@@ -768,7 +768,7 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
             connection.release();
             if (!err) {
                 console.log("Successfully executed Query: " + queryString);
-                callback();
+                callback(details.bookingID);
             }
         });
         connection.on('error', function (err) {

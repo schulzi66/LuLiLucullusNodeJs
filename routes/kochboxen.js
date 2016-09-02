@@ -15,7 +15,8 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res) {
-    _dbController.insertOrderInformation(req.body, function () {
+    _dbController.insertOrderInformation(req.body, function (bookingID) {
+        var bookingIDForMailSubject = bookingID;
         _dbController.getRecipeIDByRecipeName(req.body, function (recipeID) {
             var recipeIDForNextQuery = recipeID[0].recipeID;
             _dbController.insertBookingRecipes(req.body, recipeIDForNextQuery, function () {
@@ -23,8 +24,7 @@ router.post('/', function (req, res) {
                     var mailOptions = {
                         from: conf.mail.auth.user, // send receivers
                         to: req.body.email, // receiver address
-                        //TODO: AuftragsID
-                        subject: 'Bestelleingangsbestätigung Ihrer Bestellung # bei Lulilucullus', // Subject line
+                        subject: 'Bestelleingangsbestätigung Ihrer Bestellung "#' + bookingIDForMailSubject + '" bei Lulilucullus', // Subject line
                         html: 'Danke für Ihre Bestellung des Rezepts "' + req.body.recipeName + '". ' +
                         'Diese wird Ihnen am ' + req.body.start + ' zugestellt'
                     };
