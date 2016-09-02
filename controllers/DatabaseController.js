@@ -708,9 +708,6 @@ DatabaseController.prototype.loadOrders = function (callback) {
 DatabaseController.prototype.insertOrderInformation = function (details, callback) {
     pool.getConnection(function (err, connection) {
         console.log(details);
-        /*
-         userID VARCHAR(100) NOT NULL,
-        * */
         var queryString = "INSERT INTO bookings VALUES " +
             "bookingID=" + connection.escape(details.bookingID) +
             "eventName=" + connection.escape(details.anlass) +

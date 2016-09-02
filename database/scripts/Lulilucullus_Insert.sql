@@ -175,21 +175,21 @@ VALUES (5, 'Super Rezept. Mein Favorit.', 'mmuster@test.de', 0);
 -- Bookings
 INSERT INTO Bookings (bookingID, eventName, dateBegin, dateEnd, street, plz, location, userId, typeID, isReleased)
 VALUES
-(1, 'Bestellung Hochzeit', '2016-08-22 12:00:00', '2016-08-30 12:00:00', 'Musterstraße 2', '12345', 'Musterort', 'mmuster@test.de', 3, false)
-,(2, 'Bestellung Geburtstag', '2016-08-27 12:00:00', '2016-09-10 12:00:00', 'Musterstraße 3', '22345', 'Musterort', 'mmuster@test.de', 3, false)
-,(3, 'Bestellung Geburtstag', '2016-08-27 12:00:00', '2016-10-22 12:00:00', 'Musterstraße 23', '99821', 'Musterort', 'mmuster@test.de', 3, false)
-,(4, 'Bestellung Goldhochzeit', '2016-08-29 12:00:00', '2016-11-27 12:00:00', 'Musterstraße 12', '53881', 'Musterort', 'mmuster@test.de', 3, false)
-,(5, 'Kochkurs \"Vegetarisch\"', '2016-08-31 18:00:00', '2016-12-22 22:00:00', 'Musterstraße 89', '50999', 'Köln', 'mmuster@test.de', 0, false);
+('_cakfaq1wk', 'Bestellung Hochzeit', '2016-08-22 12:00:00', '2016-08-30 12:00:00', 'Musterstraße 2', '12345', 'Musterort', 'mmuster@test.de', 3, false)
+,('_ueygd0qvi', 'Bestellung Geburtstag', '2016-08-27 12:00:00', '2016-09-10 12:00:00', 'Musterstraße 3', '22345', 'Musterort', 'mmuster@test.de', 3, false)
+,('_1so2t4g9p', 'Bestellung Geburtstag', '2016-08-27 12:00:00', '2016-10-22 12:00:00', 'Musterstraße 23', '99821', 'Musterort', 'mmuster@test.de', 3, false)
+,('_bixf10gv5', 'Bestellung Goldhochzeit', '2016-08-29 12:00:00', '2016-11-27 12:00:00', 'Musterstraße 12', '53881', 'Musterort', 'mmuster@test.de', 3, false)
+,('_58xj543wc', 'Kochkurs \"Vegetarisch\"', '2016-08-31 18:00:00', '2016-12-22 22:00:00', 'Musterstraße 89', '50999', 'Köln', 'mmuster@test.de', 0, false);
 
 -- BookingEmployees
 
 -- BookingRecipes
 INSERT INTO BookingRecipes (amountOfServings, bookingID, recipeID)
 VALUES
-(2,2,2)
-,(1,1,1)
-,(1,3,3)
-,(20, 4, 0)
-,(1, 5, 0);
+(2,'_cakfaq1wk',2)
+,(1,'_ueygd0qvi',1)
+,(1,'_1so2t4g9p',3)
+,(20, '_bixf10gv5', 0)
+,(1, '_58xj543wc', 0);
 
 

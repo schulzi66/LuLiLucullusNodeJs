@@ -39,3 +39,7 @@ Util.convertPictureRefToPath = function (pictureRef) {
     var path = imgDir + pictureRef + fileExtension[1];
     return path;
 }
+
+Util.generateUUID = function () {
+    return '_' + Math.random().toString(36).substr(2, 9);
+}
