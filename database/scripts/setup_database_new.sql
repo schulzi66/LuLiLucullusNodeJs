@@ -93,7 +93,7 @@ CREATE TABLE Units
 
 CREATE TABLE PasswordResets
 (
-  dateOfReset TIMESTAMP     NOT NULL,
+  dateOfReset DATETIME     NOT NULL,
   resetCode   VARCHAR(50),
   closed      BOOLEAN      NOT NULL,
   userID      VARCHAR(100) NOT NULL,
@@ -103,7 +103,7 @@ CREATE TABLE PasswordResets
 
 CREATE TABLE EmployeesPasswordResets
 (
-  dateOfReset TIMESTAMP     NOT NULL,
+  dateOfReset DATETIME     NOT NULL,
   resetCode   VARCHAR(50),
   closed      BOOLEAN      NOT NULL,
   employeeID  VARCHAR(100) NOT NULL,
@@ -155,9 +155,9 @@ CREATE TABLE Bookings
 (
   bookingID  VARCHAR(50)  NOT NULL,
   eventName  VARCHAR(100) NOT NULL,
-  dateBegin  TIMESTAMP     NOT NULL,
+  dateBegin  DATETIME     NOT NULL,
   location   VARCHAR(50)  NOT NULL,
-  dateEnd    TIMESTAMP    NOT NULL,
+  dateEnd    DATETIME     NOT NULL,
   street     VARCHAR(50)  NOT NULL,
   plz        VARCHAR(10)  NOT NULL,
   userID     VARCHAR(100) NOT NULL,
@@ -170,8 +170,8 @@ CREATE TABLE Bookings
 
 CREATE TABLE BookingEmployees
 (
-  dateBegin  TIMESTAMP     NOT NULL,
-  dateEnd    TIMESTAMP     NOT NULL,
+  dateBegin  DATETIME     NOT NULL,
+  dateEnd    DATETIME     NOT NULL,
   bookingID  VARCHAR(50)  NOT NULL,
   employeeID VARCHAR(100) NOT NULL,
   PRIMARY KEY (bookingID, employeeID),
