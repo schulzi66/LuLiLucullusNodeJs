@@ -14,7 +14,7 @@
             <%= message %>
         </div>
         <% } %>
-        <form action="/kochboxen" method="post">
+        <form action="/kochboxen" method="post" id="kochboxen-form">
             <div class="form-group">
                 <label>Name</label>
                 <input type="text" class="form-control" name="name" required>
@@ -33,14 +33,14 @@
             </div>
             <div class="form-group">
                 <label>Gericht</label>
-                <select class="form-control" id="recipeSelection">
+                <select class="form-control" id="recipeSelection" required>
                     <option>--- Wählen Sie Ihr Wunschrezept aus ---</option>
                     <script>loadRecipeNamesForOrder();</script>
                 </select>
             </div>
             <div class="form-group">
                 <label>Menge</label>
-                <input id="recipeAmount" type="number" class="form-control" name="amount" pattern="^[1-9]\d*$">
+                <input id="recipeAmount" type="number" class="form-control" name="amount" min="1" required>
             </div>
             <div class="form-group">
                 <label>Preis p. Portion</label>
@@ -50,9 +50,9 @@
                 <label>Datum</label>
                 <!--<input type="text" class="form-control" name="date" id="datepicker" required>-->
                 <div class="input-daterange input-group" id="datepicker">
-                    <input type="text" class="input-sm form-control" name="start" />
+                    <input type="text" class="input-sm form-control" name="start" required/>
                     <span class="input-group-addon">bis</span>
-                    <input type="text" class="input-sm form-control" name="end" />
+                    <input type="text" class="input-sm form-control" name="end" required/>
                 </div>
             </div>
             <div class="form-group">
@@ -60,10 +60,15 @@
                 <input type="hidden" id="orderType" class="form-control" name="orderType" value="3">
                 <input type="hidden" id="bookingID" class="form-control" name="bookingID" value="">
             </div>
-
             <div id="recipeID" class="form-group">
             </div>
-            <button type="submit" class="btn btn-sm btn-primary">Bestellung aufgeben</button>
+            <% if (locals.user) { %>
+            <button id="kochboxen-submit" type="submit" class="btn btn-sm btn-primary">Bestellung aufgeben</button>
+            <% } else { %>
+            <button id="kochboxen-submit" type="submit" class="btn btn-sm btn-primary btn-kochboxen-disabled" disabled title="Bitte loggen Sie sich ein um die Bestellung abzuschicken!" data-toggle="tooltip" data-placement="bottom">
+                Bestellung aufgeben
+            </button>
+            <% } %>
         </form>
     </div>
 </div>
@@ -72,18 +77,22 @@
 </html>
 
 <script>
-    $('#orderBoxDate .input-daterange').datepicker({
-        startDate: 'today',
-        format: 'dd. MM yyyy',
-        clearBtn: true,
-        keepEmptyValues: true
-    });
-
     $(document).on('ready', function () {
         if ($('#recipeSelection').find("option:first").val().indexOf('Wunschrezept') < -1) {
             $('#recipePrice').val($('#recipeSelection').find("option:first").val());
         } else {
             $('#recipePrice').val($('#recipeSelection').find("option:eq(1)").val());
+        }
+
+        $('#orderBoxDate .input-daterange').datepicker({
+            startDate: 'today',
+            format: 'dd. MM yyyy',
+            clearBtn: true,
+            keepEmptyValues: true
+        });
+
+        if ($('#kochboxen-submit').is(':disabled')) {
+            $('[data-toggle="tooltip"]').tooltip();
         }
     });
 
@@ -92,6 +101,7 @@
             $('#recipePrice').val($(this).val());
             $('#recipeName').val($('#recipeSelection').find('option:selected').text());
         }).change();
-    });
 
+        $('#bookingID').val(Util.generateUUID());
+    });
 </script>

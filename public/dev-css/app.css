@@ -107,9 +107,12 @@ html {
     margin-bottom: 20px;
 }
 
-.btn:hover {
-    background-color: #963343;
-    border-color: #4a1921;
+/*
+    important because it overwrites different styles
+*/
+.btn:hover:not(.btn-portions) {
+    background-color: #963343 !important;
+    border-color: #4a1921 !important;
 }
 
 .btn-portions {
