@@ -89,8 +89,9 @@ function loginUser(req, res, user) {
         //user has entered correct password
         req.session.user = user;
         req.session.user.displayName = user.name + " " + user.familyName;
-        console.log(req.session.redirectTo);
-        res.redirect(req.session.redirectTo || '/');
+        res.redirect('/');
+        // console.log(req.session.redirectTo);
+        // res.redirect(req.session.redirectTo || '/');
     }
     else {
         req.session.message = 'Falsches Passwort';

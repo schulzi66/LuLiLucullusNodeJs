@@ -731,7 +731,6 @@ DatabaseController.prototype.insertBookingRecipes = function (details, recipeID,
             connection.escape(details.bookingID) + "," +
             connection.escape(recipeID) + ")";
         connection.query(queryString, function (err) {
-            console.log("INSERT BOOKING RECIPES: " + queryString);
             connection.release();
             if (!err) {
                 console.log("Successfully executed Query: " + queryString);
