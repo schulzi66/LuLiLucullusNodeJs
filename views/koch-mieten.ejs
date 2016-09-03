@@ -39,10 +39,14 @@
             <div class="form-group" id="rentachefDates">
                 <label>Datum</label>
                 <div class="input-daterange input-group" id="datepicker">
-                    <input type="text" class="input-sm form-control" name="start" />
+                    <input type="text" class="input-sm form-control" name="start"/>
                     <span class="input-group-addon">bis</span>
-                    <input type="text" class="input-sm form-control" name="end" />
+                    <input type="text" class="input-sm form-control" name="end"/>
                 </div>
+            </div>
+            <div class="form-group">
+                <input type="hidden" id="bookingID" class="form-control" name="bookingID" value="">
+                <input type="hidden" id="eventName" class="form-control" name="eventName" value="">
             </div>
             <button type="submit" class="btn btn-sm btn-primary">Bestellung aufgeben</button>
         </form>
@@ -50,21 +54,19 @@
 </div>
 
 <script>
-$('#rentachefDates .input-daterange').datepicker({
-    startDate: 'today',
-    format: 'dd. MM yyyy',
-    clearBtn: true,
-    keepEmptyValues: true
-});
+    $('#rentachefDates .input-daterange').datepicker({
+        startDate: 'today',
+        format: 'dd. MM yyyy',
+        clearBtn: true,
+        keepEmptyValues: true
+    });
 
-$(function () {
-    $('#recipeSelection').change(function () {
-        $('#recipePrice').val($(this).val());
-        $('#recipeName').val($('#recipeSelection').find('option:selected').text());
-    }).change();
-
-    $('#bookingID').val(Util.generateUUID());
-});
+    $(function () {
+        $('#bookingTypeSelection').change(function () {
+            $('#eventName').val($(this).val());
+        }).change();
+        $('#bookingID').val(Util.generateUUID());
+    });
 </script>
 
 </body>

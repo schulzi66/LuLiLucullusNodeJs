@@ -752,6 +752,8 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
         if (details.end != undefined) {
             endDate = new Date(details.end);
         }
+        console.log(dateFormat(startDate, "yyyy-mm-dd hh:mm:ss"));
+        console.log(dateFormat(endDate, "yyyy-mm-dd hh:mm:ss"));
         var queryString = "INSERT INTO bookings (bookingID, eventName, dateBegin, dateEnd, location, street, plz, userID, typeID, isReleased) " +
             "VALUES (" +
             connection.escape(details.bookingID) + "," +
