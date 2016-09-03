@@ -40,20 +40,6 @@ html {
 }
 
 /* -----------------------------------------------------------------------------
-    Header Style
- -----------------------------------------------------------------------------*/
-#navbar {
-    background-color: #40434E;
-}
-
-#navbar > #menu > ul > li > a {
-    color: #f8f8f8;
-}
-#navbar > #menu > ul > li > a:focus, #navbar > #menu > ul > li > a:hover {
-    background-color: transparent;
-}
-
-/* -----------------------------------------------------------------------------
     Logo styles
 -----------------------------------------------------------------------------*/
 #logo {
@@ -157,8 +143,9 @@ html {
 }
 
 #navbar {
-    border-top: 1px solid #080705;
-    border-bottom: 2px solid #080705;
+    background-color: #40434E;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 2px solid #f8f8f8;
     margin-bottom: 20px;
     margin-top: 30px;
 }
@@ -191,6 +178,13 @@ html {
 .navbar-inner {
     display: none;
     text-align: center;
+}
+
+#navbar > #menu > ul > li > a {
+    color: #f8f8f8;
+}
+#navbar > #menu > ul > li > a:focus, #navbar > #menu > ul > li > a:hover {
+    background-color: #4A1921;
 }
 
 /* -----------------------------------------------------------------------------
