@@ -111,7 +111,7 @@ html {
     important because it overwrites different styles
 */
 .btn:hover:not(.btn-portions) {
-    background-color: #963343 !important;
+    background-color: #912F40 !important;
     border-color: #4a1921 !important;
 }
 
@@ -159,7 +159,7 @@ html {
 }
 
 #dropdown-recipe-categorie {
-    color: #fff;
+    color: #f8f8f8;
 }
 
 .lulilucullus-navbar {
@@ -256,7 +256,7 @@ html {
 }
 
 .carousel-caption {
-    color: #912F40;
+    color: #702632;
 }
 
 .carousel-caption {
@@ -265,7 +265,7 @@ html {
 }
 
 .carousel-control, .carousel-control:hover {
-    color: #912F40;
+    color: #702632;
 }
 
 /* -----------------------------------------------------------------------------
@@ -291,10 +291,11 @@ html {
 }
 
 .thumbnail {
+    min-height: 450px;
+    max-height: 450px;
     background-color: #f8f8f8;
     border-color: #4A1921;
 }
-
 /* -----------------------------------------------------------------------------
     Recipe Details Styles
 ----------------------------------------------------------------------------- */
@@ -358,11 +359,11 @@ html {
 }
 
 #recipe-filter {
-    color: #fff;
+    color: #f8f8f8;
 }
 
 #filterSubmitBtn {
-    color: #fff;
+    color: #f8f8f8;
     margin-bottom: 5px;
     margin-right: 5px;
 }
@@ -466,17 +467,17 @@ html {
 
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #F5F5F5;
+    background-color: #f8f8f8;
 }
 
 ::-webkit-scrollbar {
     width: 12px;
-    background-color: #F5F5F5;
+    background-color: #f8f8f8;
 }
 
 ::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-    background-color: #555;
+    background-color: #40434E;
 }
 
 /*
