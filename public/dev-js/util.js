@@ -29,11 +29,49 @@ Util.getMaturityPeriod = function (orderDate, maturityDate) {
     return Math.round(Math.abs(maturityDate - orderDate) / 60 / 60 / 24);
 }
 
-//TODO: calculation
-Util.calculateRecipeIngredientsAmount = function (amount) {
-    return amount;
+Util.calculateRecipeIngredientsAmount = function (ingredient, amount, unit) {
+    var resolvedUnit = unit;
+    if (amount > 1 && unit === "Messerspitze") {
+        resolvedUnit = "Messerspitzen";
+    } else if (amount > 1 && unit === "Stück") {
+        resolvedUnit = "Stücke";
+    } else if (amount > 1 && unit === "Stange") {
+        resolvedUnit == "Stangen";
+    } else if (amount > 1 && unit === "Packung") {
+        resolvedUnit == "Packungen";
+    } else resolvedUnit = unit;
+
+    if (amount >= 1000 && resolvedUnit === "Gramm") {
+        return (amount / 1000) + " Kilogramm";
+    } else if (amount >= 1000 && resolvedUnit === "Milliliter") {
+        return (amount / 1000) + " Liter";
+    } else if (amount >= 3 && resolvedUnit === "Teelöffel") {
+        return (amount / 3) + " Esslöffel";
+    } else if (amount > 5 && resolvedUnit === "Esslöffel") {
+        return (amount * 15) + " Gramm";
+    } else if (amount >= 5 && resolvedUnit === "Prise") {
+        if (!amount >= 20 && resolvedUnit === "Prise") {
+            return (amount / 5) + " Messerspitze";
+        } else {
+            return (amount / 20 ) + " Teelöffel";
+        }
+    } else if (amount >= 4 && resolvedUnit === "Messerspitze(n)") {
+        return (amount / 4) + " Teelöffel";
+    } else return amount + " " + resolvedUnit;
 }
 
+Util.checkIngredients = function (ingredient, amount) {
+    console.log(amount, ingredient);
+    if (amount > 1 && ingredient == "Ei") {
+        return "Eier";
+    } else if (amount > 1 && ingredient == "Zwiebel") {
+        return "Zwiebeln";
+    } else if (amount > 1 && ingredient == "Knoblauchzehe") {
+        return "Knoblauchzehen";
+    } else {
+        return ingredient;
+    }
+}
 Util.convertPictureRefToPath = function (pictureRef) {
     var imgDir = "img/recipes/";
     var fileExtension = [".png", ".jpg"];

@@ -78,11 +78,11 @@ function loadRecipeFromId(id, portions) {
         $.each(recipe, function (i) {
             var recipe_ingredients_list =
                 '<ul class="recipe-ingredients-list recipe-ingredients">' +
-                '<li id="ingredientList_ ' + i + '" class="recipe-ingredients-list-item-first-column">' +
-                recipe[i].ingredientName +
+                '<li id="ingredientList_' + i + '" class="recipe-ingredients-list-item-first-column">' +
+                Util.checkIngredients(recipe[i].ingredientName, recipe[i].amount) +
                 '</li>' +
                 '<li class="recipe-ingredients-list-item-second-column">' +
-                Util.calculateRecipeIngredientsAmount(portions * recipe[i].amount) + " " + recipe[i].unitName +
+                Util.calculateRecipeIngredientsAmount(recipe[i].ingredientName, (portions * recipe[i].amount), recipe[i].unitName ) +
                 '</li>' +
                 '</ul>';
 
