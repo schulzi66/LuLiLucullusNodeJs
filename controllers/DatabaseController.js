@@ -616,13 +616,14 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
     pool.getConnection(function (err, connection) {
         var queryString = "";
         if (filterOptions.length == 0)
-            queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM RECIPES";
+            queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef, recipePrice FROM RECIPES";
         else {
             var allergenString = "";
             //var styleString = "\x22amerikanisch\x22";
             //var courseString = "\x22hauptgang\x22";
             var courseString = "";
             var styleString = "";
+            var recipeNameString = "";
 
             for (var i = 0; i < filterOptions.length; i++) {
                 if (filterOptions[i].key == "allergen") {
@@ -634,9 +635,14 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
                 else if (filterOptions[i].key == "style") {
                     styleString += "OR styles.styleName LIKE (\x22%" + filterOptions[i].option + "%\x22) ";
                 }
+                else if (filterOptions[i].key == "recipename") {
+                    recipeNameString += "AND recipes.recipeName LIKE (\x22%" + filterOptions[i].option + "%\x22) ";
+                }
             }
 
-            queryString = "SELECT DISTINCT recipes.recipeID, recipes.recipeName, recipes.shortDescription, recipes.pictureRef FROM recipes " +
+            console.log(queryString);
+
+            queryString = "SELECT DISTINCT recipes.recipeID, recipes.recipeName, recipes.shortDescription, recipes.pictureRef, recipes.recipePrice FROM recipes " +
                 "JOIN styles ON styles.styleID = recipes.styleID " +
                 "JOIN courses ON courses.courseID = recipes.courseID " +
                 "LEFT JOIN recipeingredients ON recipeingredients.recipeID = recipes.recipeID " +
@@ -655,6 +661,9 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
             }
             if (courseString != "") {
                 queryString += "AND courses.courseName LIKE (\x22%%\x22) " + courseString;
+            }
+            if (recipeNameString != "") {
+                queryString += recipeNameString;
             }
         }
         console.log(queryString);

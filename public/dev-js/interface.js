@@ -195,6 +195,13 @@ function loadFilterOptions() {
                 '</div>';
             $('#filterOptionsStyles').append(currentStyle);
         });
+
+        $('#inputFields').append(
+            '<div class="panel panel-default" id="filterOptionsName" class="col-md-4">' +
+            '<div class="panel-heading">Name</div>' +
+            '<input id="filterOptionTextInput" type="text" class="form-control" name="recipeNames" data-type="recipeName">' +
+            '</div>'
+        );
     });
 }
 
@@ -238,6 +245,9 @@ $(document).ready(function () {
         $('input:checked').each(function () {
             selectedOptions.push(this.getAttribute('data-type') + ":" + this.id);
         });
+
+        var filterText = $('#filterOptionTextInput').val();
+        selectedOptions.push("recipename:" + filterText);
 
         for (var i = 0; i < selectedOptions.length; i++) {
             var currentOptionType = selectedOptions[i].split(':')[0];
