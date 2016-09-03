@@ -128,3 +128,25 @@ function loadStyles() {
     })
 }
 
+/* #####################################
+ Method to load ingredients
+ ##################################### */
+
+
+function loadIngredients() {
+    var socket = io.connect();
+    socket.emit('loadIngredients');
+    socket.on('loadedIngredients', function (ingredients) {
+        console.log("styles: " +styles);
+        var container = $("#ingredientSelection");
+        $.each(ingredients, function (i) {
+            var options =
+                '<option value="' + ingredients[i].ingredientName + '">' +
+                "</option>";
+
+            container.append(options);
+            $('#ingredientID').append('<input class="form-control" type="hidden" value="' + ingredients[i].ingredientID + '">');
+        });
+        // Todo something with container.append ;)
+    })
+}
