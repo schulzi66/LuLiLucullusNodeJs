@@ -1,3 +1,5 @@
+'use strict';
+
 function Util() {
 }
 
@@ -36,9 +38,9 @@ Util.calculateRecipeIngredientsAmount = function (ingredient, amount, unit) {
     } else if (amount > 1 && unit === "Stück") {
         resolvedUnit = "Stücke";
     } else if (amount > 1 && unit === "Stange") {
-        resolvedUnit == "Stangen";
+        resolvedUnit = "Stangen";
     } else if (amount > 1 && unit === "Packung") {
-        resolvedUnit == "Packungen";
+        resolvedUnit = "Packungen";
     } else resolvedUnit = unit;
 
     if (amount >= 1000 && resolvedUnit === "Gramm") {
@@ -76,8 +78,7 @@ Util.convertPictureRefToPath = function (pictureRef) {
     var imgDir = "img/recipes/";
     var fileExtension = [".png", ".jpg"];
     pictureRef = pictureRef.split('pictureRef')[1].toLowerCase();
-    var path = imgDir + pictureRef + fileExtension[1];
-    return path;
+    return imgDir + pictureRef + fileExtension[1];
 }
 
 Util.generateUUID = function () {
@@ -88,7 +89,7 @@ Util.getTemplate = function () {
     var client = new XMLHttpRequest();
     client.open('GET', '/template.html');
     client.onreadystatechange = function () {
-        alert(client.responseText)
+        alert(client.responseText);
     }
     client.send();
 }

@@ -40,4 +40,12 @@
     .recipe-time-needed {
         font-weight: 300;
     }
+    #hiddenLogo {
+        position: relative;
+        overflow: hidden;
+        float: right;
+        display: block;
+        width: 145px;
+        height: 200px;
+    }
 }
