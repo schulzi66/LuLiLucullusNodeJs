@@ -171,6 +171,7 @@ html {
     margin: 0;
     float: none;
 }
+
 .nav-center > img {
     height: 65px;
 }
@@ -183,6 +184,7 @@ html {
 #navbar > #menu > ul > li > a {
     color: #f8f8f8;
 }
+
 #navbar > #menu > ul > li > a:focus:not(.logo-link), #navbar > #menu > ul > li > a:hover:not(.logo-link) {
     background-color: #4A1921;
 }
@@ -190,6 +192,7 @@ html {
 #navbar > #menu > ul > li > .logo-link:hover, #navbar > #menu > ul > li > .logo-link:focus {
     background-color: transparent;
 }
+
 /* -----------------------------------------------------------------------------
     Login Button styles
 -----------------------------------------------------------------------------*/
@@ -307,6 +310,7 @@ html {
     background-color: #f8f8f8;
     border-color: #4A1921;
 }
+
 /* -----------------------------------------------------------------------------
     Recipe Details Styles
 ----------------------------------------------------------------------------- */

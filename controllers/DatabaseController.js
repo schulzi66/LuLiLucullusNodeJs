@@ -508,7 +508,7 @@ DatabaseController.prototype.insertNewEmployee = function (req, res) {
 
 DatabaseController.prototype.loadRecipesOverview = function (callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef FROM RECIPES";
+        var queryString = "SELECT recipeID, recipeName, recipePrice, shortDescription, pictureRef FROM RECIPES";
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -747,16 +747,17 @@ DatabaseController.prototype.insertBookingRecipes = function (details, recipeID,
 
 DatabaseController.prototype.insertOrderInformation = function (details, callback) {
     pool.getConnection(function (err, connection) {
-        console.log(details);
-        var date = new Date(details.start);
-        console.log(date);
-        console.log(dateFormat(date, "yyyy-mm-dd hh:mm:ss"));
+        var startDate = new Date(details.start);
+        var endDate = new Date(details.start);
+        if (details.end != undefined) {
+            endDate = new Date(details.end);
+        }
         var queryString = "INSERT INTO bookings (bookingID, eventName, dateBegin, dateEnd, location, street, plz, userID, typeID, isReleased) " +
             "VALUES (" +
             connection.escape(details.bookingID) + "," +
             connection.escape(details.eventName) + "," +
-            connection.escape(dateFormat(date, "yyyy-mm-dd hh:mm:ss")) + "," +
-            connection.escape(dateFormat(date, "yyyy-mm-dd hh:mm:ss")) + "," +
+            connection.escape(dateFormat(startDate, "yyyy-mm-dd hh:mm:ss")) + "," +
+            connection.escape(dateFormat(endDate, "yyyy-mm-dd hh:mm:ss")) + "," +
             connection.escape(details.location) + "," +
             connection.escape(details.street) + "," +
             connection.escape(details.plz) + "," +
