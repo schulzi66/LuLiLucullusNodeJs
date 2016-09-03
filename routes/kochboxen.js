@@ -24,8 +24,8 @@ router.post('/', function (req, res) {
                     from: conf.mail.auth.user, // send receivers
                     to: req.body.email, // receiver address
                     subject: 'Bestelleingangsbestätigung Ihrer Bestellung "#' + bookingIDForMailSubject + '" bei Lulilucullus', // Subject line
-                    html: 'Danke für Ihre Bestellung des Rezepts "' + req.body.recipeName + '". ' +
-                    'Diese wird Ihnen am ' + req.body.start + ' zugestellt'
+                    html: 'Danke für Ihre Bestellung der Kochbox "' + req.body.recipeName + '". ' +
+                    'Die Bestellung ist am ' + req.body.start + ' bei uns eingegangen und wird schnellstmöglich bearbeitet.'
                 };
                 var message = "Ihre Anfrage wurde erfolgreich übermittelt.";
                 var redirect = '/kochboxen';
