@@ -1,13 +1,12 @@
 var DatabaseController = require('./DatabaseController');
 var DevLoggingController = require('./DevLoggingController');
 
-var logger = new DevLoggingController();
 var _dbController = new DatabaseController();
 
 var SocketController = function () {
 }
 
-SocketController.prototype.startServerSocket = function (io, server) {
+SocketController.prototype.startServerSocket = function (io) {
     io.on('connection', onConnection);
 }
 

@@ -65,8 +65,8 @@
         json["typeID"] = $(this).parents("tr:first").find("input[type=hidden]:last").not("script").val();
         json["freigeben"] = true;
 
-        insertIntoOrdersTable(json);
-        sendConfirmation(json);
+        releaseOrder(json);
+
         singleOrder.remove();
 
         if ($('#orderOverview').has("td").length == 0) {

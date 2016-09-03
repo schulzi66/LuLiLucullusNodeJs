@@ -51,13 +51,13 @@ VALUES
 ,(6, 'Italienisch');
 
 -- Courses
-INSERT INTO COURSES (courseID, courseName)
+INSERT INTO Courses (courseID, courseName)
 VALUES
-(0, 'Vorspeise')
-,(1, 'Hauptgang')
-,(2, 'Dessert')
-,(3, 'Salat')
-,(4, 'Beilage');
+	(0, 'Vorspeise'),
+	(1, 'Zwischengang'),
+	(2, 'Hauptgang'),
+	(3, 'Dessert'),
+	(4, 'Beilage');
 
 -- Users
 INSERT INTO Users (name, familyName, userID, street, location, telefonNumber, plz, password, billingAddressStreet, billingAddressLocation, billingAddressPlz, internal)

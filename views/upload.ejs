@@ -13,7 +13,7 @@
             <%= message %>
         </div>
         <% } %>
-        <form action="/upload" method="post" id="upload-form">
+        <form action="/administration/upload" method="post" id="upload-form">
             <div class="form-group">
                 <label>Rezeptname</label>
                 <input type="text" class="form-control" name="name" required>
@@ -21,38 +21,39 @@
             <div class="form-group">
                 <label>Menüart</label>
                 <select class="form-control" id="courseSelection" required>
-                    <option>--- Wählen Sie Ihre Menüart aus ---</option>
-                    <script> loadCourses();</script>
+                    <option></option>
+                    <script>loadCourses();</script>
                 </select>
             </div>
             <div class="form-group">
                 <label>Region</label>
                 <select class="form-control" id="styleSelection" required>
-                    <option>--- Wählen Sie die Herkunft Ihres Repezts aus ---</option>
-                    <script> loadStyles();</script>
+                    <option></option>
+                    <script>loadStyles();</script>
                 </select>
             </div>
             <div class="form-group row">
                 <label for="ingredients" class="col-md-1 control-label ingredients-label">Zutaten</label>
                 <div class="col-md-3">
-                    <select class="form-control" id="unitSelection" required>
-                        <option>--- Wählen Sie Ihre Zutaten---</option>
+                    <select class="form-control" id="ingredientSelection" required>
+                        <option></option>
                         <script>loadIngredients();</script>
                     </select>
                 </div>
                 <label for="ingredientAmount" class="col-md-1 control-label">Menge</label>
                 <div class="col-md-3">
                     <input type="number" class="form-control" id="ingredientAmount" min="1">
-             d   <label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>
+                </div>
+                <label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>
                 <div class="col-md-3">
                     <select class="form-control" id="unitSelection" required>
-                        <option>--- Wählen Sie die passende Maßeinheit ---</option>
-                        <script>loadRecipeNamesForOrder();</script>
+                        <script>loadUnits();</script>
                     </select>
                 </div>
             </div>
-            <div id="additionalIngredients">
-                LALALAL
+
+            <div class="from-group">
+                <button id="addInputs" class="glyphicons glyphicons-plus"></button>
             </div>
             <div class="form-group">
                 <label>Preis p. Portion</label>
@@ -67,28 +68,31 @@
 </html>
 
 <script>
-    $('#addInputs').on('click', function () {
+    $('#addInputs').on('click', function (e) {
+        e.preventDefault();
         var units = loadUnits();
-
         var container = $('#additionalIngredients');
         var formAppend =
-                '<div class="form-group row">' +
-                    '<label for="ingredients" class="col-md-1 control-label ingredients-label">Zutaten</label>' +
-                    '<div class="col-md-3">' +
-                        '<input type="text" class="form-control" name="additionalIngredients" required>' +
-                    '</div>' +
-                    '<label for="ingredientAmount" class="col-md-1 control-label">Menge</label>' +
-                    '<div class="col-md-3">' +
-                        '<input type="number" class="form-control" id="ingredientAmount" min="1">' +
-                    '</div>' +
-                    '<label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>' +
-                    '<div class="col-md-3">' +
-                        '<select class="form-control" id="unitSelection" required>' +
-                            '<option>--- Wählen Sie die passende Maßeinheit ---</option>' +
-                                units +
-                        '</select>' +
-                    '</div>' +
-                '</div>';
+        '<div class="form-group row">' +
+            '<label for="ingredients" class="col-md-1 control-label ingredients-label">Zutaten</label>' +
+            '<div class="col-md-3">' +
+                '<select class="form-control" id="ingredientSelection" required>' +
+                    '<option>' +
+                    loadIngredients() +
+                    '</option>' +
+                '</select>' +
+            '</div>' +
+            '<label for="ingredientAmount" class="col-md-1 control-label">Menge</label>' +
+            '<div class="col-md-3">' +
+                '<input type="number" class="form-control" id="ingredientAmount" min="1">' +
+            '</div>' +
+            '<label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>' +
+            '<div class="col-md-3">' +
+                '<select class="form-control" id="unitSelection" required>' +
+                    loadUnits() +
+                '</select>' +
+            '</div>' +
+        '</div>';
         container.append(formAppend);
     });
 

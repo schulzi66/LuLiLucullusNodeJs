@@ -63,7 +63,6 @@ Util.calculateRecipeIngredientsAmount = function (ingredient, amount, unit) {
 }
 
 Util.checkIngredients = function (ingredient, amount) {
-    console.log(amount, ingredient);
     if (amount > 1 && ingredient == "Ei") {
         return "Eier";
     } else if (amount > 1 && ingredient == "Zwiebel") {
