@@ -22,29 +22,29 @@
             <div class="form-group">
                 <label>Menüart</label>
                 <select class="form-control" id="courseSelection" required>
-                    <option>--- Wählen Sie Ihr Wunschrezept aus ---</option>
-                    <script>loadRecipeNamesForOrder();</script>
+                    <option>--- Wählen Sie Ihre Menüart aus ---</option>
+                    <!--TODO logic / method-->
+                    <script>loadCourses();</script>
                 </select>
             </div>
             <div class="form-group">
                 <label>Region</label>
                 <select class="form-control" id="styleSelection" required>
-                    <option>--- Wählen Sie Ihr Wunschrezept aus ---</option>
-                    <script>loadRecipeNamesForOrder();</script>
+                    <!--TODO: logic / method-->
+                    <option>--- Wählen Sie die Herkunft Ihres Repezts aus ---</option>
+                    <script>loadStyles();</script>
                 </select>
             </div>
             <div class="form-group">
                 <label>Zutaten</label>
-                <textarea class="form-control" id="ingredients" name="ingredients" vresize required></textarea>
-            </div>
-            <div class="form-group">
+                <textarea class="form-control col-md-4" id="ingredients" name="ingredients" vresize required></textarea>
                 <label>Menge</label>
-                <input id="ingredientAmount" type="number" class="form-control" name="ingredientAmount" min="1"
-                       required>
-            </div>
-            <div class="form-group" id="orderBoxDate">
+                <input id="ingredientAmount col-md-4" type="number" class="form-control" name="ingredientAmount" min="1"
                 <label>Maßeinheit</label>
-                <input type="text" class="input-sm form-control" name="unit" required/>
+                <select class="form-control" id="styleSelection" required>
+                    <option>--- Wählen Sie die passende Maßeinheit ---</option>
+                    <script>loadRecipeNamesForOrder();</script>
+                </select>
             </div>
             <div class="form-group">
                 <label>Preis p. Portion</label>
@@ -57,33 +57,3 @@
 </body>
 <% include partials/footer %>
 </html>
-
-<script>
-    $(document).on('ready', function () {
-        if ($('#recipeSelection').find("option:first").val().indexOf('Wunschrezept') < -1) {
-            $('#recipePrice').val($('#recipeSelection').find("option:first").val());
-        } else {
-            $('#recipePrice').val($('#recipeSelection').find("option:eq(1)").val());
-        }
-
-        $('#orderBoxDate .input-daterange').datepicker({
-            startDate: 'today',
-            format: 'dd. MM yyyy',
-            clearBtn: true,
-            keepEmptyValues: true
-        });
-
-        if ($('#kochboxen-submit').is(':disabled')) {
-            $('[data-toggle="tooltip"]').tooltip();
-        }
-    });
-
-    $(function () {
-        $('#recipeSelection').change(function () {
-            $('#recipePrice').val($(this).val());
-            $('#recipeName').val($('#recipeSelection').find('option:selected').text());
-        }).change();
-
-        $('#bookingID').val(Util.generateUUID());
-    });
-</script>
