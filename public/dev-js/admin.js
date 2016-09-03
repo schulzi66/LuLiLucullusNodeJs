@@ -61,3 +61,71 @@ function insertNewRecipe(recipe) {
     socket.emit('insertNewRecipe', recipe);
 }
 
+/* #####################################
+ Method to load existing units
+ ##################################### */
+
+function loadUnits() {
+    var socket = io.connect();
+    socket.emit('loadUnits');
+    socket.on('loadedUnits', function (units) {
+        console.log("units: " + units);
+        var container = $("#unitSelection");
+        $.each(units, function (i) {
+            var options =
+                '<option value="' + units[i].unitName + '">' +
+                "</option>";
+
+            container.append(options);
+            $('#unitID').append('<input class="form-control" type="hidden" value="' + units[i].unitID + '">');
+        });
+        //TODO Julian not showing values
+    })
+}
+
+/* #####################################
+ Method to load courses
+ ##################################### */
+
+
+function loadCourses() {
+    var socket = io.connect();
+    socket.emit('loadCourses');
+    socket.on('loadedCourses', function (courses) {
+        console.log("courses: " + courses);
+        var container = $("#courseSelection");
+        $.each(courses, function (i) {
+            var options =
+                '<option value="' + courses[i].courseName + '">' +
+                "</option>";
+
+            container.append(options);
+            $('#courseID').append('<input class="form-control" type="hidden" value="' + courses[i].courseID + '">');
+        });
+        // Todo something with container.append ;)
+    })
+}
+
+/* #####################################
+     Method to load styles
+ ##################################### */
+
+
+function loadStyles() {
+    var socket = io.connect();
+    socket.emit('loadStyles');
+    socket.on('loadedStyles', function (styles) {
+        console.log("styles: " +styles);
+        var container = $("#styleSelection");
+        $.each(styles, function (i) {
+            var options =
+                '<option value="' + styles[i].styleName + '">' +
+                "</option>";
+
+            container.append(options);
+            $('#styleID').append('<input class="form-control" type="hidden" value="' + styles[i].styleID + '">');
+        });
+        // Todo something with container.append ;)
+    })
+}
+

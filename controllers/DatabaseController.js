@@ -795,6 +795,58 @@ DatabaseController.prototype.setReleaseFlag = function (details) {
         });
     });
 }
+
+/**
+ * Upload Recipes Methods
+ */
+DatabaseController.prototype.loadUnits = function (callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT * FROM Units";
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.loadCourses = function (callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT * FROM Courses";
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.loadStyles = function (callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT * FROM Styles";
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
 /*DatabaseController.prototype.saveRatingForRecipe = function (rating, id, callback) {
  pool.getConnection(function (err, connection) {
  var queryString = "INSERT INTO Ratings SET stars= " +
