@@ -16,7 +16,7 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
     console.log(req.body);
-    _dbController.insertOrderInformation(req, function () {
+    _dbController.insertOrderInformation(req.body, function () {
         var mailOptions = {
             from: req.body.email,
             to: conf.mail.auth.user,

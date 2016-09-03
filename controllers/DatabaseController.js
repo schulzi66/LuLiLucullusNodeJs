@@ -749,6 +749,13 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
     pool.getConnection(function (err, connection) {
         var startDate = new Date(details.start);
         var endDate = new Date(details.start);
+
+        logger.log("startDate", details);
+        console.log("details.start: " + details.start);
+
+        console.log("startDate: " + startDate);
+        console.log("endDate: " + endDate);
+
         if (details.end != undefined) {
             endDate = new Date(details.end);
         }
@@ -766,8 +773,8 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
             connection.escape(details.email) + "," +
             connection.escape(details.orderType) + "," +
             false + ")";
-        connection.query(queryString, function (err) {
             console.log(queryString);
+        connection.query(queryString, function (err) {
             connection.release();
             if (!err) {
                 console.log("Successfully executed Query: " + queryString);
