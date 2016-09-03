@@ -750,30 +750,21 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
         var startDate = new Date(details.start);
         var endDate = new Date(details.start);
 
-        logger.log("startDate", details);
-        console.log("details.start: " + details.start);
-
-        console.log("startDate: " + startDate);
-        console.log("endDate: " + endDate);
-
         if (details.end != undefined) {
             endDate = new Date(details.end);
         }
-        console.log(dateFormat(startDate, "yyyy-mm-dd hh:mm:ss"));
-        console.log(dateFormat(endDate, "yyyy-mm-dd hh:mm:ss"));
-        var queryString = "INSERT INTO bookings (bookingID, eventName, dateBegin, dateEnd, location, street, plz, userID, typeID, isReleased) " +
-            "VALUES (" +
-            connection.escape(details.bookingID) + "," +
-            connection.escape(details.eventName) + "," +
-            connection.escape(dateFormat(startDate, "yyyy-mm-dd hh:mm:ss")) + "," +
-            connection.escape(dateFormat(endDate, "yyyy-mm-dd hh:mm:ss")) + "," +
-            connection.escape(details.location) + "," +
-            connection.escape(details.street) + "," +
-            connection.escape(details.plz) + "," +
-            connection.escape(details.email) + "," +
-            connection.escape(details.orderType) + "," +
-            false + ")";
-            console.log(queryString);
+        var queryString = "INSERT INTO BOOKINGS SET " +
+            "bookingID=" + connection.escape(details.bookingID) + ", " +
+            "eventName=" + connection.escape(details.eventName) + ", " +
+            "dateBegin=" + connection.escape(dateFormat(startDate, "yyyy-mm-dd hh:mm:ss")) + ", " +
+            "location=" + connection.escape(details.location) + ", " +
+            "dateEnd=" + connection.escape(dateFormat(endDate, "yyyy-mm-dd hh:mm:ss")) + ", " +
+            "street=" + connection.escape(details.street) + ", " +
+            "plz=" + connection.escape(details.plz) + ", " +
+            "userID=" + connection.escape(details.email) + ", " +
+            "typeID=" + connection.escape(details.orderType) + ", " +
+            "isReleased=" + false;
+
         connection.query(queryString, function (err) {
             connection.release();
             if (!err) {
