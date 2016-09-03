@@ -3,7 +3,7 @@
 <svg version="1.1" id="Ebene_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 841.9 595.3" style="enable-background:new 0 0 841.9 595.3;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#702632;}
+	.st0{fill:#702632;stroke:white;}
 </style>
 <path id="XMLID_17_" d="M229.7,408.7c-1.8,1.2-3.6,2.5-5.3,3.4L229.7,408.7z"/>
 <path id="XMLID_18_" d="M235,405.2l-5.3,3.4C231.5,407.4,233.3,406.2,235,405.2z"/>

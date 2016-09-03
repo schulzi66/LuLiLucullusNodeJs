@@ -87,7 +87,6 @@ function loadUnits() {
  Method to load courses
  ##################################### */
 
-
 function loadCourses() {
     var socket = io.connect();
     socket.emit('loadCourses');
