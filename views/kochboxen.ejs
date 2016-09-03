@@ -63,15 +63,14 @@
                 <input type="hidden" id="bookingID" class="form-control" name="bookingID" value="">
                 <input type="hidden" id="eventName" class="form-control" name="eventName" value="Kochbox Bestellung">
             </div>
-            <div id="recipeID" class="form-group">
-            </div>
-            <%# if (locals.user) { %>
+            <div id="recipeID" class="form-group"></div>
+            <% if (locals.user) { %>
             <button id="kochboxen-submit" type="submit" class="btn btn-sm btn-primary">Bestellung aufgeben</button>
-            <%# } else { %>
-            <!--<button id="kochboxen-submit" type="submit" class="btn btn-sm btn-primary btn-kochboxen-disabled" disabled title="Bitte loggen Sie sich ein um die Bestellung abzuschicken!" data-toggle="tooltip" data-placement="bottom">
+            <% } else { %>
+            <button id="kochboxen-submit" type="submit" class="btn btn-sm btn-primary btn-kochboxen-disabled" disabled title="Bitte loggen Sie sich ein um die Bestellung abzuschicken!" data-toggle="tooltip" data-placement="bottom">
                 Bestellung aufgeben
-            </button>-->
-            <%# } %>
+            </button>
+            <% } %>
         </form>
     </div>
 </div>

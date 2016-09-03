@@ -56,6 +56,15 @@ $('#rentachefDates .input-daterange').datepicker({
     clearBtn: true,
     keepEmptyValues: true
 });
+
+$(function () {
+    $('#recipeSelection').change(function () {
+        $('#recipePrice').val($(this).val());
+        $('#recipeName').val($('#recipeSelection').find('option:selected').text());
+    }).change();
+
+    $('#bookingID').val(Util.generateUUID());
+});
 </script>
 
 </body>
