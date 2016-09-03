@@ -85,6 +85,29 @@ function onConnection(socket) {
     socket.on('receiveChatMessage', function (message) {
         console.log(message);
     });
+
+    //Region Units
+    socket.on('loadUnits', function () {
+        _dbController.loadUnits(function (units) {
+            socket.emit('loadedUnits', units);
+        })
+    })
+    //End region
+
+    //Region Courses
+    socket.on('loadCourses', function () {
+        _dbController.loadCourses(function (courses) {
+            socket.emit('loadedCourses', courses);
+        })
+    })
+    //End region
+
+    //Region Styles
+    socket.on('loadStyles', function () {
+        _dbController.loadStyles(function (styles) {
+            socket.emit('loadedStyles', styles);
+        })
+    })
 }
 
 module.exports = SocketController;
