@@ -382,3 +382,11 @@ table.dataTable thead .sorting:after {
     float:right;
     padding: 15px;
 }
+
+/*
+    Recipe upload
+*/
+
+#ingredients {
+    resize: vertical;
+}
