@@ -13,21 +13,21 @@
             <%= message %>
         </div>
         <% } %>
-        <form action="/administration/upload" method="post" id="upload-form">
+        <form action="/administration/upload" method="post" id="upload-form" enctype="application/json">
             <div class="form-group">
                 <label>Rezeptname</label>
                 <input type="text" class="form-control" name="name" required>
             </div>
             <div class="form-group">
                 <label>Menüart</label>
-                <select class="form-control" id="courseSelection" required>
+                <select class="form-control" id="courseSelection" name="course" required>
                     <option></option>
                     <script>loadCourses();</script>
                 </select>
             </div>
             <div class="form-group">
                 <label>Region</label>
-                <select class="form-control" id="styleSelection" required>
+                <select class="form-control" id="styleSelection" name="style" required>
                     <option></option>
                     <script>loadStyles();</script>
                 </select>
@@ -35,23 +35,25 @@
             <div class="form-group row">
                 <label for="ingredients" class="col-md-1 control-label ingredients-label">Zutaten</label>
                 <div class="col-md-3">
-                    <select class="form-control" id="ingredientSelection" required>
+                    <select class="form-control" id="ingredientSelection" name="ingredients" required>
                         <option></option>
                         <script>loadIngredients();</script>
                     </select>
                 </div>
                 <label for="ingredientAmount" class="col-md-1 control-label">Menge</label>
                 <div class="col-md-3">
-                    <input type="number" class="form-control" id="ingredientAmount" min="1">
+                    <input type="number" class="form-control" name="amount" id="amount" min="1">
                 </div>
                 <label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>
                 <div class="col-md-3">
-                    <select class="form-control" id="unitSelection" required>
+                    <select class="form-control" id="unitSelection" name="unit" required>
                         <script>loadUnits();</script>
                     </select>
                 </div>
             </div>
+            <div id="additionalIngredients">
 
+            </div>
             <div class="from-group">
                 <button id="addInputs" class="glyphicons glyphicons-plus"></button>
             </div>
@@ -68,6 +70,23 @@
 </html>
 
 <script>
+    //TODO: get this Json structure out of this form
+    /*
+    {
+        "name":"Rezeptname",
+        "ingredients":{
+            "Backpulver":{
+                "ingredientAmount":"50",
+                "ingredientUnit":"g"
+            },
+            "Tomatensaft":{
+                "ingredientAmount":"2",
+                "ingredientUnit":"Teelöffel"
+            }
+        },
+        "price":"2,50€"
+    }
+     */
     $('#addInputs').on('click', function (e) {
         e.preventDefault();
         var units = loadUnits();
@@ -76,24 +95,17 @@
         '<div class="form-group row">' +
             '<label for="ingredients" class="col-md-1 control-label ingredients-label">Zutaten</label>' +
             '<div class="col-md-3">' +
-                '<select class="form-control" id="ingredientSelection" required>' +
-                    '<option>' +
-                    loadIngredients() +
-                    '</option>' +
-                '</select>' +
+                '<input type="text" class="form-control" id="ingredients" name="ingredients" min="1">' +
             '</div>' +
             '<label for="ingredientAmount" class="col-md-1 control-label">Menge</label>' +
             '<div class="col-md-3">' +
-                '<input type="number" class="form-control" id="ingredientAmount" min="1">' +
+                '<input type="number" class="form-control" id="amount" name="amount" min="1">' +
             '</div>' +
             '<label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>' +
             '<div class="col-md-3">' +
-                '<select class="form-control" id="unitSelection" required>' +
-                    loadUnits() +
-                '</select>' +
+                '<input type="text" class="form-control" id="unit" name="unit" min="1">' +
             '</div>' +
         '</div>';
         container.append(formAppend);
     });
-
 </script>
