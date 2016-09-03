@@ -202,18 +202,22 @@ function loadFilteredRecipes(filterOptions) {
     var socket = io.connect();
     socket.emit('loadFilteredRecipes', filterOptions);
     socket.on('loadedFilteredRecipes', function (filteredRecipes) {
-        var container = $('ul.recipes');
+        var container = $('#recipeContainer');
         container.children().remove();
         $.each(filteredRecipes, function (i) {
             var recipe_list_element =
-                '<li class="recipes-overview-item">' +
+                '<div class="col-sm-6 col-md-4">' +
+                '<div class="thumbnail">' +
                 '<img src="' + Util.convertPictureRefToPath(filteredRecipes[i].pictureRef) + '"' + '>' +
+                '<div class="caption">' +
                 '<h3 class="recipes-overview-headline text-uppercase">' + filteredRecipes[i].recipeName + '</h3>' +
                 '<p class="recipes-overview-short-description">' + filteredRecipes[i].shortDescription + '</p>' +
                 '<p>' +
                 '<a class="recipes-overview-btn btn btn-primary btn-sm" href="recipes/recipe?id=' + filteredRecipes[i].recipeID + '"> Weitere Informationen ... </a>' +
-                '</p>' +
-                '</li>';
+                '<span style="margin-left: 20px" class="lead">' + filteredRecipes[i].recipePrice + '</span></p>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
             container.append(recipe_list_element);
         });
     });

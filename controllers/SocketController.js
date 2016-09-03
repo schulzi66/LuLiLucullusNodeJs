@@ -46,8 +46,8 @@ function onConnection(socket) {
     });
     
     socket.on('loadFilteredRecipes', function (filterOptions) {
-        _dbController.loadFilteredRecipes(filterOptions, function (filterOptions) {
-            socket.emit('loadedFilteredRecipes', filterOptions);
+        _dbController.loadFilteredRecipes(filterOptions, function (filteredRecipes) {
+            socket.emit('loadedFilteredRecipes', filteredRecipes);
         });
     });
     //End Region

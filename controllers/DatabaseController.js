@@ -629,15 +629,12 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
                     allergenString += ", \x22" + filterOptions[i].option + "\x22";
                 }
                 else if (filterOptions[i].key == "course") {
-                    courseString += "\x22" + filterOptions[i].option + "\x22";
+                    courseString += "OR courses.courseName LIKE (\x22%" + filterOptions[i].option + "%\x22) ";
                 }
                 else if (filterOptions[i].key == "style") {
-                    styleString += "\x22" + filterOptions[i].option + "\x22";
+                    styleString += "OR styles.styleName LIKE (\x22%" + filterOptions[i].option + "%\x22) ";
                 }
             }
-
-            console.log(courseString);
-            console.log(styleString);
 
             queryString = "SELECT DISTINCT recipes.recipeID, recipes.recipeName, recipes.shortDescription, recipes.pictureRef FROM recipes " +
                 "JOIN styles ON styles.styleID = recipes.styleID " +
@@ -653,21 +650,21 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
                 "JOIN recipeingredients ON ingredients.ingredientID = recipeingredients.ingredientID " +
                 "JOIN recipes ON recipeingredients.recipeID = recipes.recipeID " +
                 "WHERE allergenes.allergenName IN (\x22\x22" + allergenString + ")) ";
-            if (courseString != "") {
-                queryString += "AND styles.styleName IN (" + styleString + ") ";
-            }
             if (styleString != "") {
-                queryString += "AND courses.courseName IN (" + courseString + ")";
+                queryString += "AND styles.styleName LIKE (\x22%%\x22) " + styleString;
+            }
+            if (courseString != "") {
+                queryString += "AND courses.courseName LIKE (\x22%%\x22) " + courseString;
             }
         }
         console.log(queryString);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-                console.log(rows);
                 callback(rows);
             }
         });
+
         connection.on('error', function (err) {
             console.log("ERR: " + err);
             return;
