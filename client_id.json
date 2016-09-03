@@ -1,0 +1,16 @@
+{
+  "web": {
+    "client_id": "1021701751301-8k6jqvs9vu3p0rhs5df9ihe1h81s45ti.apps.googleusercontent.com",
+    "project_id": "sylvan-mode-142308",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "h5zVaQTL0VKTDvPYaHoqCwxZ",
+    "redirect_uris": [
+      "http://localhost:3000/oauth2callback"
+    ],
+    "javascript_origins": [
+      "http://localhost:3000"
+    ]
+  }
+}
