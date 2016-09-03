@@ -106,7 +106,7 @@ function loadCourses() {
 }
 
 /* #####################################
-     Method to load styles
+ Method to load styles
  ##################################### */
 
 
@@ -114,7 +114,7 @@ function loadStyles() {
     var socket = io.connect();
     socket.emit('loadStyles');
     socket.on('loadedStyles', function (styles) {
-        console.log("styles: " +styles);
+        console.log("styles: " + styles);
         var container = $("#styleSelection");
         $.each(styles, function (i) {
             var options =
