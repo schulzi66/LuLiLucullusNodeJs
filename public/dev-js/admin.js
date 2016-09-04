@@ -74,7 +74,7 @@ function loadCourses() {
                 "</option>";
 
             container.append(options);
-            hiddenInputs.append('<input class="form-control" type="hidden" name="courseName_' + courses[i].courseName +'" value="' + courses[i].courseID + '">');
+            hiddenInputs.append('<input class="form-control" type="hidden" name="' + courses[i].courseName +'" value="' + courses[i].courseID + '">');
         });
     });
 }
@@ -97,7 +97,7 @@ function loadStyles() {
                 "</option>";
 
             container.append(options);
-            hiddenInputs.append('<input class="form-control" type="hidden" name="styleName_' + styles[i].styleName +'" value="' + styles[i].styleID + '">');
+            hiddenInputs.append('<input class="form-control" type="hidden" name="' + styles[i].styleName +'" value="' + styles[i].styleID + '">');
         });
     });
 }
