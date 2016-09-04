@@ -13,7 +13,10 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    _dbController.uploadRecipe(req.body);
+    console.log(req.body);
+    _dbController.uploadRecipe(req.body, function () {
+        console.log("I DID IT");
+    });
 });
 
 module.exports = router;
