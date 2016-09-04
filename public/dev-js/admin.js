@@ -66,6 +66,7 @@ function loadUnits() {
     socket.emit('loadUnits');
     socket.on('loadedUnits', function (units) {
         var container = $("#unitSelection");
+        var hiddenInputs = $('#hiddenInputs');
         $.each(units, function (i) {
             var options =
                 '<option value="' + units[i].unitName + '">' +
@@ -73,7 +74,7 @@ function loadUnits() {
                 "</option>";
 
             container.append(options);
-            $('#unitID').append('<input class="form-control" type="hidden" value="' + units[i].unitID + '">');
+            hiddenInputs.append('<input class="form-control" type="hidden" name="unitID_' + i +'" value="' + units[i].unitID + '">');
         });
     });
 }
@@ -87,6 +88,7 @@ function loadCourses() {
     socket.emit('loadCourses');
     socket.on('loadedCourses', function (courses) {
         var container = $("#courseSelection");
+        var hiddenInputs = $('#hiddenInputs');
         $.each(courses, function (i) {
             var options =
                 '<option value="' + courses[i].courseName + '">' +
@@ -94,7 +96,7 @@ function loadCourses() {
                 "</option>";
 
             container.append(options);
-            $('#courseID').append('<input class="form-control" type="hidden" value="' + courses[i].courseID + '">');
+            hiddenInputs.append('<input class="form-control" type="hidden" name="courseID_' + i +'" value="' + courses[i].courseID + '">');
         });
     });
 }
@@ -109,6 +111,7 @@ function loadStyles() {
     socket.emit('loadStyles');
     socket.on('loadedStyles', function (styles) {
         var container = $("#styleSelection");
+        var hiddenInputs = $('#hiddenInputs');
         $.each(styles, function (i) {
             var options =
                 '<option value="' + styles[i].styleName + '">' +
@@ -116,7 +119,7 @@ function loadStyles() {
                 "</option>";
 
             container.append(options);
-            $('#styleID').append('<input class="form-control" type="hidden" value="' + styles[i].styleID + '">');
+            hiddenInputs.append('<input class="form-control" type="hidden" name="styleID_' + i +'" value="' + styles[i].styleID + '">');
         });
     });
 }

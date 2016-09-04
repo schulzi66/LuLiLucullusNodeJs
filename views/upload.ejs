@@ -62,6 +62,9 @@
                 <label>Preis p. Portion</label>
                 <input id="price" type="text" class="form-control" name="price" required>
             </div>
+            <div id="hiddenInputs" class="form-group">
+                <input type="hidden" id="recipeID" class="form-control" name="recipeID">
+            </div>
             <button id="recipe-upload" type="submit" class="btn btn-sm btn-primary">Bestellung aufgeben</button>
         </form>
     </div>
@@ -71,23 +74,10 @@
 </html>
 
 <script>
-    //TODO: get this Json structure out of this form
-    /*
-    {
-        "name":"Rezeptname",
-        "ingredients":{
-            "Backpulver":{
-                "ingredientAmount":"50",
-                "ingredientUnit":"g"
-            },
-            "Tomatensaft":{
-                "ingredientAmount":"2",
-                "ingredientUnit":"Teelöffel"
-            }
-        },
-        "price":"2,50€"
-    }
-     */
+    $(function () {
+        $('#recipeID').val(Util.generateUUID());
+    });
+
     $('#addInputs').on('click', function (e) {
         e.preventDefault();
         var units = loadUnits();
