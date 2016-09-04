@@ -387,7 +387,7 @@ table.dataTable thead .sorting:after {
 /* -----------------------------------------------------------------------------
     Recipe Upload styles
 -----------------------------------------------------------------------------*/
-#ingredients {
+textarea {
     resize: vertical;
 }
 

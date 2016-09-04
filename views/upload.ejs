@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label>Rezeptbild</label>
-                <input id="fileinput" type="file" name="image" required>
+                <input id="fileinput" type="file" name="pictureRef" required>
             </div>
 
             <div class="form-group">
@@ -36,6 +36,18 @@
                     <option val="" disabled selected>Herkunft wählen</option>
                     <script>loadStyles();</script>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Kurzbeschreibung</label>
+                <textarea type="text" class="form-control" name="shortDescription" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Zubereitung</label>
+                <textarea type="text" class="form-control" name="baseDescription" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Arbeitsaufwand</label>
+                <textarea type="text" class="form-control" name="timeNeeded" required></textarea>
             </div>
             <div class="form-group row">
                 <label for="ingredients" class="col-md-1 control-label ingredients-label">Zutaten</label>
