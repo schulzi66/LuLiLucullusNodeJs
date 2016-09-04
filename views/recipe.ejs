@@ -34,20 +34,14 @@
         © Lulilucullus GmbH - nicht für die kommerzielle Nutzung bestimmt!
     </div>
 </div>
-<!-- <script src="/thirdparty/dev-js/rating.js"></script>
 <script>
-    var el = document.querySelector('#el');
-    var currentRating = 0; //TODO: get from database
-    var maxRating = 5;
-
-    var callback = function (rating) {
-        recipeRating.getRating();
-    };
-
-    // rating instance
-    var recipeRating = rating(el, currentRating, maxRating, callback);
+    function bookmarkRecipe(recipeID) {
+        var userID = locals.user;
+        console.log(recipeID, userID);
+        sendBookmarkToDatabase(recipeID, userID);
+    }
 </script>
--->
+
 </body>
 <% include partials/footer %>
 </html>

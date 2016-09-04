@@ -11,7 +11,7 @@
 #page-wrapper {
     padding: 0 15px;
     min-height: 568px;
-    background-color: #fff;
+    background-color: #f8f8f8;
 }
 
 @media (min-width: 768px) {
@@ -169,7 +169,7 @@
 .btn-info.btn-outline:hover,
 .btn-warning.btn-outline:hover,
 .btn-danger.btn-outline:hover {
-    color: #fff;
+    color: #f8f8f8;
 }
 
 .chat {
@@ -181,7 +181,7 @@
 .chat li {
     margin-bottom: 10px;
     padding-bottom: 5px;
-    border-bottom: 1px dotted #999;
+    border-bottom: 1px dotted #e7e7e7;
 }
 
 .chat li.left .chat-body {
@@ -319,7 +319,7 @@ table.dataTable thead .sorting:after {
 
 .panel-red > .panel-heading {
     border-color: #912F40;
-    color: #fff;
+    color: #f8f8f8;
     background-color: #912F40;
 }
 
@@ -337,7 +337,7 @@ table.dataTable thead .sorting:after {
 
 .panel-yellow > .panel-heading {
     border-color: #f0ad4e;
-    color: #fff;
+    color: #f8f8f8;
     background-color: #f0ad4e;
 }
 

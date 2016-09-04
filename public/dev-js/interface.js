@@ -46,18 +46,18 @@ function loadRecipeFromId(id, portions) {
             '<p class="h3">' + recipe[0].recipeName + '</p>' +
             '</div>' +
             '<div class="col-md-2">' +
-            '<a onclick="window.print()">' +
+            '<a onclick="window.print();">' +
             '<p class="recipe-print-icon h3">' +
-            '<span class="glyphicon glyphicon-print"> </span>' +
+            '<span class="glyphicon glyphicon-print"></span>' +
             '</p>' +
             '</a>' +
             '</div>' +
-            '<div class="col-md-3 rating">' +
-            '<p class="h3">Bewertung</p>' +
-            '</div>' +
-            '<div class="col-md-3 recicpe-rating-wrapper">' +
-            '<ul id="el" class="c-rating">' +
-            '</ul>' +
+            '<div class="col-md-6">' +
+            '<a id="bookmark" onclick="bookmarkRecipe(' + id + ');">' +
+            '<p class="h3">' +
+            '<span class="glyphicon glyphicon-bookmark"> Zu "Meine Rezepte" hinzufügen</span>' +
+            '</p>' +
+            '</a>' +
             '</div>' +
             '</div>' +
             '</div>';
@@ -82,7 +82,7 @@ function loadRecipeFromId(id, portions) {
                 Util.checkIngredients(recipe[i].ingredientName, recipe[i].amount) +
                 '</li>' +
                 '<li class="recipe-ingredients-list-item-second-column">' +
-                Util.calculateRecipeIngredientsAmount(recipe[i].ingredientName, (portions * recipe[i].amount), recipe[i].unitName ) +
+                Util.calculateRecipeIngredientsAmount(recipe[i].ingredientName, (portions * recipe[i].amount), recipe[i].unitName) +
                 '</li>' +
                 '</ul>';
 
@@ -104,6 +104,13 @@ function loadRecipeFromId(id, portions) {
     });
 }
 
+function sendBookmarkToDatabase(recipeID, userID) {
+    var socket = io.connect();
+    socket.emit('sendBookmark');
+    socket.on('sentBookmark', function () {
+        console.log("test");
+    });
+}
 
 function loadRecipeNamesForOrder() {
     var socket = io.connect();

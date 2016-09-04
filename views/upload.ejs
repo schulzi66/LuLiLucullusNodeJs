@@ -67,6 +67,7 @@
             </div>
             <div class="from-group">
                 <button id="addInputs"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                <button id="removeInputs"><i class="fa fa-minus" aria-hidden="true"></i></button>
             </div>
             <div class="form-group">
                 <label>Preis p. Portion (in €)</label>
@@ -84,28 +85,42 @@
 </html>
 
 <script>
+    $('#removeInputs').prop('disabled', true);
     $(function () {
         $('#recipeID').val(Util.generateUUID());
     });
 
     $('#addInputs').on('click', function (e) {
         e.preventDefault();
+        $('#removeInputs').prop('disabled', false);
         var container = $('#additionalIngredients');
         var formAppend =
-        '<div class="form-group row">' +
-            '<label for="ingredients" class="col-md-1 control-label ingredients-label">Zutaten</label>' +
-            '<div class="col-md-3">' +
+                '<div class="form-group row">' +
+                '<label for="ingredients" class="col-md-1 control-label ingredients-label">Zutaten</label>' +
+                '<div class="col-md-3">' +
                 '<input type="text" class="form-control" id="ingredients" name="ingredients" min="1">' +
-            '</div>' +
-            '<label for="ingredientAmount" class="col-md-1 control-label">Menge</label>' +
-            '<div class="col-md-3">' +
+                '</div>' +
+                '<label for="ingredientAmount" class="col-md-1 control-label">Menge</label>' +
+                '<div class="col-md-3">' +
                 '<input type="number" class="form-control" id="amount" name="amount" min="1">' +
-            '</div>' +
-            '<label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>' +
-            '<div class="col-md-3">' +
+                '</div>' +
+                '<label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>' +
+                '<div class="col-md-3">' +
                 '<input type="text" class="form-control" id="unit" name="unit" min="1">' +
-            '</div>' +
-        '</div>';
+                '</div>' +
+                '</div>';
         container.append(formAppend);
+    });
+
+    $('#removeInputs').on('click', function (e) {
+        e.preventDefault();
+        var container = $('#additionalIngredients');
+        if (container.children('div.row').length > 0) {
+            container.children('div.row').last().remove();
+            var count = container.children('div.row').length;
+        }
+        if(count == 0) {
+            $('#removeInputs').prop('disabled', true);
+        }
     });
 </script>

@@ -565,6 +565,24 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
     });
 }
 
+DatabaseController.prototype.saveBookmark = function (recipeID, userID, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "INSERT INTO MyRecipes (userID, recipeID) VALUES (" +
+            connection.escape(userID) + ", " +
+            connection.ecape(recipeID);
+        connection.query(queryString, function (err, rows) {
+            console.log("QUERYSTRING saveBookmark: " + queryString);
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
 /**
  * Load recipe names
  * @param id
@@ -930,16 +948,29 @@ DatabaseController.prototype.loadIngredients = function (callback) {
 };
 
 /**
- * Method to send JSON created by the upload form to our database for insertion.
+ * Method to send JSON created by the upload form to our database for recipe insertion.
+ * @param recipe
  * @param callback
  */
-DatabaseController.prototype.uploadRecipe = function (recipeInformation, callback) {
+DatabaseController.prototype.uploadRecipe = function (recipe, callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT * FROM Ingredients";
-        connection.query(queryString, function (err, rows) {
+        var queryString = "INSERT INTO RECIPES SET " +
+            "recipeID=" + connection.escape(recipe.recipeID) + ", " +
+            "recipeName=" + connection.escape(recipe.name) + ", " +
+            "pictureRef=" + connection.escape(recipe.pictureRef) + ", " +
+            "shortDescription=" + connection.escape(recipe.shortDescription) + ", " +
+            "timeNeeded=" + connection.escape(recipe.timeNeeded) + ", " +
+            "baseDescription=" + connection.escape(recipe.baseDescription) + ", " +
+            "styleID=" + connection.escape(recipe.styleID) + ", " +
+            "courseID=" + connection.escape(recipe.courseID) + ", " +
+            "recipePrice=" + connection.escape(recipe.price);
+        console.log("querystring: " + queryString);
+
+        connection.query(queryString, function (err) {
             connection.release();
             if (!err) {
-                callback(rows);
+                console.log("Sucessfully uploadedRecipe");
+                callback();
             }
         });
         connection.on('error', function (err) {
@@ -948,6 +979,88 @@ DatabaseController.prototype.uploadRecipe = function (recipeInformation, callbac
         });
     });
 };
+
+/**
+ * Method to send JSON created by the upload form to our database for unit insertion.
+ * @param unit
+ */
+DatabaseController.prototype.uploadUnit = function (unit) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "INSERT INTO UNITS SET " +
+            "unitID=" + connection.escape(unit.unitID) + ", " +
+            "unitName=" + connection.escape(unit.unitName);
+        console.log("querystring: " + queryString);
+
+        connection.query(queryString, function (err) {
+            connection.release();
+            if (!err) {
+                console.log("Sucessfully uploadedUnit");
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+};
+
+
+/**
+ * Method to send JSON created by the upload form to our database for ingredient insertion.
+ * @param ingredient
+ */
+DatabaseController.prototype.uploadIngredient = function (ingredient) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "INSERT INTO INGREDIENTS SET " +
+            "ingredientID=" + connection.escape(ingredient.ingredientID) + ", " +
+            "ingredientName=" + connection.escape(ingredient.ingredientName);
+        console.log("querystring: " + queryString);
+
+        connection.query(queryString, function (err) {
+            connection.release();
+            if (!err) {
+                console.log("Sucessfully uploadedIngredient");
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+};
+
+/**
+ * Method to send JSON created by the upload form to our database for recipe ingredient insertion.
+ * @param amount
+ * @param recipeID
+ * @param ingredientID
+ * @param unitID
+ */
+DatabaseController.prototype.uploadRecipeIngredient = function (amount, recipeID, ingredientID, unitID) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "INSERT INTO RECIPEINGREDIENTS SET " +
+            "amount=" + connection.escape(amount) + ", " +
+            "recipeID=" + connection.escape(recipeID) + ", " +
+            "ingredientID=" + connection.escape(ingredientID) + ", " +
+            "unitID=" + connection.escape(unitID);
+        console.log("querystring: " + queryString);
+
+        connection.query(queryString, function (err) {
+            connection.release();
+            if (!err) {
+                console.log("Sucessfully uploadedRecipeIngredient");
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+};
+
+
+
+
 
 /*DatabaseController.prototype.saveRatingForRecipe = function (rating, id, callback) {
  pool.getConnection(function (err, connection) {

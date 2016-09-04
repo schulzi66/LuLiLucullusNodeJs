@@ -23,6 +23,11 @@ function onConnection(socket) {
             socket.emit('loadedRecipe', recipe);
         });
     });
+
+    socket.on('sendBookmark', function (id) {
+        _dbController.saveBookmark(id);
+    });
+
     //End Region
 
     socket.on('loadRecipeNames', function () {
