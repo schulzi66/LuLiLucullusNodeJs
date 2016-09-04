@@ -24,7 +24,7 @@ router.post('/', function (req, res) {
                     _dbController.loadRecipesOverview(function (existingRecipes) {
                         req.body.recipeID = existingRecipes.length;
                         logger.log("req.body", req.body);
-                        _dbController.uploadRecipe(req.body,function () {
+                        _dbController.uploadRecipe(req.body, function () {
                             var newUnits = checkForExistingUnits(existingUnits, req.body.unit);
                             insertNewUnits(newUnits);
                             var newIngredients = checkForExistingIngredients(existingIngredients, req.body.ingredients);
@@ -40,12 +40,12 @@ router.post('/', function (req, res) {
 
 function mapIDS(req, existingCourses, existingStyles) {
     for (var i = 0; i < existingCourses.length; ++i) {
-        if(existingCourses[i].courseName === req.body.course) {
+        if (existingCourses[i].courseName === req.body.course) {
             req.body.courseID = existingCourses[i].courseID;
         }
     }
     for (var i = 0; i < existingStyles.length; ++i) {
-        if(existingStyles[i].styleName === req.body.style) {
+        if (existingStyles[i].styleName === req.body.style) {
             req.body.styleID = existingStyles[i].styleID;
         }
     }
@@ -55,8 +55,8 @@ function checkForExistingUnits(existingUnits, newUnits) {
     var unitsToAdd = newUnits;
     //
     for (var i = 0; i < existingUnits.length; ++i) {
-        for(var j = 0; j < newUnits.length; ++j){
-            if(existingUnits[i].unitName === newUnits[j]) {
+        for (var j = 0; j < newUnits.length; ++j) {
+            if (existingUnits[i].unitName === newUnits[j]) {
                 unitsToAdd[j].unitID = existingUnits.length + i;
                 delete unitsToAdd[j];
             }
@@ -71,8 +71,8 @@ function insertNewUnits(newUnits) {
     //     logger.log("insert", unit);
     //     _dbController.uploadUnit(unit);
     // })
-    for(var i = 0; i < newUnits.length; ++i) {
-        console.log("i:" + i +"," + newUnits[i]);
+    for (var i = 0; i < newUnits.length; ++i) {
+        console.log("i:" + i + "," + newUnits[i]);
         _dbController.uploadUnit(newUnits[i]);
     }
 }
@@ -80,8 +80,8 @@ function insertNewUnits(newUnits) {
 function checkForExistingIngredients(existingIngredients, newIngredients) {
     var ingredientsToAdd = newIngredients;
     for (var i = 0; i < existingIngredients.length; ++i) {
-        for(var j = 0; j < newIngredients.length; ++j){
-            if(existingIngredients[i].ingredientName === newIngredients[j]) {
+        for (var j = 0; j < newIngredients.length; ++j) {
+            if (existingIngredients[i].ingredientName === newIngredients[j]) {
                 ingredientsToAdd[j].ingredientID = existingIngredients.length + i;
                 delete ingredientsToAdd[j];
             }
@@ -91,13 +91,14 @@ function checkForExistingIngredients(existingIngredients, newIngredients) {
 }
 
 function insertNewIngredients(newIngredients) {
-    for(var i = 0; i < newIngredients.length; ++ i){
+    for (var i = 0; i < newIngredients.length; ++i) {
         _dbController.uploadIngredient(newIngredients[i]);
     }
 }
 
 function insertRecipeIngredients(json, newIngredients, newUnits) {
-    for(var i = 0; i < json.amount.length; ++i){
+    for (var i = 0; i < json.amount.length; ++i) {
+        //TODO: ingredient / Unit ID not the name
         _dbController.uploadRecipeIngredient(json.amount[i], json.recipeID, newIngredients[i], newUnits[i]);
     }
 }
