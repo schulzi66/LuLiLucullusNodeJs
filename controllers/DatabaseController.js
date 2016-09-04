@@ -654,21 +654,28 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
             queryString = "SELECT recipeID, recipeName, shortDescription, pictureRef, recipePrice FROM RECIPES";
         else {
             var allergenString = "";
-            //var styleString = "\x22amerikanisch\x22";
-            //var courseString = "\x22hauptgang\x22";
             var courseString = "";
             var styleString = "";
             var recipeNameString = "";
+            var courseCount = 0;
+            var styleCount = 0;
 
             for (var i = 0; i < filterOptions.length; i++) {
                 if (filterOptions[i].key == "allergen") {
                     allergenString += ", \x22" + filterOptions[i].option + "\x22";
                 }
                 else if (filterOptions[i].key == "course") {
-                    courseString += "OR courses.courseName LIKE (\x22%" + filterOptions[i].option + "%\x22) ";
+                    courseCount += 1;
+                    if(courseCount > 1)
+                        courseString += "OR "
+                    courseString += "courses.courseName LIKE (\x22%" + filterOptions[i].option + "%\x22) ";
+
                 }
                 else if (filterOptions[i].key == "style") {
-                    styleString += "OR styles.styleName LIKE (\x22%" + filterOptions[i].option + "%\x22) ";
+                    styleCount += 1;
+                    if(styleCount > 1)
+                        styleString += "OR "
+                    styleString += "styles.styleName LIKE (\x22%" + filterOptions[i].option + "%\x22) ";
                 }
                 else if (filterOptions[i].key == "recipename") {
                     recipeNameString += "AND recipes.recipeName LIKE (\x22%" + filterOptions[i].option + "%\x22) ";
@@ -692,10 +699,10 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
                 "JOIN recipes ON recipeingredients.recipeID = recipes.recipeID " +
                 "WHERE allergenes.allergenName IN (\x22\x22" + allergenString + ")) ";
             if (styleString != "") {
-                queryString += "AND styles.styleName LIKE (\x22%%\x22) " + styleString;
+                queryString += "AND ( " + styleString + ") ";
             }
             if (courseString != "") {
-                queryString += "AND courses.courseName LIKE (\x22%%\x22) " + courseString;
+                queryString += "AND ( " + courseString + ") ";
             }
             if (recipeNameString != "") {
                 queryString += recipeNameString;

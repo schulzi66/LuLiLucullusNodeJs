@@ -223,7 +223,9 @@ function loadFilterOptions() {
         $('#inputFields').append(
             '<div class="panel panel-default" id="filterOptionsName" class="col-md-4">' +
             '<div class="panel-heading">Name</div>' +
-            '<input id="filterOptionTextInput" type="text" class="form-control" name="recipeNames" data-type="recipeName">' +
+            '<div class="ui-widget">' +
+            '<input id="filterOptionTextInput" type="text" class="form-control" name="recipeNames" data-type="recipeName" />' +
+            '</div>' +
             '</div>'
         );
     });
@@ -283,6 +285,35 @@ $(document).ready(function () {
         }
         console.log(filterOptions);
         loadFilteredRecipes(filterOptions);
+    });
+    $(function() {
+        var availableTags = [
+             "ActionScript",
+             "AppleScript",
+             "Asp",
+             "BASIC",
+             "C",
+             "C++",
+             "Clojure",
+             "COBOL",
+             "ColdFusion",
+             "Erlang",
+             "Fortran",
+             "Groovy",
+             "Haskell",
+             "Java",
+             "JavaScript",
+             "Lisp",
+             "Perl",
+             "PHP",
+             "Python",
+             "Ruby",
+             "Scala",
+             "Scheme"
+        ];
+        $("#filterOptionTextInput").autocomplete({
+            source: availableTags
+        });
     });
 
     /**
