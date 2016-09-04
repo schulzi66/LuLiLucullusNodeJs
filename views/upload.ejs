@@ -13,50 +13,67 @@
             <%= message %>
         </div>
         <% } %>
-        <form action="/upload" method="post" id="upload-form">
+        <form action="/administration/upload" method="post" id="upload-form" enctype="application/json">
             <div class="form-group">
                 <label>Rezeptname</label>
                 <input type="text" class="form-control" name="name" required>
             </div>
             <div class="form-group">
+                <label>Rezeptbild</label>
+                <input id="fileinput" type="file" name="pictureRef" required>
+            </div>
+
+            <div class="form-group">
                 <label>Menüart</label>
-                <select class="form-control" id="courseSelection" required>
-                    <option>--- Wählen Sie Ihre Menüart aus ---</option>
-                    <script> loadCourses();</script>
+                <select class="form-control" id="courseSelection" name="course" required>
+                    <option val="" disabled selected>Menüart wählen</option>
+                    <script>loadCourses();</script>
                 </select>
             </div>
             <div class="form-group">
                 <label>Region</label>
-                <select class="form-control" id="styleSelection" required>
-                    <option>--- Wählen Sie die Herkunft Ihres Repezts aus ---</option>
-                    <script> loadStyles();</script>
+                <select class="form-control" id="styleSelection" name="style" required>
+                    <option val="" disabled selected>Herkunft wählen</option>
+                    <script>loadStyles();</script>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Kurzbeschreibung</label>
+                <textarea type="text" class="form-control" name="shortDescription" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Zubereitung</label>
+                <textarea type="text" class="form-control" name="baseDescription" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Arbeitsaufwand</label>
+                <textarea type="text" class="form-control" name="timeNeeded" required></textarea>
             </div>
             <div class="form-group row">
                 <label for="ingredients" class="col-md-1 control-label ingredients-label">Zutaten</label>
                 <div class="col-md-3">
-                    <select class="form-control" id="unitSelection" required>
-                        <option>--- Wählen Sie Ihre Zutaten---</option>
-                        <script>loadIngredients();</script>
-                    </select>
+                    <input id="ingredients" type="text" class="form-control" name="ingredients" required>
                 </div>
                 <label for="ingredientAmount" class="col-md-1 control-label">Menge</label>
                 <div class="col-md-3">
-                    <input type="number" class="form-control" id="ingredientAmount" min="1">
-             d   <label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>
+                    <input type="number" class="form-control" name="amount" id="amount" min="1" required>
+                </div>
+                <label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>
                 <div class="col-md-3">
-                    <select class="form-control" id="unitSelection" required>
-                        <option>--- Wählen Sie die passende Maßeinheit ---</option>
-                        <script>loadRecipeNamesForOrder();</script>
-                    </select>
+                    <input id="unit" type="text" class="form-control" name="unit" required>
                 </div>
             </div>
             <div id="additionalIngredients">
-                LALALAL
+            </div>
+            <div class="from-group">
+                <button id="addInputs"><i class="fa fa-plus" aria-hidden="true"></i></button>
             </div>
             <div class="form-group">
-                <label>Preis p. Portion</label>
+                <label>Preis p. Portion (in €)</label>
                 <input id="price" type="text" class="form-control" name="price" required>
+            </div>
+            <div id="hiddenInputs" class="form-group">
+                <input type="hidden" id="recipeID" class="form-control" name="recipeID" required>
             </div>
             <button id="recipe-upload" type="submit" class="btn btn-sm btn-primary">Bestellung aufgeben</button>
         </form>
@@ -67,29 +84,28 @@
 </html>
 
 <script>
-    $('#addInputs').on('click', function () {
-        var units = loadUnits();
-
-        var container = $('#additionalIngredients');
-        var formAppend =
-                '<div class="form-group row">' +
-                    '<label for="ingredients" class="col-md-1 control-label ingredients-label">Zutaten</label>' +
-                    '<div class="col-md-3">' +
-                        '<input type="text" class="form-control" name="additionalIngredients" required>' +
-                    '</div>' +
-                    '<label for="ingredientAmount" class="col-md-1 control-label">Menge</label>' +
-                    '<div class="col-md-3">' +
-                        '<input type="number" class="form-control" id="ingredientAmount" min="1">' +
-                    '</div>' +
-                    '<label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>' +
-                    '<div class="col-md-3">' +
-                        '<select class="form-control" id="unitSelection" required>' +
-                            '<option>--- Wählen Sie die passende Maßeinheit ---</option>' +
-                                units +
-                        '</select>' +
-                    '</div>' +
-                '</div>';
-        container.append(formAppend);
+    $(function () {
+        $('#recipeID').val(Util.generateUUID());
     });
 
+    $('#addInputs').on('click', function (e) {
+        e.preventDefault();
+        var container = $('#additionalIngredients');
+        var formAppend =
+        '<div class="form-group row">' +
+            '<label for="ingredients" class="col-md-1 control-label ingredients-label">Zutaten</label>' +
+            '<div class="col-md-3">' +
+                '<input type="text" class="form-control" id="ingredients" name="ingredients" min="1">' +
+            '</div>' +
+            '<label for="ingredientAmount" class="col-md-1 control-label">Menge</label>' +
+            '<div class="col-md-3">' +
+                '<input type="number" class="form-control" id="amount" name="amount" min="1">' +
+            '</div>' +
+            '<label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>' +
+            '<div class="col-md-3">' +
+                '<input type="text" class="form-control" id="unit" name="unit" min="1">' +
+            '</div>' +
+        '</div>';
+        container.append(formAppend);
+    });
 </script>
