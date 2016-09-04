@@ -11,7 +11,10 @@ var _mailController = new MailController();
 
 /* GET contact page. */
 router.get('/', function (req, res, next) {
-    res.render('kochboxen', {user: req.session.user});
+    if(req.session.user === undefined) {
+        var message = "Zum Bestellen bitte anmelden oder einen Account erstellen."
+    }
+    res.render('kochboxen', {user: req.session.user, message: message});
 });
 
 router.post('/', function (req, res) {
