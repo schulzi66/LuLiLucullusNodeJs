@@ -565,6 +565,24 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
     });
 }
 
+DatabaseController.prototype.saveBookmark = function (recipeID, userID, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "INSERT INTO MyRecipes (userID, recipeID) VALUES (" +
+            connection.escape(userID) + ", " +
+            connection.ecape(recipeID);
+        connection.query(queryString, function (err, rows) {
+            console.log("QUERYSTRING saveBookmark: " + queryString);
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
 /**
  * Load recipe names
  * @param id
