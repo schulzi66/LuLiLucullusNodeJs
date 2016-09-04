@@ -66,7 +66,6 @@ function loadCourses() {
     socket.emit('loadCourses');
     socket.on('loadedCourses', function (courses) {
         var container = $("#courseSelection");
-        var hiddenInputs = $('#hiddenInputs');
         $.each(courses, function (i) {
             var options =
                 '<option value="' + courses[i].courseName + '">' +
@@ -74,7 +73,6 @@ function loadCourses() {
                 "</option>";
 
             container.append(options);
-            hiddenInputs.append('<input class="form-control" type="hidden" name="' + courses[i].courseName +'" value="' + courses[i].courseID + '">');
         });
     });
 }
@@ -89,7 +87,6 @@ function loadStyles() {
     socket.emit('loadStyles');
     socket.on('loadedStyles', function (styles) {
         var container = $("#styleSelection");
-        var hiddenInputs = $('#hiddenInputs');
         $.each(styles, function (i) {
             var options =
                 '<option value="' + styles[i].styleName + '">' +
@@ -97,7 +94,6 @@ function loadStyles() {
                 "</option>";
 
             container.append(options);
-            hiddenInputs.append('<input class="form-control" type="hidden" name="' + styles[i].styleName +'" value="' + styles[i].styleID + '">');
         });
     });
 }
