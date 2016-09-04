@@ -21,14 +21,14 @@
             <div class="form-group">
                 <label>Menüart</label>
                 <select class="form-control" id="courseSelection" name="course" required>
-                    <option></option>
+                    <option val="" disabled selected>Menüart wählen</option>
                     <script>loadCourses();</script>
                 </select>
             </div>
             <div class="form-group">
                 <label>Region</label>
                 <select class="form-control" id="styleSelection" name="style" required>
-                    <option></option>
+                    <option val="" disabled selected>Herkunft wählen</option>
                     <script>loadStyles();</script>
                 </select>
             </div>
@@ -36,7 +36,7 @@
                 <label for="ingredients" class="col-md-1 control-label ingredients-label">Zutaten</label>
                 <div class="col-md-3">
                     <select class="form-control" id="ingredientSelection" name="ingredients" required>
-                        <option></option>
+                        <option val="" disabled selected>Zutat wählen</option>
                         <script>loadIngredients();</script>
                     </select>
                 </div>
@@ -47,6 +47,7 @@
                 <label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>
                 <div class="col-md-3">
                     <select class="form-control" id="unitSelection" name="unit" required>
+                        <option val="" disabled selected>Menge wählen</option>
                         <script>loadUnits();</script>
                     </select>
                 </div>
