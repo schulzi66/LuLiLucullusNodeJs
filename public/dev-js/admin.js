@@ -58,28 +58,6 @@ function insertNewRecipe(recipe) {
 }
 
 /* #####################################
- Method to load existing units
- ##################################### */
-
-function loadUnits() {
-    var socket = io.connect();
-    socket.emit('loadUnits');
-    socket.on('loadedUnits', function (units) {
-        var container = $("#unitSelection");
-        var hiddenInputs = $('#hiddenInputs');
-        $.each(units, function (i) {
-            var options =
-                '<option value="' + units[i].unitName + '">' +
-                units[i].unitName +
-                "</option>";
-
-            container.append(options);
-            hiddenInputs.append('<input class="form-control" type="hidden" name="unitID_' + i +'" value="' + units[i].unitID + '">');
-        });
-    });
-}
-
-/* #####################################
  Method to load courses
  ##################################### */
 
@@ -124,25 +102,3 @@ function loadStyles() {
     });
 }
 
-/* #####################################
- Method to load ingredients
- ##################################### */
-
-
-function loadIngredients() {
-    var socket = io.connect();
-    socket.emit('loadIngredients');
-    socket.on('loadedIngredients', function (ingredients) {
-        var container = $("#ingredientSelection");
-        $.each(ingredients, function (i) {
-            var options =
-                '<option value="' + ingredients[i].ingredientName + '">' +
-                ingredients[i].ingredientName +
-                "</option>";
-
-            container.append(options);
-            $('#ingredientID').append('<input class="form-control" type="hidden" value="' + ingredients[i].ingredientID + '">');
-        });
-        // Todo something with container.append ;)
-    })
-}
