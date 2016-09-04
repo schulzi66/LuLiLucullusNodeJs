@@ -28,6 +28,10 @@ function onConnection(socket) {
         _dbController.saveBookmark(id);
     });
 
+    socket.on('sendBookmark', function (userId) {
+        _dbController.loadBookmarks(id);
+    });
+
     //End Region
 
     socket.on('loadRecipeNames', function () {

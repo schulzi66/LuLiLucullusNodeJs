@@ -112,6 +112,23 @@ function sendBookmarkToDatabase(recipeID, userID) {
     });
 }
 
+function loadMyRecipes(userID) {
+    var socket = io.connect();
+    socket.emit('loadBookmaks', userID);
+    socket.on('loadedBookmarks', function (bookmarks) {
+        var container = $('#myRecipeList');
+        $.each(bookmarks, function () {
+            var bookmarkList =
+                '<ul>' +
+                '<li>' +
+                bookmarks[i].recipeName +
+                '</li>' +
+                '</ul>';
+            container.append(bookmarkList);
+        });
+    })
+}
+
 function loadRecipeNamesForOrder() {
     var socket = io.connect();
     socket.emit('loadRecipeNames');
