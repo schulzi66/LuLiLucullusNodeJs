@@ -16,9 +16,9 @@ var pool = mysql.createPool({
     connectionLimit: conf.database.connectionLimit
 });
 
-/**
+/***********************************************
  * Constr & Init Methods
- */
+ ***********************************************/
 var DatabaseController = function () {
 }
 
@@ -29,9 +29,9 @@ DatabaseController.prototype.connect = function (startServerCallback) {
     });
 }
 
-/**
+/***********************************************
  * Password Methods
- */
+ ***********************************************/
 
 DatabaseController.prototype.hash = function (password) {
     var hash = bcrypt.hashSync(password);
@@ -116,6 +116,9 @@ DatabaseController.prototype.changePassword = function (res, userId, newPassword
     });
 }
 
+/***********************************************
+ * Password Request Methods
+ ***********************************************/
 DatabaseController.prototype.insertEmployeesPasswordRequest = function (reqDate, authenticationCode, email) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO EMPLOYEESPASSWORDRESETS SET " +
@@ -178,7 +181,9 @@ DatabaseController.prototype.closeEmployeesPasswordRequest = function (req, res,
     });
 }
 
-
+/***********************************************
+ * Change Password Methods
+ ***********************************************/
 DatabaseController.prototype.changeEmployeePassword = function (res, employeeID, newPassword, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "UPDATE EMPLOYEES SET PASSWORD=" + connection.escape(DatabaseController.prototype.hash(newPassword)) + " " +
@@ -198,9 +203,9 @@ DatabaseController.prototype.changeEmployeePassword = function (res, employeeID,
     });
 }
 
-/**
- * Users Methods
- */
+/***********************************************
+ * User Methods
+ ***********************************************/
 
 DatabaseController.prototype.getUserByEmail = function (req, res, email, callback) {
     pool.getConnection(function (err, connection) {
@@ -219,6 +224,10 @@ DatabaseController.prototype.getUserByEmail = function (req, res, email, callbac
         });
     });
 }
+
+/***********************************************
+ * Signup External Methods
+ ***********************************************/
 DatabaseController.prototype.signupExternalUser = function (req, res, placeholder, internal, method_token) {
     pool.getConnection(function (err, connection) {
         var familyName;
@@ -273,6 +282,9 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
     });
 }
 
+/***********************************************
+* Signup Internal Methods
+***********************************************/
 DatabaseController.prototype.signup = function (req, res, internal) {
     pool.getConnection(function (err, connection) {
         var rech_str, rech_ort, rech_plz;
@@ -334,6 +346,9 @@ DatabaseController.prototype.signup = function (req, res, internal) {
     });
 }
 
+/***********************************************
+ * Update User Methods
+ ***********************************************/
 DatabaseController.prototype.updateUser = function (req, res) {
     pool.getConnection(function (err, connection) {
         var rech_str, rech_ort, rech_plz;
@@ -393,10 +408,9 @@ DatabaseController.prototype.updateUser = function (req, res) {
     });
 }
 
-/**
- * Employees Methods
- */
-
+/***********************************************
+ * Employee Methods
+ ***********************************************/
 DatabaseController.prototype.getAdminByEmail = function (req, res, email, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "SELECT * FROM EMPLOYEES WHERE employeeID=" + connection.escape(email) +
@@ -416,6 +430,9 @@ DatabaseController.prototype.getAdminByEmail = function (req, res, email, callba
     });
 };
 
+/***********************************************
+ * Set Online State Method
+ ***********************************************/
 DatabaseController.prototype.setAdminOnlineStatus = function (user, onlineStatus) {
     pool.getConnection(function (err, connection) {
         var queryString = "UPDATE EMPLOYEES SET isOnline=" + connection.escape(onlineStatus) +
@@ -712,6 +729,11 @@ DatabaseController.prototype.loadOrders = function (callback) {
     });
 }
 
+/**
+ * Get the recipeID for further usage by using the Recipe Name.g
+ * @param details
+ * @param callback
+ */
 DatabaseController.prototype.getRecipeIDByRecipeName = function (details, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "SELECT recipeID FROM recipes WHERE recipeName=" + connection.escape(details.recipeName);
@@ -729,6 +751,12 @@ DatabaseController.prototype.getRecipeIDByRecipeName = function (details, callba
     });
 }
 
+/**
+ * Create a new recipe booking.
+ * @param details Order Information
+ * @param recipeID ID for the ordered recipe
+ * @param callback Callbackfunction to send an email.
+ */
 DatabaseController.prototype.insertBookingRecipes = function (details, recipeID, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO bookingRecipes (amountOfServings, bookingID, recipeID) " +
@@ -750,6 +778,11 @@ DatabaseController.prototype.insertBookingRecipes = function (details, recipeID,
     });
 }
 
+/**
+ * Create a new order in the table Bookings to receive it in the admin order area.
+ * @param details order information received by the form
+ * @param callback bookingID for further usage in another database function
+ */
 DatabaseController.prototype.insertOrderInformation = function (details, callback) {
     pool.getConnection(function (err, connection) {
         var startDate = new Date(details.start);
@@ -784,6 +817,9 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
     });
 }
 
+/**
+ * Set an unreleased order on released after releasing it in the order area.
+ */
 DatabaseController.prototype.setReleaseFlag = function (details) {
     pool.getConnection(function (err, connection) {
         var queryString = "UPDATE bookings SET " +
@@ -802,8 +838,13 @@ DatabaseController.prototype.setReleaseFlag = function (details) {
     });
 }
 
+/***********************************************
+ * Upload Recipe Methods
+ ***********************************************/
+
 /**
- * Upload Recipes Methods
+ * Load all different units to render them via jQuery for the Upload-Form in our Administration area
+ * @param callback
  */
 DatabaseController.prototype.loadUnits = function (callback) {
     pool.getConnection(function (err, connection) {
@@ -821,6 +862,10 @@ DatabaseController.prototype.loadUnits = function (callback) {
     });
 }
 
+/**
+ * Load all different courses to render them via jQuery for the Upload-Form in our Administration area
+ * @param callback
+ */
 DatabaseController.prototype.loadCourses = function (callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "SELECT * FROM Courses";
@@ -837,6 +882,10 @@ DatabaseController.prototype.loadCourses = function (callback) {
     });
 }
 
+/**
+ * Load all different styles to render them via jQuery for the Upload-Form in our Administration area
+ * @param callback
+ */
 DatabaseController.prototype.loadStyles = function (callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "SELECT * FROM Styles";
@@ -853,6 +902,10 @@ DatabaseController.prototype.loadStyles = function (callback) {
     });
 }
 
+/**
+ * Load all different inredients to render them via jQuery for the Upload-Form in our Administration area
+ * @param callback
+ */
 DatabaseController.prototype.loadIngredients = function (callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "SELECT * FROM Ingredients";
@@ -869,7 +922,11 @@ DatabaseController.prototype.loadIngredients = function (callback) {
     });
 };
 
-DatabaseController.prototype.uploadRecipe = function (callback) {
+/**
+ * Method to send JSON created by the upload form to our database for insertion.
+ * @param callback
+ */
+DatabaseController.prototype.uploadRecipe = function (recipeInformation, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "SELECT * FROM Ingredients";
         connection.query(queryString, function (err, rows) {
