@@ -199,8 +199,8 @@ function loadFilterOptions() {
         $('#inputFields').append(
             '<div class="panel panel-default" id="filterOptionsName" class="col-md-4">' +
             '<div class="panel-heading">Name</div>' +
-            '<div class="ui-widget>' +
-            '<input id="filterOptionTextInput" type="text" class="form-control" name="recipeNames" data-type="recipeName">' +
+            '<div class="ui-widget">' +
+            '<input id="filterOptionTextInput" type="text" class="form-control" name="recipeNames" data-type="recipeName" />' +
             '</div>' +
             '</div>'
         );
