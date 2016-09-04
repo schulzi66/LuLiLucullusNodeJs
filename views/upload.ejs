@@ -44,7 +44,7 @@
                 </div>
                 <label for="ingredientAmount" class="col-md-1 control-label">Menge</label>
                 <div class="col-md-3">
-                    <input type="number" class="form-control" name="amount" id="amount" min="1">
+                    <input type="number" class="form-control" name="amount" id="amount" min="1" required>
                 </div>
                 <label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>
                 <div class="col-md-3">
@@ -61,7 +61,7 @@
                 <input id="price" type="text" class="form-control" name="price" required>
             </div>
             <div id="hiddenInputs" class="form-group">
-                <input type="hidden" id="recipeID" class="form-control" name="recipeID">
+                <input type="hidden" id="recipeID" class="form-control" name="recipeID" required>
             </div>
             <button id="recipe-upload" type="submit" class="btn btn-sm btn-primary">Bestellung aufgeben</button>
         </form>
