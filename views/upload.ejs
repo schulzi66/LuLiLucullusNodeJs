@@ -85,12 +85,14 @@
 </html>
 
 <script>
+    $('#removeInputs').prop('disabled', true);
     $(function () {
         $('#recipeID').val(Util.generateUUID());
     });
 
     $('#addInputs').on('click', function (e) {
         e.preventDefault();
+        $('#removeInputs').prop('disabled', false);
         var container = $('#additionalIngredients');
         var formAppend =
                 '<div class="form-group row">' +
@@ -109,11 +111,16 @@
                 '</div>';
         container.append(formAppend);
     });
+
     $('#removeInputs').on('click', function (e) {
         e.preventDefault();
         var container = $('#additionalIngredients');
         if (container.children('div.row').length > 0) {
             container.children('div.row').last().remove();
+            var count = container.children('div.row').length;
         }
-    })
+        if(count == 0) {
+            $('#removeInputs').prop('disabled', true);
+        }
+    });
 </script>
