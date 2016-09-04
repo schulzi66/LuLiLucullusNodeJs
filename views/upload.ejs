@@ -35,10 +35,7 @@
             <div class="form-group row">
                 <label for="ingredients" class="col-md-1 control-label ingredients-label">Zutaten</label>
                 <div class="col-md-3">
-                    <select class="form-control" id="ingredientSelection" name="ingredients" required>
-                        <option val="" disabled selected>Zutat wählen</option>
-                        <script>loadIngredients();</script>
-                    </select>
+                    <input id="ingredients" type="text" class="form-control" name="ingredients" required>
                 </div>
                 <label for="ingredientAmount" class="col-md-1 control-label">Menge</label>
                 <div class="col-md-3">
@@ -46,10 +43,7 @@
                 </div>
                 <label for="unitSelection" class="col-md-1 control-label">Maßeinheit</label>
                 <div class="col-md-3">
-                    <select class="form-control" id="unitSelection" name="unit" required>
-                        <option val="" disabled selected>Menge wählen</option>
-                        <script>loadUnits();</script>
-                    </select>
+                    <input id="unit" type="text" class="form-control" name="unit" required>
                 </div>
             </div>
             <div id="additionalIngredients">
@@ -80,7 +74,6 @@
 
     $('#addInputs').on('click', function (e) {
         e.preventDefault();
-        var units = loadUnits();
         var container = $('#additionalIngredients');
         var formAppend =
         '<div class="form-group row">' +
