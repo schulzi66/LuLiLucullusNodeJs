@@ -9,10 +9,11 @@
     <div class="col-sm-6 col-sm-offset-3">
         <h1><span class="fa fa-user"></span> Koch mieten</h1>
         <% if (typeof message !== 'undefined') { %>
-        <div class="alert alert-success">
+        <div class="alert alert-warning">
             <%= message %>
         </div>
         <% } %>
+        <!--TODO: create user if not exists on order -->
         <form action="/koch-mieten" method="post">
             <div class="form-group">
                 <label>Name</label>
