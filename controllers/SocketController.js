@@ -85,12 +85,6 @@ function onConnection(socket) {
         console.log(message);
     });
 
-    //Region Units
-    socket.on('loadUnits', function () {
-        _dbController.loadUnits(function (units) {
-            socket.emit('loadedUnits', units);
-        })
-    });
     //End region
 
     //Region Courses
@@ -105,12 +99,6 @@ function onConnection(socket) {
     socket.on('loadStyles', function () {
         _dbController.loadStyles(function (styles) {
             socket.emit('loadedStyles', styles);
-        })
-    });
-    //Region Ingredients
-    socket.on('loadIngredients', function () {
-        _dbController.loadIngredients(function (ingredients) {
-            socket.emit('loadedIngredients', ingredients);
         })
     });
 }
