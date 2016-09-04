@@ -62,6 +62,9 @@ function checkForExistingUnits(existingUnits, newUnits) {
             }
         }
     }
+    for(var k = 0; k < unitsToAdd.length; ++k){
+        unitsToAdd[k].unitID = existingUnits.length + k;
+    }
     return unitsToAdd;
 }
 
