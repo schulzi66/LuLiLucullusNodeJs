@@ -603,7 +603,7 @@ DatabaseController.prototype.loadBookmarks = function (userID, callback) {
 
 DatabaseController.prototype.getRecipeByID = function (recipeID, callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT recipeName, recipeID FROM recipes WHERE recipeID=" + connection.escape(recipeID);
+        var queryString = "SELECT recipeName, recipeID, shortDescription FROM recipes WHERE recipeID=" + connection.escape(recipeID);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {

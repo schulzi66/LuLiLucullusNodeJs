@@ -121,10 +121,11 @@ function loadMyRecipes(userID) {
         $.each(bookmarks, function (i) {
             var bookmarkList =
                 '<ul class="list-group">' +
-                '<li class="list-group-item">' +
                 '<a href="/recipes/recipe?id=' + bookmarks[i].recipeID + '">' +
-                bookmarks[i].recipeName +
+                '<h4 class="list-group-item-heading">' + bookmarks[i].recipeName + '</h4>' +
                 '</a>' +
+                '<li class="list-group-item">' +
+                bookmarks[i].shortDescription +
                 '</li>' +
                 '</ul>';
             container.append(bookmarkList);
