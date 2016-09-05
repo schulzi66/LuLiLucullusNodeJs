@@ -6,7 +6,7 @@
 <body>
 <div class="container">
     <% include partials/breadcrumb %>
-    <div id="myRecipeList">
+    <div id="myRecipeList" class="container-margin">
         <script>
             loadMyRecipes("<%= locals.user.userID %>");
         </script>

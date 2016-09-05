@@ -585,26 +585,11 @@ DatabaseController.prototype.saveBookmark = function (userID, recipeID) {
 
 DatabaseController.prototype.loadBookmarks = function (userID, callback) {
     pool.getConnection(function (err, connection) {
-        var queryString = "SELECT recipeID FROM MyRecipes WHERE userID=" +
+        var queryString = "SELECT Myrecipes.recipeID, Recipes.recipeName, Recipes.shortDescription FROM MyRecipes" +
+            " LEFT JOIN Recipes ON Recipes.recipeID=MyRecipes.recipeID WHERE MyRecipes.userID=" +
             connection.escape(userID);
         connection.query(queryString, function (err, rows) {
             console.log("QUERYSTRING saveBookmark: " + queryString);
-            connection.release();
-            if (!err) {
-                callback(rows);
-            }
-        });
-        connection.on('error', function (err) {
-            console.log("ERR: " + err);
-            return;
-        });
-    });
-}
-
-DatabaseController.prototype.getRecipeByID = function (recipeID, callback) {
-    pool.getConnection(function (err, connection) {
-        var queryString = "SELECT recipeName, recipeID FROM recipes WHERE recipeID=" + connection.escape(recipeID);
-        connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
                 callback(rows);
@@ -1046,7 +1031,7 @@ DatabaseController.prototype.uploadIngredient = function (ingredient) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO INGREDIENTS SET " +
             // "ingredientID=" + connection.escape(ingredient.ingredientID) + ", " +
-            "ingredientName=" + connection.escape(ingredient);
+            "ingredientName=" + connection.escape(ingredient.ingredientName);
         console.log("querystring: " + queryString);
 
         connection.query(queryString, function (err) {
@@ -1138,15 +1123,5 @@ DatabaseController.prototype.getIngredientIdByIngredientName = function (ingredi
         });
     });
 }
-
-
-/*DatabaseController.prototype.saveRatingForRecipe = function (rating, id, callback) {
- pool.getConnection(function (err, connection) {
- var queryString = "INSERT INTO Ratings SET stars= " +
- connection.escape(rating) + ", recipeId=" + connection.escape(id) +
- ", userId=" + connection.escape(user.id) +
- "WHERE "
- });
- };*/
 
 module.exports = DatabaseController;
