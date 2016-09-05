@@ -1108,7 +1108,7 @@ DatabaseController.prototype.getUnitIdByUnitName = function (unitName, callback)
 DatabaseController.prototype.getIngredientIdByIngredientName = function (ingredientName, callback) {
     pool.getConnection(function (err, connection) {
         console.log("dbctr ingredientName: " + ingredientName);
-        var queryString = "SELECT ingredientsID FROM ingredients WHERE ingredientName=" + connection.escape(ingredientName);
+        var queryString = "SELECT ingredientID FROM ingredients WHERE ingredientName=" + connection.escape(ingredientName);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {

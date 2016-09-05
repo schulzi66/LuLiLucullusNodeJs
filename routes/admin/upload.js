@@ -53,9 +53,8 @@ function mapIDS(req, existingCourses, existingStyles) {
 }
 
 function checkForExistingUnits(existingUnits, newUnits) {
-        // newUnits;
     var unitsToAdd = {};
-    for(var k = 0; k < newUnits.length; k++){
+    for (var k = 0; k < newUnits.length; k++) {
         unitsToAdd[k] = newUnits[k];
     }
     for (var i = 0; i < existingUnits.length; ++i) {
@@ -69,9 +68,9 @@ function checkForExistingUnits(existingUnits, newUnits) {
 }
 
 function insertNewUnits(newUnits) {
-    console.log("objectKEys: " + Object.keys(newUnits).length);
-    for (var i = 0; i < Object.keys(newUnits).length; i++) {
-        if(newUnits[i] !== undefined){
+    for (var i = 0; i <= Object.keys(newUnits).length; i++) {
+        if (newUnits[i] !== undefined) {
+            console.log(newUnits[i]);
             _dbController.uploadUnit(newUnits[i]);
         }
     }
@@ -79,8 +78,7 @@ function insertNewUnits(newUnits) {
 
 function checkForExistingIngredients(existingIngredients, newIngredients) {
     var ingredientsToAdd = {};
-    // newIngredients;
-    for(var k = 0; k < newIngredients.length; k++){
+    for (var k = 0; k < newIngredients.length; k++) {
         ingredientsToAdd[k] = newIngredients[k];
     }
     for (var i = 0; i < existingIngredients.length; ++i) {
@@ -95,42 +93,35 @@ function checkForExistingIngredients(existingIngredients, newIngredients) {
 
 function insertNewIngredients(newIngredients) {
     for (var i = 0; i < Object.keys(newIngredients).length; i++) {
-        if(newIngredients[i] !== undefined){
+        if (newIngredients[i] !== undefined) {
             _dbController.uploadIngredient(newIngredients[i]);
         }
     }
 }
 
 function insertRecipeIngredients(json) {
-    // logger.log("units", json.unit);
-    // logger.log("ingredients", json.ingredients);
-    // console.log("unit[0]: " + json.unit[0]);
-    // console.log("unit[1]: " + json.unit[1]);
+    var unitMappings = [];
+    var ingredientsMappings = [];
 
     for (var i = 0; i < json.amount.length; i++) {
-            _dbController.getUnitIdByUnitName(json.unit[i], function (unitID) {
-                console.log("unitID: " + unitID);
-                console.log("ingredients[i]: " + json.ingredients[i]);
-                _dbController.getIngredientIdByIngredientName(json.ingredients[i], function (ingredientID) {
-                    console.log("check");
-                    console.log("json.amount[i]: " + json.amount[i]);
-                    console.log("json.recipeID: " + json.recipeID);
-                    console.log("ingredientID: " + ingredientID);
-                    console.log("unitID: " + unitID);
-                    _dbController.uploadRecipeIngredient(json.amount[i], json.recipeID, ingredientID, unitID);
-                });
-            });
-        // _dbController.getUnitIdByUnitName(json.unit[i],function (unitID) {
-        //     setTimeout(function () {
-        //         _dbController.getIngredientIdByIngredientName(json.ingredients[i], function (ingredientID) {
-        //             console.log("ingredientID:" + ingredientID);
-        //             console.log("unitID:" + unitID);
-        //             _dbController.uploadRecipeIngredient(json.amount[i], json.recipeID, ingredientID, unitID);
-        //         });
-        //
-        //     }, 1000);
-        // });
+        _dbController.getUnitIdByUnitName(json.unit[i], function (unitID) {
+            var unitMap = {unitID: unitID, unitName: json.unit[i]};
+            unitMappings.push(unitMap);
+        });
     }
+
+    for (var k = 0; k < json.amount.length; k++) {
+        _dbController.getIngredientIdByIngredientName(json.ingredients[k], function (ingredientID) {
+            var ingredientMap = {ingredientID: ingredientID, ingredientName: json.ingredients[k]};
+            ingredientsMappings.push(ingredientMap);
+        });
+    }
+
+    setTimeout(function () {
+        for (var m = 0; m < json.amount.length; m++) {
+            _dbController.uploadRecipeIngredient(json.amount[m], json.recipeID, ingredientsMappings[m].ingredientID, unitMappings[m].unitID);
+        }
+    }, 5000);
 }
 
 module.exports = router;
