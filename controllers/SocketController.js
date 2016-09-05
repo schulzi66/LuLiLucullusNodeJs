@@ -30,9 +30,7 @@ function onConnection(socket) {
 
     socket.on('loadBookmarks', function (userID) {
         _dbController.loadBookmarks(userID, function (bookmarks) {
-            _dbController.getRecipeByID(bookmarks, function (bookmarks) {
-                socket.emit('loadedBookmarks', bookmarks);
-            })
+            socket.emit('loadedBookmarks', bookmarks);
         });
     });
 

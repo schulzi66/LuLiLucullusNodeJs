@@ -116,7 +116,6 @@ function loadMyRecipes(userID) {
     var socket = io.connect();
     socket.emit('loadBookmarks', userID);
     socket.on('loadedBookmarks', function (bookmarks) {
-        console.log(bookmarks);
         var container = $('#myRecipeList');
         $.each(bookmarks, function (i) {
             var bookmarkList =
