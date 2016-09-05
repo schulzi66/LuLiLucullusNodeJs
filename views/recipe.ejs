@@ -34,10 +34,10 @@
         © Lulilucullus GmbH - nicht für die kommerzielle Nutzung bestimmt!
     </div>
 </div>
+
 <script>
     function bookmarkRecipe(recipeID) {
-        var userID = locals.user;
-        console.log(recipeID, userID);
+        var userID = "<%= locals.user.userID %>";
         sendBookmarkToDatabase(recipeID, userID);
     }
 </script>

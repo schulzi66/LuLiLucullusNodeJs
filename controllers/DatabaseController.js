@@ -283,8 +283,8 @@ DatabaseController.prototype.signupExternalUser = function (req, res, placeholde
 }
 
 /***********************************************
-* Signup Internal Methods
-***********************************************/
+ * Signup Internal Methods
+ ***********************************************/
 DatabaseController.prototype.signup = function (req, res, internal) {
     pool.getConnection(function (err, connection) {
         var rech_str, rech_ort, rech_plz;
@@ -565,11 +565,11 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
     });
 }
 
-DatabaseController.prototype.saveBookmark = function (recipeID, userID, callback) {
+DatabaseController.prototype.saveBookmark = function (userID, recipeID, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO MyRecipes (userID, recipeID) VALUES (" +
             connection.escape(userID) + ", " +
-            connection.ecape(recipeID);
+            connection.escape(recipeID) + ")";
         connection.query(queryString, function (err, rows) {
             console.log("QUERYSTRING saveBookmark: " + queryString);
             connection.release();
@@ -583,6 +583,25 @@ DatabaseController.prototype.saveBookmark = function (recipeID, userID, callback
         });
     });
 }
+
+DatabaseController.prototype.loadBookmarks = function (userID, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT recipeID FROM MyRecipes WHERE userID=" +
+            connection.escape(userID);
+        connection.query(queryString, function (err, rows) {
+            console.log("QUERYSTRING saveBookmark: " + queryString);
+            connection.release();
+            if (!err) {
+                callback(rows[0]);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
 /**
  * Load recipe names
  * @param id
@@ -666,14 +685,14 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
                 }
                 else if (filterOptions[i].key == "course") {
                     courseCount += 1;
-                    if(courseCount > 1)
+                    if (courseCount > 1)
                         courseString += "OR "
                     courseString += "courses.courseName LIKE (\x22%" + filterOptions[i].option + "%\x22) ";
 
                 }
                 else if (filterOptions[i].key == "style") {
                     styleCount += 1;
-                    if(styleCount > 1)
+                    if (styleCount > 1)
                         styleString += "OR "
                     styleString += "styles.styleName LIKE (\x22%" + filterOptions[i].option + "%\x22) ";
                 }
@@ -1057,9 +1076,6 @@ DatabaseController.prototype.uploadRecipeIngredient = function (amount, recipeID
         });
     });
 };
-
-
-
 
 
 /*DatabaseController.prototype.saveRatingForRecipe = function (rating, id, callback) {

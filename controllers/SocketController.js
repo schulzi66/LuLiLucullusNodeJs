@@ -24,12 +24,14 @@ function onConnection(socket) {
         });
     });
 
-    socket.on('sendBookmark', function (id) {
-        _dbController.saveBookmark(id);
+    socket.on('sendBookmark', function (userID, recipeID) {
+        _dbController.saveBookmark(userID, recipeID);
     });
 
-    socket.on('sendBookmark', function (userId) {
-        _dbController.loadBookmarks(id);
+    socket.on('loadBookmarks', function (userID) {
+        _dbController.loadBookmarks(userID, function (bookmarks) {
+            socket.emit('loadedBookmarks', bookmarks);
+        });
     });
 
     //End Region

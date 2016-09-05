@@ -106,7 +106,7 @@ function loadRecipeFromId(id, portions) {
 
 function sendBookmarkToDatabase(recipeID, userID) {
     var socket = io.connect();
-    socket.emit('sendBookmark');
+    socket.emit('sendBookmark', recipeID, userID);
     socket.on('sentBookmark', function () {
         console.log("test");
     });
