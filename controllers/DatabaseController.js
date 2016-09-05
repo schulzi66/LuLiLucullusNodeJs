@@ -1021,7 +1021,6 @@ DatabaseController.prototype.uploadRecipe = function (recipe, callback) {
 DatabaseController.prototype.uploadUnit = function (unit) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO UNITS SET " +
-            "unitID=" + connection.escape(unit.unitID) + ", " +
             "unitName=" + connection.escape(unit.unitName);
         console.log("querystring: " + queryString);
 
@@ -1046,7 +1045,7 @@ DatabaseController.prototype.uploadUnit = function (unit) {
 DatabaseController.prototype.uploadIngredient = function (ingredient) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO INGREDIENTS SET " +
-            "ingredientID=" + connection.escape(ingredient.ingredientID) + ", " +
+            // "ingredientID=" + connection.escape(ingredient.ingredientID) + ", " +
             "ingredientName=" + connection.escape(ingredient.ingredientName);
         console.log("querystring: " + queryString);
 
