@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var DatabaseController = require('../controllers/DatabaseController');
-var _dbController = new DatabaseController();
-
 /* GET recipes page. */
 router.get('/', function (req, res) {
     if (req.session.user !== undefined) {

@@ -80,7 +80,7 @@ app.use('/contact', contact);
 app.use('/services', services);
 app.use('/recipes', recipes);
 app.use('/recipes/recipe', recipe);
-app.use('my-recipes', my_recipes);
+app.use('/my-recipes', my_recipes);
 app.use('/impressum', impressum);
 app.use('/kochboxen', kochboxen);
 app.use('/koch-mieten', koch_mieten);

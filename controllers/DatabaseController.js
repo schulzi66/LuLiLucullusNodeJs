@@ -565,16 +565,15 @@ DatabaseController.prototype.loadRecipeFromId = function (id, callback) {
     });
 }
 
-DatabaseController.prototype.saveBookmark = function (userID, recipeID, callback) {
+DatabaseController.prototype.saveBookmark = function (userID, recipeID) {
     pool.getConnection(function (err, connection) {
-        var queryString = "INSERT INTO MyRecipes (userID, recipeID) VALUES (" +
+        var queryString = "INSERT INTO MyRecipes (recipeID, userID) VALUES (" +
             connection.escape(userID) + ", " +
             connection.escape(recipeID) + ")";
         connection.query(queryString, function (err, rows) {
             console.log("QUERYSTRING saveBookmark: " + queryString);
             connection.release();
             if (!err) {
-                callback(rows);
             }
         });
         connection.on('error', function (err) {
@@ -592,7 +591,7 @@ DatabaseController.prototype.loadBookmarks = function (userID, callback) {
             console.log("QUERYSTRING saveBookmark: " + queryString);
             connection.release();
             if (!err) {
-                callback(rows[0]);
+                callback(rows);
             }
         });
         connection.on('error', function (err) {

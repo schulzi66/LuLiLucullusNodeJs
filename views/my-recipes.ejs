@@ -8,7 +8,7 @@
     <% include partials/breadcrumb %>
     <div id="myRecipeList">
         <script>
-            loadMyRecipes();
+            loadMyRecipes("<%= locals.user.userID %>");
         </script>
     </div>
 </div>
