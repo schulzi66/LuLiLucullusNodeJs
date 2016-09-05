@@ -17,8 +17,11 @@ router.post('/', function (req, res) {
         subject: 'Kontakt Anfrage Lulilucullus', // Subject line
         text: req.body.contact_message//, // plaintext body
     };
-
-    var message = "Ihre Anfrage wurde erfolgreich übermittelt.";
+    if (req.body.recipeSuggestion !== undefined) {
+        var message = "Ihr Rezeptvorschlag wurde erfolgreich übermittelt."
+    } else {
+        var message = "Ihre Anfrage wurde erfolgreich übermittelt.";
+    }
     var redirect = '/contact';
     _mailController.sendEmail(req, res, mailOptions, message, redirect);
 });
