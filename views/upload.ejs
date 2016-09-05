@@ -13,14 +13,17 @@
             <%= message %>
         </div>
         <% } %>
+        <form action="/administration/upload/image" method="post" id="upload-form" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Rezeptbild</label>
+                <input id="fileinput" type="file" name="pictureRef" required>
+            </div>
+            <button id="recipe-upload" type="submit" class="btn btn-sm btn-primary">Bild hochladen</button>
+        </form>
         <form action="/administration/upload" method="post" id="upload-form" enctype="application/json">
             <div class="form-group">
                 <label>Rezeptname</label>
                 <input type="text" class="form-control" name="name" required>
-            </div>
-            <div class="form-group">
-                <label>Rezeptbild</label>
-                <input id="fileinput" type="file" name="pictureRef" required>
             </div>
 
             <div class="form-group">

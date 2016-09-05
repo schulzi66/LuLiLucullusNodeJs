@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var multer  = require('multer');
 var DatabaseController = require('../../controllers/DatabaseController');
 var _dbController = new DatabaseController();
 
@@ -29,8 +30,8 @@ router.post('/', function (req, res) {
                             var newIngredients = checkForExistingIngredients(existingIngredients, req.body.ingredients);
                             insertNewIngredients(newIngredients);
                             setTimeout(function () {
-                                insertRecipeIngredients(req.body, res);
-                            }, 5000);
+                                insertRecipeIngredients(req.body, req, res);
+                            }, 7000);
                         });
                     });
                 });
@@ -38,6 +39,33 @@ router.post('/', function (req, res) {
         });
     });
 });
+
+router.post('/image', function (req, res) {
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/img/recipes')
+        },
+        filename: function (req, file, cb) {
+            cb(null, file.fieldname)
+        }
+    });
+
+    var upload = multer({ storage: storage }).single('pictureRef');
+
+
+
+    upload(req,res,function(err) {
+        if(err) {
+            console.log("error uploading file");
+        }
+    logger.log("req", req);
+        console.log("file uploades");
+        console.log("req.files: " + req.files);
+
+        // res.end("File is uploaded");
+    });
+});
+
 
 function mapIDS(req, existingCourses, existingStyles) {
     for (var i = 0; i < existingCourses.length; ++i) {
@@ -64,6 +92,7 @@ function checkForExistingUnits(existingUnits, newUnits) {
             }
         }
     }
+    logger.log("unitsToADD", unitsToAdd);
     return unitsToAdd;
 }
 
@@ -99,7 +128,7 @@ function insertNewIngredients(newIngredients) {
     }
 }
 
-function insertRecipeIngredients(json, res) {
+function insertRecipeIngredients(json, req, res) {
     var unitMappings = [];
     var ingredientsMappings = [];
 
@@ -121,8 +150,13 @@ function insertRecipeIngredients(json, res) {
         for (var m = 0; m < json.amount.length; m++) {
             _dbController.uploadRecipeIngredient(json.amount[m], json.recipeID, ingredientsMappings[m].ingredientID, unitMappings[m].unitID);
         }
+        // uploadRecipeImage(req, res);
         res.redirect('/administration');
     }, 5000);
+}
+
+function uploadRecipeImage(req, res) {
+
 }
 
 module.exports = router;
