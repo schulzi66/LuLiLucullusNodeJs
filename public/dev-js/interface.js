@@ -114,15 +114,17 @@ function sendBookmarkToDatabase(recipeID, userID) {
 
 function loadMyRecipes(userID) {
     var socket = io.connect();
-    socket.emit('loadBookmaks', userID);
+    socket.emit('loadBookmarks', userID);
     socket.on('loadedBookmarks', function (bookmarks) {
         console.log(bookmarks);
         var container = $('#myRecipeList');
-        $.each(bookmarks, function () {
+        $.each(bookmarks, function (i) {
             var bookmarkList =
-                '<ul>' +
-                '<li>' +
+                '<ul class="list-group">' +
+                '<li class="list-group-item">' +
+                '<a href="/recipes/recipe?id=' + bookmarks[i].recipeID + '">' +
                 bookmarks[i].recipeName +
+                '</a>' +
                 '</li>' +
                 '</ul>';
             container.append(bookmarkList);
