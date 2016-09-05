@@ -29,7 +29,7 @@ router.post('/', function (req, res) {
                             var newIngredients = checkForExistingIngredients(existingIngredients, req.body.ingredients);
                             insertNewIngredients(newIngredients);
                             setTimeout(function () {
-                                insertRecipeIngredients(req.body);
+                                insertRecipeIngredients(req.body, res);
                             }, 5000);
                         });
                     });
@@ -99,7 +99,7 @@ function insertNewIngredients(newIngredients) {
     }
 }
 
-function insertRecipeIngredients(json) {
+function insertRecipeIngredients(json, res) {
     var unitMappings = [];
     var ingredientsMappings = [];
 
@@ -121,6 +121,7 @@ function insertRecipeIngredients(json) {
         for (var m = 0; m < json.amount.length; m++) {
             _dbController.uploadRecipeIngredient(json.amount[m], json.recipeID, ingredientsMappings[m].ingredientID, unitMappings[m].unitID);
         }
+        res.redirect('/administration');
     }, 5000);
 }
 
