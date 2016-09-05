@@ -2,6 +2,9 @@
 -- Feel free to extend sample data.
 USE webdev;
 
+-- Ignore foreign keys for insert.
+SET FOREIGN_KEY_CHECKS = 0;
+
 -- Ingredients
 INSERT INTO Ingredients (ingredientName)
 VALUES
@@ -193,4 +196,5 @@ VALUES
 ,(20, '_bixf10gv5', 0)
 ,(1, '_58xj543wc', 0);
 
-
+-- Reenable foreihn key checks
+SET FOREIGN_KEY_CHECKS = 1;
