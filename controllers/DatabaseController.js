@@ -1021,7 +1021,7 @@ DatabaseController.prototype.uploadRecipe = function (recipe, callback) {
 DatabaseController.prototype.uploadUnit = function (unit) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO UNITS SET " +
-            "unitName=" + connection.escape(unit.unitName);
+            "unitName=" + connection.escape(unit);
         console.log("querystring: " + queryString);
 
         connection.query(queryString, function (err) {
@@ -1046,7 +1046,7 @@ DatabaseController.prototype.uploadIngredient = function (ingredient) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO INGREDIENTS SET " +
             // "ingredientID=" + connection.escape(ingredient.ingredientID) + ", " +
-            "ingredientName=" + connection.escape(ingredient.ingredientName);
+            "ingredientName=" + connection.escape(ingredient);
         console.log("querystring: " + queryString);
 
         connection.query(queryString, function (err) {
@@ -1090,6 +1090,54 @@ DatabaseController.prototype.uploadRecipeIngredient = function (amount, recipeID
         });
     });
 };
+
+
+/**
+ * Get the unitID for further usage by using the unit Name.
+ * @param unitName
+ * @param callback
+ */
+DatabaseController.prototype.getUnitIdByUnitName = function (unitName, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT unitID FROM UNITS WHERE unitName=" + connection.escape(unitName);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                // console.log("Successfully executed Query: " + queryString + " ID = " + rows[0]);
+                logger.log("rowsunits", rows);
+                callback(rows[0]);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+
+/**
+ * Get the ingredientID for further usage by using the ingredient Name.
+ * @param ingredientName
+ * @param callback
+ */
+DatabaseController.prototype.getIngredientIdByIngredientName = function (ingredientName, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT ingredientsID FROM ingredients WHERE ingredientName=" + connection.escape(ingredientName);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                // console.log("Successfully executed Query: " + queryString+ " ID = " + rows[0]);
+                logger.log("rowsingredients", rows);
+                callback(rows[0]);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
 
 
 /*DatabaseController.prototype.saveRatingForRecipe = function (rating, id, callback) {

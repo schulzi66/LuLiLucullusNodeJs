@@ -23,14 +23,12 @@ router.post('/', function (req, res) {
                     mapIDS(req, existingCourses, existingStyles);
                     _dbController.loadRecipesOverview(function (existingRecipes) {
                         req.body.recipeID = existingRecipes.length;
-                        logger.log("req.body", req.body);
                         _dbController.uploadRecipe(req.body, function () {
-                            var newUnits = {};
-                            newUnits = checkForExistingUnits(existingUnits, req.body.unit);
+                            var newUnits = checkForExistingUnits(existingUnits, req.body.unit);
                             insertNewUnits(newUnits);
                             var newIngredients = checkForExistingIngredients(existingIngredients, req.body.ingredients);
                             insertNewIngredients(newIngredients);
-                            insertRecipeIngredients(req.body, newIngredients, newUnits);
+                            insertRecipeIngredients(req.body);
                         });
                     });
                 });
@@ -53,7 +51,11 @@ function mapIDS(req, existingCourses, existingStyles) {
 }
 
 function checkForExistingUnits(existingUnits, newUnits) {
-    var unitsToAdd = newUnits;
+        // newUnits;
+    var unitsToAdd = {};
+    for(var k = 0; k < newUnits.length; k++){
+        unitsToAdd[k] = newUnits[k];
+    }
     for (var i = 0; i < existingUnits.length; ++i) {
         for (var j = 0; j < newUnits.length; ++j) {
             if (existingUnits[i].unitName == newUnits[j]) {
@@ -67,14 +69,17 @@ function checkForExistingUnits(existingUnits, newUnits) {
 function insertNewUnits(newUnits) {
     for (var i = 0; i < newUnits.length; i++) {
         if(newUnits[i] !== undefined){
-        console.log("unitID:" + newUnits[i]);
             _dbController.uploadUnit(newUnits[i]);
         }
     }
 }
 
 function checkForExistingIngredients(existingIngredients, newIngredients) {
-    var ingredientsToAdd = newIngredients;
+    var ingredientsToAdd = {};
+    // newIngredients;
+    for(var k = 0; k < newIngredients.length; k++){
+        ingredientsToAdd[k] = newIngredients[k];
+    }
     for (var i = 0; i < existingIngredients.length; ++i) {
         for (var j = 0; j < newIngredients.length; ++j) {
             if (existingIngredients[i].ingredientName === newIngredients[j]) {
@@ -93,10 +98,35 @@ function insertNewIngredients(newIngredients) {
     }
 }
 
-function insertRecipeIngredients(json, newIngredients, newUnits) {
-    for (var i = 0; i < json.amount.length; ++i) {
-        //TODO: ingredient / Unit ID not the name
-        _dbController.uploadRecipeIngredient(json.amount[i], json.recipeID, newIngredients[i], newUnits[i]);
+function insertRecipeIngredients(json) {
+    logger.log("units", json.unit);
+    logger.log("ingredients", json.ingredients);
+    for (var i = 0; i < json.amount.length; i++) {
+        setTimeout(function () {
+            console.log("unit[i]: " + json.unit[i]);
+            _dbController.getUnitIdByUnitName(json.unit[i], function (unitID) {
+                console.log("unitID: " + unitID);
+                console.log("ingredients[i]: " + json.ingredients[i]);
+                _dbController.getIngredientIdByIngredientName(json.ingredients[i], function (ingredientID) {
+                    console.log("check");
+                    console.log("json.amount[i]: " + json.amount[i]);
+                    console.log("json.recipeID: " + json.recipeID);
+                    console.log("ingredientID: " + ingredientID);
+                    console.log("unitID: " + unitID);
+                    _dbController.uploadRecipeIngredient(json.amount[i], json.recipeID, ingredientID, unitID);
+                });
+            });
+        }, 5000);
+        // _dbController.getUnitIdByUnitName(json.unit[i],function (unitID) {
+        //     setTimeout(function () {
+        //         _dbController.getIngredientIdByIngredientName(json.ingredients[i], function (ingredientID) {
+        //             console.log("ingredientID:" + ingredientID);
+        //             console.log("unitID:" + unitID);
+        //             _dbController.uploadRecipeIngredient(json.amount[i], json.recipeID, ingredientID, unitID);
+        //         });
+        //
+        //     }, 1000);
+        // });
     }
 }
 
