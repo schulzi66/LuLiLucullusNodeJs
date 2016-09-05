@@ -28,7 +28,9 @@ router.post('/', function (req, res) {
                             insertNewUnits(newUnits);
                             var newIngredients = checkForExistingIngredients(existingIngredients, req.body.ingredients);
                             insertNewIngredients(newIngredients);
-                            insertRecipeIngredients(req.body);
+                            setTimeout(function () {
+                                insertRecipeIngredients(req.body);
+                            }, 5000);
                         });
                     });
                 });
@@ -67,7 +69,8 @@ function checkForExistingUnits(existingUnits, newUnits) {
 }
 
 function insertNewUnits(newUnits) {
-    for (var i = 0; i < newUnits.length; i++) {
+    console.log("objectKEys: " + Object.keys(newUnits).length);
+    for (var i = 0; i < Object.keys(newUnits).length; i++) {
         if(newUnits[i] !== undefined){
             _dbController.uploadUnit(newUnits[i]);
         }
@@ -91,7 +94,7 @@ function checkForExistingIngredients(existingIngredients, newIngredients) {
 }
 
 function insertNewIngredients(newIngredients) {
-    for (var i = 0; i < newIngredients.length; i++) {
+    for (var i = 0; i < Object.keys(newIngredients).length; i++) {
         if(newIngredients[i] !== undefined){
             _dbController.uploadIngredient(newIngredients[i]);
         }
@@ -99,11 +102,12 @@ function insertNewIngredients(newIngredients) {
 }
 
 function insertRecipeIngredients(json) {
-    logger.log("units", json.unit);
-    logger.log("ingredients", json.ingredients);
+    // logger.log("units", json.unit);
+    // logger.log("ingredients", json.ingredients);
+    // console.log("unit[0]: " + json.unit[0]);
+    // console.log("unit[1]: " + json.unit[1]);
+
     for (var i = 0; i < json.amount.length; i++) {
-        setTimeout(function () {
-            console.log("unit[i]: " + json.unit[i]);
             _dbController.getUnitIdByUnitName(json.unit[i], function (unitID) {
                 console.log("unitID: " + unitID);
                 console.log("ingredients[i]: " + json.ingredients[i]);
@@ -116,7 +120,6 @@ function insertRecipeIngredients(json) {
                     _dbController.uploadRecipeIngredient(json.amount[i], json.recipeID, ingredientID, unitID);
                 });
             });
-        }, 5000);
         // _dbController.getUnitIdByUnitName(json.unit[i],function (unitID) {
         //     setTimeout(function () {
         //         _dbController.getIngredientIdByIngredientName(json.ingredients[i], function (ingredientID) {

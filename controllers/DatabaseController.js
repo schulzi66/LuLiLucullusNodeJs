@@ -1030,8 +1030,7 @@ DatabaseController.prototype.uploadUnit = function (unit) {
 DatabaseController.prototype.uploadIngredient = function (ingredient) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO INGREDIENTS SET " +
-            // "ingredientID=" + connection.escape(ingredient.ingredientID) + ", " +
-            "ingredientName=" + connection.escape(ingredient.ingredientName);
+            "ingredientName=" + connection.escape(ingredient);
         console.log("querystring: " + queryString);
 
         connection.query(queryString, function (err) {
@@ -1084,13 +1083,13 @@ DatabaseController.prototype.uploadRecipeIngredient = function (amount, recipeID
  */
 DatabaseController.prototype.getUnitIdByUnitName = function (unitName, callback) {
     pool.getConnection(function (err, connection) {
+        console.log("DBCtr unitName: " + unitName);
         var queryString = "SELECT unitID FROM UNITS WHERE unitName=" + connection.escape(unitName);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-                // console.log("Successfully executed Query: " + queryString + " ID = " + rows[0]);
-                logger.log("rowsunits", rows);
-                callback(rows[0]);
+                console.log("Successfully executed Query: " + queryString + " ID = " + rows[0].unitID);
+                callback(rows[0].unitID);
             }
         });
         connection.on('error', function (err) {
@@ -1108,13 +1107,13 @@ DatabaseController.prototype.getUnitIdByUnitName = function (unitName, callback)
  */
 DatabaseController.prototype.getIngredientIdByIngredientName = function (ingredientName, callback) {
     pool.getConnection(function (err, connection) {
+        console.log("dbctr ingredientName: " + ingredientName);
         var queryString = "SELECT ingredientsID FROM ingredients WHERE ingredientName=" + connection.escape(ingredientName);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-                // console.log("Successfully executed Query: " + queryString+ " ID = " + rows[0]);
-                logger.log("rowsingredients", rows);
-                callback(rows[0]);
+                console.log("Successfully executed Query: " + queryString+ " ID = " + rows[0]);
+                callback(rows[0].ingredientID);
             }
         });
         connection.on('error', function (err) {
