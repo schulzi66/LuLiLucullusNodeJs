@@ -5,7 +5,7 @@ CREATE DATABASE IF NOT EXISTS webdev;
 USE webdev;
 CREATE TABLE Ingredients
 (
-  ingredientID   INT         NOT NULL,
+  ingredientID   INT         NOT NULL AUTO_INCREMENT,
   ingredientName VARCHAR(50) NOT NULL,
   PRIMARY KEY (ingredientID),
   UNIQUE (ingredientName)
@@ -85,7 +85,7 @@ CREATE TABLE BookingTypes
 
 CREATE TABLE Units
 (
-  unitID   INT         NOT NULL,
+  unitID   INT         NOT NULL AUTO_INCREMENT,
   unitName VARCHAR(50) NOT NULL,
   PRIMARY KEY (unitID),
   UNIQUE (unitName)
