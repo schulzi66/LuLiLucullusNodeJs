@@ -30,7 +30,9 @@ function onConnection(socket) {
 
     socket.on('loadBookmarks', function (userID) {
         _dbController.loadBookmarks(userID, function (bookmarks) {
-            socket.emit('loadedBookmarks', bookmarks);
+            _dbController.getRecipeByID(bookmarks, function (bookmarks) {
+                socket.emit('loadedBookmarks', bookmarks);
+            })
         });
     });
 
@@ -54,7 +56,7 @@ function onConnection(socket) {
             socket.emit('loadedFilterOptions', filterOptions);
         });
     });
-    
+
     socket.on('loadFilteredRecipes', function (filterOptions) {
         _dbController.loadFilteredRecipes(filterOptions, function (filteredRecipes) {
             socket.emit('loadedFilteredRecipes', filteredRecipes);

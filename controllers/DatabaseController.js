@@ -570,7 +570,7 @@ DatabaseController.prototype.saveBookmark = function (userID, recipeID) {
         var queryString = "INSERT INTO MyRecipes (recipeID, userID) VALUES (" +
             connection.escape(userID) + ", " +
             connection.escape(recipeID) + ")";
-        connection.query(queryString, function (err, rows) {
+        connection.query(queryString, function (err) {
             console.log("QUERYSTRING saveBookmark: " + queryString);
             connection.release();
             if (!err) {
@@ -589,6 +589,22 @@ DatabaseController.prototype.loadBookmarks = function (userID, callback) {
             connection.escape(userID);
         connection.query(queryString, function (err, rows) {
             console.log("QUERYSTRING saveBookmark: " + queryString);
+            connection.release();
+            if (!err) {
+                callback(rows);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.getRecipeByID = function (recipeID, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT recipeName, recipeID FROM recipes WHERE recipeID=" + connection.escape(recipeID);
+        connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
                 callback(rows);
