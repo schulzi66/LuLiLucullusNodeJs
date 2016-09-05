@@ -177,6 +177,7 @@ function loadFilterOptions() {
         var styles = [];
         var courses = [];
         var recipeNames = [];
+        var ingredients = [];
 
         for (var i = 0; i < filterOptions.length; i++) {
             if (!allergens.includes(filterOptions[i].allergenName) && filterOptions[i].allergenName !== null) {
@@ -191,7 +192,13 @@ function loadFilterOptions() {
             if (!recipeNames.includes(filterOptions[i].recipeName) && filterOptions[i].recipeName !== null) {
                 recipeNames.push(filterOptions[i].recipeName);
             }
+            if (!ingredients.includes(filterOptions[i].ingredientName) && filterOptions[i].ingredientName !== null) {
+                ingredients.push(filterOptions[i].ingredientName);
+            }
         }
+
+        for (var j = 0; j < ingredients.length; j++)
+            console.log(ingredients[j]);
 
         $('#inputFields').append('<div class="panel panel-default" id="filterOptionsAllergens" class="col-md-4"><div class="panel-heading">Allergene</div>');
         $.each(allergens, function (i) {
