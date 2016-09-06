@@ -1,6 +1,20 @@
 var express = require('express');
 var router = express.Router();
+var fs = require('fs');
 var multer  = require('multer');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/img/recipes')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+});
+
+var pictureRef = "";
+
+var upload = multer({ storage: storage });
+
 var DatabaseController = require('../../controllers/DatabaseController');
 var _dbController = new DatabaseController();
 
@@ -24,6 +38,8 @@ router.post('/', function (req, res) {
                     mapIDS(req, existingCourses, existingStyles);
                     _dbController.loadRecipesOverview(function (existingRecipes) {
                         req.body.recipeID = existingRecipes.length;
+                        req.body.pictureRef = pictureRef;
+                        console.log("req.body.pictureRef: " + req.body.pictureRef);
                         _dbController.uploadRecipe(req.body, function () {
                             var newUnits = checkForExistingUnits(existingUnits, req.body.unit);
                             insertNewUnits(newUnits);
@@ -40,32 +56,21 @@ router.post('/', function (req, res) {
     });
 });
 
-router.post('/image', function (req, res) {
-    var storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, './public/img/recipes')
-        },
-        filename: function (req, file, cb) {
-            cb(null, file.fieldname)
-        }
-    });
+router.post('/image', upload.single('pictureRef'), function (req, res, next) {
+    logger.log("req.file", req.file);
 
-    var upload = multer({ storage: storage }).single('pictureRef');
-
-
-
-    upload(req,res,function(err) {
-        if(err) {
-            console.log("error uploading file");
-        }
-    logger.log("req", req);
-        console.log("file uploades");
-        console.log("req.files: " + req.files);
-
-        // res.end("File is uploaded");
+    fs.readFile(req.file.path, function (err, data) {
+        var newPath = req.file.destination;
+        pictureRef = req.file.originalname;
+        var outStream = fs.createWriteStream(newPath);
+        outStream.on('error', function () {
+            console.log("error but dont care");
+        });
+        outStream.on('finish', function () {
+            res.close();
+        });
     });
 });
-
 
 function mapIDS(req, existingCourses, existingStyles) {
     for (var i = 0; i < existingCourses.length; ++i) {
@@ -153,10 +158,6 @@ function insertRecipeIngredients(json, req, res) {
         // uploadRecipeImage(req, res);
         res.redirect('/administration');
     }, 5000);
-}
-
-function uploadRecipeImage(req, res) {
-
 }
 
 module.exports = router;
