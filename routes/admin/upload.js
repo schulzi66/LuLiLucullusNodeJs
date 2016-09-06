@@ -11,6 +11,8 @@ var storage = multer.diskStorage({
     }
 });
 
+var uploadedFile;
+
 var pictureRef = "";
 
 var upload = multer({ storage: storage });
@@ -31,45 +33,37 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    _dbController.loadIngredients(function (existingIngredients) {
-        _dbController.loadUnits(function (existingUnits) {
-            _dbController.loadCourses(function (existingCourses) {
-                _dbController.loadStyles(function (existingStyles) {
-                    mapIDS(req, existingCourses, existingStyles);
-                    _dbController.loadRecipesOverview(function (existingRecipes) {
-                        req.body.recipeID = existingRecipes.length;
-                        req.body.pictureRef = pictureRef;
-                        console.log("req.body.pictureRef: " + req.body.pictureRef);
-                        _dbController.uploadRecipe(req.body, function () {
-                            var newUnits = checkForExistingUnits(existingUnits, req.body.unit);
-                            insertNewUnits(newUnits);
-                            var newIngredients = checkForExistingIngredients(existingIngredients, req.body.ingredients);
-                            insertNewIngredients(newIngredients);
-                            setTimeout(function () {
-                                insertRecipeIngredients(req.body, req, res);
-                            }, 7000);
+    uploadImage();
+        _dbController.loadIngredients(function (existingIngredients) {
+            _dbController.loadUnits(function (existingUnits) {
+                _dbController.loadCourses(function (existingCourses) {
+                    _dbController.loadStyles(function (existingStyles) {
+                        mapIDS(req, existingCourses, existingStyles);
+                        _dbController.loadRecipesOverview(function (existingRecipes) {
+                            req.body.recipeID = existingRecipes.length;
+                            req.body.pictureRef = pictureRef;
+                            console.log("req.body.pictureRef: " + req.body.pictureRef);
+                            _dbController.uploadRecipe(req.body, function () {
+                                var newUnits = checkForExistingUnits(existingUnits, req.body.unit);
+                                insertNewUnits(newUnits);
+                                var newIngredients = checkForExistingIngredients(existingIngredients, req.body.ingredients);
+                                insertNewIngredients(newIngredients);
+                                setTimeout(function () {
+                                    insertRecipeIngredients(req.body, req, res);
+                                }, 7000);
+                            });
                         });
                     });
                 });
             });
         });
-    });
 });
 
 router.post('/image', upload.single('pictureRef'), function (req, res, next) {
     logger.log("req.file", req.file);
-
-    fs.readFile(req.file.path, function (err, data) {
-        var newPath = req.file.destination;
-        pictureRef = req.file.originalname;
-        var outStream = fs.createWriteStream(newPath);
-        outStream.on('error', function () {
-            console.log("error but dont care");
-        });
-        outStream.on('finish', function () {
-            res.close();
-        });
-    });
+    uploadedFile = req.file;
+   //TODO: Figure out how to send back http 200 to display "File uploaded" to user without redirecting to another page or stuff like this
+    // res.send(req.body);
 });
 
 function mapIDS(req, existingCourses, existingStyles) {
@@ -155,9 +149,22 @@ function insertRecipeIngredients(json, req, res) {
         for (var m = 0; m < json.amount.length; m++) {
             _dbController.uploadRecipeIngredient(json.amount[m], json.recipeID, ingredientsMappings[m].ingredientID, unitMappings[m].unitID);
         }
-        // uploadRecipeImage(req, res);
         res.redirect('/administration');
     }, 5000);
+}
+
+function uploadImage() {
+    fs.readFile(uploadedFile.path, function (err, data) {
+        var newPath = uploadedFile.destination;
+        var outStream = fs.createWriteStream(newPath);
+        outStream.on('error', function () {
+            console.log("error but dont care");
+            pictureRef = uploadedFile.originalname;
+        });
+        outStream.on('finish', function () {
+            pictureRef = uploadedFile.originalname;
+        });
+    });
 }
 
 module.exports = router;
