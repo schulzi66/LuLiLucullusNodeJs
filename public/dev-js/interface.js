@@ -16,7 +16,8 @@ function loadRecipesOverview() {
                 '<div class="caption">' +
                 '<h3 class="recipes-overview-headline text-uppercase">' + recipes[i].recipeName + '</h3>' +
                 '<p class="recipes-overview-short-description">' + recipes[i].shortDescription + '</p>' +
-                '<p><a class="btn btn-primary btn-sm" href="recipes/recipe?id=' + recipes[i].recipeID + '"> Weitere Informationen ... </a><span style="margin-left: 20px" class="lead">' + recipes[i].recipePrice + '</span></p>' +
+                '<p class="recipeMoreInfoBtn"><a class="btn btn-primary btn-sm" href="recipes/recipe?id=' + recipes[i].recipeID + '"> Weitere Informationen ... </a></p>' +
+                '<span style="margin-left: 20px" class="lead recipePrice">' + recipes[i].recipePrice + '</span>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
@@ -300,6 +301,17 @@ $(document).ready(function () {
         }
         console.log(filterOptions);
         loadFilteredRecipes(filterOptions);
+    });
+
+    $('#sortNameBtn').on('click', function () {
+        var currentSorted = this.getAttribute('data-sorted');
+        if (currentSorted == "none") {
+            currentSorted = "asc";
+        } else if (currentSorted == "asc") {
+            currentSorted = "dsc";
+        } else if (currentSorted == "dsc") {
+            currentSorted = "none";
+        }
     });
 
     /**
