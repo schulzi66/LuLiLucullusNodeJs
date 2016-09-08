@@ -166,6 +166,25 @@ function loadBookingTypes() {
     });
 }
 
+function loadRequests() {
+    var socket = io.connect();
+    socket.emit('loadRequests',);
+    socket.on('loadedRequests', function (requests) {
+        var container = $('#requestList');
+        $.each(requests, function (i) {
+            var requestList =
+                '<ul class="list-group">' +
+                '<a href="/recipes/recipe?id=' + requests[i].recipeID + '">' +
+                '<h4 class="list-group-item-heading">' + requests[i].recipeName + '</h4>' +
+                '</a>' +
+                '<li class="list-group-item">' +
+                requests[i].shortDescription +
+                '</li>' +
+                '</ul>';
+            container.append(requestList);
+        });
+    });
+}
 /* #####################################
  Region filter
  ##################################### */

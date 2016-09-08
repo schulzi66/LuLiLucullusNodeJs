@@ -49,6 +49,7 @@ var administration_login = require('./routes/logins/administration-login');
 var administration = require('./routes/admin/administration');
 var recipe_upload = require('./routes/admin/upload');
 var orders = require('./routes/admin/orders');
+var request = require('./routes/admin/request');
 var newEmployee = require('./routes/admin/newEmployee');
 var changeEmployeePassword = require('./routes/admin/change-employee-password');
 
@@ -107,6 +108,7 @@ app.use('/administration', administration);
 app.use('/administration-login', administration_login);
 app.use('/administration/upload', recipe_upload);
 app.use('/administration/orders', orders);
+app.use('/administration/request', request);
 app.use('/administration/newEmployee', newEmployee);
 app.use('/administration/changeEmployeePassword', changeEmployeePassword);
 
