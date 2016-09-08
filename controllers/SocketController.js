@@ -1,6 +1,8 @@
 var DatabaseController = require('./DatabaseController');
 var DevLoggingController = require('./DevLoggingController');
-
+var MailController = require('./MailController');
+var conf = require('../conf.json');
+var _mailController = new MailController();
 var _dbController = new DatabaseController();
 
 var SocketController = function () {
@@ -70,7 +72,19 @@ function onConnection(socket) {
     });
 
     socket.on('releaseOrder', function (orderDetails) {
-        _dbController.setReleaseFlag(orderDetails);
+        _dbController.setReleaseFlag(orderDetails, function () {
+            _dbController.getUserForOrder(orderDetails, function (userID) {
+                var mailOptions = {
+                    from: conf.mail.auth.user, // sender address
+                    to: userID, // list of receivers
+                    subject: 'Bestellfreigabe', // Subject line
+                    text: 'Ihre Bestellung wurde erfolgreich freigegeben.' // plaintext body
+                };
+                var message = "Bestellung erfolreich freigegeben.";
+                var redirect = '';
+                _mailController.sendEmail(null, null, mailOptions, message, redirect, false);
+            });
+        });
     });
     //End Region
 

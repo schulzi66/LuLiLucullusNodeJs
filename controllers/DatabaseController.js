@@ -864,7 +864,7 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
 /**
  * Set an unreleased order on released after releasing it in the order area.
  */
-DatabaseController.prototype.setReleaseFlag = function (details) {
+DatabaseController.prototype.setReleaseFlag = function (details, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "UPDATE bookings SET " +
             "isReleased=" + true +
@@ -872,6 +872,25 @@ DatabaseController.prototype.setReleaseFlag = function (details) {
         connection.query(queryString, function (err) {
             connection.release();
             if (!err) {
+                callback();
+                console.log("Successfully executed Query: " + queryString);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.getUserForOrder = function (details, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT userID FROM bookings " +
+            "WHERE bookingID=" + connection.escape(details.bookingID);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows[0].userID);
                 console.log("Successfully executed Query: " + queryString);
             }
         });
