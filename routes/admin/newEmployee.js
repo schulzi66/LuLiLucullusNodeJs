@@ -44,7 +44,7 @@ function sendMailToEmployee(req, res, employee) {
 
       var message = "Dem Benutzer wurde eine Aktivierungs-Email gesendet.";
       var redirect = '/administration/newEmployee';
-      _mailController.sendEmail(req, res, mailOptions, message, redirect);
+      _mailController.sendEmail(req, res, mailOptions, message, redirect, true);
 
       if (req.body.isAdmin === undefined) {
         req.body.isAdmin = false;

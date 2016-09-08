@@ -23,7 +23,7 @@ router.post('/', function (req, res) {
         var message = "Ihre Anfrage wurde erfolgreich übermittelt.";
     }
     var redirect = '/contact';
-    _mailController.sendEmail(req, res, mailOptions, message, redirect);
+    _mailController.sendEmail(req, res, mailOptions, message, redirect, true);
 });
 
 module.exports = router;
