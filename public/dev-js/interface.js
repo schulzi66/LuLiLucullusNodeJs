@@ -168,7 +168,7 @@ function loadBookingTypes() {
 
 function loadRequests() {
     var socket = io.connect();
-    socket.emit('loadRequests',);
+    socket.emit('loadRequests');
     socket.on('loadedRequests', function (requests) {
         var container = $('#requestList');
         $.each(requests, function (i) {
