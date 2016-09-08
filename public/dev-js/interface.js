@@ -172,6 +172,8 @@ function loadRequests() {
     socket.on('loadedRequests', function (requests) {
         var container = $('#requestList');
         $.each(requests, function (i) {
+            //TODO: Label: Email Subject
+            //TODO: Collapse: From, To, Message
             var requestList =
                 '<ul class="list-group">' +
                 '<a href="/recipes/recipe?id=' + requests[i].recipeID + '">' +
