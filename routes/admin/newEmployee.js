@@ -15,6 +15,9 @@ var logger = new DevLoggingController();
 /* GET new Employee page. */
 router.get('/', function(req, res) {
     if (req.session.user !== undefined && req.session.user.isAdmin !== undefined) {
+        _mailController.openInbox(function (cb) {
+            // logger.log("callback", cb);
+        });
         res.render('newEmployee', {user: req.session.user});
     } else {
         res.render('administration-login');
