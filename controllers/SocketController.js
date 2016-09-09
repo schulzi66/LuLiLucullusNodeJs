@@ -93,6 +93,7 @@ function onConnection(socket) {
 
     socket.on('loadRequests', function () {
        _mailController.openInbox(function (messages) {
+           console.log("messages received: " + messages);
            socket.emit('loadedRequests', messages);
        })
     });

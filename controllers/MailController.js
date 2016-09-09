@@ -165,10 +165,14 @@ function listThreads(authClient, initialCb) {
                 'id': results.threads[i].id,
                 'fields': 'messages(payload/headers,snippet)'
             }, function (err, result) {
+                console.log("result: " + result);
                 messages.push(result);
+                if(messages.length === results.threads.length){
+                    logger.log("MailController.listThreads + messages", messages);
+                    initialCb(messages);
+                }
             });
         }
-        initialCb(messages);
     });
 }
 module.exports = MailController;
