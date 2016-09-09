@@ -168,6 +168,7 @@ function listThreads(authClient, initialCb) {
             }, function (err, result) {
                 messages.push(result);
                 if(messages.length === results.threads.length){
+                    // logger.log("messages", messages);
                     initialCb(messages);
                 }
             });
