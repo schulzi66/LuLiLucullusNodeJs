@@ -175,14 +175,21 @@ function loadRequests() {
             //TODO: Label: Email Subject
             //TODO: Collapse: From, To, Message
             var requestList =
-                '<ul class="list-group">' +
-                '<a href="/recipes/recipe?id=' + requests[i].recipeID + '">' +
-                '<h4 class="list-group-item-heading">' + requests[i].recipeName + '</h4>' +
-                '</a>' +
-                '<li class="list-group-item">' +
-                requests[i].shortDescription +
-                '</li>' +
-                '</ul>';
+            '<p>' +
+            '<a class="panel-group card card-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">' +
+                '<div class="panel panel-default">' +
+                '<div class="panel-body"><h5 class="card-title">Subject:' + requests[i].subject + '</h5></div>' +
+            '</div>' +
+            '</a>' +
+            '</p>' +
+            '<div class="panel-group card card-block collapse" id="collapseExample">' +
+                '<div class="panel panel-default">' +
+                '<div class="panel-body">From:' + requests[i].sender + '</div>' +
+            '</div>' +
+            '<div class="card-text">' +
+                '<div class="panel-body">' +requests[i].message + '</div>' +
+                '</div>' +
+                '</div>';
             container.append(requestList);
         });
     });
