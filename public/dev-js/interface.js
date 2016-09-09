@@ -291,7 +291,7 @@ function loadFilteredRecipes(filterOptions) {
                 '<p class="recipes-overview-short-description">' + filteredRecipes[i].shortDescription + '</p>' +
                 '<p>' +
                 '<a class="recipes-overview-btn btn btn-primary btn-sm" href="recipes/recipe?id=' + filteredRecipes[i].recipeID + '"> Weitere Informationen ... </a>' +
-                '<span style="margin-left: 20px" class="lead">' + filteredRecipes[i].recipePrice + '</span></p>' +
+                '<span style="margin-left: 20px" class="lead recipePrice">' + filteredRecipes[i].recipePrice + '</span></p>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
@@ -332,14 +332,63 @@ $(document).ready(function () {
     });
 
     $('#sortNameBtn').on('click', function () {
-        var currentSorted = this.getAttribute('data-sorted');
+        var currentSorted = this.getAttribute('data-nameSorted');
+        var recipeDivs = $("div.col-sm-6.col-md-4");
+
         if (currentSorted == "none") {
             currentSorted = "asc";
-        } else if (currentSorted == "asc") {
-            currentSorted = "dsc";
-        } else if (currentSorted == "dsc") {
-            currentSorted = "none";
+            var orderedListByName = recipeDivs.sort(function (a, b){
+                return $(a).find("h3").text() > $(b).find("h3").text()
+            });
+            $('#sortNameBtn').attr('data-nameSorted', 'asc')
+            $('#sortNameBtn').append('<span class="fa fa-chevron-up"></span>');
         }
+        else if (currentSorted == "asc") {
+            currentSorted = "dsc";
+            var orderedListByName = recipeDivs.sort(function (a, b){
+                return $(a).find("h3").text() < $(b).find("h3").text()
+            });
+            $('#sortNameBtn').find('span').remove();
+            $('#sortNameBtn').attr('data-nameSorted', 'dsc');
+            $('#sortNameBtn').append('<span class="fa fa-chevron-down"></span>');
+        }
+        else if (currentSorted == "dsc") {
+            currentSorted = "none";
+            $('#sortNameBtn').find('span').remove();
+            $('#sortNameBtn').attr('data-nameSorted', 'none');
+        }
+
+        $("#recipeContainer").html(orderedListByName);
+    });
+
+    $('#sortPriceBtn').on('click', function () {
+        var currentSorted = this.getAttribute('data-priceSorted');
+        var recipeDivs = $("div.col-sm-6.col-md-4");
+
+        if (currentSorted == "none") {
+            currentSorted = "asc";
+            var orderedListByName = recipeDivs.sort(function (a, b){
+                return $(a).find("span.recipePrice").text() > $(b).find("span.recipePrice").text()
+            });
+            $('#sortPriceBtn').attr('data-priceSorted', 'asc')
+            $('#sortPriceBtn').append('<span class="fa fa-chevron-up"></span>');
+        }
+        else if (currentSorted == "asc") {
+            currentSorted = "dsc";
+            var orderedListByName = recipeDivs.sort(function (a, b){
+                return $(a).find("span.recipePrice").text() < $(b).find("span.recipePrice").text()
+            });
+            $('#sortPriceBtn').find('span').remove();
+            $('#sortPriceBtn').attr('data-priceSorted', 'dsc');
+            $('#sortPriceBtn').append('<span class="fa fa-chevron-down"></span>');
+        }
+        else if (currentSorted == "dsc") {
+            currentSorted = "none";
+            $('#sortPriceBtn').find('span').remove();
+            $('#sortPriceBtn').attr('data-priceSorted', 'none');
+        }
+
+        $("#recipeContainer").html(orderedListByName);
     });
 
     /**
