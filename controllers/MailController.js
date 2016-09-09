@@ -1,14 +1,18 @@
 var conf = require('../conf.json');
 var nodemailer = require('nodemailer');
 
-var Imap = require('imap');
-var inspect = require('util').inspect;
+var fs = require('fs');
+var readline = require('readline');
+var google = require('googleapis');
+var googleAuth = require('google-auth-library');
+
+var SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
+var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
+    process.env.USERPROFILE) + '/.credentials/';
+var TOKEN_PATH = TOKEN_DIR + 'gmail-nodejs-quickstart.json';
 
 var DevLoggingController = require('./DevLoggingController');
 var logger = new DevLoggingController();
-
-
-
 
 var MailController = function () {
 };
@@ -52,66 +56,119 @@ MailController.prototype.createAuthenticationcode = function () {
     return text;
 }
 
-MailController.prototype.openInbox = function (cb) {
-    var imap = new Imap({
-        user: conf.mail.auth.user,
-        password: conf.mail.auth.password,
-        host: 'imap.gmail.com',
-        port: 993,
-        tls: true
+MailController.prototype.openInbox = function (initialCb) {
+    fs.readFile('client_secret.json', function processClientSecrets(err, content) {
+        if (err) {
+            console.log('Error loading client secret file: ' + err);
+            return;
+        }
+        // Authorize a client with the loaded credentials, then call the
+        // Gmail API.
+        authorize(JSON.parse(content), initialCb, listThreads);
     });
 
-    imap.once('ready', function() {
-        openInbox(imap, function(err, box) {
-            if (err) throw err;
-            var f = imap.seq.fetch('1:5', {
-                bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
-                struct: true
-            });
-            f.on('message', function(msg, seqno) {
-                console.log('Message #%d', seqno);
-                var prefix = '(#' + seqno + ') ';
-                msg.on('body', function(stream, info) {
-                    var buffer = '';
-                    stream.on('data', function(chunk) {
-                        buffer += chunk.toString('utf8');
-                    });
-                    stream.once('end', function() {
-                        console.log(prefix + 'Parsed header: %s', inspect(Imap.parseHeader(buffer)));
-                    });
-                });
-                msg.once('attributes', function(attrs) {
-                    console.log(prefix + 'Attributes: %s', inspect(attrs, false, 8));
-                });
-                msg.once('end', function() {
-                    console.log(prefix + 'Finished');
-                });
-            });
-            f.once('error', function(err) {
-                console.log('Fetch error: ' + err);
-            });
-            f.once('end', function() {
-                console.log('Done fetching all messages!');
-                imap.end();
-            });
+}
+
+/**
+ * Create an OAuth2 client with the given credentials, and then execute the
+ * given callback function.
+ *
+ * @param {Object} credentials The authorization client credentials.
+ * @param {function} callback The callback to call with the authorized client.
+ */
+function authorize(credentials, initialCb, callback) {
+    var clientSecret = credentials.installed.client_secret;
+    var clientId = credentials.installed.client_id;
+    var redirectUrl = credentials.installed.redirect_uris[0];
+    var auth = new googleAuth();
+    var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
+
+    // Check if we have previously stored a token.
+    fs.readFile(TOKEN_PATH, function(err, token) {
+        if (err) {
+            getNewToken(oauth2Client, initialCb, callback);
+        } else {
+            oauth2Client.credentials = JSON.parse(token);
+            callback(oauth2Client, initialCb);
+        }
+    });
+}
+
+
+/**
+ * Get and store new token after prompting for user authorization, and then
+ * execute the given callback with the authorized OAuth2 client.
+ *
+ * @param {google.auth.OAuth2} oauth2Client The OAuth2 client to get token for.
+ * @param {getEventsCallback} callback The callback to call with the authorized
+ *     client.
+ */
+function getNewToken(oauth2Client, initialCb, callback) {
+    var authUrl = oauth2Client.generateAuthUrl({
+        access_type: 'offline',
+        scope: SCOPES
+    });
+    console.log('Authorize this app by visiting this url: ', authUrl);
+    var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+    rl.question('Enter the code from that page here: ', function(code) {
+        rl.close();
+        oauth2Client.getToken(code, function(err, token) {
+            if (err) {
+                console.log('Error while trying to retrieve access token', err);
+                return;
+            }
+            oauth2Client.credentials = token;
+            storeToken(token);
+            callback(oauth2Client, initialCb);
         });
     });
-
-    imap.once('error', function(err) {
-        console.log(err);
-    });
-
-    imap.once('end', function() {
-        console.log('Connection ended');
-    });
-
-    imap.connect();
-
 }
 
-function openInbox(imap, cb) {
-    imap.openBox('INBOX', true, cb);
+/**
+ * Store token to disk be used in later program executions.
+ *
+ * @param {Object} token The token to store to disk.
+ */
+function storeToken(token) {
+    try {
+        fs.mkdirSync(TOKEN_DIR);
+    } catch (err) {
+        if (err.code != 'EEXIST') {
+            throw err;
+        }
+    }
+    fs.writeFile(TOKEN_PATH, JSON.stringify(token));
+    console.log('Token stored to ' + TOKEN_PATH);
 }
 
+/**
+ * Retrieve Threads in the user's mailbox matching query.
+ *
+ * @param  authClient
+ */
+function listThreads(authClient, initialCb) {
 
+    var gmail = google.gmail({ auth: authClient, version: 'v1' });
+
+    var messages = [];
+    var emails = gmail.users.threads.list({
+        includeSpamTrash: false,
+        q: "to:lulilucullusgourmet",
+        userId: conf.mail.auth.user
+    }, function (err, results) {
+        for(var i = 0; i < results.threads.length; i++){
+            var message = gmail.users.threads.get({
+                'userId': conf.mail.auth.user,
+                'id': results.threads[i].id,
+                'fields': 'messages(payload/headers,snippet)'
+            }, function (err, result) {
+                messages.push(result);
+            });
+        }
+        initialCb(messages);
+    });
+}
 module.exports = MailController;
