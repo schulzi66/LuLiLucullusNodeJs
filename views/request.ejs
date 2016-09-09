@@ -7,22 +7,6 @@
 <div class="container">
     <% include partials/breadcrumb %>
     <div id="requestList" class="container-margin">
-        <p>
-            <a class="panel-group card card-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                <div class="panel panel-default">
-                    <div class="panel-body"><h5 class="card-title">Subject: requests[i].subject</h5></div>
-                </div>
-            </a>
-        </p>
-        <div class="panel-group card card-block collapse" id="collapseExample">
-            <div class="panel panel-default">
-                <div class="panel-body">From: requests[i].sender</div>
-            </div>
-            <div class="card-text">
-                <div class="panel-body">requests[i].message</div>
-            </div>
-        </div>
-
         <script>
             loadRequests();
         </script>

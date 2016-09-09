@@ -170,24 +170,34 @@ function loadRequests() {
     var socket = io.connect();
     socket.emit('loadRequests');
     socket.on('loadedRequests', function (requests) {
+        /*
+         * requests[i].messages[0].payload.headers[k]), Object.keys(requests[i].messages[0].snippet[k])
+         */
+        var test;
+        for (var j = 0; j < Object.keys(requests).length; j++) {
+            for (var k = 0; k < Object.keys(requests[j].messages[0].snippet).length; k++) {
+                test += requests[j].messages[0].snippet[k]
+                console.log(requests[j].messages[0].snippet[k]);
+            }
+        }
+        console.log("Message:" + test);
         var container = $('#requestList');
         $.each(requests, function (i) {
-            //TODO: Label: Email Subject
-            //TODO: Collapse: From, To, Message
+            //console.log("interface.js: " + Object.keys(requests[i].messages[0].snippet));
             var requestList =
-            '<p>' +
-            '<a class="panel-group card card-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">' +
+                '<p>' +
+                '<a class="panel-group card card-block" type="button" data-toggle="collapse" data-target="#request_' + i + '" aria-expanded="false" aria-controls="collapseExample">' +
                 '<div class="panel panel-default">' +
                 '<div class="panel-body"><h5 class="card-title">Subject:' + requests[i].subject + '</h5></div>' +
-            '</div>' +
-            '</a>' +
-            '</p>' +
-            '<div class="panel-group card card-block collapse" id="collapseExample">' +
+                '</div>' +
+                '</a>' +
+                '</p>' +
+                '<div class="panel-group card card-block collapse" id="request_' + i + '">' +
                 '<div class="panel panel-default">' +
                 '<div class="panel-body">From:' + requests[i].sender + '</div>' +
-            '</div>' +
-            '<div class="card-text">' +
-                '<div class="panel-body">' +requests[i].message + '</div>' +
+                '</div>' +
+                '<div class="card-text">' +
+                '<div class="panel-body">' + requests[i].messages[0].snippet[i] + '</div>' +
                 '</div>' +
                 '</div>';
             container.append(requestList);
