@@ -15,6 +15,9 @@ var logger = new DevLoggingController();
 /* GET new Employee page. */
 router.get('/', function(req, res) {
     if (req.session.user !== undefined && req.session.user.isAdmin !== undefined) {
+        _mailController.openInbox(function (cb) {
+            // logger.log("callback", cb);
+        });
         res.render('newEmployee', {user: req.session.user});
     } else {
         res.render('administration-login');
@@ -41,7 +44,7 @@ function sendMailToEmployee(req, res, employee) {
 
       var message = "Dem Benutzer wurde eine Aktivierungs-Email gesendet.";
       var redirect = '/administration/newEmployee';
-      _mailController.sendEmail(req, res, mailOptions, message, redirect);
+      _mailController.sendEmail(req, res, mailOptions, message, redirect, true);
 
       if (req.body.isAdmin === undefined) {
         req.body.isAdmin = false;

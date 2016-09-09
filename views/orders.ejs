@@ -64,9 +64,9 @@
         json["bookingID"] = $(this).parents("tr:first").find("input[type=hidden]:first").not("script").val();
         json["typeID"] = $(this).parents("tr:first").find("input[type=hidden]:last").not("script").val();
         json["freigeben"] = true;
+
         //TODO: send mail on release
         releaseOrder(json);
-
         singleOrder.remove();
 
         if ($('#orderOverview').has("td").length == 0) {

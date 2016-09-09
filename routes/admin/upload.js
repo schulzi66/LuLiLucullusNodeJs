@@ -33,37 +33,34 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    uploadImage();
-        _dbController.loadIngredients(function (existingIngredients) {
-            _dbController.loadUnits(function (existingUnits) {
-                _dbController.loadCourses(function (existingCourses) {
-                    _dbController.loadStyles(function (existingStyles) {
-                        mapIDS(req, existingCourses, existingStyles);
-                        _dbController.loadRecipesOverview(function (existingRecipes) {
-                            req.body.recipeID = existingRecipes.length;
-                            req.body.pictureRef = pictureRef;
-                            console.log("req.body.pictureRef: " + req.body.pictureRef);
-                            _dbController.uploadRecipe(req.body, function () {
-                                var newUnits = checkForExistingUnits(existingUnits, req.body.unit);
-                                insertNewUnits(newUnits);
-                                var newIngredients = checkForExistingIngredients(existingIngredients, req.body.ingredients);
-                                insertNewIngredients(newIngredients);
-                                setTimeout(function () {
-                                    insertRecipeIngredients(req.body, req, res);
-                                }, 7000);
-                            });
+    _dbController.loadIngredients(function (existingIngredients) {
+        _dbController.loadUnits(function (existingUnits) {
+            _dbController.loadCourses(function (existingCourses) {
+                _dbController.loadStyles(function (existingStyles) {
+                    mapIDS(req, existingCourses, existingStyles);
+                    _dbController.loadRecipesOverview(function (existingRecipes) {
+                        req.body.recipeID = existingRecipes.length;
+                        req.body.pictureRef = pictureRef;
+                        console.log("req.body.pictureRef: " + req.body.pictureRef);
+                        _dbController.uploadRecipe(req.body, function () {
+                            var newUnits = checkForExistingUnits(existingUnits, req.body.unit);
+                            insertNewUnits(newUnits);
+                            var newIngredients = checkForExistingIngredients(existingIngredients, req.body.ingredients);
+                            insertNewIngredients(newIngredients);
+                            setTimeout(function () {
+                                insertRecipeIngredients(req.body, req, res);
+                            }, 4000);
                         });
                     });
                 });
             });
         });
+    });
 });
 
 router.post('/image', upload.single('pictureRef'), function (req, res, next) {
-    logger.log("req.file", req.file);
     uploadedFile = req.file;
-   //TODO: Figure out how to send back http 200 to display "File uploaded" to user without redirecting to another page or stuff like this
-    // res.send(req.body);
+    pictureRef = uploadedFile.originalname;
 });
 
 function mapIDS(req, existingCourses, existingStyles) {
@@ -91,14 +88,12 @@ function checkForExistingUnits(existingUnits, newUnits) {
             }
         }
     }
-    logger.log("unitsToADD", unitsToAdd);
     return unitsToAdd;
 }
 
 function insertNewUnits(newUnits) {
     for (var i = 0; i <= Object.keys(newUnits).length; i++) {
         if (newUnits[i] !== undefined) {
-            console.log(newUnits[i]);
             _dbController.uploadUnit(newUnits[i]);
         }
     }
@@ -150,21 +145,7 @@ function insertRecipeIngredients(json, req, res) {
             _dbController.uploadRecipeIngredient(json.amount[m], json.recipeID, ingredientsMappings[m].ingredientID, unitMappings[m].unitID);
         }
         res.redirect('/administration');
-    }, 5000);
-}
-
-function uploadImage() {
-    fs.readFile(uploadedFile.path, function (err, data) {
-        var newPath = uploadedFile.destination;
-        var outStream = fs.createWriteStream(newPath);
-        outStream.on('error', function () {
-            console.log("error but dont care");
-            pictureRef = uploadedFile.originalname;
-        });
-        outStream.on('finish', function () {
-            pictureRef = uploadedFile.originalname;
-        });
-    });
+    }, 500);
 }
 
 module.exports = router;

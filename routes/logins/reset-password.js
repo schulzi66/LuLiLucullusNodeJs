@@ -42,7 +42,7 @@ console.log("user:  " + user);
       var message = "Ihre Anfrage wurde erfolgreich übermittelt. Überprüfen Sie Ihr Email Postfach";
       var redirect = '/login/change-Password';
 
-      _mailController.sendEmail(req, res, mailOptions, message, redirect);
+      _mailController.sendEmail(req, res, mailOptions, message, redirect, true);
 
       _dbController.insertPasswordRequest(_mailController.createRequestDate(), authenticationCode, req.body.email);
   }

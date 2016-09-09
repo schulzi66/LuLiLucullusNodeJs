@@ -20,6 +20,7 @@
     "google-auth-library": "^0.9.8",
     "googleapis": "^12.4.0",
     "helmet": "^2.1.1",
+    "imap": "^0.8.17",
     "morgan": "~1.7.0",
     "multer": "^1.2.0",
     "mysql": "^2.11.1",

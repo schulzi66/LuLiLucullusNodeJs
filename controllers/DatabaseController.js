@@ -864,7 +864,7 @@ DatabaseController.prototype.insertOrderInformation = function (details, callbac
 /**
  * Set an unreleased order on released after releasing it in the order area.
  */
-DatabaseController.prototype.setReleaseFlag = function (details) {
+DatabaseController.prototype.setReleaseFlag = function (details, callback) {
     pool.getConnection(function (err, connection) {
         var queryString = "UPDATE bookings SET " +
             "isReleased=" + true +
@@ -872,6 +872,25 @@ DatabaseController.prototype.setReleaseFlag = function (details) {
         connection.query(queryString, function (err) {
             connection.release();
             if (!err) {
+                callback();
+                console.log("Successfully executed Query: " + queryString);
+            }
+        });
+        connection.on('error', function (err) {
+            console.log("ERR: " + err);
+            return;
+        });
+    });
+}
+
+DatabaseController.prototype.getUserForOrder = function (details, callback) {
+    pool.getConnection(function (err, connection) {
+        var queryString = "SELECT userID FROM bookings " +
+            "WHERE bookingID=" + connection.escape(details.bookingID);
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                callback(rows[0].userID);
                 console.log("Successfully executed Query: " + queryString);
             }
         });
@@ -983,7 +1002,6 @@ DatabaseController.prototype.uploadRecipe = function (recipe, callback) {
             "styleID=" + connection.escape(recipe.styleID) + ", " +
             "courseID=" + connection.escape(recipe.courseID) + ", " +
             "recipePrice=" + connection.escape(recipe.price);
-        console.log("querystring: " + queryString);
 
         connection.query(queryString, function (err) {
             connection.release();
@@ -1007,7 +1025,6 @@ DatabaseController.prototype.uploadUnit = function (unit) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO UNITS SET " +
             "unitName=" + connection.escape(unit);
-        console.log("querystring: " + queryString);
 
         connection.query(queryString, function (err) {
             connection.release();
@@ -1031,7 +1048,6 @@ DatabaseController.prototype.uploadIngredient = function (ingredient) {
     pool.getConnection(function (err, connection) {
         var queryString = "INSERT INTO INGREDIENTS SET " +
             "ingredientName=" + connection.escape(ingredient);
-        console.log("querystring: " + queryString);
 
         connection.query(queryString, function (err) {
             connection.release();
@@ -1060,7 +1076,6 @@ DatabaseController.prototype.uploadRecipeIngredient = function (amount, recipeID
             "recipeID=" + connection.escape(recipeID) + ", " +
             "ingredientID=" + connection.escape(ingredientID) + ", " +
             "unitID=" + connection.escape(unitID);
-        console.log("querystring: " + queryString);
 
         connection.query(queryString, function (err) {
             connection.release();
@@ -1083,12 +1098,11 @@ DatabaseController.prototype.uploadRecipeIngredient = function (amount, recipeID
  */
 DatabaseController.prototype.getUnitIdByUnitName = function (unitName, callback) {
     pool.getConnection(function (err, connection) {
-        console.log("DBCtr unitName: " + unitName);
         var queryString = "SELECT unitID FROM UNITS WHERE unitName=" + connection.escape(unitName);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-                console.log("Successfully executed Query: " + queryString + " ID = " + rows[0].unitID);
+                console.log("Successfully getUnitIdByUnitName");
                 callback(rows[0].unitID);
             }
         });
@@ -1107,12 +1121,11 @@ DatabaseController.prototype.getUnitIdByUnitName = function (unitName, callback)
  */
 DatabaseController.prototype.getIngredientIdByIngredientName = function (ingredientName, callback) {
     pool.getConnection(function (err, connection) {
-        console.log("dbctr ingredientName: " + ingredientName);
         var queryString = "SELECT ingredientID FROM ingredients WHERE ingredientName=" + connection.escape(ingredientName);
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
-                console.log("Successfully executed Query: " + queryString+ " ID = " + rows[0]);
+                console.log("Successfully getIngredientIdByIngredientName");
                 callback(rows[0].ingredientID);
             }
         });
