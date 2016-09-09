@@ -160,15 +160,14 @@ function listThreads(authClient, initialCb) {
         userId: conf.mail.auth.user
     }, function (err, results) {
         for(var i = 0; i < results.threads.length; i++){
+            console.log("für Julian zum nachvollziehen: results.threads[i].id:  " + results.threads[i].id);
             var message = gmail.users.threads.get({
                 'userId': conf.mail.auth.user,
                 'id': results.threads[i].id,
                 'fields': 'messages(payload/headers,snippet)'
             }, function (err, result) {
-                console.log("result: " + result);
                 messages.push(result);
                 if(messages.length === results.threads.length){
-                    logger.log("MailController.listThreads + messages", messages);
                     initialCb(messages);
                 }
             });
