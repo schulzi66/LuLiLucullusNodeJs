@@ -50,6 +50,13 @@ function onConnection(socket) {
         })
     });
 
+    socket.on('loadRequests', function () {
+        //TODO: param
+        _mailController.openInbox(function (param) {
+            socket.emit('loadedRequests', param);
+        })
+    });
+
     //Region Recipe Filter
     socket.on('loadFilterOptions', function () {
         _dbController.loadFilterOptions(function (filterOptions) {
