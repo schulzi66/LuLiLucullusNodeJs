@@ -99,18 +99,18 @@ function onConnection(socket) {
            // messages[i].messages[0] => die null muss bleiben.. dämliche json structur
            // die restlichen loggs sollten aussagekräftig sein
 
-           console.log("messages[0] received: " + messages[0]);
-           logger.log("Message object inside array of messages object", messages[0].messages[0]);
-           logger.log("Payload Object inside message object", messages[0].messages[0].payload);
-           logger.log("headers Objects inside payload object", messages[0].messages[0].payload.headers);
-           logger.log("From object inside headers object", messages[0].messages[0].payload.headers[3]);
-
-           // die drei wichtigen werte die du brauchst habe ich hier geloggt
-           console.log("---------------");
-           console.log("From value: " + messages[0].messages[0].payload.headers[3].value);
-           console.log("Subject value: " + messages[0].messages[0].payload.headers[13].value);
-           console.log("Text value: " + messages[0].messages[0].snippet);
-           console.log("---------------");
+           // console.log("messages[0] received: " + messages[0]);
+           // logger.log("Message object inside array of messages object", messages[0].messages[0]);
+           // logger.log("Payload Object inside message object", messages[0].messages[0].payload);
+           // logger.log("headers Objects inside payload object", messages[0].messages[0].payload.headers);
+           // logger.log("From object inside headers object", messages[0].messages[0].payload.headers[3]);
+           // // logger.log("Subject object inside headers object", messages[0].messages[0].payload.headers[13]);
+           // // die drei wichtigen werte die du brauchst habe ich hier geloggt
+           // console.log("---------------");
+           // console.log("From value: " + messages[0].messages[0].payload.headers[3].value);
+           // console.log("Subject value: " + messages[0].messages[0].payload.headers[13].value);
+           // console.log("Text value: " + messages[0].messages[0].snippet);
+           // console.log("---------------");
            socket.emit('loadedRequests', messages);
 
        })
