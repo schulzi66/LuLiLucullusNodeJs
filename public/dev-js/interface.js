@@ -172,24 +172,43 @@ function loadRequests() {
     socket.on('loadedRequests', function (requests) {
         var container = $('#requestList');
         container.empty();
+
         $.each(requests, function (i) {
-            var fromValue = requests[i].messages[0].payload.headers[3].value;
-            fromValue = fromValue.replace('<', '');
-            fromValue = fromValue.replace('>', '');
+            var Subject = "";
+            var From = "";
+            var Message = requests[i].messages[0].snippet;
+
+            for(var j = 0; j < requests[i].messages[0].payload.headers.length; j++){
+                if(requests[i].messages[0].payload.headers[j].name === "Return-Path"){
+                    From = requests[i].messages[0].payload.headers[j].value;
+                }
+                if(From === "<lulilucullusgourmet@gmail.com>"){
+                    if(requests[i].messages[0].payload.headers[j].name === "X-Google-Original-From"){
+                        From = requests[i].messages[0].payload.headers[j].value;
+                    }
+                }
+                if(requests[i].messages[0].payload.headers[j].name === "Subject"){
+                    Subject = requests[i].messages[0].payload.headers[j].value;
+                }
+            }
+
+            From = From.replace('<', '');
+            From = From.replace('>', '');
+
             var requestList =
                 '<p>' +
                 '<a class="panel-group card card-block" type="button" data-toggle="collapse" data-target="#request_' + i + '" aria-expanded="false" aria-controls="collapseExample">' +
                 '<div class="panel panel-default">' +
-                '<div class="panel-body"><h5 class="card-title">Betreff: ' + requests[i].messages[0].payload.headers[13].value + '</h5></div>' +
+                '<div class="panel-body"><h5 class="card-title">Betreff: ' + Subject + '</h5></div>' +
                 '</div>' +
                 '</a>' +
                 '</p>' +
                 '<div class="panel-group card card-block collapse" id="request_' + i + '">' +
                 '<div class="panel panel-default">' +
-                '<div class="panel-body">Absender: ' + fromValue +'</div>' +
+                '<div class="panel-body">Absender: ' + From +'</div>' +
                 '</div>' +
                 '<div class="card-text">' +
-                '<div class="panel-body">' + requests[i].messages[0].snippet + '</div>' +
+                '<div class="panel-body">' + Message + '</div>' +
                 '</div>' +
                 '</div>';
             container.append(requestList);

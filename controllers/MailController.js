@@ -193,7 +193,7 @@ function listThreads(authClient, initialCb) {
                     console.log("retry3");
                     listThreads(authClient,initialCb);
                 }
-            },2000);
+            },500);
         }
     });
 }
