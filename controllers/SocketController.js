@@ -95,7 +95,6 @@ function onConnection(socket) {
     socket.on('loadRequests', function () {
        _mailController.openInbox(function (messages) {
            socket.emit('loadedRequests', messages);
-
        })
     });
 
