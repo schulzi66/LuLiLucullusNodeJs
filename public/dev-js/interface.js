@@ -285,13 +285,26 @@ function loadFilterOptions() {
             '<div class="panel-heading">Name</div>' +
             '<div class="ui-widget">' +
             '<input id="filterOptionTextInput" class="ui-autocomplete-input" autocomplete="off" name="recipeNames" data-type="recipeName">' +
-            //'<input id="filterOptionTextInput" type="text" class="form-control" name="recipeNames" data-type="recipeName" />' +
             '</div>' +
+            '</div>'
+        );
+
+        $('#inputFields').append(
+            '<div class="panel panel-default" id="filterOptionsName" class="col-md-4">' +
+            '<div class="panel-heading">Zutaten</div>' +
+            '<ul id="ingredientTags">' +
+            '</ul>' +
             '</div>'
         );
 
         $("#filterOptionTextInput").autocomplete({
             source: recipeNames
+        });
+
+        $("#ingredientTags").tagit({
+            availableTags: ingredients,
+            removeConfirmation: true,
+            autocomplete: {delay: 0, minLength: 0}
         });
     });
 }
@@ -306,7 +319,7 @@ function loadFilteredRecipes(filterOptions) {
             var recipe_list_element =
                 '<div class="col-sm-6 col-md-4">' +
                 '<div class="thumbnail">' +
-                '<img src="' + Util.convertPictureRefToPath(filteredRecipes[i].pictureRef) + '"' + '>' +
+                '<img src="' + filteredRecipes[i].pictureRef + '"' + '>' +
                 '<div class="caption">' +
                 '<h3 class="recipes-overview-headline text-uppercase">' + filteredRecipes[i].recipeName + '</h3>' +
                 '<p class="recipes-overview-short-description">' + filteredRecipes[i].shortDescription + '</p>' +
@@ -331,6 +344,8 @@ $(document).ready(function () {
     });
 
     $('#filterSubmitBtn').on('click', function () {
+        $('#sortPriceBtn').find('span').remove();
+        $('#sortNameBtn').find('span').remove();
         var selectedOptions = [];
         var filterOptions = [];
         $('input:checked').each(function () {
@@ -339,6 +354,12 @@ $(document).ready(function () {
 
         var filterText = $('#filterOptionTextInput').val();
         selectedOptions.push("recipename:" + filterText);
+
+        var ingredientTags = $("#ingredientTags").tagit("assignedTags");
+        for (var i = 0; i < ingredientTags.length; i++) {
+            selectedOptions.push("ingredientTag:" + ingredientTags[i]);
+        }
+        //console.log(ingredientTags);
 
         for (var i = 0; i < selectedOptions.length; i++) {
             var currentOptionType = selectedOptions[i].split(':')[0];
@@ -349,6 +370,7 @@ $(document).ready(function () {
             });
         }
         console.log(filterOptions);
+
         loadFilteredRecipes(filterOptions);
     });
 

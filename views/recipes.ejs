@@ -16,12 +16,19 @@
         </section>
     </div>
 
-    <div id="filter-bar" class="container" style="display:block">
+    <div id="filter-bar" class="container">
         <div id="inputFields" class="col-md-6">
             <h4>Filtern</h4>
             <script type="text/javascript">
                 loadFilterOptions();
             </script>
+
+            <!--<div class="panel panel-default" id="filterOptionsName" class="col-md-4">
+                <div class="panel-heading">Zutaten</div>
+                <ul id="ingredientTags">
+                    <li>Test</li>
+                </ul>
+            </div>-->
         </div>
         <div id="filterRightColumn" class="col-md-6">
             <h4>Sortieren</h4>
@@ -45,6 +52,12 @@
             loadRecipesOverview();
         </script>
     </div>
+
+    <script type="text/javascript">
+        $("#ingredientTags").tagit({
+            availableTags: ["c++", "java", "php", "javascript", "ruby", "python", "c"]
+        });
+    </script>
 </div>
 </body>
 <% include partials/footer %>

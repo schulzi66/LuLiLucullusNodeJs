@@ -676,6 +676,7 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
             var courseString = "";
             var styleString = "";
             var recipeNameString = "";
+            var ingredientString = "";
             var courseCount = 0;
             var styleCount = 0;
 
@@ -699,6 +700,9 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
                 else if (filterOptions[i].key == "recipename") {
                     recipeNameString += "AND recipes.recipeName LIKE (\x22%" + filterOptions[i].option + "%\x22) ";
                 }
+                else if (filterOptions[i].key == "ingredientTag") {
+                    ingredientString += ", \x22" + filterOptions[i].option + "\x22";
+                }
             }
 
             console.log(queryString);
@@ -717,6 +721,13 @@ DatabaseController.prototype.loadFilteredRecipes = function (filterOptions, call
                 "JOIN recipeingredients ON ingredients.ingredientID = recipeingredients.ingredientID " +
                 "JOIN recipes ON recipeingredients.recipeID = recipes.recipeID " +
                 "WHERE allergenes.allergenName IN (\x22\x22" + allergenString + ")) ";
+            if (ingredientString != "") {
+                queryString += "AND recipes.recipeID IN ( " +
+                "SELECT DISTINCT recipes.recipeID FROM ingredients " +
+                "JOIN recipeingredients ON ingredients.ingredientID = recipeingredients.ingredientID " +
+                "JOIN recipes ON recipeingredients.recipeID = recipes.recipeID " +
+                "WHERE ingredients.ingredientName IN (\x22\x22" + ingredientString + ")) ";
+            }
             if (styleString != "") {
                 queryString += "AND ( " + styleString + ") ";
             }
