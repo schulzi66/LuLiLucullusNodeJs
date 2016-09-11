@@ -12,7 +12,7 @@ function loadRecipesOverview() {
             var recipe_list_element =
                 '<div class="col-sm-6 col-md-4" >' +
                 '<div class="thumbnail">' +
-                '<img src="img/recipes/' + recipes[i].pictureRef + '.jpg"' + '>' +
+                '<img src="img/recipes/' + recipes[i].pictureRef + '"' + '>' +
                 '<div class="caption">' +
                 '<h3 class="recipes-overview-headline text-uppercase">' + recipes[i].recipeName + '</h3>' +
                 '<p class="recipes-overview-short-description">' + recipes[i].shortDescription + '</p>' +
@@ -37,7 +37,7 @@ function loadRecipeFromId(id, portions) {
             portions = 1;
         }
         var recipe_image =
-            '<img class="recipe-image img-responsive img-rounded" data-failover="img/default.png" src="img/recipes/' + recipe[0].pictureRef + '.jpg">';
+            '<img class="recipe-image img-responsive img-rounded" data-failover="img/default.png" src="img/recipes/' + recipe[0].pictureRef + '">';
         $('#recipe-image-wrapper').append(recipe_image);
 
         var recipe_details =
