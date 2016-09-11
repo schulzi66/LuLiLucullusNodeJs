@@ -73,12 +73,6 @@ Util.checkIngredients = function (ingredient, amount) {
         return ingredient;
     }
 }
-Util.convertPictureRefToPath = function (pictureRef) {
-    var imgDir = "img/recipes/";
-    var fileExtension = [".png", ".jpg"];
-    pictureRef = pictureRef.split('pictureRef')[1].toLowerCase();
-    return imgDir + pictureRef + fileExtension[1];
-}
 
 Util.generateUUID = function () {
     return '_' + Math.random().toString(36).substr(2, 9);
