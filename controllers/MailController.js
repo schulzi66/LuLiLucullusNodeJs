@@ -156,22 +156,44 @@ function listThreads(authClient, initialCb) {
     var messages = [];
     var emails = gmail.users.threads.list({
         includeSpamTrash: false,
-        q: "to:lulilucullusgourmet",
+        q: 'to:lulilucullusgourmet',
         userId: conf.mail.auth.user
     }, function (err, results) {
-        for(var i = 0; i < results.threads.length; i++){
-            var message = gmail.users.threads.get({
-                'userId': conf.mail.auth.user,
-                'id': results.threads[i].id,
-                'fields': 'messages(payload/headers,snippet)'
-            }, function (err, result) {
-                console.log("result: " + result);
-                messages.push(result);
-                if(messages.length === results.threads.length){
-                    logger.log("MailController.listThreads + messages", messages);
+        if(err !== null){
+            console.log("error: " + err);
+        }
+        else if(results === undefined){
+            console.log("retry1");
+            listThreads(authClient, initialCb);
+        }
+        else{
+            for (var i = 0; i < results.threads.length; i++) {
+                var message = gmail.users.threads.get({
+                    'userId': conf.mail.auth.user,
+                    'id': results.threads[i].id,
+                    'fields': 'messages(payload/headers,snippet)'
+                }, function (err, result) {
+                    if(err !== null){
+                        console.log("error: " + err);
+                    }
+                    else if(result === undefined){
+                        console.log("retry2");
+                        listThreads(authClient, initialCb);
+                    }
+                    else{
+                        messages.push(result);
+                    }
+                });
+            }
+            setTimeout(function () {
+                if (messages.length === results.threads.length) {
                     initialCb(messages);
                 }
-            });
+                else{
+                    console.log("retry3");
+                    listThreads(authClient,initialCb);
+                }
+            },500);
         }
     });
 }

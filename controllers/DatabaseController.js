@@ -335,7 +335,7 @@ DatabaseController.prototype.signup = function (req, res, internal) {
                         req.body.billingAdressPlz,
                         internal);
                     req.session.user = user;
-                    res.redirect('/');
+                    res.redirect('/recipes');
                 }
             });
 

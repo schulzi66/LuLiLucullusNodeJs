@@ -4,6 +4,7 @@ var MailController = require('./MailController');
 var conf = require('../conf.json');
 var _mailController = new MailController();
 var _dbController = new DatabaseController();
+var logger = new DevLoggingController();
 
 var SocketController = function () {
 }
@@ -93,7 +94,6 @@ function onConnection(socket) {
 
     socket.on('loadRequests', function () {
        _mailController.openInbox(function (messages) {
-           console.log("messages received: " + messages);
            socket.emit('loadedRequests', messages);
        })
     });
