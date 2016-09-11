@@ -202,6 +202,7 @@ VALUES
 INSERT INTO Users (name, familyName, userID, street, location, telefonNumber, password, plz, billingAddressStreet, billingAddressLocation, billingAddressPlz, internal)
 VALUES
 	('Julian', 'Ulonska', 'ulonska.julian@gmail.com', 'Im Reiherflug 6', 'Euskirchen', '0123456789', '$2a$10$GXWBOcTA73qPangwc.A5B.lAqEBiNmQKfBgdufYcs/2IX5PKRB1.C', '53881', 'Im Reiherflug 6', 'Euskirchen', '53881', 1);
+
 -- Reenable foreihn key checks
 SET FOREIGN_KEY_CHECKS = 1;
 
