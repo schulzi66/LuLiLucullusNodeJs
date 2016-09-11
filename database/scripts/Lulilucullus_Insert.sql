@@ -111,7 +111,7 @@ VALUES
 ,('Stange(n)');
 
 -- Recipes
-INSERT INTO Recipes (recipeID, recipeName,  , shortDescription, timeNeeded, baseDescription, styleID, courseID, recipePrice)
+INSERT INTO Recipes (recipeID, recipeName, pictureRef , shortDescription, timeNeeded, baseDescription, styleID, courseID, recipePrice)
 VALUES
 (0, 'Pfannkuchen',' pfannkuchen', 'Ein genialer Pfannkuchen. Schmeckt immer besonders gut', 'Arbeitszeit: ca. 45 Min. Ruhezeit: ca. 15 Min. / Schwierigkeitsgrad: normal / Kalorien p. P.: keine Angabe' ,'Die Eier mit dem Zucker cremig aufschlagen, dann mit der Milch verrühren. Nun Salz, Mehl und Backpulver dazugeben und alles zu einem glatten Teig rühren. Danach den Teig für ca. 15 Minuten ruhen lassen, da das Mehl noch ausquillt. Dann 1-2 große Schöpfkellen Teig in eine auf mittlere Hitze erhitzte, beschichtete Pfanne geben. Nach ca. 2 Minuten bilden sich kleine Bläschen, dann den Pfannkuchen einmal wenden und von der anderen Seite schön goldbraun ausbacken.', 0, 1, '2,50 &euro;')
 , (1, 'Amerikanische Bier-Hamburger im Hamburgerbrötchen',' hamburger', 'Ein super leckerer original amerikanischer Bier-Hamburger', 'Arbeitszeit: ca. 45 Min. / Koch-/Backzeit: ca. 32 Min. Ruhezeit: ca. 35 Min. / Schwierigkeitsgrad: simpel / Kalorien p. P.: keine Angabe',
@@ -196,6 +196,10 @@ VALUES
 ,(20, '_bixf10gv5', 0)
 ,(1, '_58xj543wc', 0);
 
+
+INSERT INTO Users (name, familyName, userID, street, location, telefonNumber, password, plz, billingAddressStreet, billingAddressLocation, billingAddressPlz, internal)
+VALUES
+	('Julian', 'Ulonska', 'ulonska.julian@gmail.com', 'Im Reiherflug 6', 'Euskirchen', '0123456789', '$2a$10$GXWBOcTA73qPangwc.A5B.lAqEBiNmQKfBgdufYcs/2IX5PKRB1.C', '53881', 'Im Reiherflug 6', 'Euskirchen', '53881', 1);
 -- Reenable foreihn key checks
 SET FOREIGN_KEY_CHECKS = 1;
 
