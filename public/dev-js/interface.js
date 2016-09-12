@@ -323,9 +323,8 @@ function loadFilteredRecipes(filterOptions) {
                 '<div class="caption">' +
                 '<h3 class="recipes-overview-headline text-uppercase">' + filteredRecipes[i].recipeName + '</h3>' +
                 '<p class="recipes-overview-short-description">' + filteredRecipes[i].shortDescription + '</p>' +
-                '<p>' +
-                '<a class="recipes-overview-btn btn btn-primary btn-sm" href="recipes/recipe?id=' + filteredRecipes[i].recipeID + '"> Weitere Informationen ... </a>' +
-                '<span style="margin-left: 20px" class="lead recipePrice">' + filteredRecipes[i].recipePrice + '</span></p>' +
+                '<p class="recipeMoreInfoBtn"><a class="btn btn-primary btn-sm" href="recipes/recipe?id=' + filteredRecipes[i].recipeID + '"> Weitere Informationen ... </a></p>' +
+                '<span style="margin-left: 20px" class="lead recipePrice">' + filteredRecipes[i].recipePrice + '</span>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
