@@ -319,7 +319,7 @@ function loadFilteredRecipes(filterOptions) {
             var recipe_list_element =
                 '<div class="col-sm-6 col-md-4">' +
                 '<div class="thumbnail">' +
-                '<img src="' + filteredRecipes[i].pictureRef + '"' + '>' +
+                '<img src="img/recipes/' + filteredRecipes[i].pictureRef + '"' + '>' +
                 '<div class="caption">' +
                 '<h3 class="recipes-overview-headline text-uppercase">' + filteredRecipes[i].recipeName + '</h3>' +
                 '<p class="recipes-overview-short-description">' + filteredRecipes[i].shortDescription + '</p>' +
